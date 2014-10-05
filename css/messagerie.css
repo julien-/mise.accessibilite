@@ -1,0 +1,64 @@
+#tableau {
+    font-family: arial, Sans-Serif;
+    font-size: 12px;
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #E98E8E;
+}
+
+#tableau h1
+{
+    color: #151515;
+    background-color: white;
+    text-align: center;
+    font-size: 36pt;
+    width: 100%;
+}
+
+#tableau thead th, tbody th{
+    font-size: 14pt;
+    font-family: arial;
+    font-weight: normal;
+    padding: 8px;
+    background-color: #FF5757;
+    border-top: 2px solid #E98E8E;
+    border-bottom: 1px solid #E98E8E;
+    color: white;
+    text-align: center;
+}
+
+#tableau tbody td{
+    font-size: 11pt;
+    font-family: arial;
+    font-weight: normal;
+    padding: 8px;
+    background-color: white;
+    border-top: 2px solid #E98E8E;
+    border-bottom: 1px solid #E98E8E;
+    border-left: 1px solid #E98E8E;
+    border-right: 1px solid #E98E8E;
+    color: black;
+}
+
+.col_expediteur
+{
+    width: 200px;
+}
+
+.col_titre
+{
+    width: 510px;
+    background-color: yellow;
+}
+
+.col_date
+{
+    width: auto;
+    text-align: center;
+}
+
+.titre_moncompte
+{
+    font-family: 'coolveticaregular';
+    font-size: 40px;
+}

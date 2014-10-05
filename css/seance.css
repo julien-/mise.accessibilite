@@ -1,0 +1,22 @@
+.form_choix_couleur{
+    display: inline;   /*pour que l'input soit à coté de la liste déroulante'*/
+}
+
+.td_jour
+{
+    width: 60px;
+}
+
+.container {
+    position: relative;
+}
+.content {
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+.bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}

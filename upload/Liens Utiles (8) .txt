@@ -1,0 +1,18 @@
+
+
+Utilisation du vote éléctronique en France:
+http://www.ordinateurs-de-vote.org/
+
+Site du gouvernementconcernant le vote éléctronique:
+http://www.interieur.gouv.fr/Elections/Comment-voter/Machines-a-voter
+
+Expériences négatives:
+
+	>Vote Etats-Unis éléctions présidentielles 2012:
+	http://www.lemonde.fr/elections-americaines/article/2012/11/06/un-electeur-filme-une-machine-a-voter-qui-choisit-romney-quand-il-vote-pour-obama_1786651_829254.html	
+
+	>Primaire UMP à Paris 2013:
+	http://www.lefigaro.fr/politique/2013/05/31/01002-20130531ARTFIG00395-primaire-ump-a-paris-un-vote-electronique-faillible.php
+
+Test vote éléctronique:
+http://fgouget.free.fr/evote/evote.html

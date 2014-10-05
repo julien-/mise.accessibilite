@@ -1,0 +1,26 @@
+/*  Lien utile:  www.iconarchive.com     */
+
+.JPG ,.PNG ,.JPEG
+{
+    content:url("../images/extension/IMAGE.png");
+}
+
+.DOC, .DOCX
+{
+    content:url("../images/extension/WORD.png");
+}
+
+.PDF
+{
+    content:url("../images/extension/PDF.png");
+}
+
+.TXT
+{
+    content:url("../images/extension/TEXTE.png");
+}
+
+.XLS, .XLSX
+{
+    content:url("../images/extension/EXCEL.png");
+}

@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'BackToSchoolRegular';
+    src: url('backtoschool.eot');
+    src: url('backtoschool.eot') format('embedded-opentype'),
+         url('backtoschool.woff2') format('woff2'),
+         url('backtoschool.woff') format('woff'),
+         url('backtoschool.ttf') format('truetype'),
+         url('backtoschool.svg#BackToSchoolRegular') format('svg');
+}

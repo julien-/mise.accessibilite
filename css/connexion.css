@@ -1,0 +1,44 @@
+/*
+CSS pour les formulaires de connexion et inscription
+*/
+
+#divconnexion {
+  position: relative;
+  float: left;
+  display: block;
+  width: 49%;
+  border: #151515 dotted 1px;
+  height: 370px;
+  font-family: arial;
+}
+
+#divinscription {
+  position: relative;
+  float: right;
+  display: block;
+  border: #151515 dotted 1px;
+  width: 49%;
+  height: 370px;
+  font-family: arial;
+}
+
+label
+{
+    margin-left: 50px;
+}
+
+input{
+    width:150px;
+}
+
+.bouton{
+    position: relative;
+    margin-bottom: 10px;
+}
+
+
+h3{
+    margin-left: 50px;
+    color: #9f005d;
+    font-size: 10pt;
+}

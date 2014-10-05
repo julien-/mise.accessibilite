@@ -1,0 +1,49 @@
+@import url("font/font.css");
+
+#divmodif1 {
+  position: relative;
+  float: left;
+  display: block;
+  width: 49%;
+  border: #151515 solid 1px;
+  height: 300px;
+  font-family: arial;
+}
+
+#divmodif2 {
+  position: relative;
+  float: right;
+  display: block;
+  border: #151515 solid 1px;
+  width: 49%;
+  height: 300px;
+  font-family: arial;
+}
+
+
+label
+{
+    display: block;
+    width: 175px;
+    float: left;
+    margin-left:50px;
+}
+
+input{
+    width:150px;
+}
+
+
+h1
+{
+    color: #f78f14;
+    background-color: black;
+    text-align: center;
+}
+
+h3{
+    margin-left: 50px;
+    color: #9f005d;
+    font-size: 10pt;
+}
+

@@ -1,0 +1,145 @@
+@import url("font/font.css");
+
+
+
+.tableau {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #E98E8E;
+    color: #339;
+    text-align: center;
+}
+
+.tableau thead th, #tableau_bonus thead th, #tableau_bonus tbody th{
+    font-size: 11pt;
+    font-family: arial;
+    font-weight: bold;
+    padding: 8px;
+    background-color: #FF5757;
+    border-top: 2px solid #E98E8E;
+    border-bottom: 1px solid #E98E8E;
+    color: white;
+    text-align: center;
+}
+
+.tableau tbody tr:hover td {
+    background-color: #F8F9F6;
+    color: #339;
+    cursor: default;
+}
+
+
+.tableau-libre {
+    font-family: arial, Sans-Serif;
+    font-size: 12px;
+    border-collapse: collapse;
+    border: 2px solid #E98E8E;
+}
+
+.tableau-libre thead th{
+    font-size: 14pt;
+    font-family: arial;
+    font-weight: normal;
+    padding: 8px;
+    background-color: #FF5757;
+    border-top: 2px solid #E98E8E;
+    border-bottom: 1px solid #E98E8E;
+    color: white;
+    text-align: center;
+}
+
+.autre_colonne {
+    width: 16%;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+    text-align: center;
+}
+
+.petite_colonne{
+    width: 5%;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+    text-align: center;
+}
+
+.autre_colonne a{
+    text-decoration: none;
+}
+
+.autre_colonne_right {
+    width: 150px;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+    text-align: right;
+    vertical-align: top;
+}
+
+.autre_colonne_left {
+    width: 150px;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+    text-align: left;
+    vertical-align: top;
+    border-right: 1px solid black;
+}
+
+.prem_colonne {
+    width: 30%;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+}
+
+
+.nom_prof{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'please_write_me_a_songmedium';
+}
+
+.nom_cours
+{
+    font-size: 35px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'please_write_me_a_songmedium';
+}
+
+.tableau_etu a
+{
+    text-decoration: none;
+    font-size: 35px;
+    font-weight: bold;
+    color: #046380;
+    margin-left: 5px;
+    text-transform: uppercase;
+    font-family: 'please_write_me_a_songmedium';
+}
+
+
+/*Redscendre les input image et images car un peu plus hautes que le reste*/
+.tableau input[type=image]
+{
+    margin-top : 15px;
+    margin-bottom: -10px;
+}
+
+.tableau img
+{
+    margin-bottom: 5px;
+}

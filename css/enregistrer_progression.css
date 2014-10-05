@@ -1,0 +1,221 @@
+/**********************
+ENREGISTRER_PROGRESSION
+**********************/
+@import url("font/font.css");
+
+#courbe_progression_seance{
+    background-color: #039;
+    float:right;
+    clear: right;
+}
+/* Tableau de la page enregistrer_progression*/
+
+.tab_enreg_prog {
+    font-family: arial, Sans-Serif;
+    font-size: 12px;
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #E98E8E;
+}
+
+.tab_enreg_prog h1
+{
+    font-family: 'please_write_me_a_songmedium';
+    color: #151515;
+    background-color: white;
+    text-align: center;
+    font-size: 36pt;
+    width: 100%;
+}
+
+.tab_enreg_prog thead th, #tableau_bonus thead th, #tableau_bonus tbody th{
+    font-size: 14pt;
+    font-family: arial;
+    font-weight: normal;
+    padding: 8px;
+    background-color: #FF5757;
+    border-top: 2px solid #E98E8E;
+    border-bottom: 1px solid #E98E8E;
+    color: white;
+    text-align: center;
+}
+
+
+
+
+
+
+.tab_enreg_prog th {
+    font-size: 13px;
+    font-weight: normal;
+    padding: 8px;
+    background-color: white;
+    border-top: 2px solid #E98E8E;
+    border-bottom: 1px solid #E98E8E;
+    color: white;
+    text-align: center;
+}
+.tab_enreg_prog tfoot tr td {
+    background-color: white;
+    font-size: 16px;
+    color: #99c;
+    text-align:center;
+}
+.tab_enreg_prog tbody tr:hover td {
+    background-color: #F8F9F6;
+    color: #339;
+}
+.tab_enreg_prog a:hover {
+    text-decoration:underline;
+}
+
+
+
+#tableau_bonus {
+    font-family: arial, Sans-Serif;
+    font-size: 12px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tableau_bonus thead th{    // Titre 1 des bonus
+    font-size: 20pt;
+    font-family: 'please_write_me_a_songmedium';;
+    font-weight: normal;
+    padding: 8px;
+    background-color: white;
+    border-top: 2px solid #E98E8E;
+    border-bottom: 1px solid #E98E8E;
+    color: #151515;
+    text-align: center;
+}
+
+textarea {
+    font-family: arial, Sans-Serif;
+    font-size: 12px;
+    width: 100%;
+}
+
+.autre_colonne {
+    width: 16%;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+    text-align: center;
+}
+
+.prem_colonne {
+    width: 30%;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+}
+
+
+.remarques{
+    font-family: 'please_write_me_a_songmedium';
+    font-size: 36pt;
+}
+
+#titre_enregistrer, #liste_seances{
+    font-family: 'coolveticaregular';
+    color: #7B7C7B;
+    font-size: 18pt;
+    text-align: center;
+    background-color: white;
+}
+
+.button-3 {
+	background-color: #400090;
+	color: #fff;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-font-smoothing: antialiased;
+	border: 1px solid #6c4988;
+	padding: 8px 15px;
+	cursor: pointer;
+}
+.button-3:hover {
+	background-color: #7432C8;
+	color: #fff;
+}
+.button-3:active {
+	background-color: #29005E;
+}
+
+.btn {
+  font-family: Arial;
+  color: white;
+  font-size: 14pt;
+  background: #FF5757;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  cursor: copy;
+  border: 0;
+  display: table-cell;
+  
+}
+
+.btn:hover {
+  background: #98bc09;
+  text-decoration: none;
+  color: white;
+}
+
+.tableau_bord_vert{
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #E98E8E;
+    margin-bottom: 20px;
+}
+
+span[data-tip]{
+  cursor: help;
+  border-bottom: 1px dotted grey;
+}
+
+[data-tip]{
+  display: inline-block;
+  position: relative;
+}
+
+[data-tip]:hover:before{
+background: url('../images/flag.png') no-repeat;
+background-position-x: 5px;
+background-position-y: 5px;
+  content: attr(data-tip);
+  position: absolute;
+  padding: 0 8px;
+  height: 28px;
+  line-height: 28px;
+  background-color: rgba(0, 0, 0, 0.8);
+  left: -10px;
+  top: -38px;
+  font-size: 14px;
+  border-radius: 3px;
+  white-space: nowrap;
+  color: #fff;
+  font-size: 11px;
+}
+
+[data-tip]:hover:after {
+  content: "";
+  position: absolute;
+  border-top: 8px solid rgba(0, 0, 0, 0.8);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  left: 0;
+  top: -10px;
+}
+
+.bravo{
+    color: #FF5757; 
+    font-weight: bold; 
+    font-size:25;
+    font-family: 'please_write_me_a_songmedium';
+}

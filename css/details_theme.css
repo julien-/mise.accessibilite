@@ -1,0 +1,39 @@
+#tableau {
+    font-family: arial, Sans-Serif;
+    font-size: 12px;
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #E98E8E;
+}
+
+#tableau thead th, #tableau_bonus thead th, #tableau_bonus tbody th{
+    font-size: 14pt;
+    font-family: arial;
+    font-weight: normal;
+    padding: 8px;
+    background-color: #FF5757;
+    border-top: 2px solid #E98E8E;
+    border-bottom: 1px solid #E98E8E;
+    color: white;
+    text-align: center;
+}
+
+.autre_colonne {
+    width: 16%;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+    text-align: center;
+}
+
+.prem_colonne {
+    width: 30%;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+}
+

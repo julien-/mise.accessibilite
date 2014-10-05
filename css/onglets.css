@@ -1,0 +1,43 @@
+@import url("font/font.css");
+
+.conteneur-onglets 
+{
+    margin: 0;
+    padding:0 0 0 5px;
+}
+.onglet
+{
+    display:inline-block;
+    margin:5px 2px 0 2px;
+    padding:5px 10px ;
+    border-left:1px solid #AAA;
+    border-right:1px solid #AAA;
+    color:grey;
+    cursor: pointer;
+    font-weight:bold;
+}
+
+.onglet_without_borders
+{
+    display:inline-block;
+    color:grey;
+    cursor: pointer;
+    font-weight:bold;
+}
+
+
+.inactif
+{
+    background:white;
+}
+.inactif:hover
+{
+    color:#AAA;
+}
+
+.contenu
+{
+    background-color:white;
+    display:none;
+    cursor: text;
+}

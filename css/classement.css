@@ -1,0 +1,126 @@
+
+
+/**********************
+ENREGISTRER_PROGRESSION
+**********************/
+
+@import url("font/font.css");
+/* Tableau de la page enregistrer_progression*/
+
+#tableau {
+    font-family: arial, Sans-Serif;
+    font-size: 15px;
+    width: 50%;
+    border-collapse: collapse;
+    border: 2px solid #E98E8E;
+}
+
+#tableau h1
+{
+    font-family: 'please_write_me_a_songmedium';
+    color: #151515;
+    background-color: white;
+    text-align: center;
+    font-size: 36pt;
+    width: 100%;
+}
+
+#tableau thead th{
+    font-size: 14pt;
+    font-family: arial;
+    font-weight: normal;
+    padding: 8px;
+    background-color: blue;
+    border-top: 2px solid #E98E8E;
+    border-bottom: 1px solid #E98E8E;
+    color: red;
+    text-align: center;
+}
+
+
+#tableau th {
+    font-size: 14pt;
+    font-family: arial;
+    font-weight: normal;
+    padding: 8px;
+    background-color: #FF5757;
+    border-top: 2px solid #E98E8E;
+    border-bottom: 1px solid #E98E8E;
+    color: white;
+    text-align: center;
+}
+/*
+.autre_colonne {
+    width: 16%;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+    text-align: center;
+}
+
+.prem_colonne {
+    width: 500px;
+    padding: 8px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    background-color: white;
+}
+*/
+.col_position
+{
+    width: 50px;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    border-right: 2px solid #E98E8E;
+    background-color: white;
+    text-align: center;
+}
+
+.col_nom
+{
+    width: 500px;
+    text-align: center;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    border-right: 2px solid #E98E8E;
+    text-align: left;
+}
+
+.col_points
+{
+    width: auto;
+    text-align: center;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    border-right: 2px solid #E98E8E;
+}
+
+.col_profil
+{
+    width: auto;
+    text-align: center;
+    border-bottom: 1px solid #E98E8E;
+    color: #669;
+    border-top: 1px solid #E98E8E;
+    
+}
+
+#tableau tfoot tr td {
+    background-color: white;
+    font-size: 16px;
+    color: #99c;
+    text-align:center;
+}
+#tableau tbody tr:hover td {
+    background-color: #F8F9F6;
+    color: #339;
+}
+#tableau a:hover {
+    text-decoration:underline;
+}
