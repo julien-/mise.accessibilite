@@ -5,20 +5,20 @@ function verifierAdresseMail($adresse)
   //Adresse mail trop longue (254 octets max)
   if(strlen($adresse)>254)
   {
-    return '<p>Votre adresse est trop longue.</p>';
+    return '<p>Votre adresse est trop longue.</p> ';
   }
 
 
-  //Caractères non-ASCII autorisés dans un nom de domaine .eu :
+  //CaractÃ¨res non-ASCII autorisÃ©s dans un nom de domaine .eu :
 
-  $nonASCII='ďđēĕėęěĝğġģĥħĩīĭįıĵķĺļľŀłńņňŉŋōŏőoeŕŗřśŝsťŧ';
-  $nonASCII.='ďđēĕėęěĝğġģĥħĩīĭįıĵķĺļľŀłńņňŉŋōŏőoeŕŗřśŝsťŧ';
-  $nonASCII.='ũūŭůűųŵŷźżztșțΐάέήίΰαβγδεζηθικλμνξοπρςστυφ';
-  $nonASCII.='χψωϊϋόύώабвгдежзийклмнопрстуфхцчшщъыьэюяt';
-  $nonASCII.='ἀἁἂἃἄἅἆἇἐἑἒἓἔἕἠἡἢἣἤἥἦἧἰἱἲἳἴἵἶἷὀὁὂὃὄὅὐὑὒὓὔ';
-  $nonASCII.='ὕὖὗὠὡὢὣὤὥὦὧὰάὲέὴήὶίὸόὺύὼώᾀᾁᾂᾃᾄᾅᾆᾇᾐᾑᾒᾓᾔᾕᾖᾗ';
-  $nonASCII.='ᾠᾡᾢᾣᾤᾥᾦᾧᾰᾱᾲᾳᾴᾶᾷῂῃῄῆῇῐῑῒΐῖῗῠῡῢΰῤῥῦῧῲῳῴῶῷ';
-  // note : 1 caractète non-ASCII vos 2 octets en UTF-8
+  $nonASCII='Ä�Ä‘Ä“Ä•Ä—Ä™Ä›Ä�ÄŸÄ¡Ä£Ä¥Ä§Ä©Ä«Ä­Ä¯Ä±ÄµÄ·ÄºÄ¼Ä¾Å€Å‚Å„Å†ÅˆÅ‰Å‹Å�Å�Å‘oeÅ•Å—Å™Å›Å�sÅ¥Å§';
+  $nonASCII.='Ä�Ä‘Ä“Ä•Ä—Ä™Ä›Ä�ÄŸÄ¡Ä£Ä¥Ä§Ä©Ä«Ä­Ä¯Ä±ÄµÄ·ÄºÄ¼Ä¾Å€Å‚Å„Å†ÅˆÅ‰Å‹Å�Å�Å‘oeÅ•Å—Å™Å›Å�sÅ¥Å§';
+  $nonASCII.='Å©Å«Å­Å¯Å±Å³ÅµÅ·ÅºÅ¼ztÈ™È›Î�Î¬Î­Î®Î¯Î°Î±Î²Î³Î´ÎµÎ¶Î·Î¸Î¹ÎºÎ»Î¼Î½Î¾Î¿Ï€Ï�Ï‚ÏƒÏ„Ï…Ï†';
+  $nonASCII.='Ï‡ÏˆÏ‰ÏŠÏ‹ÏŒÏ�ÏŽÐ°Ð±Ð²Ð³Ð´ÐµÐ¶Ð·Ð¸Ð¹ÐºÐ»Ð¼Ð½Ð¾Ð¿Ñ€Ñ�Ñ‚ÑƒÑ„Ñ…Ñ†Ñ‡ÑˆÑ‰ÑŠÑ‹ÑŒÑ�ÑŽÑ�t';
+  $nonASCII.='á¼€á¼�á¼‚á¼ƒá¼„á¼…á¼†á¼‡á¼�á¼‘á¼’á¼“á¼”á¼•á¼ á¼¡á¼¢á¼£á¼¤á¼¥á¼¦á¼§á¼°á¼±á¼²á¼³á¼´á¼µá¼¶á¼·á½€á½�á½‚á½ƒá½„á½…á½�á½‘á½’á½“á½”';
+  $nonASCII.='á½•á½–á½—á½ á½¡á½¢á½£á½¤á½¥á½¦á½§á½°Î¬á½²Î­á½´Î®á½¶Î¯á½¸ÏŒá½ºÏ�á½¼ÏŽá¾€á¾�á¾‚á¾ƒá¾„á¾…á¾†á¾‡á¾�á¾‘á¾’á¾“á¾”á¾•á¾–á¾—';
+  $nonASCII.='á¾ á¾¡á¾¢á¾£á¾¤á¾¥á¾¦á¾§á¾°á¾±á¾²á¾³á¾´á¾¶á¾·á¿‚á¿ƒá¿„á¿†á¿‡á¿�á¿‘á¿’Î�á¿–á¿—á¿ á¿¡á¿¢Î°á¿¤á¿¥á¿¦á¿§á¿²á¿³á¿´á¿¶á¿·';
+  // note : 1 caractÃ¨te non-ASCII vos 2 octets en UTF-8
 
 
   $syntaxe="#^[[:alnum:][:punct:]]{1,64}@[[:alnum:]-.$nonASCII]{2,253}\.[[:alpha:].]{2,6}$#";
@@ -41,7 +41,7 @@ function stripAccents($str)
     
     $str = preg_replace('#&([A-za-z])(?:acute|cedil|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
     $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str); // pour les ligatures e.g. '&oelig;'
-    $str = preg_replace('#&[^;]+;#', '', $str); // supprime les autres caractères
+    $str = preg_replace('#&[^;]+;#', '', $str); // supprime les autres caractÃ¨res
     
     return $str;
 }
@@ -54,7 +54,7 @@ function check_in_range($start_date, $end_date, $date_from_user)
   $user_ts = strtotime($date_from_user);
 
   // Retourne si START <= USER <= END
-  //">= et <=" pour qu'ils puissent saisir encore le jour de la prochaine séance
+  //">= et <=" pour qu'ils puissent saisir encore le jour de la prochaine sÃ©ance
   return (($start_ts <= $user_ts) && ($user_ts <= $end_ts));
 }
 
@@ -69,7 +69,7 @@ function reduireChaineCar($chaine, $nb_car, $delim='...') {
   }else return $chaine;
 }
 
-//Julien a enlevé car les données brutes dans la BDD sont au bon format
+//Julien a enlevÃ© car les donnÃ©es brutes dans la BDD sont au bon format
 //function formatterNoms($chaine)
 //{
 //    $chaine = strtolower($chaine);
@@ -104,12 +104,12 @@ function genererMDP ($longueur = 8){
     // initialiser la variable $mdp
     $mdp = "";
  
-    // Définir tout les caractères possibles dans le mot de passe, 
-    // Il est possible de rajouter des voyelles ou bien des caractères spéciaux
+    // DÃ©finir tout les caractÃ¨res possibles dans le mot de passe, 
+    // Il est possible de rajouter des voyelles ou bien des caractÃ¨res spÃ©ciaux
     $possible = "2346789bcdfghjkmnpqrtvwxyzBCDFGHJKLMNPQRTVWXYZ";
  
-    // obtenir le nombre de caractères dans la chaîne précédente
-    // cette valeur sera utilisé plus tard
+    // obtenir le nombre de caractÃ¨res dans la chaÃ®ne prÃ©cÃ©dente
+    // cette valeur sera utilisÃ© plus tard
     $longueurMax = strlen($possible);
  
     if ($longueur > $longueurMax) {
@@ -119,20 +119,20 @@ function genererMDP ($longueur = 8){
     // initialiser le compteur
     $i = 0;
  
-    // ajouter un caractère aléatoire à $mdp jusqu'à ce que $longueur soit atteint
+    // ajouter un caractÃ¨re alÃ©atoire Ã  $mdp jusqu'Ã  ce que $longueur soit atteint
     while ($i < $longueur) {
-        // prendre un caractère aléatoire
+        // prendre un caractÃ¨re alÃ©atoire
         $caractere = substr($possible, mt_rand(0, $longueurMax-1), 1);
  
-        // vérifier si le caractère est déjà utilisé dans $mdp
+        // vÃ©rifier si le caractÃ¨re est dÃ©jÃ  utilisÃ© dans $mdp
         if (!strstr($mdp, $caractere)) {
-            // Si non, ajouter le caractère à $mdp et augmenter le compteur
+            // Si non, ajouter le caractÃ¨re Ã  $mdp et augmenter le compteur
             $mdp .= $caractere;
             $i++;
         }
     }
  
-    // retourner le résultat final
+    // retourner le rÃ©sultat final
     return $mdp;
 }
 
@@ -393,9 +393,9 @@ function strtoupperFr($string) {
 
    $string = str_replace(
 
-      array('é', 'è', 'ê', 'ë', 'à', 'â', 'î', 'ï', 'ô', 'ù', 'û'),
+      array('Ã©', 'Ã¨', 'Ãª', 'Ã«', 'Ã ', 'Ã¢', 'Ã®', 'Ã¯', 'Ã´', 'Ã¹', 'Ã»'),
 
-      array('É', 'È', 'Ê', 'Ë', 'À', 'Â', 'Î', 'Ï', 'Ô', 'Ù', 'Û'),
+      array('Ã‰', 'Ãˆ', 'ÃŠ', 'Ã‹', 'Ã€', 'Ã‚', 'ÃŽ', 'Ã�', 'Ã”', 'Ã™', 'Ã›'),
 
       $string
 
