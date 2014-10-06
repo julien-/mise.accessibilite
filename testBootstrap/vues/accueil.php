@@ -70,7 +70,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                                 <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
-                                    <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']; ?><span class="caret"></span></a>
+                                    <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
                                 <ul id="g-account-menu" class="dropdown-menu" role="menu">
                                     <li><a href="#">My Profile</a></li>
                                     <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
@@ -116,9 +116,9 @@
                                 <hr>
                                 <ul class="nav nav-stacked">
                                     <?php
-                                    while ($cours = mysql_fetch_array($listeCours)) {
+                                    while ($cours = $listeCours->fetch_assoc()) {
                                         ?>
-                                        <li><a href="javascript:;" title="<?php echo $cours['libelle_cours']; ?>" class="black"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo substr($cours['libelle_cours'], 0, 20); ?></a></li>
+                                        <li><a href="javascript:;" title="<?php echo utf8_encode($cours['libelle_cours']); ?>" class="black"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo substr(utf8_encode($cours['libelle_cours']), 0, 20); ?></a></li>
                                         <?php
                                     }
                                     ?>
