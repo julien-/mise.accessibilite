@@ -13,44 +13,27 @@ class ProfesseurManager extends EtudiantManager
 	public function add(Professeur $professeur)
 	{
 		parent::add($professeur);
-		$q = $this->_db->prepare('INSERT INTO professeur SET id_prof = ?');
-		$q->bind_param('s', $this->_db->insert_id);
-	
-		$q->execute();
+		$this->_db->query('INSERT INTO professeur SET id_prof = ' . $this->_db->insert_id);
 	}
 	
 	  public function getCours(Professeur $prof)
 	  {
-	  	$q = $this->_db->prepare('SELECT id_cours, libelle_cours FROM cours WHERE id_prof = ' . $prof->getId());
 	  	$result = $this->_db->query('SELECT id_cours, libelle_cours FROM cours WHERE id_prof = ' . $prof->getId());
-	  	if (!$q)
-	  	{
-	  		printf("Message d'erreur : %s\n", $q->error);
-	  	}
-	  	
-	  	$q->execute();
 	 
 	  	return $result;
 	  }
 	  
 	  public function getByID($id)
 	  {
-	  	$q = $this->_db->prepare('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE id_etu = ' . $id);
-	  	$q->execute();
-	  	if (!$q)
-	  	{
-	  		printf("Message d'erreur : %s\n", $q->error);
-	  	}
-	  	$q->bind_result($id, $nom, $prenom, $mail, $pseudo, $pass, $admin);
-	  	$q->fetch();
-	  
+	  	$result = $this->_db->query('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE id_etu = ' . $id);
+	  	$professeur = $result->fetch_assoc();
 	
-	  	return new Professeur(array(	'id' => $id,
-	  			'nom' => $nom,
-	  			'prenom' => $prenom,
-	  			'mail' => $mail,
-	  			'login' => $pseudo,
-	  			'pass' => $pass,
-	  			'admin' => $admin));
+	  	return new Professeur(array('id' => $professeur['id_etu'], 
+  								'nom' => $professeur['nom_etu'], 
+  								'prenom' => $professeur['prenom_etu'], 
+  								'mail' => $professeur['mail_etu'], 
+  								'login' => $professeur['pseudo_etu'],
+  								'pass' => $professeur['pass_etu'],
+  								'admin' => $professeur['admin']));
 	  }
 }

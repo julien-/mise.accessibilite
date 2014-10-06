@@ -116,9 +116,9 @@
                                 <hr>
                                 <ul class="nav nav-stacked">
                                     <?php
-                                    while ($cours = $listeCours->fetch_assoc()) {
+                                    foreach ($listeCours as $cours) {
                                         ?>
-                                        <li><a href="javascript:;" title="<?php echo utf8_encode($cours['libelle_cours']); ?>" class="black"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo substr(utf8_encode($cours['libelle_cours']), 0, 20); ?></a></li>
+                                        <li><a href="javascript:;" title="<?php echo utf8_encode($cours->getLibelle()); ?>" class="black"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo substr(utf8_encode($cours->getLibelle()), 0, 20); ?></a></li>
                                         <?php
                                     }
                                     ?>

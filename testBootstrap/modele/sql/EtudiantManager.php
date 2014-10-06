@@ -1,12 +1,6 @@
 <?php
-class EtudiantManager 
+class EtudiantManager extends DAOMysqli
 {
-  protected $_db;
-  
-  public function __construct(MySQLi $db)
-  {
-    $this->_db = $db;
-  }
   
   public function add(Etudiant $etudiant)
   {
@@ -14,6 +8,23 @@ class EtudiantManager
   	$q->bind_param('sssss', $etudiant->getNom(), $etudiant->getNom(), $etudiant->getNom(), $etudiant->getNom(), $etudiant->getNom());
   
   	$q->execute();
+  }
+  
+  public function getAll()
+  {
+	  	$result = $this->_db->query('SELECT * FROM etudiant');
+	 	
+	  	$listeEtudiants = array();
+	  	while ($etudiant = $result->fetch_assoc()) {
+	  		$listeEtudiants[] = new Etudiant(array(	'id' => $etudiant['id_etu'], 
+  								'nom' => $etudiant['nom_etu'], 
+  								'prenom' => $etudiant['prenom_etu'], 
+  								'mail' => $etudiant['mail_etu'], 
+  								'login' => $etudiant['pseudo_etu'],
+  								'pass' => $etudiant['pass_etu'],
+  								'admin' => $etudiant['admin']));
+	  	}
+	  	return $listeEtudiants;
   }
   
   public function getByID($id)
