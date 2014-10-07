@@ -1,12 +1,10 @@
 <?php
-class Cours {
+class Theme {
 	
 	protected 
 	$id,
-	$libelle,
-	$couleurCalendar,
-	$prof,
-	$cle;
+	$titre,
+	$cours;
 	
 	public function __construct($valeurs = array()) {
 		if (! empty ( $valeurs )) // Si on a sp�cifi� des valeurs, alors on hydrate l'objet.
@@ -36,42 +34,21 @@ class Cours {
 		return $this;
 	}
 	
-	public function getLibelle() {
-		return $this->libelle;
+	public function getTitre() {
+		return $this->titre;
 	}
 	
-	public function setLibelle($libelle) {
-		$this->libelle = $libelle;
+	public function setTitre($titre) {
+		$this->titre = $titre;
+		return $this;
+	}	
+	
+	public function getCours() {
+		return $this->cours;
+	}
+	
+	public function setCours($cours) {
+		$this->cours = $cours;
 		return $this;
 	}
-	
-	public function getCouleurCalendar() {
-		return $this->couleurCalendar;
-	}
-	
-	public function setCouleurCalendar($couleurCalendar) {
-		$this->couleurCalendar = $couleurCalendar;
-		return $this;
-	}
-	
-	public function getProf() {
-		return $this->prof;
-	}
-	
-	public function setProf($prof) {
-		$this->prof = $prof;
-		return $this;
-	}
-	
-	public function getCle() {
-		return $this->cle;
-	}
-	
-	public function setCle($cle) {
-		$this->cle = $cle;
-		return $this;
-	}
-	
-	
-	
 }

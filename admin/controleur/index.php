@@ -7,16 +7,19 @@ include_once "../../config.php";
 $db = DBFactory::getMysqlConnexionWithMySQLi();
 $daoProfesseur = new DAOProfesseur($db);
 $daoCours = new DAOCours($db);
+$daoTheme = new DAOTheme($db);
+$daoExo = new DAOExercice($db);
 
 $professeur = $daoProfesseur->getByID($_SESSION['id']);
 
 $listeCours = $daoCours->getAllByProf($professeur);
 
-foreach ($listeCours as $cours)
-{
-	echo $cours->getIdProf()->getNom();
-}
+$theme = $daoTheme->getByID(7);
+echo $theme->getTitre();
 
+$exercice = $daoExo->getByID(16);
+
+echo $exercice->getTheme()->getCours()->getLibelle();
 
 $_SESSION['currentUser'] = $professeur; 
 if (isset($_GET['section'])) {

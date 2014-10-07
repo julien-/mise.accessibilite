@@ -146,7 +146,7 @@
 		<script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/bootstrap/dataTablePerso.js"></script>
 		<script type="text/javascript">
-		$('#example').DataTable( {
+		$('#tableau').DataTable( {
 		    language: {
 		    	processing:     "Traitement en cours...",
 		        search:         "Rechercher&nbsp;:",
