@@ -4,10 +4,7 @@ class EtudiantManager extends DAOMysqli
   
   public function add(Etudiant $etudiant)
   {
-  	$q = $this->_db->prepare('INSERT INTO etudiant SET nom_etu = ?, prenom_etu = ?, mail_etu = ?, pseudo_etu = ?, pass_etu = ?');
-  	$q->bind_param('sssss', $etudiant->getNom(), $etudiant->getNom(), $etudiant->getNom(), $etudiant->getNom(), $etudiant->getNom());
-  
-  	$q->execute();
+  	$result = $this->_db->query('INSERT INTO etudiant SET nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '"');
   }
   
   public function getAll()
