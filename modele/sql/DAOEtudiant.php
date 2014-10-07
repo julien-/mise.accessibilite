@@ -42,4 +42,5 @@ class DAOEtudiant extends DAOMysqli
   								'pass' => $pass,
   								'admin' => $admin));
   }
+  
 }
