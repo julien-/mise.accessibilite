@@ -1,4 +1,6 @@
-
+<script type="text/javascript"
+  src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","table"]}]}'>
+</script>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,6 +12,8 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
+        <link href="../../css/style.css" rel="stylesheet">
+        <link href="../../css/<?php echo $page; ?>.css" rel="stylesheet">
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -73,8 +77,8 @@
                                 <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
                                     <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
                                 <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                                    <li><a href="#">My Profile</a></li>
-                                    <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+                                    <li><a href="#"> Mon profil</a></li>
+                                    <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Se deconnecter</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -95,8 +99,8 @@
                     </div>
                     <div class="collapse navbar-collapse" >
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Mes cours</a></li>
-                            <li><a href="#about">Mes étudiants</a></li>
+                            <li class="active"><a href="index.php">Mes cours</a></li>
+                            <li><a href="index.php?section=seance">Mes étudiants</a></li>
                             <li><a href="#contact">Mes séances</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -107,25 +111,41 @@
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-1">
 
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-10">
                         <?php include_once('../' . $page . '.php'); ?>
+                    </div>
+                    <div class="col-sm-1">
+
                     </div>
                 </div><!--/row-->
             </div><!--/container-->
         </div><!-- /wrap -->
 
-
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
         <div id="footer">
             <div class="container">
-                <p class="muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+                <p style="text-align: center;">    
+                <br/>     
+                	<span>Remarques, questions, bugs : <a href="mailto:mystudycompanion@gmail.com">mystudycompanion@gmail.com</a></span>
+            		<br/>
+            		<span>Copyright © 2014 - My Study Companion ® - Tous droits réservés</span>
+            	</p>
             </div>
         </div>
 
         <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <!--Integartaion des fichiers js de chaque page-->
+        <script type="text/javascript" src="../../js/<?php echo ($page . ".js"); ?>"></script>
+        <script type="text/javascript" src="../../js/commun.js"></script>
 
         <!-- JavaScript jQuery code from Bootply.com editor  -->
 

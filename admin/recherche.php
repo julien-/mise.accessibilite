@@ -1,5 +1,4 @@
 <?php
-include_once('../fonctions.php');
 $messagesParPage = 10;
 if (!isset($_GET['page']))
     $p = 1;

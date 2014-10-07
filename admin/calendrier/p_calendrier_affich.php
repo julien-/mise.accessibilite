@@ -9,13 +9,13 @@
                     <!--Mois Precedent-->
                     <td width="50">
                         <a href="index.php?section=seance&mois=<?php echo($mois_prec); ?>&an=<?php echo($an_prec); ?>">	
-                            <div align="left"><img border="0" src="../images/admin/calendrier/prec.png"/></div>
+                            <div align="left"><img border="0" src="../../images/admin/calendrier/prec.png"/></div>
                         </a>
                     </td>
                     <!--Mois suivant-->
                     <td width="41">
                         <a href="index.php?section=seance&mois=<?php echo $mois_suivant; ?>&an=<?php echo $an_suivant; ?>">	
-                            <div><img border="0" src="../images/admin/calendrier/suiv.png" /></div>
+                            <div><img border="0" src="../../images/admin/calendrier/suiv.png" /></div>
                         </a>
                     </td>
                 </tr>

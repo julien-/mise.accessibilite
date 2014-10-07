@@ -133,7 +133,7 @@ if (mysql_num_rows($reqBonus) > 0)
                         ?>
                             <td class="autre_colonne">
                                 <a href="delete_bonus.php?b=<?php echo $data['id_bonus']; ?>">
-                                <img src="../images/admin/flat_supp.png" alt="Supprimer" title="Supprimer" />
+                                <img src="../../images/admin/flat_supp.png" alt="Supprimer" title="Supprimer" />
                                 </a>
                             </td>
                         <?php

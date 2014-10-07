@@ -1,8 +1,6 @@
 <link rel="stylesheet" href="../<?php echo $dossiercss; ?>tableau.css" />
 
 <?php
-include_once "../sql/connexion_mysql.php";
-include_once "../config.php";
 
 
 //permet de garder la bonne selection dans la liste déroulante des cours
@@ -38,15 +36,6 @@ if ($rq_seances === FALSE) {
 }
 //mysql_close($db);
 ?>
-<h1 class="titre_page_school">Mes s&eacute;ances</h1>
-
-
-
-
-
-
-
-
 
 <div id="seance" name="seance">
     <input type="hidden" name="id_cours_sel" id="id_cours_sel"/>
@@ -105,7 +94,7 @@ if ($rq_seances === FALSE) {
                             <!-- Saisie de la date -->
                             <input type="date" name="dateseancemaj" id="dateseancemaj"/>
                             <!--submit-->
-                            <input type="image" name="soumismajexo" id="soumismajexo" src="../<?php echo($dossierimg . "admin/flat_edit.png"); ?>" alt="Modifier le titre del'exercice" title="Modifier le titre de l'exercice"/>
+                            <input type="image" name="soumismajexo" id="soumismajexo" src="../../<?php echo($dossierimg . "admin/flat_edit.png"); ?>" alt="Modifier le titre del'exercice" title="Modifier le titre de l'exercice"/>
                         </form>
                     </td>
                     <!--#########################
@@ -114,7 +103,7 @@ if ($rq_seances === FALSE) {
                     <td class="autre_colonne">
                         <form method="post" action="rq_seance.php?section=seance&supseance=<?php echo $ma_seance['id_seance']; ?>">
                             <!--submit-->
-                            <input type='image' class='img_sup_seance' name ='img_sup_seance' src='../<?php echo($dossierimg . "admin/flat_supp.png"); ?>' alt="Supprimer la séance" title="Supprimer la séance"/>
+                            <input type='image' class='img_sup_seance' name ='img_sup_seance' src='../../<?php echo($dossierimg . "admin/flat_supp.png"); ?>' alt="Supprimer la séance" title="Supprimer la séance"/>
                         </form>
                     </td>
                 </tr>
@@ -130,7 +119,7 @@ if ($rq_seances === FALSE) {
                 <!-- Saisie de la date -->
                 <td><input type="date" name="dateseanceadd" id="dateseanceadd"/></td>
                 <!--submit-->
-                <td><input type="image" name="soumisadd" id="soumisadd" src='../<?php echo($dossierimg . "admin/flat_ajou.png"); ?>'  alt='Ajouter une séance' title='Ajouter une séance'/></td>
+                <td><input type="image" name="soumisadd" id="soumisadd" src='../../<?php echo($dossierimg . "admin/flat_ajou.png"); ?>'  alt='Ajouter une séance' title='Ajouter une séance'/></td>
             </tr>
         </table>
     </form>
@@ -144,4 +133,4 @@ if ($rq_seances === FALSE) {
     </div>
 </div>
 
-<script type="text/javascript" src="../js/jscolor/jscolor.js"></script>
+<script type="text/javascript" src="../../js/jscolor/jscolor.js"></script>

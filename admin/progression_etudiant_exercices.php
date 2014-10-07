@@ -1,8 +1,7 @@
-<script type="text/javascript" src="../js/googleChartToolsBarChart.js"></script>
+<script type="text/javascript" src="../../js/googleChartToolsBarChart.js"></script>
 
 <?php
 
-include_once('../fonctions.php');
 $theme = exists('theme', 'theme', 'id_theme');
 $etudiant = exists('e', 'etudiant', 'id_etu');
 $cours = exists('c', 'cours', 'id_cours');

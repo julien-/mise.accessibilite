@@ -1,4 +1,4 @@
-<script type="text/javascript" src="../js/googleChartToolsPieChart.js"></script>
+<script type="text/javascript" src="../../../js/googleChartToolsPieChart.js"></script>
 <table id="chemin">
 <?php
 $sql = 'SELECT * 
@@ -11,7 +11,7 @@ while($donnees = mysql_fetch_array($req_theme))  // pour chaque th�me on va ch
 {
     $theme = $donnees['id_theme'];
     $nomTheme = $donnees['titre_theme'];
-    $urlJSON = '../chart/get_json_pie_chart.php?cours=' . $cours . '&theme=' . $theme . '&user=' . $etudiant;
+    $urlJSON = '../../chart/get_json_pie_chart.php?cours=' . $cours . '&theme=' . $theme . '&user=' . $etudiant;
 ?>
     <tr style="background-color:#f54f4f;">
         <td>
