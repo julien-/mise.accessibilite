@@ -1,5 +1,5 @@
 <?php
-class EtudiantManager extends DAOMysqli
+class DAOEtudiant extends DAOMysqli
 {
   
   public function add(Etudiant $etudiant)

@@ -1,5 +1,5 @@
 <?php
-class CoursManager extends DAOMysqli
+class DAOCours extends DAOMysqli
 {
   
   public function add(Cours $cours)

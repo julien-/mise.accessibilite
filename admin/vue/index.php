@@ -8,7 +8,8 @@
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/perso/index.css" rel="stylesheet">
+        <link href="../../css/perso/index.css" rel="stylesheet">
+        <link href="../../css/tableau.css" rel="stylesheet">
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -107,24 +108,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-3">
-                        <hr>
-                        <ul class="list-unstyled">
-                            <li class="nav-header"> 
-                                <a href="#" data-toggle="collapse" data-target="#userMenu">
-                                    <h3 class="pokemon-red"><i class="glyphicon glyphicon-pencil pokemon-red"></i> Mes cours</h3>
-                                </a>
-                                <hr>
-                                <ul class="nav nav-stacked">
-                                    <?php
-                                    foreach ($listeCours as $cours) {
-                                        ?>
-                                        <li><a href="javascript:;" title="<?php echo utf8_encode($cours->getLibelle()); ?>" class="black"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo substr(utf8_encode($cours->getLibelle()), 0, 20); ?></a></li>
-                                        <?php
-                                    }
-                                    ?>
-                                </ul>
-                            </li>
-                        </ul>
+
                     </div>
                     <div class="col-sm-9">
                         <?php include_once('../' . $page . '.php'); ?>

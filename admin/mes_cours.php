@@ -1,7 +1,8 @@
 
 <?php
-include_once "../sql/connexion_mysql.php";
-include_once "../config.php";
+include_once "../../sql/connexion_mysql.php";
+include_once "../../config.php";
+include_once "../../fonctions.php";
 //permet de garder la bonne selection dans la liste déroulante des thèmes
 if (isset($_POST["id_cours_sel"])) {
     session_start();
@@ -102,7 +103,7 @@ if ($rq_exos === FALSE) {
                         <form method="post" action="rq_mes_cours.php?section=mes_cours&majtitrecours=<?php echo($mon_cours['id_cours']); ?>">
                             <input type="text" name="newtitrecours" id="newtitrecours" size="26" value="<?php echo $mon_cours['libelle_cours']; ?>" title="Saisir un nouveau titre de cours" class="inputValDefaut">
                             <!--submit-->
-                            <input type='image' id='img_edit_titrecours' name ='img_edit_titrecours' src='../<?php echo($dossierimg . "admin/flat_edit.png"); ?>' alt="Valider le nouveau titre saisi" title="Valider le nouveau titre saisi"/>
+                            <input type='image' id='img_edit_titrecours' name ='img_edit_titrecours' src='../../<?php echo($dossierimg . "admin/flat_edit.png"); ?>' alt="Valider le nouveau titre saisi" title="Valider le nouveau titre saisi"/>
                         </form>
                     </td>
                     <!--Nombre d'inscris-->
@@ -116,7 +117,7 @@ if ($rq_exos === FALSE) {
                     <!--Détails-->
                     <td class="petite_colonne">
                         <a href="index.php?section=progression_globale&c=<?php echo $mon_cours['id_cours']; ?>">
-                            <img src="../images/loupe.png"/>
+                            <img src="../../images/loupe.png"/>
                         </a>
                     </td>
                     <!--Modifier la clé du cours-->
@@ -295,20 +296,20 @@ if ($rq_exos === FALSE) {
                                 <!--TITRE-->
                                 <input type="text" name="titremajexo" id="titremajexo" size="26" value="<?php echo ($mon_exo["titre_exo"]); ?>" title="Taper un titre d'exercice" class="inputValDefaut">
                                 <!--submit-->
-                                <input type="image" id="soumismajexo" src="../<?php echo($dossierimg . $dossieradmin . "flat_edit.png"); ?>" alt="Valider le nouveau titre saisi" title="Valider le nouveau titre saisi"/>
+                                <input type="image" id="soumismajexo" src="../../../<?php echo($dossierimg . $dossieradmin . "flat_edit.png"); ?>" alt="Valider le nouveau titre saisi" title="Valider le nouveau titre saisi"/>
                             </form>
                         </td>
                         <!--Details-->
                         <td class="petite_colonne">
                             <a title ="Progression de l'exercice" href="index.php?section=details_exercice&c=<?php echo ($mon_exo['id_cours']); ?>&ex=<?php echo ($mon_exo["id_exo"]); ?>">
-                                <img src="../images/loupe.png"/>
+                                <img src="../../../images/loupe.png"/>
                             </a>
                         </td>
                         <!--3 Popup: Affichage des fichiers-->
                         <td class="petite_colonne">
                             <form method="post" name="gestion_fichiers" action="index.php?section=mes_cours&exo_sel=<?php echo ($mon_exo["id_exo"]); ?>">
                                 <!--submit-->
-                                <input type="image" id="soumisficexo" src="../<?php echo($dossierimg . $dossieradmin . "/fichiers.png"); ?>" alt="Gérer les fichiers de l'exercice" title="Gérer les fichiers de l'exercice"/>
+                                <input type="image" id="soumisficexo" src="../../../<?php echo($dossierimg . $dossieradmin . "/fichiers.png"); ?>" alt="Gérer les fichiers de l'exercice" title="Gérer les fichiers de l'exercice"/>
                                 ( <?php echo ($mon_exo["nb_fichiers"]); ?> )
                             </form>
                         </td>
@@ -318,7 +319,7 @@ if ($rq_exos === FALSE) {
                                 <!--Mémorise l'id du theme de l'exercice concerné-->
                                 <input type="hidden"  id="idt_exo" name="idt_exo" value="<?php echo ($mon_exo['id_theme']); ?>" />
                                 <!--submit-->
-                                <input type="image" class="soumissupexo" src="../<?php echo($dossierimg . $dossieradmin . "flat_supp.png"); ?>" alt="Supprimer l'exercice" title="Supprimer l'exercice"/>
+                                <input type="image" class="soumissupexo" src="../../../<?php echo($dossierimg . $dossieradmin . "flat_supp.png"); ?>" alt="Supprimer l'exercice" title="Supprimer l'exercice"/>
                             </form>
                         </td>
 
@@ -344,7 +345,7 @@ if ($rq_exos === FALSE) {
                     </td>
                     <td>
                         <!--sumbit (titre modifié dans le JS)-->
-                        <input type="image" name="soumisajouexo" id="soumisajouexo" src="../<?php echo($dossierimg . "admin/flat_ajou.png"); ?>" alt="Ajouter l'exercice" title="Ajouter l'exercice"/>
+                        <input type="image" name="soumisajouexo" id="soumisajouexo" src="../../<?php echo($dossierimg . "admin/flat_ajou.png"); ?>" alt="Ajouter l'exercice" title="Ajouter l'exercice"/>
                     </td>
                 </tr>
             </table>

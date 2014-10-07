@@ -1,5 +1,5 @@
 <?php
-class ProfesseurManager extends EtudiantManager
+class DAOProfesseur extends DAOEtudiant
 {
 	
 	protected $_db;
