@@ -12,27 +12,63 @@ class DAOCours extends DAOMysqli
   
   public function getAll()
   {
-	  	$result = $this->_db->query('SELECT * FROM cours');
+	  	$result = $this->_db->query('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu');
 	 	
 	  	$listeCours = array();
 	  	while ($cours = $result->fetch_assoc()) {
 	  		$listeCours[] = new Cours(array(	'id' => $cours['id_cours'], 
   								'libelle' => $cours['libelle_cours'], 
   								'couleurCalendar' => $cours['couleur_calendar'], 
-  								'idProf' => $cours['id_prof'], 
-  								'idCle' => $cours['id_cle']));
+  								'idProf' => new Professeur(array('id' => $cours['id_etu'], 
+						  								'nom' => $cours['nom_etu'], 
+						  								'prenom' => $cours['prenom_etu'], 
+						  								'mail' => $cours['mail_etu'], 
+						  								'login' => $cours['pseudo_etu'],
+						  								'pass' => $cours['pass_etu'],
+						  								'admin' => $cours['admin'])),
+  								'idCle' => new Cle(array('id' => $cours['id_cle'],
+  														'cle' => $cours['valeur_cle']))));
 	  	}
 	  	return $listeCours;
   }
   
+  public function getAllByProf(Professeur $prof)
+  {
+  	$result = $this->_db->query('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND id_prof = ' . $prof->getId());
+  	 
+  	$listeCours = array();
+  	while ($cours = $result->fetch_assoc()) {
+  		$listeCours[] = new Cours(array(	'id' => $cours['id_cours'],
+  				'libelle' => $cours['libelle_cours'],
+  				'couleurCalendar' => $cours['couleur_calendar'],
+  				'idProf' => new Professeur(array('id' => $cours['id_etu'],
+  						'nom' => $cours['nom_etu'],
+  						'prenom' => $cours['prenom_etu'],
+  						'mail' => $cours['mail_etu'],
+  						'login' => $cours['pseudo_etu'],
+  						'pass' => $cours['pass_etu'],
+  						'admin' => $cours['admin'])),
+  				'idCle' => new Cle(array('id' => $cours['id_cle'],
+  						'cle' => $cours['valeur_cle']))));
+  	}
+  	return $listeCours;
+  }
+  
   public function getByID($id)
   {
-	$result = $this->_db->query('SELECT * FROM cours WHERE id_cours = ' . $id);
+	$result = $this->_db->query('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND id_cours = ' . $id);
 	$cours = $result->fetch_assoc();
   	return new Cours(array(	'id' => $cours['id_cours'], 
   								'libelle' => $cours['libelle_cours'], 
   								'couleurCalendar' => $cours['couleur_calendar'], 
-  								'idProf' => $cours['id_prof'], 
-  								'idCle' => $cours['id_cle']));
+  								'idProf' => new Professeur(array('id' => $cours['id_etu'], 
+						  								'nom' => $cours['nom_etu'], 
+						  								'prenom' => $cours['prenom_etu'], 
+						  								'mail' => $cours['mail_etu'], 
+						  								'login' => $cours['pseudo_etu'],
+						  								'pass' => $cours['pass_etu'],
+						  								'admin' => $cours['admin'])),
+  								'idCle' => new Cle(array('id' => $cours['id_cle'],
+  														'cle' => $cours['valeur_cle']))));
   }
 }

@@ -100,8 +100,7 @@
                     <div class="collapse navbar-collapse" >
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="index.php">Mes cours</a></li>
-                            <li><a href="index.php?section=seance">Mes étudiants</a></li>
-                            <li><a href="#contact">Mes séances</a></li>
+                            <li><a href="index.php?section=seance">Mes séances</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -143,7 +142,38 @@
 
         <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <!--Integartaion des fichiers js de chaque page-->
+        <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/bootstrap/dataTablePerso.js"></script>
+		<script type="text/javascript">
+		$('#example').DataTable( {
+		    language: {
+		    	processing:     "Traitement en cours...",
+		        search:         "Rechercher&nbsp;:",
+		        lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+		        info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+		        infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+		        infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+		        infoPostFix:    "",
+		        loadingRecords: "Chargement en cours...",
+		        zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+		        emptyTable:     "Aucune donnée disponible dans le tableau",
+		        paginate: {
+		            first:      "Premier",
+		            previous:   "Pr&eacute;c&eacute;dent",
+		            next:       "Suivant",
+		            last:       "Dernier"
+		        },
+		        aria: {
+		            sortAscending:  ": activer pour trier la colonne par ordre croissant",
+		            sortDescending: ": activer pour trier la colonne par ordre décroissant"
+		        }
+		        
+			        
+		    }
+		} );
+</script>
+        <!--Integration des fichiers js de chaque page-->
         <script type="text/javascript" src="../../js/<?php echo ($page . ".js"); ?>"></script>
         <script type="text/javascript" src="../../js/commun.js"></script>
 

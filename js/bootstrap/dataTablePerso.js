@@ -1,4 +1,4 @@
-$("#example tbody tr").click(function() {
+$("#tableau tbody tr").click(function() {
     if ($(this).hasClass('selectedRow')) {
         $(this).removeClass('selectedRow');
     }
@@ -9,7 +9,7 @@ $("#example tbody tr").click(function() {
 
 $(document).ready(function() {
     var tab = new Array;
-    var table = $('#example').DataTable();
+    var table = $('#tableau').DataTable();
     $('#button').click(function() {
         alert(table.rows('.selectedRow').data().length + ' row(s) selected');
         $(".selectedRow").each(function() {
