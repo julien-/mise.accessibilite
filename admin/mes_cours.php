@@ -98,7 +98,7 @@ if ($rq_exos === FALSE) {
                         ?>
                         <tr>
                             <!--Titre du cours-->
-                            <td class="prem_colonne">
+                            <td class="autre_colonne">
                                 <form method="post" name="form_name_<?php echo($mon_cours['id_cours']); ?>" action="../rq_mes_cours.php?section=mes_cours&majtitrecours=<?php echo($mon_cours['id_cours']); ?>">
                                     <input type="text" style="height: 20px; font-size: 10pt;" name="newtitrecours" id="newtitrecours" size="26" value="<?php echo $mon_cours['libelle_cours']; ?>" title="Saisir un nouveau titre de cours" class="inputValDefaut">
                                     <!--submit-->
@@ -121,7 +121,7 @@ if ($rq_exos === FALSE) {
                                 </a>
                             </td>
                             <!--Modifier la clé du cours-->
-                            <td class="prem_colonne">
+                            <td class="autre_colonne">
                                 <form method="post" name="form_cle_<?php echo($mon_cours['id_cle']); ?>" action="../rq_mes_cours.php?section=mes_cours&majclecours=<?php echo($mon_cours['id_cle']); ?>">
                                     <input type="text" style="height: 20px; font-size: 10pt;" name="newclecours" id="newclecours" size="26" value="" title="Saisir une nouvelle clé" class="inputValDefaut">
                                     <!--submit-->
@@ -146,21 +146,42 @@ if ($rq_exos === FALSE) {
             </table>
             <!--#########################   NOUVEAU COURS   #########################-->
             <div id="msg_cours"></div>
-            <form method="post" action="../rq_mes_cours.php?section=mes_cours&addcours">
-                <table class="tableau-libre">
-                    <tr>
-                        <th colspan="3">Ajouter un cours</th>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="titrecours" id="titrecours" size="26" value="" title="Taper un titre de cours" class="inputValDefaut"></td>
-                        <td><input type="text" name="clecours" id="clecours" size="26" value="" title="Taper une clé unique pour ce cours" class="inputValDefaut"></td>
-                        <!--submit-->
-                        <td><input type="image" name="soumis1" id="soumis1" src='../../<?php echo($dossierimg . "admin/flat_ajou.png"); ?>'  alt='Ajouter un cours' title='Ajouter un cours'/> </td>
-                    </tr>
-
-                </table>
-            </form>
-
+            
+            
+<a  class="btn btn-primary" data-toggle="modal" href="modal/remotePage.php" data-target="#remoteModal">Ajouter un cours</a>  
+ 
+    <!-- Modal -->  
+<div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
+     <div class="modal-dialog">  
+        <div class="modal-content">
+            <form method="post" name="form_add_cours" action="../rq_mes_cours.php?section=mes_cours&addcours">
+            <br/>
+            	<div class="container-fluid">
+                	<div class="row">
+                		<div class="col-sm-1">
+                		</div>
+                		<div class="col-sm-9">
+	            		<div class="form-group">
+	            			<label for="titrecours">Titre du cours</label>
+		                	<input type="text" name="titrecours" id="titrecours" size="26" value="" title="Taper un titre de cours" class="inputValDefaut"></td>
+		                </div>
+		                <div class="form-group">
+		                	<label for="clecours">Clé du cours</label>
+		                	<input type="text" name="clecours" id="clecours" size="26" value="" title="Taper une clé unique pour ce cours" class="inputValDefaut"></td>
+		                </div>
+		                <!--submit-->
+		                <div class="form-group center-content">
+		                	<input type="submit" class="btn btn-primary" name="soumis1" id="soumis1" alt='Ajouter un cours' title='Ajouter un cours' value="Ajouter"/>
+		    			</div>
+		    			</div>
+		    			<div class="col-sm-1">
+		    			</div>
+	    			</div>
+    			</div>
+	    	</form>
+        </div>
+     </div>
+</div>  
             <!--##############
                     THEMES
                 ##############-->

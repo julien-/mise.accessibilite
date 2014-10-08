@@ -71,7 +71,4 @@ class Cours {
 		$this->cle = $cle;
 		return $this;
 	}
-	
-	
-	
 }

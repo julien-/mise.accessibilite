@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
+        <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
         <link href="../../css/style.css" rel="stylesheet">
         <link href="../../css/<?php echo $page; ?>.css" rel="stylesheet">
