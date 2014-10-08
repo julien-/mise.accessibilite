@@ -11,8 +11,7 @@ echo $titre;
 $reqRecherche = SQLQuery ( 'SELECT * FROM etudiant e, inscription i, cours c WHERE e.id_etu = i.id_etu AND c.id_cours = i.id_cours AND c.id_prof = ' . $_SESSION ['currentUser']->getId () );
 
 ?>
-<link rel="stylesheet" type="text/css"
-	href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
 
 <table id="tableau" class="table table-striped table-bordered">
 	<thead>

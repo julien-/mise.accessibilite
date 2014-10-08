@@ -12,14 +12,6 @@ $daoExo = new DAOExercice($db);
 
 $professeur = $daoProfesseur->getByID($_SESSION['id']);
 
-$listeCours = $daoCours->getAllByProf($professeur);
-
-$theme = $daoTheme->getByID(7);
-echo $theme->getTitre();
-
-$exercice = $daoExo->getByID(16);
-
-echo $exercice->getTheme()->getCours()->getLibelle();
 
 $_SESSION['currentUser'] = $professeur; 
 if (isset($_GET['section'])) {

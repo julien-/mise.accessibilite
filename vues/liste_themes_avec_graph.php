@@ -1,21 +1,16 @@
 <script type="text/javascript" src="../../../js/googleChartToolsPieChart.js"></script>
 <table id="chemin">
 <?php
-$sql = 'SELECT * 
-        FROM theme
-        WHERE id_cours = ' . $cours;
-        
-$req_theme = mysql_query($sql) or die('Erreur SQL !<br>' . $sql . '<br>' . mysql_error());
+$daoTheme = new DAOTheme($db);
+$listeTheme = $daoTheme->getAllByCours($_GET['c']);
 
-while($donnees = mysql_fetch_array($req_theme))  // pour chaque th�me on va chercher les exos
+foreach($listeTheme as $theme) // pour chaque th�me on va chercher les exos
 {
-    $theme = $donnees['id_theme'];
-    $nomTheme = $donnees['titre_theme'];
-    $urlJSON = '../../chart/get_json_pie_chart.php?cours=' . $cours . '&theme=' . $theme . '&user=' . $etudiant;
+    $urlJSON = '../../chart/get_json_pie_chart.php?cours=' . $theme->getCours()->getId() . '&theme=' . $theme->getId() . '&user=' . $etudiant;
 ?>
     <tr style="background-color:#f54f4f;">
         <td>
-            <h1 class="titre_scolaire"> <?php echo $nomTheme; ?></h1>
+            <h1 class="titre_scolaire"> <?php echo $theme->getTitre(); ?></h1>
         </td>
     </tr>
     <tr>
@@ -32,14 +27,14 @@ while($donnees = mysql_fetch_array($req_theme))  // pour chaque th�me on va ch
                                                 1: { color: '#FF6633' }
                                             }
                                         };
-                setPieChartOptions('<?php echo $urlJSON ?>', optionsPieChart, <?php echo $theme ?>);
+                setPieChartOptions('<?php echo $urlJSON ?>', optionsPieChart, <?php echo $theme->getId() ?>);
             </script>
-            <div id="<?php echo $theme; ?>" style="width: 500px; height: auto;"></div>
+            <div id="<?php echo $theme->getId(); ?>" style="width: 500px; height: auto;"></div>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="<?php echo $lienDetails.$theme; ?>">Details</a>
+            <a href="<?php echo $lienDetails.$theme->getCours()->getId(); ?>">Details</a>
         </td>
     </tr>
 <?php

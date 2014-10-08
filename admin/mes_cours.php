@@ -80,7 +80,7 @@ if ($rq_exos === FALSE) {
                 #############-->
             <h2 class="titre_scolaire">Gestion de mes cours</h2>
 
-            <table class="tableau" name ="tab_cours" id="tab_cours">
+            <table class="table table-striped table-bordered" name ="tab_cours" id="tab_cours">
                 <thead>
                     <tr class="titre">
                         <th>Titre du cours</th>
@@ -99,10 +99,11 @@ if ($rq_exos === FALSE) {
                         <tr>
                             <!--Titre du cours-->
                             <td class="prem_colonne">
-                                <form method="post" action="rq_mes_cours.php?section=mes_cours&majtitrecours=<?php echo($mon_cours['id_cours']); ?>">
-                                    <input type="text" name="newtitrecours" id="newtitrecours" size="26" value="<?php echo $mon_cours['libelle_cours']; ?>" title="Saisir un nouveau titre de cours" class="inputValDefaut">
+                                <form method="post" name="form_name_<?php echo($mon_cours['id_cours']); ?>" action="../rq_mes_cours.php?section=mes_cours&majtitrecours=<?php echo($mon_cours['id_cours']); ?>">
+                                    <input type="text" style="height: 20px; font-size: 10pt;" name="newtitrecours" id="newtitrecours" size="26" value="<?php echo $mon_cours['libelle_cours']; ?>" title="Saisir un nouveau titre de cours" class="inputValDefaut">
                                     <!--submit-->
-                                    <input type='image' id='img_edit_titrecours' name ='img_edit_titrecours' src='../../<?php echo($dossierimg . "admin/flat_edit.png"); ?>' alt="Valider le nouveau titre saisi" title="Valider le nouveau titre saisi"/>
+                                    <a id='img_edit_titrecours' name ='img_edit_titrecours' href="#" onClick=form_name_<?php echo($mon_cours['id_cours']); ?>.submit()><i class="glyphicon glyphicon-pencil" title="Modifier le nom de ce cours"></i></a> 
+                                
                                 </form>
                             </td>
                             <!--Nombre d'inscris-->
@@ -116,26 +117,26 @@ if ($rq_exos === FALSE) {
                             <!--Détails-->
                             <td class="petite_colonne">
                                 <a href="index.php?section=progression_globale&c=<?php echo $mon_cours['id_cours']; ?>">
-                                    <img src="../../images/loupe.png"/>
+                                    <i class="glyphicon glyphicon-list-alt" title="D&eacute;tails sur ce cours"></i>
                                 </a>
                             </td>
                             <!--Modifier la clé du cours-->
                             <td class="prem_colonne">
-                                <form method="post" action="rq_mes_cours.php?section=mes_cours&majclecours=<?php echo($mon_cours['id_cle']); ?>">
-                                    <input type="text" name="newclecours" id="newclecours" size="26" value="" title="Saisir une nouvelle clé" class="inputValDefaut">
+                                <form method="post" name="form_cle_<?php echo($mon_cours['id_cle']); ?>" action="../rq_mes_cours.php?section=mes_cours&majclecours=<?php echo($mon_cours['id_cle']); ?>">
+                                    <input type="text" style="height: 20px; font-size: 10pt;" name="newclecours" id="newclecours" size="26" value="" title="Saisir une nouvelle clé" class="inputValDefaut">
                                     <!--submit-->
-                                    <input type='image' id='img_edit_clecours' name ='img_edit_clecours' src='../../<?php echo($dossierimg . "admin/flat_edit.png"); ?>' alt="Modifier la clé du cours" title="Modifier la clé du cours"/>
+                                    <a id='img_edit_clecours' name ='img_edit_clecours' href="#" onClick=form_cle_<?php echo($mon_cours['id_cle']); ?>.submit()><i class="glyphicon glyphicon-pencil" title="Modifier la clé de ce cours"></i></a> 
                                 </form>
                             </td>
                             <!-- FORUM -->
                             <td class="petite_colonne">
-                                <a href="index.php?section=index_forum&id_cours=<?php echo($mon_cours['id_cours']); ?>"><img width="24" src='../../<?php echo($dossierimg . "admin/forum.png"); ?>' alt="Forum" title="Forum"/></a> 
+                                <a href="index.php?section=index_forum&id_cours=<?php echo($mon_cours['id_cours']); ?>"><i class="glyphicon glyphicon-comment" alt="Forum" title="Forum"></i></a> 
                             </td>
                             <!-- SUPPRESSION COURS   -->
                             <td class="petite_colonne">
-                                <form id="form_sup_cours" method="post" action="rq_mes_cours.php?section=mes_cours&supcours=<?php echo $mon_cours['id_cours']; ?>">
+                                <form id="form_delete_<?php echo($mon_cours['id_cours']); ?>" method="post" action="../rq_mes_cours.php?section=mes_cours&supcours=<?php echo $mon_cours['id_cours']; ?>">
                                     <!--submit-->
-                                    <input type='image' class='img_sup_cours' name ='img_sup_cours' src='../../<?php echo($dossierimg . "admin/flat_supp.png"); ?>' alt="Supprimer le cours, ses thèmes, exercices et avancements" title="Supprimer le cours, ses thèmes, exercices et avancements"/>
+                                    <a class='img_sup_cours' name ='img_sup_cours' href="#" onClick=form_delete_<?php echo($mon_cours['id_cours']); ?>.submit()><i class="glyphicon glyphicon-minus-sign" title="Modifier la clé de ce cours"></i></a>
                                 </form>
                             </td>
 
@@ -145,7 +146,7 @@ if ($rq_exos === FALSE) {
             </table>
             <!--#########################   NOUVEAU COURS   #########################-->
             <div id="msg_cours"></div>
-            <form method="post" action="rq_mes_cours.php?section=mes_cours&addcours">
+            <form method="post" action="../rq_mes_cours.php?section=mes_cours&addcours">
                 <table class="tableau-libre">
                     <tr>
                         <th colspan="3">Ajouter un cours</th>
@@ -185,7 +186,7 @@ if ($rq_exos === FALSE) {
                 </h2>
                 <div id="msg_themes"></div>
                 <!--######################### TABLEAU DES THEMES #########################-->
-                <table id="tab_themes" name="tab_themes" class="tableau">
+                <table id="tab_themes" name="tab_themes" class="table table-striped table-bordered">
                     <thead>
                         <tr class="titre">  <!--class pour rester toujours visible-->
                             <th>Titre du thème</th>
@@ -199,7 +200,7 @@ if ($rq_exos === FALSE) {
                             ?>
                             <tr class="trTHEMES_<?php echo($mon_theme["id_cours"]); ?>" >   <!--Pour savoir s'il faut afficher ou pas-->
                                 <!--Titre du thème-->
-                                <td class="prem_colonne">
+                                <td class="autre_colonne">
                                     <form method="post" action="rq_mes_cours.php?section=mes_cours&majtheme=<?php echo($mon_theme['id_theme']); ?>">
                                         <input type="text" name="titremajtheme" id="titremajtheme" size="26" value="<?php echo $mon_theme['titre_theme']; ?>" title="Taper un titre de thème" class="inputValDefaut">
                                         <!--submit-->
@@ -207,11 +208,11 @@ if ($rq_exos === FALSE) {
                                     </form>
                                 </td>
                                 <!-- Nombre d'exercices : Utile pour garder le numéro du prochain exercice à créer-->
-                                <td class="petite_colonne" id="nbexo_idtheme<?php echo ($mon_theme["id_theme"] ); ?>">
+                                <td class="autre_colonne" id="nbexo_idtheme<?php echo ($mon_theme["id_theme"] ); ?>">
                                     <?php echo($mon_theme["nb_exo"]); ?>
                                 </td>
                                 <!--SUPPRESSION THEME-->
-                                <td class="petite_colonne">
+                                <td class="autre_colonne">
                                     <form method="post" action="rq_mes_cours.php?section=mes_cours&suptheme=<?php echo $mon_theme['id_theme']; ?>">
                                         <!--submit-->
                                         <input type='image' class='img_sup_theme' name ='img_sup_theme' src='../../<?php echo($dossierimg . "admin/flat_supp.png"); ?>' alt="Supprimer le thème, ses exercices et avancements" title="Supprimer le thème, ses exercices et avancements"/>
@@ -269,7 +270,7 @@ if ($rq_exos === FALSE) {
                         LISTE DES EXERCICES 
                     #########################-->
                 <div id="msg_exo"></div>
-                <table id="tab_exo" name="tab_exo"class="tableau">
+                <table id="tab_exo" name="tab_exo"class="table table-striped table-bordered">
                     <thead>
                         <tr class="titre">
                             <th>N°</th>
