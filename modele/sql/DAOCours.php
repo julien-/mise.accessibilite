@@ -62,7 +62,7 @@ class DAOCours extends DAOMysqli
   		$listeCours[] = new Cours(array(	'id' => $cours['id_cours'],
   				'libelle' => $cours['libelle_cours'],
   				'couleurCalendar' => $cours['couleur_calendar'],
-  				'idEtu' => new Etudiant(array('id' => $cours['id_etu'],
+  				'idProf' => new Professeur(array('id' => $cours['id_etu'],
   						'nom' => $cours['nom_etu'],
   						'prenom' => $cours['prenom_etu'],
   						'mail' => $cours['mail_etu'],

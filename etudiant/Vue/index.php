@@ -139,7 +139,7 @@
                         </ul>
                     </div>
                     <div class="col-sm-9">
-                        <?php include_once('../etudiant/' . $page . '.php'); ?>
+                        <?php include_once('../Controleur/' . $page . '.php'); ?>
                     </div>
                 </div><!--/row-->
             </div><!--/container-->
