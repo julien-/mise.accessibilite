@@ -100,8 +100,8 @@
                     </div>
                     <div class="collapse navbar-collapse" >
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.php">Mes cours</a></li>
-                            <li><a href="index.php?section=seance">Mes séances</a></li>
+                            <li class="<?php if (!isset($_GET['section'])) echo "active";?>"><a href="index.php">Mes cours</a></li>
+                            <li class="<?php if ($_GET['section'] == 'seance') echo "active";?>"><a href="index.php?section=seance">Mes séances</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>

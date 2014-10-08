@@ -83,13 +83,13 @@ if ($rq_exos === FALSE) {
             <table class="table table-striped table-bordered" name ="tab_cours" id="tab_cours">
                 <thead>
                     <tr class="titre">
-                        <th>Titre du cours</th>
-                        <th>Inscrits</th>
-                        <th>Th&egrave;mes</th>
-                        <th>Détails</th>
-                        <th>Modifier la clé du cours</th>
-                        <th>Forum</th>
-                        <th>Supprimer</th> 
+                        <th class="center-text">Titre du cours</th>
+                        <th class="center-text">Inscrits</th>
+                        <th class="center-text">Th&egrave;mes</th>
+                        <th class="center-text">Détails</th>
+                        <th class="center-text">Modifier la clé du cours</th>
+                        <th class="center-text">Forum</th>
+                        <th class="center-text">Supprimer</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -130,7 +130,7 @@ if ($rq_exos === FALSE) {
                             </td>
                             <!-- FORUM -->
                             <td class="petite_colonne">
-                                <a href="index.php?section=index_forum&id_cours=<?php echo($mon_cours['id_cours']); ?>"><i class="glyphicon glyphicon-comment" alt="Forum" title="Forum"></i></a> 
+                                <a href="../index.php?section=index_forum&id_cours=<?php echo($mon_cours['id_cours']); ?>"><i class="glyphicon glyphicon-comment" alt="Forum" title="Forum"></i></a> 
                             </td>
                             <!-- SUPPRESSION COURS   -->
                             <td class="petite_colonne">
@@ -150,7 +150,7 @@ if ($rq_exos === FALSE) {
             
 <a  class="btn btn-primary" data-toggle="modal" href="modal/remotePage.php" data-target="#remoteModal">Ajouter un cours</a>  
  
-    <!-- Modal -->  
+<!-- Modal ajout cours-->  
 <div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
      <div class="modal-dialog">  
         <div class="modal-content">
@@ -186,6 +186,7 @@ if ($rq_exos === FALSE) {
         </div>
      </div>
 </div>  
+<!-- Fin modal ajout cours -->
             <!--##############
                     THEMES
                 ##############-->
@@ -204,7 +205,7 @@ if ($rq_exos === FALSE) {
 
                             if (isset($_SESSION['id_cours_sel']) && ($_SESSION['id_cours_sel'] == $mon_cours["id_cours"]))
                                 echo 'selected="selected"';
-                            ?>><?php echo (strtoupperFr($mon_cours["libelle_cours"])); ?></option><?php
+                            ?>><?php echo (Outils::toUpper($mon_cours["libelle_cours"])); ?></option><?php
                                 }
                                 ?>
                     </select>
@@ -214,9 +215,9 @@ if ($rq_exos === FALSE) {
                 <table id="tab_themes" name="tab_themes" class="table table-striped table-bordered">
                     <thead>
                         <tr class="titre">  <!--class pour rester toujours visible-->
-                            <th>Titre du thème</th>
-                            <th>Nombre d'exercices</th>
-                            <th>Supprimer un thème</th>
+                            <th class="center-text">Titre du thème</th>
+                            <th class="center-text">Nombre d'exercices</th>
+                            <th class="center-text">Supprimer un thème</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -226,11 +227,11 @@ if ($rq_exos === FALSE) {
                             <tr class="trTHEMES_<?php echo($mon_theme["id_cours"]); ?>" >   <!--Pour savoir s'il faut afficher ou pas-->
                                 <!--Titre du thème-->
                                 <td class="autre_colonne">
-                                    <form method="post" action="rq_mes_cours.php?section=mes_cours&majtheme=<?php echo($mon_theme['id_theme']); ?>">
-                                        <input type="text" name="titremajtheme" id="titremajtheme" size="26" value="<?php echo $mon_theme['titre_theme']; ?>" title="Taper un titre de thème" class="inputValDefaut">
-                                        <!--submit-->
-                                        <input type='image' id='img_edit_theme' name ='img_edit_theme' src='../../<?php echo($dossierimg . "admin/flat_edit.png"); ?>' alt="Valider le nouveau titre saisi" title="Valider le nouveau titre saisi"/>
-                                    </form>
+                                    <form method="post" name="form_name_theme_<?php echo($mon_theme['id_theme']); ?>" action="../rq_mes_cours.php?section=mes_cours&majtheme=<?php echo($mon_theme['id_theme']); ?>">
+	                                    <input type="text" style="height: 20px; font-size: 10pt;" name="titremajtheme" id="titremajtheme" size="26" value="<?php echo $mon_theme['titre_theme']; ?>" title="Saisir un nouveau titre de cours" class="inputValDefaut">
+	                                    <!--submit-->
+	                                    <a id='img_edit_theme' name ='img_edit_theme' href="#" onClick=form_name_theme_<?php echo($mon_theme['id_theme']); ?>.submit()><i class="glyphicon glyphicon-pencil" title="Modifier le nom de ce thème"></i></a> 
+                                	</form>
                                 </td>
                                 <!-- Nombre d'exercices : Utile pour garder le numéro du prochain exercice à créer-->
                                 <td class="autre_colonne" id="nbexo_idtheme<?php echo ($mon_theme["id_theme"] ); ?>">
@@ -238,35 +239,52 @@ if ($rq_exos === FALSE) {
                                 </td>
                                 <!--SUPPRESSION THEME-->
                                 <td class="autre_colonne">
-                                    <form method="post" action="rq_mes_cours.php?section=mes_cours&suptheme=<?php echo $mon_theme['id_theme']; ?>">
-                                        <!--submit-->
-                                        <input type='image' class='img_sup_theme' name ='img_sup_theme' src='../../<?php echo($dossierimg . "admin/flat_supp.png"); ?>' alt="Supprimer le thème, ses exercices et avancements" title="Supprimer le thème, ses exercices et avancements"/>
-                                    </form>
+	                                <form id="form_delete_theme_<?php echo($mon_theme['id_theme']); ?>" method="post" action="../rq_mes_cours.php?section=mes_cours&suptheme=<?php echo $mon_theme['id_theme']; ?>">
+	                                    <!--submit-->
+	                                    <a class='img_sup_theme' name ='img_sup_theme' href="#" onClick=form_delete_theme_<?php echo($mon_theme['id_theme']); ?>.submit()><i class="glyphicon glyphicon-minus-sign" title="Supprimer ce thème"></i></a>
+	                                </form>
                                 </td>
 
                             </tr>
                         <?php } ?>
                     </tbody>
                 </table>
-                <!--#########################
-                        NOUVEAU THEME 
-                    #########################-->
-                <form method="post" action="rq_mes_cours.php?section=mes_cours&addtheme">
-                    <table border="1" class="tableau-libre">
-                        <tr>
-                            <th colspan="3">Ajouter un thème</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" name="titretheme" id="titretheme"size="26" value="" title="Taper un titre de thème" class="inputValDefaut"/>
-                                <input hidden="hidden" name="id_cours_sel" id="id_cours_sel"/>
-                            </td>
-                            <!--submit-->
-                            <td><input type="image" name="soumis2" id="soumis2" src='../../<?php echo($dossierimg . "admin/flat_ajou.png"); ?>'  alt='Ajouter un thème' title='Ajouter un thème'/> </td>
-                        </tr>
-
-                    </table>
-                </form>
+                <!-- Modal ajout cours-->  
+<a  class="btn btn-primary" data-toggle="modal" data-target="#ajoutTheme">Ajouter un thème</a>  
+                
+<div class="modal fade" id="ajoutTheme" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
+     <div class="modal-dialog">  
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 id="myModalLabel" class="modal-title">Ajouter un thème</h4>
+            </div>
+            <br/>
+            <form method="post" name="form_add_cours" action="../rq_mes_cours.php?section=mes_cours&addtheme">
+            	<div class="container-fluid">
+                	<div class="row">
+                		<div class="col-sm-1">
+                		</div>
+                		<div class="col-sm-9">
+	            		<div class="form-group">
+	            			<label for="titrecours">Titre du thème</label>
+                	       	<input type="text" name="titretheme" id="titretheme" size="26" value="" title="Taper un titre de thème" class="inputValDefaut"/>
+                            <input hidden="hidden" name="id_cours_sel" id="id_cours_sel"/>
+		                </div>
+                		<!--submit-->
+		                <div class="form-group center-content">
+		                	<input type="submit" class="btn btn-primary" name="soumis2" id="soumis2" alt='Ajouter un thème' title='Ajouter un thème' value="Ajouter"/>
+		    			</div>
+		    			</div>
+		    			<div class="col-sm-1">
+		    			</div>
+	    			</div>
+    			</div>
+	    	</form>
+        </div>
+     </div>
+</div>  
+<!-- Fin modal ajout cours -->
             </div>
             <div id="exo">
                 <h2 class="titre_scolaire">Gestion des exercices du th&egrave;me <?php ?>
@@ -298,11 +316,11 @@ if ($rq_exos === FALSE) {
                 <table id="tab_exo" name="tab_exo"class="table table-striped table-bordered">
                     <thead>
                         <tr class="titre">
-                            <th>N°</th>
-                            <th>Titre actuel</th>
-                            <th>Détails</th>
-                            <th>Fichiers</th>
-                            <th>Supprimer un exercice</th>
+                            <th class="center-text">N°</th>
+                            <th class="center-text">Titre actuel</th>
+                            <th class="center-text">Détails</th>
+                            <th class="center-text">Fichiers</th>
+                            <th class="center-text">Supprimer un exercice</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -316,7 +334,7 @@ if ($rq_exos === FALSE) {
                                     <?php echo ($mon_exo["num_exo"]); ?>
                                 </td>
                                 <!--Titre de l'exercice-->
-                                <td class="autre_colonne">
+                                <td class="petite_colonne">
                                     <form method="post" action="rq_mes_cours.php?section=mes_cours&majexo=<?php echo($mon_exo['id_exo']); ?>">
                                         <!--TITRE-->
                                         <input type="text" name="titremajexo" id="titremajexo" size="26" value="<?php echo ($mon_exo["titre_exo"]); ?>" title="Taper un titre d'exercice" class="inputValDefaut">

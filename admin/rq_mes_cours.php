@@ -94,7 +94,6 @@ if (isset($_GET["majtheme"])) {
 //SUPPRESSION DE THEME (et ses exos)
 if (isset($_GET["suptheme"])) {
     //forum
-    deleteCategorieFromTheme($_GET["suptheme"]);
     //theme
     mysql_query("DELETE FROM " . $tb_theme . " WHERE id_theme = " . $_GET["suptheme"]);
 

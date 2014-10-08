@@ -13,17 +13,15 @@ $daoInscription = new DAOInscription($db);
 
 $listeInscriptions = $daoInscription->getAllByCours(1);
 $listeCours = $daoCours->getAllByProf(17);
-
 $daoSeance = new DAOSeance($db);
+$daoAvancement = new DAOAvancement($db);
 
+echo $daoAvancement->getByTheme(7);
 $listeSeance = $daoSeance->getAllByCours(2);
 
 //echo $daoSeance->getByID(1)->getCours()->getLibelle();
 
-
-
 $professeur = $daoProfesseur->getByID($_SESSION['id']);
-
 
 $_SESSION['currentUser'] = $professeur; 
 if (isset($_GET['section'])) {

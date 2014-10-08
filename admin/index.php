@@ -6,7 +6,7 @@ session_start();
 
 include_once "../config.php";
 include_once "../sql/connexion_mysql.php";
-
+session_start();
 include_once('../fonctions.php');
 if (!isset($_SESSION['pseudo'])) {
     $page = "connexion"; //NON CONNECTE en tant que PROFESSEUR
