@@ -16,10 +16,10 @@ $reqRecherche = SQLQuery ( 'SELECT * FROM etudiant e, inscription i, cours c WHE
 <table id="tableau" class="table table-striped table-bordered">
 	<thead>
 		<tr>
-			<th>Nom</th>
-			<th>Pr&eacute;nom</th>
-			<th>Pseudo</th>
-			<th>D&eacute;tails</th>
+			<th class="center-text">Nom</th>
+			<th class="center-text">Pr&eacute;nom</th>
+			<th class="center-text">Pseudo</th>
+			<th class="center-text">D&eacute;tails</th>
 		</tr>
 	</thead>
 	<tbody>

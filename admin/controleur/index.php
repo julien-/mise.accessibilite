@@ -16,7 +16,6 @@ $listeCours = $daoCours->getAllByProf(17);
 $daoSeance = new DAOSeance($db);
 $daoAvancement = new DAOAvancement($db);
 
-echo $daoAvancement->getByTheme(7);
 $listeSeance = $daoSeance->getAllByCours(2);
 
 //echo $daoSeance->getByID(1)->getCours()->getLibelle();
