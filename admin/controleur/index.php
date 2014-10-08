@@ -9,6 +9,22 @@ $daoProfesseur = new DAOProfesseur($db);
 $daoCours = new DAOCours($db);
 $daoTheme = new DAOTheme($db);
 $daoExo = new DAOExercice($db);
+$daoInscription = new DAOInscription($db);
+
+$listeInscriptions = $daoInscription->getAllByCours(1);
+$listeCours = $daoCours->getAllByProf(17);
+
+foreach($listeCours as $cours)
+{
+	;
+}
+
+
+foreach($listeInscriptions as $inscription)
+{
+	echo $inscription->getCours()->getLibelle();
+}
+
 
 $professeur = $daoProfesseur->getByID($_SESSION['id']);
 
