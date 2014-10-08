@@ -1,8 +1,9 @@
+session_start();
 <script type="text/javascript"
   src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","table"]}]}'>
 </script>
 <?php
-session_start();
+
 include_once "../config.php";
 include_once "../sql/connexion_mysql.php";
 

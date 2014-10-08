@@ -154,6 +154,10 @@ if ($rq_exos === FALSE) {
 <div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
      <div class="modal-dialog">  
         <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 id="myModalLabel" class="modal-title">Ajouter un cours</h4>
+            </div>
             <form method="post" name="form_add_cours" action="../rq_mes_cours.php?section=mes_cours&addcours">
             <br/>
             	<div class="container-fluid">

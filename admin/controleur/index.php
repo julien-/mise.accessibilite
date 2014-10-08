@@ -14,16 +14,12 @@ $daoInscription = new DAOInscription($db);
 $listeInscriptions = $daoInscription->getAllByCours(1);
 $listeCours = $daoCours->getAllByProf(17);
 
-foreach($listeCours as $cours)
-{
-	;
-}
+$daoSeance = new DAOSeance($db);
 
+$listeSeance = $daoSeance->getAllByCours(2);
 
-foreach($listeInscriptions as $inscription)
-{
-	echo $inscription->getCours()->getLibelle();
-}
+//echo $daoSeance->getByID(1)->getCours()->getLibelle();
+
 
 
 $professeur = $daoProfesseur->getByID($_SESSION['id']);
