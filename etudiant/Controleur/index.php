@@ -17,7 +17,7 @@ $listeCours = $daoCours->getAllByEtu($etudiant);
 if (isset($_GET['section'])) {
 	$page = $_GET['section'];
 } else {
-	$page = 'evolution';
+	$page = 'cours';
 }
 
 include_once('../Vue/index.php');
