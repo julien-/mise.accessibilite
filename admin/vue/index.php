@@ -146,6 +146,7 @@
         <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/bootstrap/dataTablePerso.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/jquery.dataTables.rowReordering.js"></script>
 		<script type="text/javascript">
 		$('#tableau').DataTable( {
 		    language: {

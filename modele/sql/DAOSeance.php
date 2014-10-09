@@ -37,7 +37,6 @@ class DAOSeance extends DAOMysqli
 		 
 		$listeSeance = array();
 		while ($seance = $result->fetch_assoc()) {
-			echo "lol";
 			$listeSeance[] = new Seance(array(	'id' => $seance['id_seance'],
 										'date' => $seance['date_seance'],
 										'cours' => new Cours(array(	'id' => $seance['id_cours'], 
@@ -62,7 +61,6 @@ class DAOSeance extends DAOMysqli
 			
 		$listeSeance = array();
 		while ($seance = $result->fetch_assoc()) {
-			echo "lol";
 			$listeSeance[] = new Seance(array(	'id' => $seance['id_seance'],
 					'date' => $seance['date_seance'],
 					'cours' => new Cours(array(	'id' => $seance['id_cours'],

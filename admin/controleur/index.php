@@ -15,7 +15,7 @@ $listeInscriptions = $daoInscription->getAllByCours(1);
 $listeCours = $daoCours->getAllByProf(17);
 $daoSeance = new DAOSeance($db);
 $daoAvancement = new DAOAvancement($db);
-
+echo 'avancement' . $daoAvancement->getByCours(1);
 $listeSeance = $daoSeance->getAllByCours(2);
 
 //echo $daoSeance->getByID(1)->getCours()->getLibelle();

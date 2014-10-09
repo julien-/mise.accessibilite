@@ -335,22 +335,22 @@ if ($rq_exos === FALSE) {
                                 </td>
                                 <!--Titre de l'exercice-->
                                 <td class="petite_colonne">
-                                    <form method="post" action="rq_mes_cours.php?section=mes_cours&majexo=<?php echo($mon_exo['id_exo']); ?>">
+                                    <form method="post" name="form_name_exo<?php echo $mon_exo['id_exo'];?>" action="../rq_mes_cours.php?section=mes_cours&majexo=<?php echo($mon_exo['id_exo']); ?>">
                                         <!--TITRE-->
-                                        <input type="text" name="titremajexo" id="titremajexo" size="26" value="<?php echo ($mon_exo["titre_exo"]); ?>" title="Taper un titre d'exercice" class="inputValDefaut">
+                                        <input type="text" style="height: 20px; font-size: 10pt;" name="titremajexo" id="titremajexo" size="26" value="<?php echo ($mon_exo["titre_exo"]); ?>" title="Taper un titre d'exercice" class="inputValDefaut">
                                         <!--submit-->
-                                        <input type="image" id="soumismajexo" src="../../<?php echo($dossierimg . $dossieradmin . "flat_edit.png"); ?>" alt="Valider le nouveau titre saisi" title="Valider le nouveau titre saisi"/>
+                                        <a id='soumismajexo' name ='soumismajexo' href="#" onClick=form_name_exo<?php echo($mon_exo['id_exo']); ?>.submit()><i class="glyphicon glyphicon-pencil" alt="Valider le nouveau titre saisi" title="Valider le nouveau titre saisi"></i></a> 
                                     </form>
                                 </td>
                                 <!--Details-->
                                 <td class="petite_colonne">
                                     <a title ="Progression de l'exercice" href="index.php?section=details_exercice&c=<?php echo ($mon_exo['id_cours']); ?>&ex=<?php echo ($mon_exo["id_exo"]); ?>">
-                                        <img src="../../images/loupe.png"/>
+                                        <i class="glyphicon glyphicon-list-alt" title="D&eacute;tails sur cet exercice"></i>
                                     </a>
                                 </td>
                                 <!--3 Popup: Affichage des fichiers-->
                                 <td class="petite_colonne">
-                                    <form method="post" name="gestion_fichiers" action="index.php?section=mes_cours&exo_sel=<?php echo ($mon_exo["id_exo"]); ?>">
+                                    <form method="post" name="gestion_fichiers" action="../index.php?section=mes_cours&exo_sel=<?php echo ($mon_exo["id_exo"]); ?>">
                                         <!--submit-->
                                         <input type="image" id="soumisficexo" src="../../<?php echo($dossierimg . $dossieradmin . "/fichiers.png"); ?>" alt="Gérer les fichiers de l'exercice" title="Gérer les fichiers de l'exercice"/>
                                         ( <?php echo ($mon_exo["nb_fichiers"]); ?> )
@@ -358,7 +358,7 @@ if ($rq_exos === FALSE) {
                                 </td>
                                 <td class="petite_colonne">
                                     <!--SUPPRESSION d'exo-->
-                                    <form method="post" action="rq_mes_cours.php?section=mes_cours&supexo=<?php echo ($mon_exo['id_exo']); ?>">
+                                    <form method="post" action="../rq_mes_cours.php?section=mes_cours&supexo=<?php echo ($mon_exo['id_exo']); ?>">
                                         <!--Mémorise l'id du theme de l'exercice concerné-->
                                         <input type="hidden"  id="idt_exo" name="idt_exo" value="<?php echo ($mon_exo['id_theme']); ?>" />
                                         <!--submit-->

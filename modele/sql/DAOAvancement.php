@@ -1,5 +1,6 @@
 <?php
 include_once('DAOMysqli.php');
+
 class DAOAvancement extends DAOMysqli
 {
 	function getByThemeEtudiant($idTheme, $idEtudiant)
@@ -67,5 +68,38 @@ class DAOAvancement extends DAOMysqli
   		return 0;
   	
   	return number_format(($avancement['progression'] / $avancement['total']) * 100, 2);
+  }
+  
+  function getByCours($idCours)
+  {
+  	
+  	$sql = '    SELECT e.id_exo '
+  			. ' FROM exercice e, theme t '
+  			. ' WHERE t.id_theme = e.id_theme '
+  					. ' AND id_cours = ' . $idCours;
+  	
+  	$reqTotal = $this->_db->query($sql);
+  	$total = $reqTotal->num_rows;
+  	
+  	$sql = 'SELECT e.id_etu FROM etudiant e';
+  	$reqTotalEtudiant = $this->_db->query($sql);
+  	$totalEtudiant = $reqTotalEtudiant->num_rows;
+  	
+  	$total = $total * $totalEtudiant * 100;
+
+  	$sql = 'SELECT SUM( assimile + compris + fait ) AS progression
+            FROM avancement a, theme t, exercice e
+            WHERE a.id_exo = e.id_exo
+            AND t.id_theme = e.id_theme
+            AND id_cours = ' . $idCours;
+  	
+  	$reqProgression = $this->_db->query($sql);
+
+  	$avancement = $reqProgression->fetch_assoc();
+  	
+  	if ($total == 0)
+  		return 0;
+  	
+  	return number_format(($avancement['progression'] / $total) * 100, 2);
   }
 }

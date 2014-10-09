@@ -8,7 +8,9 @@ if (isset ( $_GET ['section'] ) && $_GET ['section'] == 'recherche') {
 }
 echo $titre;
 
-$reqRecherche = SQLQuery ( 'SELECT * FROM etudiant e, inscription i, cours c WHERE e.id_etu = i.id_etu AND c.id_cours = i.id_cours AND c.id_prof = ' . $_SESSION ['currentUser']->getId () );
+$daoInscription = new DAOInscription($db);
+$listeResultats = $daoInscription->getAllByProfesseur($_SESSION ['currentUser']->getId());
+//$reqRecherche = SQLQuery ( 'SELECT * FROM etudiant e, inscription i, cours c WHERE e.id_etu = i.id_etu AND c.id_cours = i.id_cours AND c.id_prof = ' . $_SESSION ['currentUser']->getId () );
 
 ?>
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
@@ -24,21 +26,21 @@ $reqRecherche = SQLQuery ( 'SELECT * FROM etudiant e, inscription i, cours c WHE
 	</thead>
 	<tbody>
            		<?php
-			while ( $row = mysql_fetch_array ( $reqRecherche ) ) 
+			foreach($listeResultats as $resultat)
 			{
 				?>
             <tr>
 			<td class="autre_colonne">
-                    <?php echo $row['nom_etu']; ?>
+                    <?php echo utf8_encode($resultat->getEtudiant()->getNom()); ?>
                 </td>
 			<td class="autre_colonne">
-                    <?php echo $row['prenom_etu']; ?>
+                    <?php echo utf8_encode($resultat->getEtudiant()->getPrenom()); ?>
                 </td>
 			<td class="autre_colonne">
-                    <?php echo $row['pseudo_etu']; ?>
+                    <?php echo utf8_encode($resultat->getEtudiant()->getLogin()); ?>
                 </td>
 			<td class="autre_colonne"><a
-				href="index.php?section=etudiant&e=<?php echo $row['id_etu']; ?>"><i class="glyphicon glyphicon-list-alt" title="Cliquez pour plus de d&eacute;tails sur cette personne"></i></a></td>
+				href="index.php?section=etudiant&e=<?php echo $resultat->getEtudiant()->getId(); ?>"><i class="glyphicon glyphicon-list-alt" title="Cliquez pour plus de d&eacute;tails sur cette personne"></i></a></td>
 		</tr>
                 <?php
 			}
