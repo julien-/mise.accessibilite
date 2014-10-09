@@ -8,18 +8,23 @@ class DAOMysqli
     $this->_db = $db;
   }
   
-  private function executeQuery($sql)
+  protected function executeQuery($sql)
   {
   	return $this->_db->query($sql);
   }
   
-  private function fetchArray($ressource)
+  protected function fetchArray($ressource)
   {
   	return $ressource->fetch_assoc();
   }
   
-  private function countRows($ressource)
+  protected function countRows($ressource)
   {
   	return $ressource->num_rows;
+  }
+  
+  protected function lastInsertedID()
+  {
+  	return $this->_db->insert_id;
   }
 }

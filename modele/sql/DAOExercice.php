@@ -14,7 +14,7 @@ class DAOExercice extends DAOMysqli
 	
 	  	if ($exercice == null)
 	  		return false;
-	  	echo $exercice['libelle_cours'];
+
 	  	return new Exercice (array('id' => $exercice['id_exo'],
 	  								'titre_exo' => $exercice['titre_exo'],
 	  								'numero' => $exercice['num_exo'],

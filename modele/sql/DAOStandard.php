@@ -1,18 +1,24 @@
 <?php
 class DAOStandard 
 { 
-  private function executeQuery($sql)
+  protected function executeQuery($sql)
   {
-  	return mysql_query($sql) or die (mysql_error() . "<br/>SQL: " . $sql);
+  	$resultat = mysql_query($sql) or die (mysql_error() . "<br/>SQL: " . $sql);
+  	return $resultat;
   }
   
-  private function fetchArray($ressource)
+  protected function fetchArray($ressource)
   {
   	return mysql_fetch_array($ressource);
   }
   
-  private function countRows($ressource)
+  protected function countRows($ressource)
   {
   	return mysql_num_rows($ressource);
+  }
+  
+  protected function lastInsertedID()
+  {
+  	return mysql_insert_id();
   }
 }
