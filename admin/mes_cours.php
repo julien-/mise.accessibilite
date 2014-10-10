@@ -358,11 +358,12 @@ if ($rq_exos === FALSE) {
                                 </td>
                                 <td class="petite_colonne">
                                     <!--SUPPRESSION d'exo-->
-                                    <form method="post" action="../rq_mes_cours.php?section=mes_cours&supexo=<?php echo ($mon_exo['id_exo']); ?>">
+                                    <form method="post" name="form_supp_exo<?php echo($mon_exo['id_exo']); ?>" action="../rq_mes_cours.php?section=mes_cours&supexo=<?php echo ($mon_exo['id_exo']); ?>">
                                         <!--Mémorise l'id du theme de l'exercice concerné-->
                                         <input type="hidden"  id="idt_exo" name="idt_exo" value="<?php echo ($mon_exo['id_theme']); ?>" />
                                         <!--submit-->
-                                        <input type="image" class="soumissupexo" src="../../<?php echo($dossierimg . $dossieradmin . "flat_supp.png"); ?>" alt="Supprimer l'exercice" title="Supprimer l'exercice"/>
+                                    	<a id='soumismajexo' name ='soumissupexo' href="#" onClick=form_supp_exo<?php echo($mon_exo['id_exo']); ?>.submit()><i class="glyphicon glyphicon-minus-sign" alt="Supprimer l'exercice" title="Supprimer l'exercice"></i></a> 
+                                    	
                                     </form>
                                 </td>
 
@@ -375,7 +376,7 @@ if ($rq_exos === FALSE) {
                 <!--#########################
                         NOUVEL EXERCICE 
                     #########################-->
-                <form method="post" action="rq_mes_cours.php?section=mes_cours&addexo">
+                <form method="post" action="../rq_mes_cours.php?section=mes_cours&addexo">
                     <table border="1" class="tableau-libre">
                         <tr>
                             <th colspan="3">Ajouter un exerice</th>
@@ -394,7 +395,40 @@ if ($rq_exos === FALSE) {
                     </table>
                 </form>
             </div>
-
+<a  class="btn btn-primary" data-toggle="modal" data-target="#ajoutExo">Ajouter un exercice</a>  
+<div class="modal fade" id="ajoutExo" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
+     <div class="modal-dialog">  
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 id="myModalLabel" class="modal-title">Ajouter un exercice</h4>
+            </div>
+            <br/>
+            <form method="post" name="form_add_exo" action="../rq_mes_cours.php?section=mes_cours&addexo">
+            	<div class="container-fluid">
+                	<div class="row">
+                		<div class="col-sm-1">
+                		</div>
+                		<div class="col-sm-9">
+	            		<div class="form-group">
+	            			<label for="titre_exo">Titre de l'exercice</label>
+                            <input type="text" name="titre_exo" id="titre_exo" size="26" value="" title="Taper un titre d'exercice" class="inputValDefaut">
+	            			<input type="hidden" name="id_them_sel" id="id_them_sel"/>
+                            <input type="hidden" name="nbmax_exo" id="nbmax_exo"/>
+		                </div>
+                		<!--submit-->
+		                <div class="form-group center-content">
+		                	<input type="submit" class="btn btn-primary" name="soumisajouexo" id="soumisajouexo" alt='Ajouter un exercice' title='Ajouter un exerccie' value="Ajouter"/>
+		    			</div>
+		    			</div>
+		    			<div class="col-sm-1">
+		    			</div>
+	    			</div>
+    			</div>
+	    	</form>
+        </div>
+     </div>
+</div>  
             <!--##############
             ###### POPUP #####
             ##################-->
