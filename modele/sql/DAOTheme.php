@@ -1,18 +1,18 @@
 <?php
-class DAOTheme extends DAOMysqli
+class DAOTheme extends DAOStandard
 {	
 	public function add(Theme $theme)
 	{
-		$this->_db->query('INSERT INTO theme SET titre_theme = "' . $theme->getTitre() . '", id_cours = "' . $theme->getCours()->getId() . '"');
+		$this->executeQuery('INSERT INTO theme SET titre_theme = "' . $theme->getTitre() . '", id_cours = "' . $theme->getCours()->getId() . '"');
 	}
 	  
 	
 	public function getAllByCours($id)
 	{
-		$result = $this->_db->query('SELECT * FROM theme t, cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND t.id_cours = ' . $id);
+		$result = $this->executeQuery('SELECT * FROM theme t, cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND t.id_cours = ' . $id);
 		 
 		$listeTheme = array();
-		while ($theme = $result->fetch_assoc()) {
+		while ($theme = $this->fetchArray($result)) {
 			$listeTheme[] = new Theme(array('id' => $theme['id_theme'], 
   								'titre' => $theme['titre_theme'], 
   								'cours' => new Cours(array(	'id' => $theme['id_cours'], 
@@ -33,9 +33,9 @@ class DAOTheme extends DAOMysqli
 	
 	  public function getByID($id)
 	  {
-	  	$result = $this->_db->query('SELECT * FROM theme t, cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND t.id_theme = ' . $id);
+	  	$result = $this->executeQuery('SELECT * FROM theme t, cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND t.id_theme = ' . $id);
 	  	
-	  	$theme = $result->fetch_assoc();
+	  	$theme = $this->fetchArray($result);
 	
 	  	if ($theme == null)
 	  		return false;

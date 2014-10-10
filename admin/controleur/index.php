@@ -10,12 +10,24 @@ $daoCours = new DAOCours($db);
 $daoTheme = new DAOTheme($db);
 $daoExo = new DAOExercice($db);
 $daoInscription = new DAOInscription($db);
+$daoSeance = new DAOSeance($db);
+$daoAvancement = new DAOAvancement($db);
 
+echo $daoProfesseur->getByID(17)->getNom();
+
+
+
+
+foreach ($daoTheme->getAllByCours(1) as $theme)
+{
+	echo $theme->getTitre();
+}
 $listeInscriptions = $daoInscription->getAllByCours(1);
 $listeCours = $daoCours->getAllByProf(17);
 $daoSeance = new DAOSeance($db);
 $daoAvancement = new DAOAvancement($db);
-echo 'avancement' . $daoAvancement->getByCours(1);
+
+
 $listeSeance = $daoSeance->getAllByCours(2);
 
 //echo $daoSeance->getByID(1)->getCours()->getLibelle();

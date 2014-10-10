@@ -1,33 +1,24 @@
 <?php
 class DAOProfesseur extends DAOEtudiant
-{
-	
-	protected $_db;
-	
-	public function __construct(MySQLi $db)
-	{
-		$this->_db = $db;
-	}
-	
-	
+{		
 	public function add(Professeur $professeur)
 	{
 		parent::add($professeur);
-		$this->_db->query('INSERT INTO professeur SET id_prof = ' . $this->_db->insert_id);
+		$this->executeQuery('INSERT INTO professeur SET id_prof = ' . $this->lastInsertedID());
 	}
 	
 	  public function getCours(Professeur $prof)
 	  {
-	  	$result = $this->_db->query('SELECT * FROM cours WHERE id_prof = ' . $prof->getId());
+	  	$result = $this->executeQuery('SELECT * FROM cours WHERE id_prof = ' . $prof->getId());
 	 
 	  	return $result;
 	  }
 	  
 	  public function getByID($id)
 	  {
-	  	$result = $this->_db->query('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE id_etu = ' . $id);
+	  	$result = $this->executeQuery('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE id_etu = ' . $id);
 	  	
-	  	$professeur = $result->fetch_assoc();
+	  	$professeur = $this->fetchArray($result);
 	
 	  	if ($professeur == null)
 	  		return false;
