@@ -3,14 +3,14 @@ class DAOExercice extends DAOMysqli
 {	
 	public function add(Exercice $exercice)
 	{
-		$this->_db->query('INSERT INTO exercice SET titre_exo = "' . $exercice->getTitre() . '", num_exo = ' . $exercice->getNumero() . ', id_theme =' . $exercice->getTheme()->getId());
+		$this->executeQuery('INSERT INTO exercice SET titre_exo = "' . $exercice->getTitre() . '", num_exo = ' . $exercice->getNumero() . ', id_theme =' . $exercice->getTheme()->getId());
 	}
 	  
 	  public function getByID($id)
 	  {
-	  	$result = $this->_db->query('SELECT * FROM exercice ex, theme t, cours c, etudiant e, cle WHERE ex.id_theme = t.id_theme AND c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND ex.id_exo = ' . $id);
+	  	$result = $this->executeQuery('SELECT * FROM exercice ex, theme t, cours c, etudiant e, cle WHERE ex.id_theme = t.id_theme AND c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND ex.id_exo = ' . $id);
 	  	
-	  	$exercice = $result->fetch_assoc();
+	  	$exercice = $this->fetchArray($result);
 	
 	  	if ($exercice == null)
 	  		return false;

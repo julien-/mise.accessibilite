@@ -12,10 +12,10 @@ class DAOCours extends DAOMysqli
   
   public function getAll()
   {
-	  	$result = $this->_db->query('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu');
+	  	$result = $this->executeQuery('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu');
 	 	
 	  	$listeCours = array();
-	  	while ($cours = $result->fetch_assoc()) {
+	  	while ($cours = $this->fetchArray($result)) {
 	  		$listeCours[] = new Cours(array(	'id' => $cours['id_cours'], 
   								'libelle' => $cours['libelle_cours'], 
   								'couleurCalendar' => $cours['couleur_calendar'], 
@@ -34,10 +34,10 @@ class DAOCours extends DAOMysqli
   
   public function getAllByProf($id)
   {
-  	$result = $this->_db->query('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND id_prof = ' . $id);
+  	$result = $this->executeQuery('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND id_prof = ' . $id);
   	 
   	$listeCours = array();
-  	while ($cours = $result->fetch_assoc()) {
+  	while ($cours = $this->fetchArray($result)) {
   		$listeCours[] = new Cours(array(	'id' => $cours['id_cours'],
   				'libelle' => $cours['libelle_cours'],
   				'couleurCalendar' => $cours['couleur_calendar'],
@@ -56,8 +56,8 @@ class DAOCours extends DAOMysqli
   
   public function getByID($id)
   {
-	$result = $this->_db->query('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND id_cours = ' . $id);
-	$cours = $result->fetch_assoc();
+	$result = $this->executeQuery('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND id_cours = ' . $id);
+	$cours = $this->fetchArray($result);
   	return new Cours(array(	'id' => $cours['id_cours'], 
   								'libelle' => $cours['libelle_cours'], 
   								'couleurCalendar' => $cours['couleur_calendar'], 

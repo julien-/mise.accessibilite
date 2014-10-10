@@ -10,7 +10,7 @@ class DAOAvancement extends DAOMysqli
             FROM exercice
             WHERE id_theme = ' . $_GET['theme'];
 		
-		$this->_db->query($sql);
+		$this->executeQuery($sql);
 		
 		$sql = 'CREATE TEMPORARY TABLE R2
             SELECT SUM(fait+compris+assimile) as progression FROM theme t, avancement a, exercice e
@@ -19,14 +19,14 @@ class DAOAvancement extends DAOMysqli
             AND id_etu = ' . $_GET['user'] . '
             AND t.id_theme = ' . $_GET['theme'];
 		
-		$this->_db->query($sql);
+		$this->executeQuery($sql);
 		
 		$sql = 'SELECT progression, total
             FROM R1, R2';
 		
-		$result = $this->_db->query($sql);
+		$result = $this->executeQuery($sql);
 		 
-		$avancement = $result->fetch_assoc();
+		$avancement = $this->fetchArray($result);
 		
 		if ($avancement['total'] == 0)
 			return 0;
@@ -40,7 +40,7 @@ class DAOAvancement extends DAOMysqli
         FROM exercice
         WHERE id_theme = ' . $idTheme;
   	
-  	$this->_db->query($sql);
+  	$this->executeQuery($sql);
   	
   	$sql = 'CREATE TEMPORARY TABLE R2
         SELECT SUM(fait+compris+assimile) as progression
@@ -49,20 +49,20 @@ class DAOAvancement extends DAOMysqli
         AND e.id_exo = a.id_exo
         AND t.id_theme = ' . $idTheme;
   	
-  	$this->_db->query($sql);
+  	$this->executeQuery($sql);
   	
   	$sql = 'CREATE TEMPORARY TABLE R3
             SELECT COUNT(*) as nbEtudiants
             FROM etudiant';
   	
-  	$this->_db->query($sql);
+  	$this->executeQuery($sql);
   	
   	$sql = 'SELECT progression, total * nbEtudiants as total
         FROM R3, R2, R1';
   	
   	$result = $this->_db->query($sql) or die (mysql_error());
   	
-  	$avancement = $result->fetch_assoc();
+  	$avancement = $this->fetchArray($result);
 	
   	if ($avancement['total'] == 0)
   		return 0;
@@ -78,12 +78,12 @@ class DAOAvancement extends DAOMysqli
   			. ' WHERE t.id_theme = e.id_theme '
   					. ' AND id_cours = ' . $idCours;
   	
-  	$reqTotal = $this->_db->query($sql);
-  	$total = $reqTotal->num_rows;
+  	$reqTotal = $this->executeQuery($sql);
+  	$total = $this->countRows($reqTotal);
   	
   	$sql = 'SELECT e.id_etu FROM etudiant e';
-  	$reqTotalEtudiant = $this->_db->query($sql);
-  	$totalEtudiant = $reqTotalEtudiant->num_rows;
+  	$reqTotalEtudiant = $this->executeQuery($sql);
+  	$totalEtudiant = $this->countRows($reqTotalEtudiant);
   	
   	$total = $total * $totalEtudiant * 100;
 
@@ -93,9 +93,9 @@ class DAOAvancement extends DAOMysqli
             AND t.id_theme = e.id_theme
             AND id_cours = ' . $idCours;
   	
-  	$reqProgression = $this->_db->query($sql);
+  	$reqProgression = $this->executeQuery($sql);
 
-  	$avancement = $reqProgression->fetch_assoc();
+  	$avancement = $this->fetchArray($reqProgression);
   	
   	if ($total == 0)
   		return 0;

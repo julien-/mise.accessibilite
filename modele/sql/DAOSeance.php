@@ -3,14 +3,14 @@ class DAOSeance extends DAOMysqli
 {	
 	public function add(Seance $seance)
 	{
-		$this->_db->query('INSERT INTO seance SET date_seance = "' . $seance->getId() . '", id_cours = ' . $seance->getCours()->getId());
+		$this->executeQuery('INSERT INTO seance SET date_seance = "' . $seance->getId() . '", id_cours = ' . $seance->getCours()->getId());
 	}
 	  
 	public function getByID($id)
 	{
-		$result = $this->_db->query('SELECT * FROM seance s, cours c, cle, etudiant e WHERE c.id_prof = e.id_etu AND cle.id_cle = c.id_cle AND s.id_cours = c.id_cours');
+		$result = $this->executeQuery('SELECT * FROM seance s, cours c, cle, etudiant e WHERE c.id_prof = e.id_etu AND cle.id_cle = c.id_cle AND s.id_cours = c.id_cours');
 			
-		$seance = $result->fetch_assoc();
+		$seance = $this->fetchArray($result);
 	
 		if ($seance == null)
 			return false;
@@ -33,10 +33,10 @@ class DAOSeance extends DAOMysqli
 	}
 	public function getAll()
 	{
-		$result = $this->_db->query('SELECT * FROM seance s, cours c, cle, etudiant e WHERE c.id_prof = e.id_etu AND cle.id_cle = c.id_cle AND s.id_cours = c.id_cours');
+		$result = $this->executeQuery('SELECT * FROM seance s, cours c, cle, etudiant e WHERE c.id_prof = e.id_etu AND cle.id_cle = c.id_cle AND s.id_cours = c.id_cours');
 		 
 		$listeSeance = array();
-		while ($seance = $result->fetch_assoc()) {
+		while ($seance = $this->fetchArray($result)) {
 			$listeSeance[] = new Seance(array(	'id' => $seance['id_seance'],
 										'date' => $seance['date_seance'],
 										'cours' => new Cours(array(	'id' => $seance['id_cours'], 
@@ -57,10 +57,10 @@ class DAOSeance extends DAOMysqli
 	  
 	public function getAllByCours($id)
 	{
-		$result = $this->_db->query('SELECT * FROM seance s, cours c, cle, etudiant e WHERE c.id_prof = e.id_etu AND cle.id_cle = c.id_cle AND s.id_cours = c.id_cours AND s.id_cours =' . $id);
+		$result = $this->executeQuery('SELECT * FROM seance s, cours c, cle, etudiant e WHERE c.id_prof = e.id_etu AND cle.id_cle = c.id_cle AND s.id_cours = c.id_cours AND s.id_cours =' . $id);
 			
 		$listeSeance = array();
-		while ($seance = $result->fetch_assoc()) {
+		while ($seance = $this->fetchArray($result)) {
 			$listeSeance[] = new Seance(array(	'id' => $seance['id_seance'],
 					'date' => $seance['date_seance'],
 					'cours' => new Cours(array(	'id' => $seance['id_cours'],

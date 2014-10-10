@@ -3,17 +3,17 @@ class DAOInscription extends DAOMysqli
 {	
 	public function add(Inscription $inscription)
 	{
-		$this->_db->query('INSERT INTO inscription SET id_cours = "' . $inscription->getCours()->getId() . '", id_etu = ' . $inscription->getEtudiant()->getId());
+		$this->executeQuery('INSERT INTO inscription SET id_cours = "' . $inscription->getCours()->getId() . '", id_etu = ' . $inscription->getEtudiant()->getId());
 	}
 	  
 	  public function getAllByEtudiant($id)
 	  {
 	  	$daoEtudiant = new DAOEtudiant($this->_db);
 	  	$sql = 'SELECT * FROM inscription i, etudiant e, cours c, cle WHERE c.id_cle = cle.id_cle AND i.id_etu = e.id_etu AND i.id_cours = c.id_cours AND i.id_etu = ' . $id . ' GROUP BY c.id_cours';
-	  	$result = $this->_db->query($sql);
+	  	$result = $this->executeQuery($sql);
 
 	  	$listeInscription = null;
-	  	while ($inscription = $result->fetch_assoc()) {
+	  	while ($inscription = $this->fetchArray($result)) {
 	  		$listeInscription[] = new Inscription(array( 'cours' => new Cours(array(	'id' => $inscription['id_cours'],
 														  				'libelle' => $inscription['libelle_cours'],
 														  				'couleurCalendar' => $inscription['couleur_calendar'],
@@ -35,10 +35,10 @@ class DAOInscription extends DAOMysqli
 	  {
 	  	$daoEtudiant = new DAOEtudiant($this->_db);
 	  	$sql = 'SELECT * FROM inscription i, etudiant e, cours c, cle WHERE c.id_cle = cle.id_cle AND i.id_etu = e.id_etu AND i.id_cours = c.id_cours AND c.id_prof = ' . $id . ' GROUP BY e.id_etu';
-	  	$result = $this->_db->query($sql);
+	  	$result = $this->executeQuery($sql);
 	  
 	  	$listeInscription = null;
-	  	while ($inscription = $result->fetch_assoc()) {
+	  	while ($inscription = $this->fetchArray($result)) {
 	  		$listeInscription[] = new Inscription(array( 'cours' => new Cours(array(	'id' => $inscription['id_cours'],
 	  				'libelle' => $inscription['libelle_cours'],
 	  				'couleurCalendar' => $inscription['couleur_calendar'],
@@ -61,9 +61,9 @@ class DAOInscription extends DAOMysqli
 	  	$daoEtudiant = new DAOEtudiant($this->_db);
 	  	$sql = 'SELECT * FROM inscription i, etudiant e, cours c, cle WHERE c.id_cle = cle.id_cle AND i.id_etu = e.id_etu AND i.id_cours = c.id_cours AND i.id_cours = ' . $id . ' GROUP BY c.id_cours';
 
-	  	$result = $this->_db->query($sql);
+	  	$result = $this->executeQuery($sql);
 	  	$listeInscription = null;
-	  	while ($inscription = $result->fetch_assoc()) {
+	  	while ($inscription = $this->fetchArray($result)) {
 
 	  		$listeInscription[] = new Inscription(array( 'cours' => new Cours(array(	'id' => $inscription['id_cours'],
 	  				'libelle' => $inscription['libelle_cours'],
