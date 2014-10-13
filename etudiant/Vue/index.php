@@ -86,8 +86,8 @@
             </div>
             <div class="navbar navbar-inverse" role="navigation" style="border-top: 1px solid white;">
                 <div class="container">
-
-                    <div class="navbar-header">
+				
+                      <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -95,15 +95,57 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-                    <div class="collapse navbar-collapse" >
+                    <div class="collapse navbar-collapse" id="example-navbar-collapse">
                         <ul class="nav navbar-nav">
                         	<?php 
                         		if(isset($_SESSION["cours"]) || isset($_GET["id_cours"]))
                         		{
                         	?>
   									<li><a href="#">Mon Evolution</a></li>
-  									<li><a href="#">Mise à jour</a></li>
-  									<li><a href="#">Mon Evolution</a></li>
+  									<li class="dropdown">
+  										<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+  											Seances <b class="caret"></b>
+  										</a>
+  										<ul class="dropdown-menu" role="menu">
+		                                    <?php
+		                                    $next_seance = next($listeSeances);
+		                                    $trouve_seance = FALSE;
+		                                    foreach ($listeSeances as $seance) 
+		                                    {
+		                                    	if($next_seance)
+		                                    	{
+			                                    	if ($seance->getDate() <= $now && $now < $next_seance->getDate() && !$trouve_seance)
+			                                    	{
+		                                    			$section = "seance_actuelle";
+		                                    			$trouve_seance = TRUE;
+			                                    	}
+			                                    	else if($seance->getDate() < $now)
+			                                    		$section = "seance_precedente";
+			                                    	else 
+			                                    		$section = "seance_futur";
+		                                    	}
+		                                    	else
+		                                    	{
+		                                    		if($trouve_seance)
+		                                    			$section = "seance_futur";
+	                                    			else
+		                                    			$section = "seance_actuelle";
+		                                    	}
+	                                        ?>
+		                                        <li class="<?php if(isset($section) && $section == "seance_actuelle") echo "active";?>">
+	                                        		<a href="<?php if(isset($section)) echo "index.php?section=".$section;?>" title="<?php echo $seance->getId(); ?>">
+	                                        			<?php
+	                                        				echo "Séance du : " . transformerDate($seance->getDate());														
+														?>
+                                        			</a>
+                                        		</li>
+	                                        <?php
+	                                        	$next_seance = next($listeSeances);
+		                                    }
+		                                    ?>
+		                                </ul>
+  									</li>
+  									<li><a href="#">Ma Progression</a></li>
   									<li><a href="#">Forum</a></li>
                             <?php 
                         		}
@@ -129,7 +171,7 @@
                                     <?php
                                     foreach ($listeCours as $cours) {
                                         ?>
-                                        <li><a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo utf8_encode($cours->getCours()->getLibelle()); ?>" class="black"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo substr(utf8_encode($cours->getCours()->getLibelle()), 0, 20); ?></a></li>
+                                        <li><a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo $cours->getCours()->getLibelle(); ?>" class="black"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo $cours->getCours()->getLibelle(); ?></a></li>
                                         <?php
                                     }
                                     ?>
