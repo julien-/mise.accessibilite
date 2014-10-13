@@ -7,6 +7,12 @@ class DAOProfesseur extends DAOEtudiant
 		$this->executeQuery('INSERT INTO professeur SET id_prof = ' . $this->lastInsertedID());
 	}
 	
+	public function delete($id)
+	{
+		parent::delete($id);
+		$this->executeQuery('DELETE FROM professeur WHERE id_prof = ' . $id);
+	}
+	
 	  public function getCours(Professeur $prof)
 	  {
 	  	$result = $this->executeQuery('SELECT * FROM cours WHERE id_prof = ' . $prof->getId());

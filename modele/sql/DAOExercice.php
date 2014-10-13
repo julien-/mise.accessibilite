@@ -6,6 +6,16 @@ class DAOExercice extends DAOMysqli
 		$this->executeQuery('INSERT INTO exercice SET titre_exo = "' . $exercice->getTitre() . '", num_exo = ' . $exercice->getNumero() . ', id_theme =' . $exercice->getTheme()->getId());
 	}
 	  
+	public function delete($id)
+	{
+		$this->executeQuery('DELETE FROM exercice WHERE id_exo = ' . $id);
+	}
+	
+	public function deleteByTheme($id)
+	{
+		$this->executeQuery('DELETE FROM exercice WHERE id_theme = ' . $id);
+	}
+	
 	  public function getByID($id)
 	  {
 	  	$result = $this->executeQuery('SELECT * FROM exercice ex, theme t, cours c, etudiant e, cle WHERE ex.id_theme = t.id_theme AND c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND ex.id_exo = ' . $id);

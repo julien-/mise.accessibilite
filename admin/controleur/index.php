@@ -1,6 +1,7 @@
 <?php
-session_start();
 include_once('../../lib/autoload.inc.php');
+session_start();
+
 include_once('../../fonctions.php');
 include_once "../../sql/connexion_mysql.php";
 include_once "../../config.php";
@@ -12,21 +13,30 @@ $daoExo = new DAOExercice($db);
 $daoInscription = new DAOInscription($db);
 $daoSeance = new DAOSeance($db);
 $daoAvancement = new DAOAvancement($db);
-
+$daoEtudiant = new DAOEtudiant($db);
 $listeInscriptions = $daoInscription->getAllByCours(1);
 $listeCours = $daoCours->getAllByProf(17);
 $daoSeance = new DAOSeance($db);
 $daoAvancement = new DAOAvancement($db);
 
-
 $listeSeance = $daoSeance->getAllByCours(2);
 
-$professeur = $daoProfesseur->getByID($_SESSION['id']);
-
-$_SESSION['currentUser'] = $professeur; 
-if (isset($_GET['section'])) {
-	$page = $_GET['section'];
-} else {
-	$page = 'mes_cours';
+if (isset($_SESSION['currentUser']))
+{
+	if (isset($_GET['section'])) 
+	{
+		$page = $_GET['section'];
+	} else 
+	{
+		$page = 'mes_cours';
+	}
 }
+else if (isset($_GET['section'])) 
+{
+	$page = $_GET['section'];
+	if ($page != 'inscription')
+		echo "erreur";
+}
+else
+	$page = 'connexion';
 include_once ('../vue/index.php');

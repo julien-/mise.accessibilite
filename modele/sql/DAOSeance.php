@@ -6,6 +6,11 @@ class DAOSeance extends DAOMysqli
 		$this->executeQuery('INSERT INTO seance SET date_seance = "' . $seance->getId() . '", id_cours = ' . $seance->getCours()->getId());
 	}
 	  
+	public function delete($id)
+	{
+		$this->executeQuery('DELETE FROM seance WHERE id_seance = ' . $id);
+	}
+	
 	public function getByID($id)
 	{
 		$result = $this->executeQuery('SELECT * FROM seance s, cours c, cle, etudiant e WHERE c.id_prof = e.id_etu AND cle.id_cle = c.id_cle AND s.id_cours = c.id_cours');

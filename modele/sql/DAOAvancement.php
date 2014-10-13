@@ -3,6 +3,31 @@ include_once('DAOMysqli.php');
 
 class DAOAvancement extends DAOMysqli
 {
+	public function saveOrUpdate(Avancement $avancement)
+	{
+		if (!$this->exists($avancement))
+			$this->executeQuery('INSERT INTO avancement SET id_etu = ' . $avancement->getEtudiant()->getId() . ', id_exo = ' . $avancement->getExercice()->getId() . ', fait = ' . $avancement->getFait() . ', compris = ' . $avancement->getCompris() . ', assimile = ' . $avancement->getAssimile() . ', id_seance = ' . $avancement->getSeance()->getId());
+		else 
+			$this->executeQuery('UPDATE avancement SET id_etu = ' . $avancement->getEtudiant()->getId() . ', id_exo = ' . $avancement->getExercice()->getId() . ', fait = ' . $avancement->getFait() . ', compris = ' . $avancement->getCompris() . ', assimile = ' . $avancement->getAssimile() . ', id_seance = ' . $avancement->getSeance()->getId() . ' WHERE id_etu = ' . $avancement->getEtudiant()->getId() . ', id_exo = ' . $avancement->getExercice()->getId());
+	}
+	
+	public function exists(Avancement $avancement)
+	{
+		$result = $this->executeQuery('SELECT * FROM avancement WHERE id_etu = ' . $avancement->getEtudiant()->getId() . ' AND id_exo = ' . $avancement->getExercice()->getId() . ' AND id_seance = ' . $avancement->getSeance()->getId());
+		
+		return $this->countRows($result) > 0;
+	}
+	
+	public function deleteByExercice($id)
+	{
+		$this->executeQuery('DELETE FROM avancement WHERE id_exo = ' . $id);
+	}
+	
+	public function deleteByEtudiant($id)
+	{
+		$this->executeQuery('DELETE FROM avancement WHERE id_etu = ' . $id);
+	}
+	
 	function getByThemeEtudiant($idTheme, $idEtudiant)
 	{
 		$sql = 'CREATE TEMPORARY TABLE R1

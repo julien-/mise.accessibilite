@@ -10,6 +10,8 @@
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/bootstrap/bootstrapValidator.min.css" rel="stylesheet">
+        <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
@@ -76,10 +78,15 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                                 <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
+                                <?php if (isset($_SESSION['currentUser']))
+                                {?>
                                     <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
+                                <?php 
+                                }
+                                ?>
                                 <ul id="g-account-menu" class="dropdown-menu" role="menu">
                                     <li><a href="#"> Mon profil</a></li>
-                                    <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Se deconnecter</a></li>
+                                    <li><a href="../controleur/deconnexion.php"><i class="glyphicon glyphicon-lock"></i> Se deconnecter</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -115,7 +122,7 @@
 
                     </div>
                     <div class="col-sm-10">
-                        <?php include_once('../' . $page . '.php'); ?>
+                        <?php include_once($page . '.php'); ?>
                     </div>
                     <div class="col-sm-1">
 
@@ -146,7 +153,14 @@
         <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/bootstrap/dataTablePerso.js"></script>
-		<script type="text/javascript" language="javascript" src="../../js/jquery.dataTables.rowReordering.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrapValidator.min.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrap-alert.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/dataValidatorPerso.js"></script>
+		
+
+
+  <script type="text/javascript" language="javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+
 		<script type="text/javascript">
 		$('#tableau').DataTable( {
 		    language: {
@@ -174,22 +188,10 @@
 			        
 		    }
 		} );
-</script>
+		</script>
         <!--Integration des fichiers js de chaque page-->
         <script type="text/javascript" src="../../js/<?php echo ($page . ".js"); ?>"></script>
         <script type="text/javascript" src="../../js/commun.js"></script>
-
-        <!-- JavaScript jQuery code from Bootply.com editor  -->
-
-        <script type='text/javascript'>
-
-            $(document).ready(function() {
-
-
-
-            });
-
-        </script>
 
         <script>
             (function(i, s, o, g, r, a, m) {

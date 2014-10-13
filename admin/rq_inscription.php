@@ -1,8 +1,8 @@
 <?php
 
-include_once "../config.php";
-include_once "../sql/connexion_mysql.php";
-include_once "../fonctions.php";
+include_once "../../config.php";
+include_once "../../sql/connexion_mysql.php";
+include_once "../../fonctions.php";
 
 $redirige = false;
 

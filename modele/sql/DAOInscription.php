@@ -6,6 +6,21 @@ class DAOInscription extends DAOMysqli
 		$this->executeQuery('INSERT INTO inscription SET id_cours = "' . $inscription->getCours()->getId() . '", id_etu = ' . $inscription->getEtudiant()->getId());
 	}
 	  
+	public function deleteByEtudiant($id)
+	{
+		$this->executeQuery('DELETE FROM inscription WHERE id_etu = ' . $id);
+	}
+	
+	public function deleteByCours($id)
+	{
+		$this->executeQuery('DELETE FROM inscription WHERE id_cours = ' . $id);
+	}
+	
+	public function deleteByEtudiantAndCours($idEtu, $idCours)
+	{
+		$this->executeQuery('DELETE FROM inscription WHERE id_etu = ' . $idEtu . ' AND id_cours = ' . $idCours);
+	}
+	
 	  public function getAllByEtudiant($id)
 	  {
 	  	$daoEtudiant = new DAOEtudiant($this->_db);

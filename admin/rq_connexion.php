@@ -63,5 +63,5 @@ if (isset($_POST['submit']) && !isset($_SESSION['id'])) { // si on a appuyé sur
 //    header('Location: ../' . $typeUser . '/index.php?redir=1' . $erreur . $retourPage);
 //}
 }
-header("Location: /".$dossieradmin."index.php?redir=1" . $erreur . $retourPage);
+header("Location: /".$dossieradmin."controleur/index.php?redir=1" . $erreur . $retourPage);
 ?>

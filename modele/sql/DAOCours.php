@@ -2,20 +2,42 @@
 class DAOCours extends DAOMysqli
 {
   
-  public function add(Cours $cours)
-  {
-  	$q = $this->_db->prepare('INSERT INTO cours SET libelle_cours = ?, couleur_calendar = ?, id_prof = ?, id_cle = ?');
-  	$q->bind_param('ssss', $cours->getLibelle(), $cours->getCouleurCalendar(), $cours->getIdProf(), $cours->getIdCle());
+	public function save(Cours $cours)
+	{
+  		$this->executeQuery('INSERT INTO cours SET libelle_cours = "' . $cours->getLibelle() . '", couleur_calendar = ' . $cours->getCouleurCalendar() . ' , id_prof = ' . $cours->getProf()->getId() . ', id_cle = ' . $cours->getCle()->getId());
+	}
+	
+	public function update(Cours $cours)
+	{
+		$this->executeQuery('UPDATE cours SET libelle_cours = "' . $cours->getLibelle() . '", couleur_calendar = ' . $cours->getCouleurCalendar() . ' , id_prof = ' . $cours->getProf()->getId() . ', id_cle = ' . $cours->getCle()->getId() . ' WHERE id_cours = ' . $cours->getId());
+	}
+	
+	public function saveOrUpdate(Cours $cours)
+	{
+		if (!exists($cours))
+			$this->save($cours);
+		else
+			$this->executeQuery('UPDATE cours SET libelle_cours = "' . $cours->getLibelle() . '", couleur_calendar = ' . $cours->getCouleurCalendar() . ' , id_prof = ' . $cours->getProf()->getId() . ', id_cle = ' . $cours->getCle()->getId() . ' WHERE id_cours = ' . $cours->getId());		
+	}
   
-  	$q->execute();
-  }
+  	public function exists(Cours $cours)
+  	{
+  		$result = $this->executeQuery('SELECT * FROM cours WHERE id_cours = ' . $cours->getId());
+  	
+  		return $this->countRows($result) > 0;
+  	}
   
-  public function getAll()
-  {
-	  	$result = $this->executeQuery('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu');
-	 	
-	  	$listeCours = array();
-	  	while ($cours = $this->fetchArray($result)) {
+  	public function delete($id)
+  	{
+  		$this->executeQuery('DELETE FROM cours WHERE id_cours = ' . $id);
+  	}
+  
+  	public function getAll()
+  	{
+		  	$result = $this->executeQuery('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu');
+	 		
+	  		$listeCours = array();
+	  		while ($cours = $this->fetchArray($result)) {
 	  		$listeCours[] = new Cours(array(	'id' => $cours['id_cours'], 
   								'libelle' => $cours['libelle_cours'], 
   								'couleurCalendar' => $cours['couleur_calendar'], 

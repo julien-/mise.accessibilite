@@ -5,8 +5,17 @@ class DAOTheme extends DAOStandard
 	{
 		$this->executeQuery('INSERT INTO theme SET titre_theme = "' . $theme->getTitre() . '", id_cours = "' . $theme->getCours()->getId() . '"');
 	}
-	  
 	
+	public function delete($id)
+	{
+		$this->executeQuery('DELETE FROM theme WHERE id_theme = ' . $id);
+	}
+	
+	public function deleteByCours($id)
+	{
+		$this->executeQuery('DELETE FROM theme WHERE id_cours = ' . $id);
+	}
+	  
 	public function getAllByCours($id)
 	{
 		$result = $this->executeQuery('SELECT * FROM theme t, cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND t.id_cours = ' . $id);

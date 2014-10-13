@@ -1,7 +1,7 @@
 <!-- Page de formualires de connexion et inscription -->
 <?php
-include_once('../sql/connexion_mysql.php');
-include_once('../fonctions.php');
+include_once('../../sql/connexion_mysql.php');
+include_once('../../fonctions.php');
 $erreur ="";
 include_once('rq_inscription.php');
 
@@ -102,54 +102,37 @@ if (!isset($_GET['f'])) {
     <!-- INSCRIPTION -->
     <div id="divinscription">
         <h1 class="titre_fond_rouge">INSCRIPTION EN TANT QUE PROFESSEUR</h1>
-        <form method="post" id="form_inscri" name="form_inscri" action="index.php">
-                <table class="formulaire">
-                <tbody>
-                    <tr>
-                        <td colspan="2" align="center">
-                            <span class="note">Tous les champs sont requis</span>
-                            <br/><br/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="libelle_champ" for="cle_prof">Clé professeurs:</label></td>
-                        <td><input type="password" name="cle_prof" id="cle_prof" size="26" value=""></td>
-                    </tr>
-                    <tr>
-                        <td><label class="libelle_champ" for="nom_etu">Nom:</label></td>
-                        <td><input type="text" name="nom_etu" id="nom_etu" size="26" value="<?php if (isset($_POST['nom_etu'])) echo $_POST['nom_etu'];?>" title="Taper votre nom" <?php if (!isset($_POST['nom_etu'])) echo "class=\"inputValDefaut\""; ?>></td>
-                    </tr>
-                    <tr>
-                        <td><label class="libelle_champ" for="prenom_etu">Prénom:</label></td>
-                        <td><input type="text" name="prenom_etu" id="prenom_etu" size="26" value="<?php if (isset($_POST['prenom_etu'])) echo $_POST['prenom_etu'];?>" title="Taper votre prénom" <?php if (!isset($_POST['prenom_etu'])) echo "class=\"inputValDefaut\""; ?>></td>
-                    </tr>
-                    <tr>
-                        <td><label class="libelle_champ" for="mail_etu">Mail:</label></td>
-                        <td><input type="text" name="mail_etu" id="mail_etu" size="26" value="<?php if (isset($_POST['mail_etu'])) echo $_POST['mail_etu'];?>" title="Taper votre adresse email" <?php if (!isset($_POST['mail_etu'])) echo "class=\"inputValDefaut\""; ?>></td>
-                    </tr>
-                     <tr>
-                        <td><label class="libelle_champ" for="pseudo_etu">Pseudonyme:</label></td>
-                        <td><input type="text" name="pseudo_etu" id="pseudo_etu" size="26" value="<?php if (isset($_POST['pseudo_etu'])) echo $_POST['pseudo_etu'];?>" title="Taper votre pseudo" <?php if (!isset($_POST['pseudo_etu'])) echo "class=\"inputValDefaut\""; ?>></td>
-                    </tr>
-                     <tr>
-                        <td><label class="libelle_champ" for="pass_etu">Mot de passe:</label></td>
-                        <td><input type="password" name="pass_etu" id="pass_etu" size="26" value=""></td>
-                     </tr>
-                     <tr>
-                        <td><label class="libelle_champ" for="conf_pass_etu">Confirmation mot de passe:</label></td>
-                        <td><input type="password" name="conf_pass_etu" id="conf_pass_etu" size="26" value=""></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center">
-                            <input class="button_1" type="submit" id="addcompte" name="addcompte" value="S'inscrire" align="center" class="bouton">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div id="msg_erreur_inscri"><?php
-                echo $erreur;
-            ?></div>
-        </form>
+        <form method="post" id="form_inscri" name="form_inscri" action="index.php" class="form-horizontal">
+        <form class="form-horizontal" role="form">
+   <div class="form-group">
+      <label for="firstname" class="col-sm-2 control-label">First Name</label>
+      <div class="col-sm-10">
+         <input type="text" class="form-control" title="mail !" id="mail_etu" 
+            placeholder="Enter First Name">
+      </div>
+   </div>
+   <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">Last Name</label>
+      <div class="col-sm-10">
+         <input type="text" class="form-control" id="lastname" 
+            placeholder="Enter Last Name">
+      </div>
+   </div>
+   <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+         <div class="checkbox">
+            <label>
+               <input type="checkbox"> Remember me
+            </label>
+         </div>
+      </div>
+   </div>
+   <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+         <button type="submit" class="btn btn-default">Sign in</button>
+      </div>
+   </div>
+</form>
     </div>
 
     <?php
