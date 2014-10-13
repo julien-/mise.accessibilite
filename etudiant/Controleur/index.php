@@ -1,22 +1,27 @@
 <?php
 
+include_once ('../../lib/autoload.inc.php');
 session_start();
 include_once('../../sql/connexion_mysql.php');
 include_once('../../fonctions.php');
-include_once ('../../lib/autoload.inc.php');
 
 $db = DBFactory::getMysqlConnexionWithMySQLi();
 $daoEtudiant = new DAOEtudiant($db);
 $daoCours = new DAOCours($db);
+$daoInscription = new DAOInscription($db);
 
 $etudiant = $daoEtudiant->getByID(65);
 $_SESSION["currentUser"] = $etudiant;
 
-$listeCours = $daoCours->getAllByEtu($etudiant);
+$listeCours = $daoInscription->getAllByEtudiant($etudiant->getId());
 
-if (isset($_GET['section'])) {
+if (isset($_GET['section'])) 
+{
 	$page = $_GET['section'];
-} else {
+	if($page == "cours")
+		unset($_SESSION["cours"]);		
+} 
+else {
 	$page = 'cours';
 }
 

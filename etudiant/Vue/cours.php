@@ -21,12 +21,12 @@ else
 {
 ?>
 
-<table class="tableau">
+<table class="table table-striped table-bordered">
     <thead>
-        <tr>
-            <th>Cours</th>
-            <th>Enseignant</th>
-            <th>Progression</th>
+        <tr class="titre">
+            <th class="center-text">Cours</th>
+            <th class="center-text">Enseignant</th>
+            <th class="center-text">Progression</th>
         </tr>
     </thead>
     <?php
@@ -37,22 +37,15 @@ else
         <tr>
             <!--Titre du cours-->
             <td class="autre_colonne">
-                <font class="nom_cours">
                 <a href=#>
-                	<?php echo $cours->getLibelle(); ?>
+                	<?php echo $cours->getCours()->getLibelle(); ?>
                 </a>
-                </font>
             </td>
             <!--Nom du professeur-->
             <td class="autre_colonne">
-                <font class="nom_prof">
-                <?php
-                	//$professeur = new Professeur();
-                	//$professeur = $cours->getProf();
-                	
-                    echo $cours->getProf()->getNom(); // . ' ' . $cours->getProf()->getPrenom(); 
+                <?php                	
+                    echo $cours->getCours()->getProf()->getNom() . ' ' . $cours->getCours()->getProf()->getPrenom(); 
                 ?>
-                </font>
             </td> 
             <!--Avancement-->
             <td class="autre_colonne">
@@ -66,9 +59,11 @@ else
                     else
                         $color = '#99FF33';*/
                  ?>
-                <span style="color: #339; font-size: 18px; font-weight: bold; font-family: 'please_write_me_a_songmedium';"><?php //echo (int) number_format($progression, 2); ?>%</span>
-                <div style="margin: auto; border: 1px solid black; width: 300px; height: 25px;">
+                <div style="float: left; border: 1px solid black; width: 79%; height: 20px;">
                     <div style="height: 100%; background-color: <?php //echo $color; ?>; width: <?php //echo $progression; ?>%;">&nbsp;</div>
+                </div>
+                <div style="float: left; width: 20%;">
+                	%
                 </div>
             </td>
         </tr>

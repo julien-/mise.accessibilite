@@ -98,13 +98,12 @@
                     <div class="collapse navbar-collapse" >
                         <ul class="nav navbar-nav">
                         	<?php 
-                        		if(isset($_SESSION["id_cours"]))
+                        		if(isset($_SESSION["cours"]) || isset($_GET["id_cours"]))
                         		{
                         	?>
   									<li><a href="#">Mon Evolution</a></li>
   									<li><a href="#">Mise à jour</a></li>
   									<li><a href="#">Mon Evolution</a></li>
-  									<li><a href="#">Classement</a></li>
   									<li><a href="#">Forum</a></li>
                             <?php 
                         		}
@@ -122,7 +121,7 @@
                         <hr>
                         <ul class="list-unstyled">
                             <li class="nav-header"> 
-                                <a href="#" data-toggle="collapse" data-target="#userMenu">
+                                <a href="index.php?section=cours" data-toggle="collapse" data-target="#userMenu">
                                     <h3 class="pokemon-red"><i class="glyphicon glyphicon-pencil pokemon-red"></i> Mes cours</h3>
                                 </a>
                                 <hr>
@@ -130,7 +129,7 @@
                                     <?php
                                     foreach ($listeCours as $cours) {
                                         ?>
-                                        <li><a href="javascript:;" title="<?php echo utf8_encode($cours->getLibelle()); ?>" class="black"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo substr(utf8_encode($cours->getLibelle()), 0, 20); ?></a></li>
+                                        <li><a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo utf8_encode($cours->getCours()->getLibelle()); ?>" class="black"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo substr(utf8_encode($cours->getCours()->getLibelle()), 0, 20); ?></a></li>
                                         <?php
                                     }
                                     ?>
