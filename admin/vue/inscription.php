@@ -11,7 +11,7 @@
 		<form id="inscription" class="form-horizontal" method="post">
 			<div class="form-group">
 				<label class="col-lg-5 control-label">Cl&eacute; d'inscription<sup>*</sup></label>
-				<div class="col-lg-3">
+				<div class="col-lg-4">
 					<input type="password" class="form-control" name="cle"
 						value="<?php echo $cle; ?>" />
 				</div>
@@ -19,7 +19,7 @@
 
 			<div class="form-group">
 				<label class="col-lg-5 control-label">Nom<sup>*</sup></label>
-				<div class="col-lg-3">
+				<div class="col-lg-4">
 					<input type="text" class="form-control" name="nom"
 						value="<?php echo $nom; ?>" />
 				</div>
@@ -27,7 +27,7 @@
 
 			<div class="form-group">
 				<label class="col-lg-5 control-label">Pr&eacute;nom<sup>*</sup></label>
-				<div class="col-lg-3">
+				<div class="col-lg-4">
 					<input type="text" class="form-control" name="prenom"
 						value="<?php echo $prenom; ?>" />
 				</div>
@@ -35,7 +35,7 @@
 
 			<div class="form-group">
 				<label class="col-lg-5 control-label">E-mail<sup>*</sup></label>
-				<div class="col-lg-3">
+				<div class="col-lg-4">
 					<input type="text" class="form-control" name="mail"
 						value="<?php echo $mail; ?>" />
 				</div>
@@ -43,7 +43,7 @@
 
 			<div class="form-group">
 				<label class="col-lg-5 control-label">Pseudo<sup>*</sup></label>
-				<div class="col-lg-3">
+				<div class="col-lg-4">
 					<input type="text" class="form-control" name="pseudo"
 						value="<?php echo $pseudo; ?>" />
 				</div>
@@ -51,15 +51,15 @@
 
 			<div class="form-group">
 				<label class="col-lg-5 control-label">Mot de passe<sup>*</sup></label>
-				<div class="col-lg-3">
-					<input type="password" class="form-control" name="mdp"
+				<div class="col-lg-4">
+					<input type="password" class="form-control" id="mdp" name="mdp"
 						value="<?php echo $mdp; ?>" />
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-lg-5 control-label">Confirmation de mot de passe<sup>*</sup></label>
-				<div class="col-lg-3">
+				<div class="col-lg-4">
 					<input type="password" class="form-control" name="confirmation"
 						value="<?php echo $confirmation; ?>" />
 				</div>
@@ -70,7 +70,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-lg-3 col-md-offset-4">
+				<div class="col-lg-5 col-md-offset-3">
 					<?php
 						foreach($errorList as $error)
 						{

@@ -1,11 +1,3 @@
-<style type="text/css">
-#buttonGroupForm .btn-group .form-control-feedback {
-	top: 0;
-	right: -30px;
-}
-</style>
-
-
 <div class="container-fluid">
 	<div class="row" style="padding-top: 80px;">
 		<div class="col-sm-12 center-content">

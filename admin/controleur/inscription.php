@@ -38,11 +38,35 @@ else
 $errorList = array();
 if (isset($_POST['submit']))
 {
-	$daoEtudiant = new DAOEtudiant($db);
+	$daoProfesseur = new DAOProfesseur($db);
 	
-	if (!$daoEtudiant->existsByPseudo($pseudo))
+	if ($daoProfesseur->existsByPseudo($pseudo))
 	{
 		$errorList[] = "Ce pseudo (<strong>" . $pseudo . "</strong>) existe déjà";
+	}
+	
+	if ($daoProfesseur->existsByMail($mail))
+	{
+		$errorList[] = "Cette adresse e-mail (<strong>" . $mail . "</strong>) existe déjà";
+	}	
+	
+	/* Si pas d'erreur on enregistrer le prof dans la base */
+	if (sizeof($errorList) == 0)
+	{
+		$professeur = new Professeur(array(	 
+  								'nom' => $nom, 
+  								'prenom' => $prenom, 
+  								'mail' => $mail, 
+  								'login' => $pseudo,
+  								'pass' => $mdp,
+  								'admin' => 0));
+		$daoProfesseur->saveOrUpdate($professeur);
+		$_SESSION['currentUser'] = $daoProfesseur->getByPseudo($pseudo);
+		?>
+		<script language="Javascript">
+			document.location.replace("index.php");
+		</script>
+		<?php
 	}
 }
 include_once('../vue/inscription.php');

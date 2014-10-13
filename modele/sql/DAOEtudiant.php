@@ -4,7 +4,20 @@ class DAOEtudiant extends DAOStandard
   
   public function saveOrUpdate(Etudiant $etudiant)
   {
+  	if (existsByPseudo($etudiant->getLogin()))
+  		$this->update($etudiant);
+  	else
+  		$this->add($etudiant);
+  }
+  
+  public function add(Etudiant $etudiant)
+  {
   	$result = $this->executeQuery('INSERT INTO etudiant SET nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '"');
+  }
+  
+  public function update(Etudiant $etudiant)
+  {
+  	$result = $this->executeQuery('UPDATE etudiant SET nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '" WHERE pseudo_etu = "' . $etudiant->getLogin() . '"');
   }
   
   public function delete($id)
@@ -61,8 +74,15 @@ class DAOEtudiant extends DAOStandard
   public function existsByPseudo($pseudo)
   {
   	$result = $this->executeQuery('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE pseudo_etu = "' . $pseudo .'"');
+	
+  	return $this->countRows($result) > 0;
+  }
   
-	return $this->countRows($result) > 0;
+  public function existsByMail($mail)
+  {
+  	$result = $this->executeQuery('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE mail_etu = "' . $mail .'"');
+  
+  	return $this->countRows($result) > 0;
   }
   
   public function existsByPseudoAndPassword($pseudo, $pass)
