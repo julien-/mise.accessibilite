@@ -6,12 +6,13 @@ if (isset ( $_GET ['section'] ) && $_GET ['section'] == 'recherche') {
 	$titre = "<h2 class=\"titre_scolaire\">Recherche d'&eacute;tudiant</h2>";
 	$pRetour = "index.php?r=1";
 }
-echo $titre;
 
 $daoInscription = new DAOInscription($db);
+
 $listeResultats = $daoInscription->getAllByProfesseur($_SESSION ['currentUser']->getId());
 //$reqRecherche = SQLQuery ( 'SELECT * FROM etudiant e, inscription i, cours c WHERE e.id_etu = i.id_etu AND c.id_cours = i.id_cours AND c.id_prof = ' . $_SESSION ['currentUser']->getId () );
-
+if (sizeof($listeResultats) > 0)
+{
 ?>
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
 
@@ -47,4 +48,6 @@ $listeResultats = $daoInscription->getAllByProfesseur($_SESSION ['currentUser']-
 				?>
         </tbody>
 </table>
-
+<?php 
+}
+?>
