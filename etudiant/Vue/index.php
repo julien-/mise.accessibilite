@@ -101,7 +101,7 @@
                         		if(isset($_SESSION["cours"]) || isset($_GET["id_cours"]))
                         		{
                         	?>
-  									<li><a href="#">Mon Evolution</a></li>
+  									<li><a href="index.php?section=evolution">Mon Evolution</a></li>
   									<li class="dropdown">
   										<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
   											Seances <b class="caret"></b>
@@ -171,7 +171,7 @@
                                     <?php
                                     foreach ($listeCours as $cours) {
                                         ?>
-                                        <li><a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo $cours->getCours()->getLibelle(); ?>" class="black"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo $cours->getCours()->getLibelle(); ?></a></li>
+                                        <li><a class="black" href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo $cours->getCours()->getLibelle(); ?>"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo $cours->getCours()->getLibelle(); ?></a></li>
                                         <?php
                                     }
                                     ?>

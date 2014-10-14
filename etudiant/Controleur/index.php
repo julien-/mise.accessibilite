@@ -11,6 +11,7 @@ $daoCours = new DAOCours($db);
 $daoInscription = new DAOInscription($db);
 $daoSeance = new DAOSeance($db);
 $daoAvancement = new DAOAvancement($db);
+$daoRemarque = new DAORemarque($db);
 
 $etudiant = $daoEtudiant->getByID(65);
 $_SESSION["currentUser"] = $etudiant;
