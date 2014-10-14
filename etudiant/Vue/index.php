@@ -69,18 +69,25 @@
                         </button>
                         <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a>
                     </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
-                                    <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
-                                <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                                    <li><a href="#">Mon compte</a></li>
-                                    <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>Se déconnecter</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                    <?php 
+                    if(isset($_SESSION["currentUser"]))
+                    {
+                    ?>
+                    	<div class="navbar-collapse collapse">
+	                        <ul class="nav navbar-nav navbar-right">
+	                            <li class="dropdown">
+	                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
+	                                    <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
+	                                <ul id="g-account-menu" class="dropdown-menu" role="menu">
+	                                    <li><a href="#">Mon compte</a></li>
+	                                    <li><a href="index.php?section=logout"><i class="glyphicon glyphicon-lock"></i>Se déconnecter</a></li>
+	                                </ul>
+	                            </li>
+	                        </ul>
+                    	</div>
+                    <?php 
+                    }
+                    ?>                    
                 </div><!-- /container -->
 
             </div>
@@ -160,24 +167,31 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-3">
-                        <hr>
-                        <ul class="list-unstyled">
-                            <li class="nav-header"> 
-                                <a href="index.php?section=cours" data-toggle="collapse" data-target="#userMenu">
-                                    <h3 class="pokemon-red"><i class="glyphicon glyphicon-pencil pokemon-red"></i> Mes cours</h3>
-                                </a>
-                                <hr>
-                                <ul class="nav nav-stacked">
-                                    <?php
-                                    foreach ($listeCours as $cours) {
-                                        ?>
-                                        <li><a class="black" href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo $cours->getCours()->getLibelle(); ?>"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo $cours->getCours()->getLibelle(); ?></a></li>
-                                        <?php
-                                    }
-                                    ?>
-                                </ul>
-                            </li>
-                        </ul>
+                    	<?php 
+	                    if(isset($_SESSION["currentUser"]))
+	                    {
+	                    ?>
+	                        <hr>
+	                        <ul class="list-unstyled">
+	                            <li class="nav-header"> 
+	                                <a href="index.php?section=cours" data-toggle="collapse" data-target="#userMenu">
+	                                    <h3 class="pokemon-red"><i class="glyphicon glyphicon-pencil pokemon-red"></i> Mes cours</h3>
+	                                </a>
+	                                <hr>
+	                                <ul class="nav nav-stacked">
+	                                    <?php
+	                                    foreach ($listeCours as $cours) {
+	                                        ?>
+	                                        <li><a class="black" href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo $cours->getCours()->getLibelle(); ?>"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo $cours->getCours()->getLibelle(); ?></a></li>
+	                                        <?php
+	                                    }
+	                                    ?>
+	                                </ul>
+	                            </li>
+	                        </ul>
+                        <?php 
+                    	}
+                    	?>
                     </div>
                     <div class="col-sm-9">
                         <?php include_once('../Controleur/' . $page . '.php'); ?>
