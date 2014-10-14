@@ -153,4 +153,26 @@ class DAOAvancement extends DAOMysqli
   	
   	return number_format(($avancement['progression'] / $total) * 100, 2);
   }
+  
+  function getBySeanceEtudiant($idSeance, $idEtudiant)
+  {
+  	$result = $this->executeQuery('SELECT * FROM avancement, theme, exercice 
+  			WHERE avancement.id_etu = ' . $idEtudiant . '
+			AND avancement.id_seance = ' .$idSeance .'
+			AND avancement.id_exo = exercice.id_exo
+  			AND exercice.id_theme = theme.id_theme');
+  	$listeAvancement = array();
+  	while ($avancement = $this->fetchArray($result)) {
+  	
+  			$listeAvancement[]['exercice']['id'] = $avancement['id_exo'];
+	  		$listeAvancement[]['exercice']['titre'] = $avancement['titre_exo'];
+	  		$listeAvancement[]['exercice']['numero'] = $avancement['num_exo'];
+	  		$listeAvancement[]['exercice']['theme']['id'] = $avancement['id_theme'];
+			$listeAvancement[]['exercice']['theme']['titre'] = $avancement['titre_theme'];
+  			$listeAvancement[]['fait'] = $avancement['fait'];
+  			$listeAvancement[]['compris'] = $avancement['compris'];
+  			$listeAvancement[]['assimile'] = $avancement['assimile'];
+  	}
+  	return $listeAvancement;
+  }
 }
