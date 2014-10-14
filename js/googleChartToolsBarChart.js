@@ -6,7 +6,7 @@ function drawBarChart(urlJSON, options, divID)  {
     }).responseText;
     var data = new google.visualization.DataTable(json);
 
-  new google.visualization.BarChart(document.getElementById(divID)).draw(data, options);
+    new google.visualization.BarChart(document.getElementById(divID)).draw(data, options);
 }
 
 function setBarChartOptions(urlJSON, options, divID)

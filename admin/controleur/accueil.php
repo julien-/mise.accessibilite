@@ -1,3 +1,3 @@
 <?php 
-include_once('../vue/')
+include_once('../vue/accueil.php')
 ?>

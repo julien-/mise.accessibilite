@@ -31,4 +31,18 @@ class Outils
 		
 		return $color;
 	}
+	
+	public static function daysToFr($day)
+	{
+		switch($day)
+		{
+			case 'Mon': return "Lundi";
+			case 'Tue': return "Mardi";
+			case 'Wed': return "Mercredi";
+			case 'Thu': return "Jeudi";
+			case 'Fri': return "Vendredi";
+			case 'Sat': return "Samedi";
+			case 'Sun': return "Dimanche";
+		}
+	}
 }
