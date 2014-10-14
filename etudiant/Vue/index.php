@@ -133,7 +133,7 @@
 		                                    	}
 	                                        ?>
 		                                        <li class="<?php if(isset($section) && $section == "seance_actuelle") echo "active";?>">
-	                                        		<a href="<?php if(isset($section)) echo "index.php?section=".$section;?>" title="<?php echo $seance->getId(); ?>">
+	                                        		<a href="<?php if(isset($section)) echo "index.php?section=".$section."&id_seance=".$seance->getId();?>" title="<?php echo transformerDate($seance->getDate()); ?>">
 	                                        			<?php
 	                                        				echo "Séance du : " . transformerDate($seance->getDate());														
 														?>
