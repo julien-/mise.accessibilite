@@ -24,15 +24,15 @@
             </td> 
             <!--Fait-->
             <td class="autre_colonne">
-                 <?php echo $avancement['fait']; ?>
+            	<i class="<?php if($avancement['fait'] == 25) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
             </td>
             <!--Compris-->
             <td class="autre_colonne">
-                 <?php echo $avancement['compris']; ?>
+                 <i class="<?php if($avancement['compris'] == 25) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
             </td>
             <!--Assimile-->
             <td class="autre_colonne">
-                 <?php echo $avancement['assimile']; ?>
+                 <i class="<?php if($avancement['assimile'] == 50) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
             </td>
         </tr>
     </tbody>
