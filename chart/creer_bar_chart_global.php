@@ -3,50 +3,31 @@
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
 <?php
-    $sql = 'SELECT sum(compris+assimile+fait) as progression, count(*)*100 as total '
-            . 'FROM avancement a, theme t, exercice e, cours c '
-            . 'WHERE id_etu != 17 '
-            . 'AND e.id_exo = a.id_exo '
-            . 'AND e.id_theme = t.id_theme '
-            . 'AND t.id_cours = c.id_cours '
-            . 'AND c.id_cours = ' . $id_cours;
-    $reqMax = mysql_query($sql) or die (mysql_error());
-    $max = mysql_fetch_array($reqMax);
-    $progression = $max['progression'];
-    $total = $max['total'];
-    if ($max['total'] == 0)
-        $pourcentage = 0;
-    else
-        $pourcentage = number_format(($progression / $total) * 100,2); 
-    
-    $daoAvancement = new DAOAvancement($db);
-?>
-<div id="chartdiv" style="width: 100%;"></div>
-<script type="text/javascript">
-  google.load("visualization", "1");
-  google.setOnLoadCallback(drawChart);
-  var chart;
-  function drawChart() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Label');
-    data.addColumn('number', 'Value');
-    data.addColumn('number', 'Value2');
-    data.addRows(1);
-    data.setCell(0, 0, '<?php echo $pourcentage; ?> %');
-    data.setCell(0, 1, <?php echo $progression; ?>, '');
-    data.setCell(0, 2, <?php echo $daoAvancement->getByCoursEtudiant($id_cours, $idEtudiant); ?>, '');
 
-    var chartDiv = document.getElementById('chartdiv');
-    var options = {
-            chart: {
-            max: <?php echo $total; ?>,
-              title: 'Company Performance',
-              subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-            },
-            bars: 'horizontal' // Required for Material Bar Charts.
-          };
-      
-    chart = new BarsOfStuff(chartDiv);
-    chart.draw(data, options);
-  }
-</script>
+    $daoAvancement = new DAOAvancement($db);
+    $progression = $daoAvancement->getByCours($_SESSION['cours']->getId());
+    $progressionEtudiant = $daoAvancement->getByCoursEtudiant($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId());
+?>
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1.1", {packages:["bar"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['', 'La promo', 'Moi'],
+          ['Avancement', <?php echo $progression?>, <?php echo $progressionEtudiant; ?>],
+        ]);
+
+        var options = {
+          hAxis: {title: "Avancement en %" , maxValue: 100,  minValue: 0},
+          bars: 'horizontal' // Required for Material Bar Charts.
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, options);
+      }
+    </script>
+<div id="barchart_material" style="width: 500px; height: 200px;"></div>

@@ -1,7 +1,7 @@
 <?php
-include_once('DAOMysqli.php');
+include_once('DAOStandard.php');
 
-class DAOAvancement extends DAOMysqli
+class DAOAvancement extends DAOStandard
 {
 	public function saveOrUpdate(Avancement $avancement)
 	{
