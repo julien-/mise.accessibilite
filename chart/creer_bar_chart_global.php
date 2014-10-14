@@ -18,6 +18,8 @@
         $pourcentage = 0;
     else
         $pourcentage = number_format(($progression / $total) * 100,2); 
+    
+    $daoAvancement = new DAOAvancement($db);
 ?>
 <div id="chartdiv" style="width: 100%;"></div>
 <script type="text/javascript">
@@ -32,7 +34,7 @@
     data.addRows(1);
     data.setCell(0, 0, '<?php echo $pourcentage; ?> %');
     data.setCell(0, 1, <?php echo $progression; ?>, '');
-    data.setCell(0, 2, <?php echo $progressionEtudiant; ?>, '');
+    data.setCell(0, 2, <?php echo $daoAvancement->getByCoursEtudiant($id_cours, $idEtudiant); ?>, '');
 
     var chartDiv = document.getElementById('chartdiv');
     var options = {

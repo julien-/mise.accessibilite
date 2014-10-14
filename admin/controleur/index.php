@@ -19,9 +19,14 @@ $listeCours = $daoCours->getAllByProf(17);
 $daoSeance = new DAOSeance($db);
 $daoAvancement = new DAOAvancement($db);
 
-echo 'avancement' . $daoAvancement->getByCoursEtudiant(1, 23);
 $listeSeance = $daoSeance->getAllByCours(2);
 
+$listeSeance = $daoSeance->getAllByCours(1);
+
+foreach($listeSeance as $seance)
+{
+	echo "id: " . $seance->getId();
+}
 if (isset($_SESSION['currentUser']))
 {
 	if (isset($_GET['section'])) 
