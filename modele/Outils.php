@@ -45,4 +45,24 @@ class Outils
 			case 'Sun': return "Dimanche";
 		}
 	}
+	
+	public static function sqlDateTimeToFr($date)
+	{
+		sscanf($date, "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
+		
+		return $jour . '-' . $mois . '-' . $annee . ' à ' . $heure . ':' . $minute;
+	}
+	
+	public static function raccourcirChaine($chaine, $tailleMax)
+	{
+		// Variable locale
+		$positionDernierEspace = 0;
+		if( strlen($chaine) >= $tailleMax )
+		{
+			$chaine = substr($chaine,0,$tailleMax);
+			$positionDernierEspace = strrpos($chaine,' ');
+			$chaine = substr($chaine,0,$positionDernierEspace).'...';
+		}
+		return $chaine;
+	}
 }

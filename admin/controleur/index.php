@@ -18,6 +18,16 @@ $listeInscriptions = $daoInscription->getAllByCours(1);
 $listeCours = $daoCours->getAllByProf(17);
 $daoSeance = new DAOSeance($db);
 $daoAvancement = new DAOAvancement($db);
+$daoCategorie = new DAOCategorie($db);
+$daoSujet = new DAOSujet($db);
+$daoMessage = new DAOMessage($db);
+
+$message = $daoMessage->getByID(6);
+$categorie = $daoCategorie->getByID(12);
+$sujet = $daoSujet->getByID(4);
+
+
+
 
 if (isset($_SESSION['currentUser']))
 {

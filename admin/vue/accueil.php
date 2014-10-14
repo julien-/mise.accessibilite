@@ -1,27 +1,42 @@
 <script type="text/javascript"
 	src="../../js/googleChartToolsLineChart.js"></script>
+<script type="text/javascript"
+	src="../../../js/googleChartToolsPieChart.js"></script>
 <div class="row">
+
 	<div class="col-lg-12 center-content">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="glyphicon glyphicon-stats"></i> Visites sur les 7
-					derniers jours
+					<i class="glyphicon glyphicon-comment"></i> 5 derniers sujets
+					postés sur le forum
 				</h3>
 			</div>
 			<div class="panel-body">
-				<div id="morris-area-chart">
-					<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-					<script type="text/javascript">
-        var optionsBarChart = {
-        		chartArea: {left:0,top:50,height:"75%", width: "100%"},
-        		backgroundColor: { fill:'transparent' },
-        		legend: {position: 'none'},
-        };
-        setBarChartOptions('../../chart/get_json_visits.php', optionsBarChart, 'lineChart');
-    </script>
-					<div id=lineChart style="width: 100%; height: 300px;"></div>
-				</div>
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th class="center-text">Sujet</th>
+							<th class="center-text">Cat&eacute;gorie</th>
+							<th class="center-text">Auteur</th>
+							<th class="center-text">Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						foreach ( $liste5DerniersSujets as $sujet ) {
+							?>
+							<tr>
+							<td><?php echo Outils::raccourcirChaine($sujet->getTitre(), 20); ?></td>
+							<td class="autre_colonne"><?php echo Outils::raccourcirChaine($sujet->getCategorie()->getTitre(), 40); ?></td>
+							<td class="autre_colonne"><?php echo Outils::raccourcirChaine($sujet->getAuteur()->getNom(), 20);?></td>
+							<td class="autre_colonne center-text"><?php echo Outils::sqlDateTimeToFr($sujet->getDateDerniereReponse())?></td>
+						</tr>
+						<?php
+						}
+						?>
+						</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -31,12 +46,26 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="glyphicon glyphicon-comment"></i> Derniers messages sur
-					le forum
+					<i class="glyphicon glyphicon-stats"></i> Visites sur les 7
+					derniers jours
 				</h3>
 			</div>
 			<div class="panel-body">
-				<div id="morris-area-chart"></div>
+				<div id="morris-area-chart">
+					<div id="morris-area-chart">
+						<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+						<script type="text/javascript">
+        var optionsBarChart = {
+        		chartArea: {left:0,top:50,height:"75%", width: "100%"},
+        		backgroundColor: { fill:'transparent' },
+        		legend: {position: 'none'},
+        };
+        setBarChartOptions('../../chart/get_json_visits.php', optionsBarChart, 'lineChart');
+    </script>
+						<div id=lineChart style="width: 100%; height: 300px;"></div>
+					</div>
+
+				</div>
 			</div>
 		</div>
 	</div>
@@ -44,12 +73,27 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="fa fa-bar-chart-o fa-fw"></i> Derniers messages sur le
-					forum
+					<i class="fa fa-bar-chart-o fa-fw"></i> Progression de la promo
 				</h3>
 			</div>
 			<div class="panel-body">
-				<div id="morris-area-chart"></div>
+				<div id="morris-area-chart">
+					<script type="text/javascript">				            
+                var optionsPieChart =   {
+                                            is3D: 'false',
+                                            width: 500,
+                                            height: 300,
+                                            tooltip: {text: 'percentage' },
+                                            backgroundColor: { fill:'transparent' },
+                                            slices: {
+                                                0: { color: '#99FF33' },
+                                                1: { color: '#FF6633' }
+                                            }
+                                        };
+                setPieChartOptions('../../chart/get_json_barchart_etudiant.php?e=-1&c=1', optionsPieChart, "pieChart");
+            </script>
+					<div id="pieChart" style="width: 500px; height: auto;"></div>
+				</div>
 			</div>
 		</div>
 	</div>
