@@ -28,12 +28,22 @@
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Label');
     data.addColumn('number', 'Value');
+    data.addColumn('number', 'Value2');
     data.addRows(1);
     data.setCell(0, 0, '<?php echo $pourcentage; ?> %');
     data.setCell(0, 1, <?php echo $progression; ?>, '');
+    data.setCell(0, 2, <?php echo $progressionEtudiant; ?>, '');
 
     var chartDiv = document.getElementById('chartdiv');
-    var options = {max: <?php echo $total; ?>, min: 0, width: 1000, type: 'Chocolate', canSelect:false};
+    var options = {
+            chart: {
+            max: <?php echo $total; ?>,
+              title: 'Company Performance',
+              subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+            },
+            bars: 'horizontal' // Required for Material Bar Charts.
+          };
+      
     chart = new BarsOfStuff(chartDiv);
     chart.draw(data, options);
   }
