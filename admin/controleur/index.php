@@ -42,8 +42,6 @@ if (isset($_SESSION['currentUser']))
 else if (isset($_GET['section'])) 
 {
 	$page = $_GET['section'];
-	if ($page != 'inscription')
-		echo "erreur";
 }
 else
 	$page = 'connexion';

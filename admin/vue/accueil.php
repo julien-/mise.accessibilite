@@ -2,6 +2,7 @@
 	src="../../js/googleChartToolsLineChart.js"></script>
 <script type="text/javascript"
 	src="../../../js/googleChartToolsPieChart.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="row">
 
 	<div class="col-lg-12 center-content">
@@ -64,7 +65,6 @@
     </script>
 						<div id=lineChart style="width: 100%; height: 300px;"></div>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="fa fa-bar-chart-o fa-fw"></i> Progression de la promo
+					<i class="fa fa-pie-chart"></i> Progression de la promo
 				</h3>
 			</div>
 			<div class="panel-body">
@@ -81,6 +81,7 @@
 					<script type="text/javascript">				            
                 var optionsPieChart =   {
                                             is3D: 'false',
+                                            chartArea: {left:"20%",top:50,width:"100%", height:"75%"},
                                             width: 500,
                                             height: 300,
                                             tooltip: {text: 'percentage' },
@@ -90,9 +91,9 @@
                                                 1: { color: '#FF6633' }
                                             }
                                         };
-                setPieChartOptions('../../chart/get_json_barchart_etudiant.php?e=-1&c=1', optionsPieChart, "pieChart");
+                setPieChartOptions('../../chart/cours_global_pie_chart.php?e=-1&c=1', optionsPieChart, "pieChart");
             </script>
-					<div id="pieChart" style="width: 500px; height: auto;"></div>
+					<div id="pieChart" style="width: 100%; height: 305px;"></div>
 				</div>
 			</div>
 		</div>
