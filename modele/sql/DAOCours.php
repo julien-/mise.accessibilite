@@ -14,10 +14,10 @@ class DAOCours extends DAOMysqli
 	
 	public function saveOrUpdate(Cours $cours)
 	{
-		if (!exists($cours))
-			$this->save($cours);
+		if (exists($cours))
+			$this->update($cours);
 		else
-			$this->executeQuery('UPDATE cours SET libelle_cours = "' . $cours->getLibelle() . '", couleur_calendar = ' . $cours->getCouleurCalendar() . ' , id_prof = ' . $cours->getProf()->getId() . ', id_cle = ' . $cours->getCle()->getId() . ' WHERE id_cours = ' . $cours->getId());		
+			$this->save($cours);
 	}
   
   	public function exists(Cours $cours)

@@ -76,7 +76,7 @@
                                     <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
                                 <ul id="g-account-menu" class="dropdown-menu" role="menu">
                                     <li><a href="#">Mon compte</a></li>
-                                    <li><a href="#"><i class="glyphicon glyphicon-lock"></i>Se déconnecter</a></li>
+                                    <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>Se déconnecter</a></li>
                                 </ul>
                             </li>
                         </ul>

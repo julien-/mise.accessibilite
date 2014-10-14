@@ -3,7 +3,8 @@ class Inscription {
 	
 	protected 
 	$cours,
-	$etudiant;
+	$etudiant,
+	$date;
 	
 	public function __construct($valeurs = array()) {
 		if (! empty ( $valeurs )) // Si on a sp�cifi� des valeurs, alors on hydrate l'objet.
@@ -40,5 +41,14 @@ class Inscription {
 	
 	public function getEtudiant() {
 		return $this->etudiant;
+	}
+	
+	public function setDate($date) {
+		$this->date = $date;
+		return $this;
+	}
+	
+	public function getDate() {
+		return $this->date;
 	}
 }

@@ -1,9 +1,29 @@
 <?php
 class DAOTheme extends DAOStandard
 {	
-	public function add(Theme $theme)
+	public function saveOrUpdate($theme)
+	{
+		if (exists($theme))
+			update($theme);
+		else
+			save($theme);
+	}
+	
+	public function save(Theme $theme)
 	{
 		$this->executeQuery('INSERT INTO theme SET titre_theme = "' . $theme->getTitre() . '", id_cours = "' . $theme->getCours()->getId() . '"');
+	}
+	
+	public function update(Theme $theme)
+	{
+		$this->executeQuery('UPDATE theme SET titre_theme = "' . $theme->getTitre() . '", id_cours = "' . $theme->getCours()->getId() . '" WHERE id_theme = ' . $theme->getId());
+	}
+	
+	public function exists($theme)
+	{
+		$result = $this->executeQuery('SELECT * FROM theme t, cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND t.id_theme = ' . $id);
+		
+		return $this->countRows($result);
 	}
 	
 	public function delete($id)

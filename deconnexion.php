@@ -7,5 +7,5 @@ session_unset ();
 
 // On détruit notre session
 session_destroy ();
-header('Location: index.php');   
+header('Location: /admin/controleur/index.php');   
 ?>

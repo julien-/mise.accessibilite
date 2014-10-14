@@ -3,7 +3,7 @@ class DAOInscription extends DAOMysqli
 {	
 	public function add(Inscription $inscription)
 	{
-		$this->executeQuery('INSERT INTO inscription SET id_cours = "' . $inscription->getCours()->getId() . '", id_etu = ' . $inscription->getEtudiant()->getId());
+		$this->executeQuery('INSERT INTO inscription SET date_inscription = "' . $inscription->getDate() . '" id_cours = "' . $inscription->getCours()->getId() . '", id_etu = ' . $inscription->getEtudiant()->getId());
 	}
 	  
 	public function deleteByEtudiant($id)
@@ -41,7 +41,9 @@ class DAOInscription extends DAOMysqli
 																			  								'mail' => $inscription['mail_etu'], 
 																			  								'login' => $inscription['pseudo_etu'],
 																			  								'pass' => $inscription['pass_etu'],
-																			  								'admin' => $inscription['admin']))));
+																			  								'admin' => $inscription['admin'])),
+	  												'date' => $inscription['date_inscription']
+	  		));
 	  	}
 	  	return $listeInscription;
 	  }
