@@ -158,20 +158,20 @@ class DAOAvancement extends DAOStandard
   {
   	$result = $this->executeQuery('SELECT * FROM avancement, theme, exercice 
   			WHERE avancement.id_etu = ' . $idEtudiant . '
-			AND avancement.id_seance = ' .$idSeance .'
+			AND avancement.id_seance = ' . $idSeance .'
 			AND avancement.id_exo = exercice.id_exo
   			AND exercice.id_theme = theme.id_theme');
   	$listeAvancement = array();
   	while ($avancement = $this->fetchArray($result)) {
   	
-  			$listeAvancement[]['exercice']['id'] = $avancement['id_exo'];
-	  		$listeAvancement[]['exercice']['titre'] = $avancement['titre_exo'];
-	  		$listeAvancement[]['exercice']['numero'] = $avancement['num_exo'];
-	  		$listeAvancement[]['exercice']['theme']['id'] = $avancement['id_theme'];
-			$listeAvancement[]['exercice']['theme']['titre'] = $avancement['titre_theme'];
-  			$listeAvancement[]['fait'] = $avancement['fait'];
-  			$listeAvancement[]['compris'] = $avancement['compris'];
-  			$listeAvancement[]['assimile'] = $avancement['assimile'];
+  			$listeAvancement[] = array('exercice' => array('id' => $avancement['id_exo'],
+															'titre' => $avancement['titre_exo'],
+															'numero' => $avancement['num_exo'],
+															'theme' => array ('id' => $avancement['id_theme'],
+																				'titre' => $avancement['titre_theme'])),
+  										'fait' => $avancement['fait'],
+  										'compris' => $avancement['compris'],
+  										'assimile' => $avancement['assimile']);
   	}
   	return $listeAvancement;
   }
