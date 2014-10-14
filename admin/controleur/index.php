@@ -26,7 +26,7 @@ if (isset($_SESSION['currentUser']))
 		$page = $_GET['section'];
 	} else 
 	{
-		$page = 'mes_cours';
+		$page = 'accueil';
 	}
 }
 else if (isset($_GET['section'])) 

@@ -1,7 +1,7 @@
 <script type="text/javascript"
   src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","table"]}]}'>
 </script>
-<script type="text/javascript" src="../../../js/googleChartToolsBarChart.js"></script>
+<script type="text/javascript" src="../../js/googleChartToolsBarChart.js"></script>
 <?php 
 
 	//echo $_SESSION["cours"]->getLibelle();
