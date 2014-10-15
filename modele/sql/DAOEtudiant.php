@@ -4,7 +4,7 @@ class DAOEtudiant extends DAOStandard
   
   public function saveOrUpdate(Etudiant $etudiant)
   {
-  	if (existsByPseudo($etudiant->getLogin()))
+  	if ($this->existsByPseudo($etudiant->getLogin()))
   		$this->update($etudiant);
   	else
   		$this->add($etudiant);

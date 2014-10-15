@@ -1,5 +1,5 @@
 <?php
-class DAOSeance extends DAOMysqli
+class DAOSeance extends DAOStandard
 {	
 	public function add(Seance $seance)
 	{

@@ -1,5 +1,5 @@
 <?php
-class DAOInscription extends DAOMysqli
+class DAOInscription extends DAOStandard
 {	
 	public function add(Inscription $inscription)
 	{

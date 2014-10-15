@@ -166,6 +166,7 @@ if (isset($_GET["supexo"])) {
 //AJOUT D'EXERCICE
 if (isset($_GET["addexo"])) {
     //Insert dans exercice
+    
     mysql_query('INSERT INTO ' . $tb_exercice . ' (id_theme, num_exo, titre_exo) ' .
             'VALUES (' . $_POST['id_them_sel'] . ', ' . $_POST['nbmax_exo'] . ', "' . $_POST['titre_exo'] . '");');
     //récupère l'autoincrement créé
@@ -177,7 +178,7 @@ if (isset($_GET["addexo"])) {
                              WHERE e.id_etu = i.id_etu
                              AND i.id_cours = t.id_cours
                              AND t.id_theme = " . $_POST['id_them_sel'] . "") or die(mysql_error());
-
+    echo "here";
     while ($id_etu = mysql_fetch_assoc($rq_idetu)) {
         mysql_query("INSERT INTO avancement VALUES (" . $id_etu['IdEtu'] . "," . $id_autoincrement["id_exo_insere"] . ",0,0,0,0)") or die(mysql_error());
     }

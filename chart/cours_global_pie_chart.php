@@ -16,7 +16,7 @@ else
     $exercice = -1;
 
 $daoAvancement = new DAOAvancement($db);
-$progression = $daoAvancement->getByCours(1);
+$progression = $daoAvancement->getByCours($_GET['c']);
 $table = array();
 $table['cols'] = array(
 

@@ -28,7 +28,7 @@ if (isset($_POST['submit']))
 		$_SESSION['currentUser'] = $daoEtudiant->getByID($etudiant->getId());
 		?>
 		<script language="Javascript">
-			document.location.replace("index.php?section=accueil");
+			document.location.replace("index.php?");
 		</script>
 		<?php
 	}

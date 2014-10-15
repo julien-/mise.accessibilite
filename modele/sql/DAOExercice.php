@@ -1,5 +1,5 @@
 <?php
-class DAOExercice extends DAOMysqli
+class DAOExercice extends DAOStandard
 {	
 	public function saveOrUpdate(Exercice $exercice)
 	{

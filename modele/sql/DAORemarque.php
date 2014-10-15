@@ -14,9 +14,9 @@ class DAORemarque extends DAOStandard
 		$this->executeQuery('INSERT INTO remarque_seances SET id_seance = "' . $remarque->getSeance()->getId() . '", id_etu = ' . $remarque->getEtudiant()->getId() . ', remarque =' . $remarque->getRemarque());
 	}
 	
-	public function update(Exercice $exercice)
+	public function update(Remarque $remarque)
 	{
-		$this->executeQuery('UPDATE remarque_seances SET id_seance = "' . $remarque->getSeance()->getId() . '", id_etu = ' . $remarque->getEtudiant()->getId() . ', remarque =' . $remarque->getRemarque());
+		$this->executeQuery('UPDATE remarque_seances SET id_seance = "' . $remarque->getSeance()->getId() . '", id_etu = ' . $remarque->getEtudiant()->getId() . ', remarque =' . $remarque->getRemarque() . ' WHERE id_remarque =' . $remarque->getId());
 	}
 	
 	public function getByEtuSeance($id_etu, $id_seance)

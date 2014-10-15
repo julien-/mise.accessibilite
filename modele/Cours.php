@@ -6,6 +6,8 @@ class Cours {
 	$libelle,
 	$couleurCalendar,
 	$prof,
+	$nbInscrits,
+	$nbThemes,
 	$cle;
 	
 	public function __construct($valeurs = array()) {
@@ -33,6 +35,24 @@ class Cours {
 	
 	public function setId($id) {
 		$this->id = $id;
+		return $this;
+	}
+	
+	public function getNbInscrits() {
+		return $this->nbInscrits;
+	}
+	
+	public function setNbInscrits($nbInscrits) {
+		$this->nbInscrits = $nbInscrits;
+		return $this;
+	}
+	
+	public function getNbThemes() {
+		return $this->nbThemes;
+	}
+	
+	public function setNbThemes($nbThemes) {
+		$this->nbThemes = $nbThemes;
 		return $this;
 	}
 	

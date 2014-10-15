@@ -1,5 +1,5 @@
 <?php
-class DAOCours extends DAOMysqli
+class DAOCours extends DAOStandard
 {
   
 	public function save(Cours $cours)
@@ -92,5 +92,25 @@ class DAOCours extends DAOMysqli
 						  								'admin' => $cours['admin'])),
   								'cle' => new Cle(array('id' => $cours['id_cle'],
   														'cle' => $cours['valeur_cle']))));
+  }
+  
+  public function getAllByProfWithStats($idProf)
+  {
+  	$result = $this->executeQuery('SELECT cours.id_cours, libelle_cours, id_cle, count(DISTINCT(id_theme)) AS nb_theme , count(DISTINCT(inscription.id_etu)) AS nb_inscrits
+        FROM cours
+        LEFT JOIN theme ON theme.id_cours = cours.id_cours 
+        LEFT JOIN inscription ON inscription.id_cours = cours.id_cours
+        WHERE cours.id_prof = ' . $idProf . '
+        GROUP BY cours.id_cours');
+  	
+  	$listeCours = array();
+  	while ($cours = $this->fetchArray($result)) {
+  		$listeCours[] = new Cours(array(	'id' => $cours['id_cours'],
+  				'nbInscrits' => $cours['nb_inscrits'],
+  				'nbThemes' => $cours['nb_theme'],
+  				'libelle' => $cours['libelle_cours'],
+  				'cle' =>  $cours['id_cle']));
+  	}
+  	return $listeCours;
   }
 }

@@ -36,7 +36,7 @@ if (isset($_SESSION['currentUser']))
 		$page = $_GET['section'];
 	} else 
 	{
-		$page = 'accueil';
+		$page = 'mes_cours';
 	}
 }
 else if (isset($_GET['section'])) 

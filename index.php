@@ -1,4 +1,6 @@
 <?php 
+include_once('lib/autoload.inc.php');
+$db = DBFactory::getMysqlConnexionStandard();
 session_start();
 ?><script type="text/javascript"
   src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","table"]}]}'>
@@ -103,7 +105,13 @@ session_start();
 
                     </div>
                     <div class="col-sm-10">
-                        <?php include_once('controleur/connexion.php'); ?>
+                        <?php 
+                        	if (!isset($_GET['section']))
+                        			$page = 'connexion';
+                        	else
+                        		$page = 'inscription';
+                                include_once('controleur/' . $page.'.php'); 
+                        ?>
                     </div>
                     <div class="col-sm-1">
 

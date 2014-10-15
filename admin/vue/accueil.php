@@ -4,12 +4,12 @@
 	src="../../../js/googleChartToolsPieChart.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="row">
-
+<h1><?php echo utf8_encode($cours->getLibelle());?></h1>
 	<div class="col-lg-12 center-content">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="glyphicon glyphicon-comment"></i> 5 derniers sujets
+					<i class="fa fa-comments"></i> 5 derniers sujets
 					postés sur le forum
 				</h3>
 			</div>
@@ -28,7 +28,7 @@
 						foreach ( $liste5DerniersSujets as $sujet ) {
 							?>
 							<tr>
-							<td><?php echo Outils::raccourcirChaine($sujet->getTitre(), 20); ?></td>
+							<td class="prem_colonne"><?php echo Outils::raccourcirChaine($sujet->getTitre(), 20); ?></td>
 							<td class="autre_colonne"><?php echo Outils::raccourcirChaine($sujet->getCategorie()->getTitre(), 40); ?></td>
 							<td class="autre_colonne"><?php echo Outils::raccourcirChaine($sujet->getAuteur()->getNom(), 20);?></td>
 							<td class="autre_colonne center-text"><?php echo Outils::sqlDateTimeToFr($sujet->getDateDerniereReponse())?></td>
@@ -47,7 +47,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="glyphicon glyphicon-stats"></i> Visites sur les 7
+					<i class="fa fa-line-chart"></i> Visites sur les 7
 					derniers jours
 				</h3>
 			</div>
@@ -61,7 +61,7 @@
         		backgroundColor: { fill:'transparent' },
         		legend: {position: 'none'},
         };
-        setBarChartOptions('../../chart/get_json_visits.php', optionsBarChart, 'lineChart');
+        setBarChartOptions('../../chart/get_json_visits.php?c=<?php echo $cours->getId();?>', optionsBarChart, 'lineChart');
     </script>
 						<div id=lineChart style="width: 100%; height: 300px;"></div>
 					</div>
@@ -82,8 +82,6 @@
                 var optionsPieChart =   {
                                             is3D: 'false',
                                             chartArea: {left:"20%",top:50,width:"100%", height:"75%"},
-                                            width: 500,
-                                            height: 300,
                                             tooltip: {text: 'percentage' },
                                             backgroundColor: { fill:'transparent' },
                                             slices: {
@@ -91,9 +89,9 @@
                                                 1: { color: '#FF6633' }
                                             }
                                         };
-                setPieChartOptions('../../chart/cours_global_pie_chart.php?e=-1&c=1', optionsPieChart, "pieChart");
+                setPieChartOptions('../../chart/cours_global_pie_chart.php?e=-1&c=<?php echo $cours->getId();?>', optionsPieChart, "pieChart");
             </script>
-					<div id="pieChart" style="width: 100%; height: 305px;"></div>
+					<div id="pieChart" style="width: 100%; height: 300px;"></div>
 				</div>
 			</div>
 		</div>

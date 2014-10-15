@@ -18,7 +18,7 @@
 	$rows = array();
 	
 	$daoHistorique = new DAOHistorique();
-	$listeHistorique = $daoHistorique->getLastVisits(1);
+	$listeHistorique = $daoHistorique->getLastVisits($_GET['c']);
 
 	for($i = 6; $i >= 0; $i--)
 	{

@@ -37,6 +37,13 @@ if ($rq_cours === FALSE) {
     die(mysql_error());
 }
 
+$daoCours = new DAOCours($db);
+$listeCours = $daoCours->getAllByProfWithStats($_SESSION['currentUser']->getid());
+foreach($listeCours as $cours)
+{
+	echo $cours->getNbInscrits();
+}
+
 
 //THEMES
 $rq_themes = mysql_query("SELECT " . $tb_theme . ".id_theme, titre_theme, count(id_exo) AS nb_exo , " . $tb_theme . ".id_cours " .
@@ -116,7 +123,7 @@ if ($rq_exos === FALSE) {
                             </td>
                             <!--Détails-->
                             <td class="petite_colonne">
-                                <a href="index.php?section=progression_globale&c=<?php echo $mon_cours['id_cours']; ?>">
+                                <a href="index.php?section=accueil&c=<?php echo $mon_cours['id_cours']; ?>">
                                     <i class="glyphicon glyphicon-list-alt" title="D&eacute;tails sur ce cours"></i>
                                 </a>
                             </td>

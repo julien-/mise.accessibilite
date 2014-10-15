@@ -34,7 +34,7 @@ if (isset($_POST['submit']))
 		?>
 		
 		<script language="Javascript">
-			document.location.replace("<?php echo $typeUser?>/controleur/index.php?section=accueil");
+			document.location.replace("<?php echo $typeUser?>/controleur/index.php");
 		</script>
 		<?php
 	}

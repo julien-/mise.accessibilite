@@ -25,7 +25,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-lg-5 col-md-offset-5">
-						<a href="../controleur/index.php?section=inscription">Pas encore
+						<a href="../index.php?section=inscription">Pas encore
 							inscrit ?</a>
 					</div>
 				</div>
