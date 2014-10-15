@@ -22,12 +22,6 @@ $daoCategorie = new DAOCategorie($db);
 $daoSujet = new DAOSujet($db);
 $daoMessage = new DAOMessage($db);
 
-$message = $daoMessage->getByID(6);
-$categorie = $daoCategorie->getByID(12);
-$sujet = $daoSujet->getByID(4);
-
-
-
 
 if (isset($_SESSION['currentUser']))
 {
@@ -44,5 +38,11 @@ else if (isset($_GET['section']))
 	$page = $_GET['section'];
 }
 else
-	$page = 'connexion';
+{
+	?>
+	<script language="Javascript">
+	document.location.replace("../../index.php");
+	</script>
+	<?php 
+}
 include_once ('../vue/index.php');

@@ -6,7 +6,7 @@
 </style>
 
 <div class="container-fluid">
-	<div class="row">
+	<div class="row" style="padding-top: 120px">
 		<div class="col-lg-12 center-content">
 			<form id="inscription" class="form-horizontal" method="post">
 		<?php
