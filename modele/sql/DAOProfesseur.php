@@ -1,13 +1,13 @@
 <?php
 class DAOProfesseur extends DAOEtudiant
 {		
-	public function add(Professeur $professeur)
+	public function add(Etudiant $professeur)
 	{
 		parent::add($professeur);
 		$this->executeQuery('INSERT INTO professeur SET id_prof = ' . $this->lastInsertedID());
 	}
 	
-	public function saveOrUpdate(Professeur $professeur)
+	public function saveOrUpdate(Etudiant $professeur)
 	{
 		$this->add($professeur);
 	}
@@ -18,7 +18,7 @@ class DAOProfesseur extends DAOEtudiant
 		$this->executeQuery('DELETE FROM professeur WHERE id_prof = ' . $id);
 	}
 	
-	  public function getCours(Professeur $prof)
+	  public function getCours(Etudiant $prof)
 	  {
 	  	$result = $this->executeQuery('SELECT * FROM cours WHERE id_prof = ' . $prof->getId());
 	 

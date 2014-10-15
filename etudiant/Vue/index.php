@@ -69,25 +69,19 @@
                         </button>
                         <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a>
                     </div>
-                    <?php 
-                    if(isset($_SESSION["currentUser"]))
-                    {
-                    ?>
+                    
                     	<div class="navbar-collapse collapse">
 	                        <ul class="nav navbar-nav navbar-right">
 	                            <li class="dropdown">
 	                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
-	                                    <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
+                                    <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
 	                                <ul id="g-account-menu" class="dropdown-menu" role="menu">
 	                                    <li><a href="#">Mon compte</a></li>
 	                                    <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>Se déconnecter</a></li>
 	                                </ul>
 	                            </li>
 	                        </ul>
-                    	</div>
-                    <?php 
-                    }
-                    ?>                    
+                    	</div>                    
                 </div><!-- /container -->
 
             </div>
@@ -167,10 +161,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-3">
-                    	<?php 
-	                    if(isset($_SESSION["currentUser"]))
-	                    {
-	                    ?>
 	                        <hr>
 	                        <ul class="list-unstyled">
 	                            <li class="nav-header"> 
@@ -189,9 +179,7 @@
 	                                </ul>
 	                            </li>
 	                        </ul>
-                        <?php 
-                    	}
-                    	?>
+
                     </div>
                     <div class="col-sm-9">
                         <?php include_once('../Controleur/' . $page . '.php'); ?>
