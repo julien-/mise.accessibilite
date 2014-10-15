@@ -28,6 +28,11 @@ if (isset($_SESSION['currentUser']))
 	if (isset($_GET['section'])) 
 	{
 		$page = $_GET['section'];
+		
+		if (strpos($page, 'forum') != false)
+		{
+			$page = '../../forum/controleur/' . $page;
+		}
 	} else 
 	{
 		$page = 'mes_cours';

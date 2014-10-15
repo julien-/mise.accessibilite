@@ -8,7 +8,7 @@
                         Messages
                     </th>
                     <?php
-                    if ($_SESSION['admin'])
+                    if ($_SESSION['currentUser']->getAdmin())
                     {
                     ?>
                         <th>
@@ -21,8 +21,6 @@
             </thead>
 	<?php
 
-	// on se connecte à notre base de données
-        include('../sql/connexion_mysql.php');
         
 	// on va scanner tous les tuples un par un
 	while ($data = mysql_fetch_array($req)) {
@@ -40,14 +38,14 @@
 	echo '<br />';
 	echo $jour , '-' , $mois , '-' , $annee , ' ' , $heure , ':' , $minute;
         
-        if ($data['id_etu'] != $_SESSION['id'])
+        if ($data['id_etu'] != $_SESSION['currentUser']->getId())
         {
             echo '<br />';
             echo '<a href="index.php?section=envoyer_messagerie&etudiant=' . $data['id_etu'] . '"><img width="30" style="vertical-align:-65%;" src="../images/mail.png" alt="Mails" title="Message priv&eacute;"/>Message priv&eacute;</a>';
         }
         echo '<br />';
         // on prépare notre requête
-	$sql = 'SELECT id FROM forum_reponses WHERE forum_reponses.auteur = ' . $data['id_etu'];
+	$sql = 'SELECT id_reponse FROM forum_reponses WHERE forum_reponses.auteur = ' . $data['id_etu'];
 
 	// on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
 	$reqNbMessages = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
@@ -56,11 +54,11 @@
 	// on affiche le message
 	echo formatURL(nl2br(htmlentities(trim($data['message']))));
 	echo '</td>';
-        if ($_SESSION['admin'])
+        if ($_SESSION['currentUser']->getAdmin())
         {
             ?>
             <td class="autre_colonne" style="vertical-align: top;">
-                <a href="../forumSimple/delete.php?section=<?php echo $_GET['section']; ?>&categorie=<?php echo $categorie; ?>&cours=<?php echo $id_cours; ?>&id_sujet_a_lire=<?php echo $sujet; ?>&type=post&id=<?php echo $data['id']; ?>"><img src="../images/admin/flat_supp.png" alt="Supprimer" title="Supprimer" /></a>
+                <a href="../../forum/controleur/delete.php?type=post&id=<?php echo $data['id_reponse']; ?>"><img src="../../images/admin/flat_supp.png" alt="Supprimer" title="Supprimer" /></a>
             </td>
             <?php
         }

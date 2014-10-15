@@ -6,7 +6,8 @@ class Sujet {
 	$auteur,
 	$titre,
 	$dateDerniereReponse,
-	$categorie
+	$categorie,
+	$nbMessages
 	;
 
 	public function __construct($valeurs = array()) {
@@ -34,6 +35,15 @@ class Sujet {
 	
 	public function setId($id) {
 		$this->id = $id;
+		return $this;
+	}
+	
+	public function getNbMessages() {
+		return $this->nbMessages;
+	}
+	
+	public function setNbMessages($nbMessages) {
+		$this->nbMessages = $nbMessages;
 		return $this;
 	}
 	

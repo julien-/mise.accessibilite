@@ -1,5 +1,5 @@
 <?php
-$sujet = exists('numero_du_sujet', 'forum_sujets', 'id');
+$sujet = exists('numero_du_sujet', 'forum_sujets', 'id_sujet');
 if ($sujet == false){
     header('Location: index.php?section=introuvable');
 }
@@ -15,21 +15,18 @@ if (isset ($_POST['go']) && $_POST['go']=='Poster') {
 	}
 	// si tout est bon, on peut commencer l'insertion dans la base
 	else {
-		// on se connecte à notre base de données
-		$base = mysql_connect ('serveur', 'login', 'password');
-		mysql_select_db ('nom_base', $base) ;
 
 		// on recupere la date de l'instant présent
 		$date = date("Y-m-d H:i:s");
 
 		// préparation de la requête d'insertion (table forum_reponses)
-		$sql = 'INSERT INTO forum_reponses VALUES("", '. $_SESSION['id'] .', "'.mysql_escape_string($_POST['message']).'", "'.$date.'", "'.$_GET['numero_du_sujet'].'")';
+		$sql = 'INSERT INTO forum_reponses VALUES("", '. $_SESSION['currentUser']->getId() .', "'.mysql_escape_string($_POST['message']).'", "'.$date.'", "'.$_GET['numero_du_sujet'].'")';
 
 		// on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
 
 		// préparation de la requête de modification de la date de la dernière réponse postée (dans la table forum_sujets)
-		$sql = 'UPDATE forum_sujets SET date_derniere_reponse="'.$date.'" WHERE id="'.$_GET['numero_du_sujet'].'"';
+		$sql = 'UPDATE forum_sujets SET date_derniere_reponse="'.$date.'" WHERE id_sujet="'.$_GET['numero_du_sujet'].'"';
 
 		// on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
@@ -38,8 +35,12 @@ if (isset ($_POST['go']) && $_POST['go']=='Poster') {
 		mysql_close();
 
 		// on redirige vers la page de lecture du sujet en cours
-		header('Location: index.php?posted=true&section=lire_sujet_forum&categorie='.$_POST['categorie'].'&id_cours='.$_POST['cours'].'&id_sujet_a_lire='.$_GET['numero_du_sujet']);
-
+		?>
+		    <script>
+    	document.location.replace('<?php echo 'index.php?posted=true&section=lire_sujet_forum&categorie='.$_POST['categorie'].'&id_cours='.$_POST['cours'].'&id_sujet_a_lire='.$_GET['numero_du_sujet']?>');
+    </script>
+		
+		<?php            
 		// on termine le script courant
 		exit;
 	}
@@ -58,11 +59,11 @@ if (isset ($_POST['go']) && $_POST['go']=='Poster') {
     <?php 
                 
 	// on prépare notre requête
-	$sql = 'SELECT id, nom_etu, prenom_etu, message, date_reponse, id_etu FROM etudiant, forum_reponses WHERE etudiant.id_etu = forum_reponses.auteur AND correspondance_sujet="'.$sujet.'" ORDER BY date_reponse ASC LIMIT 10';
+	$sql = 'SELECT id_reponse, nom_etu, prenom_etu, message, date_reponse, id_etu FROM etudiant, forum_reponses WHERE etudiant.id_etu = forum_reponses.auteur AND correspondance_sujet="'.$sujet.'" ORDER BY date_reponse ASC LIMIT 10';
 
 	// on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
 	$req = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
-    include_once('../vues/topic.php'); ?>
+    include_once('../../vues/topic.php'); ?>
 
 <!-- on fait pointer le formulaire vers la page traitant les données -->
 <form action="index.php?section=insert_reponse_forum&numero_du_sujet=<?php echo $_GET['numero_du_sujet']; ?>" method="post">

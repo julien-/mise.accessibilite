@@ -1,5 +1,6 @@
 <?php
-include_once('../fonctions.php');
+$_SESSION['referrer'] = current_page_url();
+include_once('../../fonctions.php');
 $categorie = exists('categorie', 'forum_categorie', 'id_categorie');
 $cours = exists('id_cours', 'cours', 'id_cours');
 if ($cours != false && $categorie != false)
@@ -17,12 +18,12 @@ if ($cours != false && $categorie != false)
         $page = $_GET['page'];
     
     // comptage du nombre de pages
-    $sql = 'SELECT count(DISTINCT(forum_reponses.id)) as nbMessages, forum_sujets.id, nom_etu, prenom_etu, titre, date_derniere_reponse FROM etudiant, forum_sujets LEFT JOIN forum_reponses ON correspondance_sujet = forum_sujets.id WHERE id_categorie = ' . $categorie . ' AND forum_sujets.auteur = etudiant.id_etu GROUP BY forum_sujets.id ORDER BY date_derniere_reponse DESC';
+    $sql = 'SELECT count(DISTINCT(forum_reponses.id_reponse)) as nbMessages, forum_sujets.id_sujet, nom_etu, prenom_etu, titre, date_derniere_reponse FROM etudiant, forum_sujets LEFT JOIN forum_reponses ON correspondance_sujet = forum_sujets.id_sujet WHERE id_categorie = ' . $categorie . ' AND forum_sujets.auteur = etudiant.id_etu GROUP BY forum_sujets.id_sujet ORDER BY date_derniere_reponse DESC';
     $req = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
     $nbPages = ceil(mysql_num_rows($req)/$messagesParPage);
     
     // préparation de la requete
-    $sql = 'SELECT count(DISTINCT(forum_reponses.id)) as nbMessages, forum_sujets.id, nom_etu, prenom_etu, titre, date_derniere_reponse FROM etudiant, forum_sujets LEFT JOIN forum_reponses ON correspondance_sujet = forum_sujets.id  WHERE id_categorie = ' . $categorie . ' AND forum_sujets.auteur = etudiant.id_etu GROUP BY forum_sujets.id ORDER BY date_derniere_reponse DESC LIMIT '. (($page - 1)*$messagesParPage) . ',' . $messagesParPage;
+    $sql = 'SELECT count(DISTINCT(forum_reponses.id_reponse)) as nbMessages, forum_sujets.id_sujet, nom_etu, prenom_etu, titre, date_derniere_reponse FROM etudiant, forum_sujets LEFT JOIN forum_reponses ON correspondance_sujet = forum_sujets.id_sujet  WHERE id_categorie = ' . $categorie . ' AND forum_sujets.auteur = etudiant.id_etu GROUP BY forum_sujets.id_sujet ORDER BY date_derniere_reponse DESC LIMIT '. (($page - 1)*$messagesParPage) . ',' . $messagesParPage;
 
     // on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
     $req = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
@@ -54,7 +55,7 @@ if ($cours != false && $categorie != false)
                             Dernier message
                         </th>
                         <?php
-                        if ($_SESSION['admin'])
+                        if ($_SESSION['currentUser']->getAdmin())
                         {
                         ?>
                             <th>
@@ -82,17 +83,17 @@ if ($cours != false && $categorie != false)
             echo '</td><td class="prem_colonne">';
 
             // on affiche le titre du sujet, et sur ce sujet, on insère le lien qui nous permettra de lire les différentes réponses de ce sujet
-            echo '<a href="index.php?section=lire_sujet_forum&id_cours=' . $cours . '&categorie=' . $categorie . '&id_sujet_a_lire=' , $data['id'] , '">' , htmlentities(trim($data['titre'])) , '</a>';
+            echo '<a href="index.php?section=lire_sujet_forum&id_cours=' . $cours . '&categorie=' . $categorie . '&id_sujet_a_lire=' , $data['id_sujet'] , '">' , htmlentities(trim($data['titre'])) , '</a>';
             
             echo '</td><td class="autre_colonne">'.$data['nbMessages'].'</td><td class="autre_colonne">';
 
             // on affiche la date de la dernière réponse de ce sujet
             echo $jour , '-' , $mois , '-' , $annee , ' ' , $heure , ':' , $minute;
-            if ($_SESSION['admin'])
+            if ($_SESSION['currentUser']->getAdmin())
             {
             ?>
             <td class="autre_colonne">
-                <a href="../forumSimple/delete.php?section=<?php echo $_GET['section']; ?>&categorie=<?php echo $categorie; ?>&cours=<?php echo $id_cours; ?>&type=sujet&id=<?php echo $data['id']; ?>"><img src="../images/admin/flat_supp.png" alt="Supprimer" title="Supprimer" /></a>
+                <a href="../../forum/controleur/delete.php?section=<?php echo $_GET['section']; ?>&categorie=<?php echo $categorie; ?>&cours=<?php echo $id_cours; ?>&type=sujet&id=<?php echo $data['id_sujet']; ?>"><img src="../../images/admin/flat_supp.png" alt="Supprimer" title="Supprimer" /></a>
             </td>
             <?php
             }

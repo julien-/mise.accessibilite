@@ -40,6 +40,7 @@ if (isset($_POST['submit']))
 {
 	$daoProfesseur = new DAOProfesseur($db);
 	$daoEtudiant = new DAOEtudiant($db);
+	$daoCle = new DAOCle($db);
 	
 	if ($daoProfesseur->existsByPseudo($pseudo))
 	{
@@ -53,7 +54,8 @@ if (isset($_POST['submit']))
 	
 	if (isset($_GET['prof']))
 	{
-		// VERFIIER LA CLE
+		if ($daoCle->checkCleInscription(md5($cle)) <= 0)
+			$errorList[] = "La clé d'inscription est invalide";
 	}
 	/* Si pas d'erreur on enregistrer le prof dans la base */
 	if (sizeof($errorList) == 0)

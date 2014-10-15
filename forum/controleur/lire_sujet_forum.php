@@ -5,7 +5,9 @@
 <body>
 
 <?php
-$sujet = exists('id_sujet_a_lire', 'forum_sujets', 'id');
+$_SESSION['referrer'] = current_page_url();
+$sujet = exists('id_sujet_a_lire', 'forum_sujets', 'id_sujet');
+
 $categorie = exists('categorie', 'forum_categorie', 'id_categorie');
 $cours = exists('id_cours', 'cours', 'id_cours');
 if ($sujet == false || $categorie == false || $cours == false) {
@@ -17,7 +19,7 @@ else {
 
         $messagesParPage = 15;
         // on prépare notre requête
-        $sql = 'SELECT id, nom_etu, prenom_etu, message, date_reponse, id_etu FROM etudiant, forum_reponses WHERE etudiant.id_etu = forum_reponses.auteur AND correspondance_sujet="'.$sujet.'" ORDER BY date_reponse';
+        $sql = 'SELECT id_reponse, nom_etu, prenom_etu, message, date_reponse, id_etu FROM etudiant, forum_reponses WHERE etudiant.id_etu = forum_reponses.auteur AND correspondance_sujet="'.$sujet.'" ORDER BY date_reponse';
 
         // on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
         $reqNbpages = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
@@ -48,12 +50,12 @@ else {
             $page = $nbPages;
         }  
 	// on prépare notre requête
-	$sql = 'SELECT id, nom_etu, prenom_etu, message, date_reponse, id_etu FROM etudiant, forum_reponses WHERE etudiant.id_etu = forum_reponses.auteur AND correspondance_sujet="'.$sujet.'" ORDER BY date_reponse ASC LIMIT '. (($page - 1)*$messagesParPage) . ',' . $messagesParPage;
+	$sql = 'SELECT id_reponse, nom_etu, prenom_etu, message, date_reponse, id_etu FROM etudiant, forum_reponses WHERE etudiant.id_etu = forum_reponses.auteur AND correspondance_sujet="'.$sujet.'" ORDER BY date_reponse ASC LIMIT '. (($page - 1)*$messagesParPage) . ',' . $messagesParPage;
 
 	// on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
 	$req = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
 
-        include_once ('../vues/topic.php'); ?>
+        include_once ('../../vues/topic.php'); ?>
         <p>
             <?php
             if ($nbPages > 1 && $page != 1)

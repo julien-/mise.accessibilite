@@ -81,4 +81,9 @@ class DAOSujet extends DAOStandard
 		
 		return $result;
 	}
+	
+	public function getAllByCoursWithStats($idCours)
+	{
+		
+	}
 }

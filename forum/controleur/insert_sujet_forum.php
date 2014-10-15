@@ -13,14 +13,12 @@ if (isset ($_POST['go']) && $_POST['go']=='Poster') {
 
 	// si tout est bon, on peut commencer l'insertion dans la base
 	else {
-		// on se connecte à notre base
-                include('../sql/connexion_mysql.php');
 
 		// on calcule la date actuelle
 		$date = date("Y-m-d H:i:s");
 
 		// préparation de la requête d'insertion (pour la table forum_sujets)
-		$sql = 'INSERT INTO forum_sujets VALUES("", "'.mysql_escape_string($_SESSION['id']).'", "'.mysql_escape_string($_POST['titre']).'", "'.$date.'", "'.mysql_escape_string($_POST['categorie']).'")';
+		$sql = 'INSERT INTO forum_sujets VALUES("", "'.mysql_escape_string($_SESSION['currentUser']->getId()).'", "'.mysql_escape_string($_POST['titre']).'", "'.$date.'", "'.mysql_escape_string($_POST['categorie']).'")';
 
 		// on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
@@ -29,7 +27,7 @@ if (isset ($_POST['go']) && $_POST['go']=='Poster') {
 		$id_sujet = mysql_insert_id();
 
 		// lancement de la requête d'insertion (pour la table forum_reponses
-		$sql = 'INSERT INTO forum_reponses VALUES("", "'.mysql_escape_string($_SESSION['id']).'", "'.mysql_escape_string($_POST['message']).'", "'.$date.'", "'.$id_sujet.'")';
+		$sql = 'INSERT INTO forum_reponses VALUES("", "'.mysql_escape_string($_SESSION['currentUser']->getId()).'", "'.mysql_escape_string($_POST['message']).'", "'.$date.'", "'.$id_sujet.'")';
 
 		// on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
@@ -39,7 +37,11 @@ if (isset ($_POST['go']) && $_POST['go']=='Poster') {
 
 		// on redirige vers la page d'accueil
 		header('Location: index.php?section=liste_posts_forum&id_cours='.$_POST['cours'] . '&categorie=' . $_POST['categorie']);
-
+		?>
+		<script>
+		document.location.replace('<?php echo 'index.php?section=liste_posts_forum&id_cours='.$_POST['cours'] . '&categorie=' . $_POST['categorie']?>');
+		</script>
+		<?php 
 		// on termine le script courant
 		exit;
 	}

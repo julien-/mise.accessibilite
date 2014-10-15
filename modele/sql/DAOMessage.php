@@ -29,4 +29,5 @@ class DAOMessage extends DAOStandard
 			));
 
 	}
+	
 }

@@ -240,7 +240,7 @@ function getTopic($id_topic)
 {
     $resultat = mysql_fetch_array(sqlQuery('SELECT * ' 
                 . 'FROM forum_sujets '
-                . 'WHERE id = ' . $id_topic
+                . 'WHERE id_sujet = ' . $id_topic
                             ));
     $titre = $resultat['titre'];
         
@@ -271,22 +271,7 @@ function getExercice($id_exo)
 
 function getFilArianne($class, $array_fil) 
 {
-    if ($_SESSION['admin'])
-        $typeUser = 'admin';
-    else
-        $typeUser = 'etudiant';
-    $fil = '<div id="' . $class .'"><a href="/'.$typeUser.'/index.php">My Study Companion</a>';
-    foreach($array_fil as $url => $lien) 
-    {
-        $fil .= ' <font>&nbsp;>&nbsp;</font> ';
-        if($url == 'final') 
-        {
-            $fil .= $lien;
-            break;
-        }
-        $fil .= '<a href="' . $url . '">' . $lien . '</a>';
-    }
-    return $fil . '</div>';
+;
 }
 
 function progressionEtudiant($id_etu, $id_cours, $id_exo) 
@@ -331,13 +316,13 @@ function progressionEtudiant($id_etu, $id_cours, $id_exo)
 
 function deletePost($id_post)
 {
-    sqlQuery('DELETE FROM forum_reponses WHERE id = ' . $id_post);
+    sqlQuery('DELETE FROM forum_reponses WHERE id_reponse = ' . $id_post);
 }
 
 function deleteSujet($id_sujet)
 {
     sqlQuery('DELETE FROM forum_reponses WHERE correspondance_sujet = ' . $id_sujet);
-    sqlQuery('DELETE FROM forum_sujets WHERE id = ' . $id_sujet);
+    sqlQuery('DELETE FROM forum_sujets WHERE id_sujet = ' . $id_sujet);
 }
 
 function deleteCategorie($id_categorie)

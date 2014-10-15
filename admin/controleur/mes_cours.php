@@ -137,7 +137,7 @@ if ($rq_exos === FALSE) {
                             </td>
                             <!-- FORUM -->
                             <td class="petite_colonne">
-                                <a href="../index.php?section=index_forum&id_cours=<?php echo($mon_cours['id_cours']); ?>"><i class="glyphicon glyphicon-comment" alt="Forum" title="Forum"></i></a> 
+                                <a href="../controleur/index.php?section=index_forum&id_cours=<?php echo($mon_cours['id_cours']); ?>"><i class="glyphicon glyphicon-comment" alt="Forum" title="Forum"></i></a> 
                             </td>
                             <!-- SUPPRESSION COURS   -->
                             <td class="petite_colonne">

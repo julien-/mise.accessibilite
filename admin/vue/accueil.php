@@ -4,7 +4,7 @@
 	src="../../../js/googleChartToolsPieChart.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="row">
-<h1><?php echo utf8_encode($cours->getLibelle());?></h1>
+<h1><?php echo ($cours->getLibelle());?></h1>
 	<div class="col-lg-12 center-content">
 		<div class="panel panel-default">
 			<div class="panel-heading">

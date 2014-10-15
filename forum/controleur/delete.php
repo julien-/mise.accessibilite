@@ -1,8 +1,12 @@
 <?php
+include_once('../../lib/autoload.inc.php');
 session_start();
-include('../sql/connexion_mysql.php');
-include('../fonctions.php');
-if ($_SESSION['admin'])
+
+$dao = new DAOAvancement(null);
+$db = DBFactory::getMysqlConnexionStandard();
+
+include('../../fonctions.php');
+if ($_SESSION['currentUser']->getAdmin())
 {
     if (isset($_GET['type']) && isset($_GET['id']))
     {
@@ -35,7 +39,10 @@ if ($_SESSION['admin'])
     }
     else
         $categorie = "";
-    
-    header("Location: ../etudiant/index.php?deleted=true&section=" . $_GET['section'] . '&id_cours=' . $_GET['cours'] . $sujet . $categorie);
+    ?>
+    <script>
+    	document.location.replace('<?php echo $_SESSION['referrer']?>');
+    </script>
+    <?php
 }
 

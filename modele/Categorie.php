@@ -6,6 +6,8 @@ class Categorie {
 	$titre,
 	$description,
 	$cours,
+	$nbSujets,
+	$nbMessages,
 	$parent;
 
 	public function __construct($valeurs = array()) {
@@ -35,6 +37,26 @@ class Categorie {
 		$this->id = $id;
 		return $this;
 	}
+	
+	public function getNbSujets() {
+		return $this->nbSujets;
+	}
+	
+	public function setNbSujets($nbSujets) {
+		$this->nbSujets = $nbSujets;
+		return $this;
+	}
+	
+	public function getNbMessages() {
+		return $this->nbMessages;
+	}
+	
+	public function setNbMessages($nbMessages) {
+		$this->nbMessages = $nbMessages;
+		return $this;
+	}
+	
+	
 	
 	public function getTitre() {
 		return $this->titre;

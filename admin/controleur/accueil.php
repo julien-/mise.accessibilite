@@ -9,4 +9,5 @@ if (isset($_GET['c']))
 
 	include_once('../vue/accueil.php');
 }
+print_r($_SESSION);
 ?>
