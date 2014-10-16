@@ -175,4 +175,57 @@ class DAOAvancement extends DAOStandard
   	}
   	return $listeAvancement;
   }
+  
+  function getTabByCoursEtudiant($idCours, $idEtudiant)
+  {
+  	$result = $this->executeQuery('SELECT * FROM avancement, theme, exercice, seance
+  			WHERE avancement.id_etu = ' . $idEtudiant . '
+			AND avancement.id_exo = exercice.id_exo
+  			AND exercice.id_theme = theme.id_theme
+  			AND theme.id_cours = ' . $idCours);
+  	
+  	$listeAvancement = array();
+  	while ($avancement = $this->fetchArray($result)) {
+  		 
+  		$listeAvancement[] = array('exercice' => array('id' => $avancement['id_exo'],
+  				'titre' => $avancement['titre_exo'],
+  				'numero' => $avancement['num_exo'],
+  				'theme' => array ('id' => $avancement['id_theme'],
+  						'titre' => $avancement['titre_theme'])),
+  				'fait' => $avancement['fait'],
+  				'compris' => $avancement['compris'],
+  				'assimile' => $avancement['assimile']);
+  	}
+  	return $listeAvancement;
+  }
+  
+  function getTabByThemeEtudiant($idTheme, $idEtudiant)
+  {
+  	/*$result = $this->executeQuery('SELECT * FROM avancement, theme, exercice, seance
+  			WHERE avancement.id_etu = ' . $idEtudiant . '
+			AND avancement.id_exo = exercice.id_exo
+  			AND exercice.id_theme = '. $idTheme);*/
+  	
+  	$result = $this->executeQuery('SELECT e.id_exo, titre_exo, num_exo, e.id_theme, titre_theme, COALESCE(SUM(fait), 0) AS fait, COALESCE(SUM(compris), 0) AS compris, COALESCE(SUM(assimile), 0) AS assimile
+  	FROM theme t, exercice e
+  	LEFT JOIN avancement a ON e.id_exo = a.id_exo
+  	AND id_etu = '.$idEtudiant.'
+  	WHERE e.id_theme = '.$idTheme.'
+  	GROUP BY e.id_exo');
+  	
+  	$listeAvancement = array();
+  	
+  	while ($avancement = $this->fetchArray($result)) {
+  			
+  		$listeAvancement[] = array('exercice' => array('id' => $avancement['id_exo'],
+  				'titre' => $avancement['titre_exo'],
+  				'numero' => $avancement['num_exo'],
+  				'theme' => array ('id' => $avancement['id_theme'],
+  						'titre' => $avancement['titre_theme'])),
+  				'fait' => $avancement['fait'],
+  				'compris' => $avancement['compris'],
+  				'assimile' => $avancement['assimile']);
+  	}
+  	return $listeAvancement;
+  }
 }

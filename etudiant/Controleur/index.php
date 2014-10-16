@@ -11,6 +11,7 @@ $daoInscription = new DAOInscription($db);
 $daoSeance = new DAOSeance($db);
 $daoAvancement = new DAOAvancement($db);
 $daoRemarque = new DAORemarque($db);
+$daoTheme = new DAOTheme($db);
 
 
 $listeCours = $daoInscription->getAllByEtudiant($_SESSION["currentUser"]->getId());

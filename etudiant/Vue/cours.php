@@ -1,4 +1,3 @@
-<h1 class="titre_page_school">Mes Cours</h1>
 <?php
 
 $consignes = "

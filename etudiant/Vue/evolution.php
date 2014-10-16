@@ -2,6 +2,7 @@
   src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","table"]}]}'>
 </script>
 <script type="text/javascript" src="../../js/googleChartToolsBarChart.js"></script>
+<script type="text/javascript" src="../../js/googleChartToolsColumnChart.js"></script>
 
 <script type="text/javascript">
 var optionsBarChart =   {
@@ -14,6 +15,27 @@ var optionsBarChart =   {
 	hAxis: {maxValue: 100,  minValue: 0}
 };
 setBarChartOptions('../../chart/get_json_barchart_global.php?', optionsBarChart, 'barChart');
+</script>
+
+<script type="text/javascript">	
+<?php 
+foreach($listeThemes as $theme)
+{
+	$urlJSON = '../../chart/get_json_columnchart.php?theme='.$theme->getId();
+?>
+	var optionsColumnChart = {
+		height: 300,
+		title: '<?php echo $theme->getTitre();?>',
+		legend: { position: 'top', maxLines: 3 },
+	    bar: { groupWidth: '75%' },
+	    isStacked: true,
+	    colors : ['#FF6633','#FFCC33','#99FF33'],
+	};
+	
+	setColumnChartOptions('<?php echo $urlJSON ?>', optionsColumnChart, '<?php echo $theme->getId();?>');
+<?php
+}
+?>
 </script>
 
 <!-- Avancement global -->
@@ -45,6 +67,7 @@ setBarChartOptions('../../chart/get_json_barchart_global.php?', optionsBarChart,
 </div>
 
 <!-- Visualisation Escaliers -->
+<!--
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
@@ -53,10 +76,62 @@ setBarChartOptions('../../chart/get_json_barchart_global.php?', optionsBarChart,
 	</div>
 	<div class="panel-body">
 		<div id="morris-area-chart">
-
+			 <div id="columnChart" style="width: auto; height: auto;"></div>
 		</div>
 	</div>
 </div>
+-->
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="glyphicon glyphicon-stats"></i> Mon Evolution par Thème
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div id="morris-area-chart">
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators">
+				  	<?php 
+				  	$i = 0;
+					foreach($listeThemes as $theme)
+					{
+					?>
+					    <li data-target="#carousel-example-generic" data-slide-to="<?php echo $i; ?>" <?php if($i == 0) echo "class=\"active\"";?>></li>
+				    <?php 						
+						$i++;
+					}
+					?>
+				  </ol>
+				
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner">
+				  	<?php 
+				  	$i = 0;
+					foreach($listeThemes as $theme)
+					{
+					?>
+						<div class="<?php if($i == 0) echo "item active"; else echo "item";?>">
+				      		<div id="<?php echo $theme->getId();?>" style="margin-left: auto; margin-right: auto; width: 80%; height: 40%;"></div>
+				    	</div>
+					<?php 						
+						$i++;
+					}
+					?>
+				  </div>
+				
+				  <!-- Controls -->
+				  <a style="background-image: none;" class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+				    <span class="pokemon-red glyphicon glyphicon-chevron-left"></span>
+				  </a>
+				  <a style="background-image: none;" class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+				    <span class="pokemon-red glyphicon glyphicon-chevron-right"></span>
+				  </a>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 
 
