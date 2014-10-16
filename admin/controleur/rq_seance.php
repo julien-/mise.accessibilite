@@ -1,11 +1,15 @@
 <?php
 
-include_once "../config.php";
-include_once "../sql/connexion_mysql.php";
+include_once "../../config.php";
+
+include_once "../../lib/autoload.inc.php";
 session_start();
 $msgperso = "";
 $redirige = false;
 
+DBFactory::getMysqlConnexionStandard();
+$daoCours = new DAOCours();
+$cours = $daoCours->getByID($_SESSION["id_cours_sel"]);
 ############
 ## SEANCE ##
 ############
@@ -37,7 +41,9 @@ if (isset($_GET["majseance"])) {
 
 //COULEUR de COURS
 if (isset($_GET["couleur_cours"])) {
-    $redirige = ( mysql_query('UPDATE ' . $tb_cours . ' SET couleur_calendar = "' . $_POST["choix_couleur_calendar"] . '" WHERE id_cours = ' . $_SESSION["id_cours_sel"] . ';') );
+	
+	$cours->setCouleurCalendar($_POST["choix_couleur_calendar"]);
+	$redirige = $daoCours->update($cours);
 }
 //mysql_close($db);
 /* #################
@@ -51,7 +57,6 @@ if (isset($_GET['section']))
     $retourPage = "section=" . $_GET['section'];
 else
     $retourPage = "";
-session_start();
 
 if ($redirige)
     $_SESSION["notif_msg"] = '<div class="ok">Requête éffectuée avec succès...</div>';

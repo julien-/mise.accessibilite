@@ -34,7 +34,7 @@
         <td class="td_jour">S</td>
     </tr>
 </table>
-<table align="center"  width="420" border="0" cellpadding="5" cellspacing="0"  class="tab_numero">
+<table align="center"  width="420" border="1" cellpadding="5" cellspacing="0"  class="tab_numero">
     <tr align="center">
         <?php
         //Affichage des 7 premiers jours du calendrier
@@ -90,19 +90,7 @@
                     if ($tab_jours[$jour_suiv]["nb_seances"] > 0) {
                         ?>
                         <td class="td_jour">
-                            <div class="container">
-                                <!--Numéro du jour-->
-                                <div class="content"><?php echo($jour_suiv); ?></div>
-                                <!--Couleur(s) d'arrière-plan-->
-                                <?php
-                                $largeur = 100 / $tab_jours[$jour_suiv]["nb_seances"];
-                                foreach ($tab_jours[$jour_suiv]["couleurs"] as $cpt => $ma_couleur) {
-                                    ?>
-                                    <div class="bg" style="left: <?php echo($cpt * $largeur); ?>% ; background-color: #<?php echo($ma_couleur); ?>; width: <?php echo($largeur); ?>%;"></div>
-                                    <?php
-                                }
-                                ?>
-                            </div>
+							
                         </td>
                         <?php
                         // sinon on ne met pas de style

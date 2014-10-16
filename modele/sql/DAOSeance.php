@@ -5,6 +5,11 @@ class DAOSeance extends DAOStandard
 	{
 		$this->executeQuery('INSERT INTO seance SET date_seance = "' . $seance->getId() . '", id_cours = ' . $seance->getCours()->getId());
 	}
+	
+	public function update(Seance $seance)
+	{
+		$this->executeQuery('UPDATE seance SET date_seance = "' . $seance->getId() . '", id_cours = ' . $seance->getCours()->getId());
+	}
 	  
 	public function delete($id)
 	{

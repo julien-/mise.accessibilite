@@ -57,7 +57,7 @@ $sql = "SELECT cours.id_cours, date_seance, couleur_calendar " .
         "FROM " . $tb_seance . " " .
         "LEFT JOIN " . $tb_cours . " ON (cours.id_cours = seance.id_cours)
         WHERE YEAR(date_seance) = " . $an . " AND MONTH(date_seance) = " . $mois . " " .
-        "AND id_prof = " . $_SESSION["id"];
+        "AND id_prof = " . $_SESSION["currentUser"]->getId();
 $requete = mysql_query($sql);
 
 while ($ma_seance_calendar = mysql_fetch_assoc($requete)) {

@@ -10,11 +10,7 @@
 .container {
     position: relative;
 }
-.content {
-    font-weight: bold;
-    position: relative;
-    z-index: 1;
-}
+
 .bg {
     position: absolute;
     top: 0;

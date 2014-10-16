@@ -311,7 +311,7 @@ if ($rq_exos === FALSE) {
                                 echo 'selected="selected"';
                             ?>
                                     class="theme_du_cours_<?php echo($mon_theme["id_cours"]); ?>"
-                                    ><?php echo (strtoupper($mon_theme["titre_theme"])); ?></option><?php
+                                    ><?php echo (Outils::toUpper($mon_theme["titre_theme"])); ?></option><?php
                                 }
                                 ?>
                     </select>
@@ -379,28 +379,6 @@ if ($rq_exos === FALSE) {
                         ?>
                     </tbody>
                 </table>
-
-                <!--#########################
-                        NOUVEL EXERCICE 
-                    #########################-->
-                <form method="post" action="../rq_mes_cours.php?section=mes_cours&addexo">
-                    <table border="1" class="tableau-libre">
-                        <tr>
-                            <th colspan="3">Ajouter un exerice</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" name="titre_exo" id="titre_exo"size="26" value="" title="Taper un titre d'exercice" class="inputValDefaut">
-                                <input type="hidden" name="id_them_sel" id="id_them_sel"/>
-                                <input type="hidden" name="nbmax_exo" id="nbmax_exo"/>
-                            </td>
-                            <td>
-                                <!--sumbit (titre modifié dans le JS)-->
-                                <input type="image" name="soumisajouexo" id="soumisajouexo" src="../../<?php echo($dossierimg . "admin/flat_ajou.png"); ?>" alt="Ajouter l'exercice" title="Ajouter l'exercice"/>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
             </div>
 <a  class="btn btn-primary" data-toggle="modal" data-target="#ajoutExo">Ajouter un exercice</a>  
 <div class="modal fade" id="ajoutExo" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   

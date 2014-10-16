@@ -4,12 +4,12 @@ class DAOCours extends DAOStandard
   
 	public function save(Cours $cours)
 	{
-  		$this->executeQuery('INSERT INTO cours SET libelle_cours = "' . $cours->getLibelle() . '", couleur_calendar = ' . $cours->getCouleurCalendar() . ' , id_prof = ' . $cours->getProf()->getId() . ', id_cle = ' . $cours->getCle()->getId());
+  		return $this->executeQuery('INSERT INTO cours SET libelle_cours = "' . $cours->getLibelle() . '", couleur_calendar = ' . $cours->getCouleurCalendar() . ' , id_prof = ' . $cours->getProf()->getId() . ', id_cle = ' . $cours->getCle()->getId());
 	}
 	
 	public function update(Cours $cours)
 	{
-		$this->executeQuery('UPDATE cours SET libelle_cours = "' . $cours->getLibelle() . '", couleur_calendar = ' . $cours->getCouleurCalendar() . ' , id_prof = ' . $cours->getProf()->getId() . ', id_cle = ' . $cours->getCle()->getId() . ' WHERE id_cours = ' . $cours->getId());
+		return $this->executeQuery('UPDATE cours SET libelle_cours = "' . $cours->getLibelle() . '", couleur_calendar = "' . $cours->getCouleurCalendar() . '" , id_prof = ' . $cours->getProf()->getId() . ', id_cle = ' . $cours->getCle()->getId() . ' WHERE id_cours = ' . $cours->getId());
 	}
 	
 	public function saveOrUpdate(Cours $cours)

@@ -104,15 +104,18 @@ $(document).ready(function() {
         
         TABthemes_selon_SELECTcours();  //liste déroulante des cours
         TABexo_selon_SELECTthemes(); //liste déroulante des themes
- 
+
         //changement de la liste déroulante des cours
         $("#liste_cours").change(function() {
             TABthemes_selon_SELECTcours();
-            TABexo_selon_SELECTthemes();
             //si changement de cours, changement des themes aussi donc on se met sur le 1er
             var nomclass = "theme_du_cours_" + $("#id_cours_sel").val();
+			//deselectionne les anciens selected
+			$("#liste_themes option").attr('selected', false);
+			//selectionne les nouveaux
             $("#liste_themes option." + nomclass + ":first").attr('selected', true);
-            //SELECTION PAR DEFAUT (1er de la liste déroulante)
+            TABexo_selon_SELECTthemes();
+			//SELECTION PAR DEFAUT (1er de la liste déroulante)
             //Liste déroulante pas encore séléctionné mais il faut quand meme afficher les bons résultats)
             //permet de garder le meme element dans la liste déroulante après une requete
             //(créé une variable SESSION pour garder après les requetes
