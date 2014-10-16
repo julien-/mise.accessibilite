@@ -1,6 +1,7 @@
 <?php
 class DAOSujet extends DAOStandard
 {
+	
 	public function getByID($id)
 	{
 		$daoEtudiant = new DAOEtudiant($db);

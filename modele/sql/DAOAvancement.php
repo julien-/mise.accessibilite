@@ -28,6 +28,11 @@ class DAOAvancement extends DAOStandard
 		$this->executeQuery('DELETE FROM avancement WHERE id_etu = ' . $id);
 	}
 	
+	public function deleteByEtudiantAndCours($idEtu, $idExo)
+	{
+		$this->executeQuery('DELETE FROM avancement WHERE id_exo =' . $idExo . ' AND id_etu =' . $idEtu);
+	}
+	
 	function getByThemeEtudiant($idTheme, $idEtudiant)
 	{
 		$sql = 'CREATE TEMPORARY TABLE R1

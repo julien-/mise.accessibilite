@@ -156,7 +156,7 @@
 		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrapValidator.min.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrap-alert.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/dataValidatorPerso.js"></script>
-		
+
 
 
   <script type="text/javascript" language="javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>

@@ -1,3 +1,20 @@
+   function getQuerystring(key, default_) {
+       if (default_==null) default_="";
+       key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+       var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
+       var qs = regex.exec(window.location.href);
+       if(qs == null) return null; else return qs[1];
+   }
+
+
+
+$(window).load(function(){
+	/*if(getQuerystring('exo_sel') !== null){
+	    $('#ajoutFichier').modal('show');
+	}
+*/
+});
+
 //Gestion des thèmes d'un cours
 function TABthemes_selon_SELECTcours() {
     var nb_theme_visible = $(".trTHEMES_" + $("#liste_cours").val()).length;
@@ -85,6 +102,39 @@ function getParameterByName(name) {
 
 
 $(document).ready(function() {
+	
+	//triggered when modal is about to be shown
+	$('#ajoutFichier').on('show.bs.modal', function(e) {
+
+		
+	    //get data-id attribute of the clicked element
+	    var bookId = $(e.relatedTarget).data('book-id');
+	        
+	    var NumExoSel = parseInt(getParameterByName("exo_sel"));
+	    if (!isNaN(NumExoSel))
+	        $("#active_popup").click();
+
+	    $("#tab_fichiers tr:not(.titre)").hide(); //cache tous les tr du tableau sauf les titres
+	    $(".trFICHIER" + bookId).show(); //montre les bons tr (ayant le meme id que la liste déroulante)
+
+	    //Mise en ligne/Hors ligne de fichier
+	    $(".fichierenligne").change(function() {
+	        //modiifie la valeur à 0 ou 1 le champ caché coche_+"ID DU FICHIER"
+	        $("#coche_" + $(this).attr("id")).val($(this).is(":checked") ? 1 : 0);
+
+	        $("#form_online_" + $(this).attr("id")).submit();
+	    });
+	    
+	    $.ajax({
+	       url : 'index.php?section=mes_cours',
+	       type : 'GET', // Le type de la requête HTTP, ici devenu POST
+	       data :{exo_sel: bookId}, // On fait passer nos variables, exactement comme en GET, au script more_com.php
+	       success: function( data ) {
+	    	   $(e.currentTarget).find('input[name="fichierID"]').val(bookId);
+	       }
+	    });
+	});
+	
     //Possibilité d'annuler une suppression
     $('.img_sup_cours').click(function() {
         return confirm("La suppression de ce cours supprimera ses THEMES, EXERCICES et toute PROGRESSION d'étudiant à ceux-ci.\n\nEtes vous sûr de vouloir supprimer ce cours?");
@@ -143,23 +193,6 @@ $(document).ready(function() {
 //    POPUP
 //##############    
     //Affichage des popups
-    var NumExoSel = parseInt(getParameterByName("exo_sel"));
-    if (!isNaN(NumExoSel))
-        $("#active_popup").click();
 
-    //Ce qu'il faut cacher ou pas dans la POPUP
-    var nb_fichiers = $(".trFICHIER").length;
-    if (nb_fichiers > 0)
-        $("#fichiers").show();
-    else
-        $("#fichiers").text("Aucun fichier n'existe pour cet exercice");
-
-    //Mise en ligne/Hors ligne de fichier
-    $(".fichierenligne").change(function() {
-        //modiifie la valeur à 0 ou 1 le champ caché coche_+"ID DU FICHIER"
-        $("#coche_" + $(this).attr("id")).val($(this).is(":checked") ? 1 : 0);
-
-        $("#form_online_" + $(this).attr("id")).submit();
-    });
 
 });

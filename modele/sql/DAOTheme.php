@@ -28,7 +28,22 @@ class DAOTheme extends DAOStandard
 	
 	public function delete($id)
 	{
+		$daoAvancement = new DAOAvancement($db);
+		$daoExercice = new DAOExercice($db);
+		
+		// Suppression du thème
 		$this->executeQuery('DELETE FROM theme WHERE id_theme = ' . $id);
+		
+		// Suppression des exercices du thème
+		$daoExercice->deleteByTheme($id);
+		
+		// Suppression des avancements pour ce thème
+		$listExercice = $daoExercice->getByAllByTheme($id);
+		foreach($listExercice as $exercice)
+		{
+			$daoAvancement->deleteByExercice($exercice->getId());
+		}
+		
 	}
 	
 	public function deleteByCours($id)

@@ -29,7 +29,17 @@ class DAOCours extends DAOStandard
   
   	public function delete($id)
   	{
+  		$daoTheme = new DAOTheme(null);
+  		$daoExercice = new DAOExercice($db);
+  		
   		$this->executeQuery('DELETE FROM cours WHERE id_cours = ' . $id);
+
+  		$listTheme = $daoTheme->getAllByCours($id);
+  		
+  		foreach($listTheme as $theme)
+  		{
+  			$daoExercice->deleteByTheme($theme->getId());
+  		}
   	}
   
   	public function getAll()

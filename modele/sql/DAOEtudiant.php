@@ -22,7 +22,10 @@ class DAOEtudiant extends DAOStandard
   
   public function delete($id)
   {
+  	$daoAvancement = new DAOAvancement(null);
+
   	$this->executeQuery('DELETE FROM etudiant WHERE id_etu = ' . $id);
+  	$daoAvancement->deleteByEtudiant($id);
   }
   
   public function getAll()

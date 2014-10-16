@@ -1,6 +1,12 @@
 <?php
 class DAOCategorie extends DAOStandard
 {
+	
+	public function delete($id)
+	{
+		$this->executeQuery("DELETE FROM forum_categorie WHERE id_categorie =" . $id);
+	}
+	
 	public function getByID($id)
 	{
 		$ressource = $this->executeQuery("SELECT * 

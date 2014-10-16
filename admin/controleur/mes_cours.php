@@ -1,6 +1,9 @@
 
 <?php
-
+if (isset($_GET['exo_sel']))
+{
+	echo "Exo sel détecté" + $_GET['exo_sel'];
+}
 //permet de garder la bonne selection dans la liste déroulante des thèmes
 if (isset($_POST["id_cours_sel"])) {
     session_start();
@@ -357,11 +360,7 @@ if ($rq_exos === FALSE) {
                                 </td>
                                 <!--3 Popup: Affichage des fichiers-->
                                 <td class="petite_colonne">
-                                    <form method="post" name="gestion_fichiers" action="../index.php?section=mes_cours&exo_sel=<?php echo ($mon_exo["id_exo"]); ?>">
-                                        <!--submit-->
-                                        <input type="image" id="soumisficexo" src="../../<?php echo($dossierimg . $dossieradmin . "/fichiers.png"); ?>" alt="Gérer les fichiers de l'exercice" title="Gérer les fichiers de l'exercice"/>
-                                        ( <?php echo ($mon_exo["nb_fichiers"]); ?> )
-                                    </form>
+                                	<a data-book-id="<?php echo($mon_exo['id_exo']); ?>" class="btn btn-primary" data-toggle="modal" data-target="#ajoutFichier">Ajouter un Fichier</a> 
                                 </td>
                                 <td class="petite_colonne">
                                     <!--SUPPRESSION d'exo-->
@@ -380,7 +379,8 @@ if ($rq_exos === FALSE) {
                     </tbody>
                 </table>
             </div>
-<a  class="btn btn-primary" data-toggle="modal" data-target="#ajoutExo">Ajouter un exercice</a>  
+            
+<a class="btn btn-primary" data-toggle="modal" data-target="#ajoutExo">Ajouter un exercice</a>  
 <div class="modal fade" id="ajoutExo" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
      <div class="modal-dialog">  
         <div class="modal-content">
@@ -414,26 +414,30 @@ if ($rq_exos === FALSE) {
         </div>
      </div>
 </div>  
-            <!--##############
-            ###### POPUP #####
-            ##################-->
-            <input type="hidden" id="active_popup" class="topopup">
-            <!--popup gestion des fichiers d'un exercice-->
-            <div id="toPopup"> 
-
-                <div class="close"></div>
-                <span class="ecs_tooltip">Press Esc to close <span class="arrow"></span></span>
-                <div id="popup_content"> <!--your content start-->
-
+            
+<a  href="#" class="btn btn-primary" data-toggle="modal" data-target="#ajoutFichier">Ajouter un Fichier</a>  
+            
+<div class="modal fade" id="ajoutFichier" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
+     <div class="modal-dialog">  
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 id="myModalLabel" class="modal-title">Ajouter un fichier</h4>
+            </div>
+            <br/>
+            <form method="post" name="form_add_exo" action="../rq_mes_cours.php?section=mes_cours&addexo">
+            	<div class="container-fluid">
+                	<div class="row">
+                	<input type="text" name="fichierID" value=""/>jjj
                     <?php
-                    if (isset($_GET["exo_sel"])) {
                         include("fichiers_exo.php");
-                    } else
-                        echo("Aucun exercice séléctionné");
-                    ?>
-                </div> <!--your content end-->
-
-            </div> <!--toPopup end-->
+                        ?>kk
+	    			</div>
+    			</div>
+	    	</form>
+        </div>
+     </div>
+</div>  
 
             <div class="loader"></div>
             <div id="backgroundPopup"></div>
