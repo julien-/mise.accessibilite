@@ -14,7 +14,7 @@ if (1) {
         <h3 class="titre_scolaire">Fichiers associés à cet exercice</h3>
         <table class="tableau" id="tab_fichiers">
             <thead>
-                <tr>
+                <tr class="titre">
                     <th>Nom</th>
                     <th>Commentaires</th>
                     <th>En ligne</th>
@@ -39,7 +39,7 @@ if (1) {
                             <form method="post" action="rq_fichiers_exo.php?comment=<?php echo($mon_fichier['id_fichier']); ?>&section=mes_cours&<?php echo(isset($_GET["exo_sel"]) ? "&exo_sel=" . $_GET["exo_sel"] : ""); ?>">
                                 <textarea name="commentaires" id="commentaires_<?php echo ($mon_fichier['id_fichier']); ?>" rows="3" cols="30"><?php echo(trim(str_replace('<br />', '', $mon_fichier["commentaires"]))); ?></textarea>
                                 <!--submit-->
-                                <input type='image' class='img_edit_comm' src='../<?php echo($dossierimg . "admin/flat_edit.png"); ?>' alt="Valider la modification du commentaire" title="Valider la modification du commentaire"/>
+                                <input type='image' class='img_edit_comm' src='../../<?php echo($dossierimg . "admin/flat_edit.png"); ?>' alt="Valider la modification du commentaire" title="Valider la modification du commentaire"/>
                             </form>
                         </td>
                         <!--En ligne / Hors ligne-->
@@ -56,7 +56,7 @@ if (1) {
                                 <!--Mémorise l'id du fichier concerné-->
                                 <input type="hidden"  id="id_fic" name="id_fic" value="<?php echo ($mon_fichier['id_fichier']); ?>" />
                                 <!--submit-->
-                                <input type="image" class="soumissupfic" src="../<?php echo($dossierimg . $dossieradmin . "flat_supp.png"); ?>" alt="Supprimer <?php echo($mon_fichier["nom"]); ?>" title="Supprimer <?php echo($mon_fichier["nom"]); ?>"/>
+                                <input type="image" class="soumissupfic" src="../../<?php echo($dossierimg . $dossieradmin . "flat_supp.png"); ?>" alt="Supprimer <?php echo($mon_fichier["nom"]); ?>" title="Supprimer <?php echo($mon_fichier["nom"]); ?>"/>
                             </form>
                         </td>
                     </tr>

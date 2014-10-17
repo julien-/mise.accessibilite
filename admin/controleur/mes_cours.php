@@ -227,7 +227,7 @@ if ($rq_exos === FALSE) {
                         <tr class="titre">  <!--class pour rester toujours visible-->
                             <th class="center-text">Titre du thème</th>
                             <th class="center-text">Nombre d'exercices</th>
-                            <th class="center-text">Supprimer un thème</th>
+                            <th class="center-text">Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -330,7 +330,7 @@ if ($rq_exos === FALSE) {
                             <th class="center-text">Titre actuel</th>
                             <th class="center-text">Détails</th>
                             <th class="center-text">Fichiers</th>
-                            <th class="center-text">Supprimer un exercice</th>
+                            <th class="center-text">Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -360,7 +360,7 @@ if ($rq_exos === FALSE) {
                                 </td>
                                 <!--3 Popup: Affichage des fichiers-->
                                 <td class="petite_colonne">
-                                	<a data-book-id="<?php echo($mon_exo['id_exo']); ?>" class="btn btn-primary" data-toggle="modal" data-target="#ajoutFichier">Ajouter un Fichier</a> 
+                                	<a href="#" data-book-id="<?php echo($mon_exo['id_exo']); ?>" data-toggle="modal" data-target="#ajoutFichier"><i class="glyphicon glyphicon-paperclip" title="Ajouter un fichier à cet exercice"></i></a>  
                                 </td>
                                 <td class="petite_colonne">
                                     <!--SUPPRESSION d'exo-->
@@ -415,8 +415,6 @@ if ($rq_exos === FALSE) {
      </div>
 </div>  
             
-<a  href="#" class="btn btn-primary" data-toggle="modal" data-target="#ajoutFichier">Ajouter un Fichier</a>  
-            
 <div class="modal fade" id="ajoutFichier" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
      <div class="modal-dialog">  
         <div class="modal-content">
@@ -425,22 +423,35 @@ if ($rq_exos === FALSE) {
                 <h4 id="myModalLabel" class="modal-title">Ajouter un fichier</h4>
             </div>
             <br/>
-            <form method="post" name="form_add_exo" action="../rq_mes_cours.php?section=mes_cours&addexo">
+            <form method="post" name="form_add_fichier" action="ajouter_fichier.php">
             	<div class="container-fluid">
                 	<div class="row">
-                	<input type="text" name="fichierID" value=""/>jjj
-                    <?php
-                        include("fichiers_exo.php");
-                        ?>kk
+                	    <div class="col-sm-1">
+                		</div>
+                		<div class="col-sm-9">
+		            		<div class="form-group">
+		            			<label for="nom_fichier">Nom du fichier</label>
+	                			<input type="text" class="input-text" name="nom_fichier" placeholder="Tapez un nom de fichier"/>
+		  						<input type="hidden" name="fichierID" id="fichierID"/>
+			                </div>
+	                	    <div class="form-group">
+		            			<label for="en_ligne">Disponible immédiatement</label>
+	                			<input type="checkbox" checked="checked" name="en_ligne"/>
+		  						<input type="hidden" name="fichierID" id="fichierID"/>
+			                </div>
+	                		<!--submit-->
+			                <div class="form-group center-content">
+			                	<input type="submit" class="btn btn-primary" name="soumisajouexo" id="soumisajouexo" alt='Ajouter un exercice' title='Ajouter un exerccie' value="Ajouter"/>
+			    			</div>
+		    			</div>
+		    			<div class="col-sm-1">
+		    			</div>
 	    			</div>
     			</div>
 	    	</form>
         </div>
      </div>
 </div>  
-
-            <div class="loader"></div>
-            <div id="backgroundPopup"></div>
         </div>
         <!--DIV Sous onglet 2-->
         <div class="tab-pane <?php if (isset($_GET['r'])) echo "active";?>" id="recherche">
