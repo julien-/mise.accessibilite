@@ -60,6 +60,5 @@ class Bonus {
 	public function setTheme($theme) {
 		$this->theme = $theme;
 		return $this;
-	}
-	
+	}	
 }

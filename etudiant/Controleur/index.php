@@ -13,6 +13,7 @@ $daoAvancement = new DAOAvancement($db);
 $daoRemarque = new DAORemarque($db);
 $daoTheme = new DAOTheme($db);
 $daoBonus= new DAOBonus($db);
+$daoAvancement_bonus= new DAOAvancement_bonus($db);
 
 
 $listeCours = $daoInscription->getAllByEtudiant($_SESSION["currentUser"]->getId());

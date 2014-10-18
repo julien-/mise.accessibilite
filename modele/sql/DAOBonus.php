@@ -15,9 +15,9 @@ class DAOBonus extends DAOStandard {
 		$this->executeQuery ( 'UPDATE bonus SET id_bonus = "' . $bonus->getId () . '", titre_bonus = ' . $bonus->getTitre () . ', type_bonus =' . $bonus->getType () . ' id_theme = ' . $bonus->getTheme ()->getId () );
 	}
 	public function getByID($id) {
-		$result = $this->executeQuery ( 'SELECT * 
-										FROM bonus, theme, cours, etudiant, cle  
-										WHERE bonus id_bonus = ' . $id . '
+		$result = $this->executeQuery ( 'SELECT *
+										FROM bonus, theme, cours, etudiant, cle
+										WHERE bonus.id_bonus = ' . $id . '
 										AND bonus.id_theme = theme.id_theme
 										AND theme.id_cours = cours.id_cours
 										AND cours.id_prof = etudiant.id_etu
@@ -48,8 +48,9 @@ class DAOBonus extends DAOStandard {
 										'id' => $bonus ['id_cle'],
 										'cle' => $bonus ['valeur_cle'] 
 								) ) 
-						) ) 
-				) ) 
+						) )
+				
+				) )
 		) );
 	}
 	public function getAllByTheme($id_theme) {
@@ -88,7 +89,7 @@ class DAOBonus extends DAOStandard {
 											'cle' => $bonus ['valeur_cle'] 
 									) ) 
 							) ) 
-					) ) 
+					) )
 			) );
 		}
 		return $listeBonus;
