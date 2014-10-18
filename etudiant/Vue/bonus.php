@@ -122,8 +122,44 @@ foreach($listeThemes as $theme)
 							<?php 
 			            		}
 			            		else 
-			            			echo "";
-							
+			            		{
+	            			?>
+			            			<a  class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ViewAddRemarque" title="Ajouter une remarque"></a>  
+	                
+									<div class="modal fade" id="ViewAddRemarque" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
+									     <div class="modal-dialog">  
+									        <div class="modal-content">
+									            <div class="modal-header">
+									                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+									                <h4 id="myModalLabel" class="modal-title">Ajouter une Remarque</h4>
+									            </div>
+									            <br/>
+									            <form method="post" name="form_add_remarque" action="../Requete/rq_bonus.php?section=bonus&addbonus">
+										            <div class="container-fluid">
+									                	<div class="row">
+									                		<div class="col-sm-1">
+									                		</div>
+									                		<div class="col-sm-9">
+											            		<div class="form-group">
+											            			<label for="remarque">Remarque : </label>
+												                	<input type="text" name="remarque" id="remarque" size="60" value="" title="Taper une remarque" class="inputValDefaut"/>
+												                </div>
+												                <!--submit-->
+												                <div class="form-group center-content">
+																	<input type="hidden" name="id_bonus" value="<?php echo $bonus->getId();?>"/>
+												                	<input type="submit" class="btn btn-primary" name="soumis1" id="soumis1" alt='Ajouter une remarque' title='Ajouter une remarque' value="Ajouter"/>
+												    			</div>
+												    			<div class="col-sm-1">
+												    			</div>
+											    			</div>
+										    			</div>
+									    			</div>
+									            </form>
+									        </div>
+									     </div>
+									</div> 
+			            	<?php 
+			            		}
 							?> 			
 			            </td>
 			        </tr>

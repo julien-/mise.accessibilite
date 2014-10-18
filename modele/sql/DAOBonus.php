@@ -60,7 +60,8 @@ class DAOBonus extends DAOStandard {
 										AND bonus.id_theme = theme.id_theme
 										AND theme.id_cours = cours.id_cours
 										AND cours.id_prof = etudiant.id_etu
-										AND cours.id_cle = cle.id_cle' );
+										AND cours.id_cle = cle.id_cle
+										GROUP BY bonus.id_bonus' );
 		
 		$listeBonus = array ();
 		while ( $bonus = $this->fetchArray ( $result ) ) {
