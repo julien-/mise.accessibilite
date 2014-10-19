@@ -66,21 +66,6 @@ foreach($listeThemes as $theme)
 	</div>
 </div>
 
-<!-- Visualisation Escaliers -->
-<!--
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-stats"></i> Mon Evolution par Thème
-		</h3>
-	</div>
-	<div class="panel-body">
-		<div id="morris-area-chart">
-			 <div id="columnChart" style="width: auto; height: auto;"></div>
-		</div>
-	</div>
-</div>
--->
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">

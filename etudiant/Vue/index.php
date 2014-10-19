@@ -147,6 +147,7 @@
 		                                </ul>
   									</li>
   									<li><a href="#">Ma Progression</a></li>
+  									<li><a href="index.php?section=bonus">Bonus</a></li>
   									<li><a href="#">Forum</a></li>
                             <?php 
                         		}
