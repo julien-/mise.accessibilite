@@ -69,7 +69,7 @@ class DAOTheme extends DAOStandard
 										  								'login' => $theme['pseudo_etu'],
 										  								'pass' => $theme['pass_etu'],
 										  								'admin' => $theme['admin'])),
-										  								'idCle' => new Cle(array('id' => $theme['id_cle'],
+										  								'cle' => new Cle(array('id' => $theme['id_cle'],
 										  														'cle' => $theme['valeur_cle']))))));
 		}
 		return $listeTheme;

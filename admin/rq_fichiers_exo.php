@@ -1,12 +1,13 @@
 <?php
 
-include_once "../config.php";
-include_once "../sql/connexion_mysql.php";
-include_once "../fonctions.php";
+include_once "../../lib/autoload.inc.php";
+include_once "../../config.php";
+include_once "../../fonctions.php";
 session_start();
 $msgperso = "";
 $redirige = false;
 
+$daoFichiers = new DAOFichier(null);
 ##############
 ## FICHIERS ##
 ##############
@@ -41,12 +42,17 @@ function upload($index, $destination, $maxsize = FALSE, $extensions = FALSE) {
     return $destination;
 }
 
-if (isset($_GET["upload"])) {
-    $destination = upload('userfile', '../upload/');
-
-    $sql = "INSERT INTO " . $tb_fichiers . " (id_exo, chemin_fichier, nom, commentaires, code_lien, enligne) " .
-            "VALUES(" . $_GET["upload"] . ", '" . $destination . "', '" . $_FILES['userfile']['name'] . "', '" . nl2br(htmlentities($_POST["commentaires"], ENT_QUOTES, 'UTF-8')) . "', '" . md5($destination) . "', 0)";
-    mysql_query($sql) or die(mysql_error() . $sql);
+if (isset($_POST["submit"])) {
+    $destination = upload('userfile', '../../upload/');
+    $daoFichiers->saveOrUpdate(array(
+    		'exercice' => $_POST['fichierID'], 
+    		'chemin' => $destination, 
+    		'nom' => $_POST['nom_fichier'], 
+    		'commentaire' => $_POST['commentaires'], 
+    		'codeLien' => md5($destination),
+    		'enLigne' => $_POST['en_ligne']
+    ));
+	
     $redirige = true;
 }
 

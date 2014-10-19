@@ -1,5 +1,5 @@
 <?php
-class Exercice {
+class Fichier {
 	
 	protected 
 	$id,

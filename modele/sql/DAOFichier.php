@@ -1,29 +1,70 @@
 <?php
-class DAOExercice extends DAOStandard
+class DAOFichier extends DAOStandard
 {	
-	public function saveOrUpdate(Exercice $exercice)
+	public function saveOrUpdate(Fichier $fichier)
 	{
-		if ($this->exists($exercice))
-			$this->update($exercice);
+		if ($this->exists($fichier))
+			$this->update($fichier);
 		else
-			$this->save($exercice);
+			$this->save($fichier);
 	}
 	
-	public function save(Exercice $exercice)
+	public function save(Fichier $fichier)
 	{
-		$this->executeQuery('INSERT INTO fichiers SET id_exo = "' . $fichier->getExercice()->getId() . '", chemin_fichier = "' . $fichier->getChemin() . '", nom = "' . $fichier->getNom() . '", commentaires = "' . $fichier->getCommentaire() . '", code_lien = "' . $fichier->getCodeLien() . '", enligne = "' . $fichier->getEnLigne() . '" WHERE id_fichier = ' . $fichier->getId());
-			}
+		$this->executeQuery('INSERT INTO fichiers SET id_exo = "' . $fichier->getExercice() . '", chemin_fichier = "' . $fichier->getChemin() . '", nom = "' . $fichier->getNom() . '", commentaires = "' . $fichier->getCommentaire() . '", code_lien = "' . $fichier->getCodeLien() . '", enligne = "' . $fichier->getEnLigne().'"');
+	}
 	
 	public function update(Fichier $fichier)
 	{
 		$this->executeQuery('UPDATE fichiers SET id_exo = "' . $fichier->getExercice()->getId() . '", chemin_fichier = "' . $fichier->getChemin() . '", nom = "' . $fichier->getNom() . '", commentaires = "' . $fichier->getCommentaire() . '", code_lien = "' . $fichier->getCodeLien() . '", enligne = "' . $fichier->getEnLigne() . '" WHERE id_fichier = ' . $fichier->getId());
 	}
 	
-	public function exists(Exercice $exercice)
+	public function exists(Fichier $fichier)
 	{
-		$result = $this->executeQuery('SELECT * FROM fichiers WHERE id_fichier = ' . $id);
+		$result = $this->executeQuery('SELECT * FROM fichiers WHERE id_fichier = ' . $fichier->getId());
 		
 		return $this->countRows($result) > 0;
+	}
+	
+	public function getAll()
+	{
+		$daoExercice = new DAOExercice($db);
+		$result = $this->executeQuery('SELECT * FROM fichiers');
+		 
+		if ($result == null)
+			return false;
+		 
+		$listResult = array();
+	
+		while($fichier = $this->fetchArray($result))
+		{
+			$daoExercice->getByID($fichier['id_exo']);
+			$listResult[] = new Fichier (array(
+							'id' => $fichier['id_fichier'],
+							'exercice' => $daoExercice->getByID($fichier['id_exo']),
+							'cheminFichier' => $fichier['chemin_fichier'],
+							'nom' => $fichier['nom'],
+							'commentaire' => $fichier['commentaires'],
+							'codeLien' => $fichier['code_lien'],
+							'enLigne' => $fichier['enligne']
+							));							
+		}
+	
+		return $listResult;
+	}
+	
+	public function count()
+	{
+		$result = $this->executeQuery('SELECT * FROM fichiers');
+		
+		return $this->countRows($result);
+	}
+	
+	public function countByExercice($id)
+	{
+		$result = $this->executeQuery('SELECT * FROM fichiers WHERE id_exo = ' . $id);
+	
+		return $this->countRows($result);
 	}
 	
 	public function delete($id)

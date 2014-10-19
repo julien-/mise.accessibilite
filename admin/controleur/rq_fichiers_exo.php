@@ -1,22 +1,17 @@
-
-
 <?php
 
-include_once "../../lib/autoload.inc.php";
 include_once "../../config.php";
 include_once "../../fonctions.php";
 session_start();
 $msgperso = "";
 $redirige = false;
 
-DBFactory::getMysqlConnexionStandard();
-$daoFichiers = new DAOFichier(null);
 ##############
 ## FICHIERS ##
 ##############
 
 //UPLOAD DE FICHIERS
-function upload($index, $chemin, $destination, $maxsize = FALSE, $extensions = FALSE) {
+function upload($index, $destination, $maxsize = FALSE, $extensions = FALSE) {
     //Test1: fichier correctement uploadé
     if (!isset($_FILES[$index]) OR $_FILES[$index]['error'] > 0)
         return FALSE;
@@ -32,40 +27,25 @@ function upload($index, $chemin, $destination, $maxsize = FALSE, $extensions = F
     $fileExt = pathinfo($_FILES[$index]['name'], PATHINFO_EXTENSION);
     $fileName = substr(basename($_FILES[$index]['name'], $ext), 0, -1);
     $count = 1;
-    $tmpDest = $chemin.$destination;
-    
-
+    $tmpDest = $destination;
     while (file_exists($tmpDest)) {
-        $tmpDest = $chemin.$destination . $fileName . '(' . $count . ').' . $fileExt;
-        echo "dest" . $tmpDest;
+        $tmpDest = $destination . $fileName . ' (' . $count . ') .' . $fileExt;
         $count++;
     }
-    
+    $destination = $tmpDest;
     //Déplacement
-    if (!move_uploaded_file($_FILES[$index]['tmp_name'], $tmpDest))
+    if (!move_uploaded_file($_FILES[$index]['tmp_name'], $destination))
         return false;
 
-    return $destination . $fileName . ' (' . ($count-1) . ') .' . $fileExt;;
+    return $destination;
 }
 
-if (isset($_POST["submit"])) {
-	
-	if (isset($_POST['en_ligne']))
-		$online = 1;
-	else
-		$online = 0;
-	
-    $destination = upload('userfile', '../../', 'upload/');
-    $daoFichiers->saveOrUpdate(new Fichier(array(
-    		'id' => -1,
-    		'exercice' => $_POST['fichierID'], 
-    		'chemin' => $destination, 
-    		'nom' => $_FILES['userfile']['name'] , 
-    		'commentaire' => $_POST['commentaires'], 
-    		'codeLien' => md5($destination),
-    		'enLigne' => $online
-    )));
-	
+if (isset($_GET["upload"])) {
+    $destination = upload('userfile', '../upload/');
+
+    $sql = "INSERT INTO " . $tb_fichiers . " (id_exo, chemin_fichier, nom, commentaires, code_lien, enligne) " .
+            "VALUES(" . $_GET["upload"] . ", '" . $destination . "', '" . $_FILES['userfile']['name'] . "', '" . nl2br(htmlentities($_POST["commentaires"], ENT_QUOTES, 'UTF-8')) . "', '" . md5($destination) . "', 0)";
+    mysql_query($sql) or die(mysql_error() . $sql);
     $redirige = true;
 }
 
@@ -98,6 +78,7 @@ if (isset($_POST["online"])) {
 
 
 
+mysql_close($db);
 /* #################
  * ## REDIRECTION ##
  * #################
@@ -112,6 +93,7 @@ else
 
 if (isset($_GET['exo_sel']))
     $retourPage .= "&exo_sel=" . $_GET['exo_sel'];
+session_start();
 
 if ($redirige)
     $_SESSION["notif_msg"] = '<div class="ok">Requête éffectuée avec succès...</div>';

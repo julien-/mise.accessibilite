@@ -1,9 +1,11 @@
 <?php
-
+include_once ('../../lib/autoload.inc.php');
 session_start();
-include_once "../fonctions.php";
-include_once "../config.php";
-include_once "../sql/connexion_mysql.php";
+include_once "../../fonctions.php";
+include_once "../../config.php";
+
+
+$db = DBFactory::getMysqlConnexionStandard();
 
 $redirige = false;
 
@@ -17,11 +19,12 @@ if (isset($_GET["addcours"])) {
     //récupère le dernier AUTO INCREMENT généré
     $idcle = mysql_fetch_assoc(mysql_query("SELECT LAST_INSERT_ID() AS id_cle"));
     //ajout dans la table cours
-    mysql_query("INSERT INTO " . $tb_cours . " (libelle_cours, id_prof, id_cle) VALUES ('" . $_POST["titrecours"] . "', " . $_SESSION["id"] . ", " . $idcle["id_cle"] . " );");
+    mysql_query("INSERT INTO " . $tb_cours . " (libelle_cours, id_prof, id_cle) VALUES ('" . $_POST["titrecours"] . "', " . $_SESSION["currentUser"]->getId() . ", " . $idcle["id_cle"] . " );");
 
     mysql_query("INSERT INTO forum_categorie (titre_categorie, description_categorie, id_cours, id_categorie_parent) " .
             "VALUES ('Blabla des étudiants' , 'Pour parler de tout et de rien', " . $idcle['id_cle'] . ", NULL);");
     $redirige = true;
+    echo "ok";
 }
 
 //MODIFICATION DE COURS
@@ -197,14 +200,12 @@ if (isset($_GET["majexo"])) {
  * ## REDIRECTION ##
  * #################
  */
-mysql_close($db);
 
 // on regarde de quel page il venait
 if (isset($_GET['section']))
     $retourPage = "section = " . $_GET['section'];
 else
     $retourPage = "";
-session_start();
 
 if ($redirige)
     $_SESSION["notif_msg"] = '<div class="ok">Requête éffectuée avec succès...</div>';
@@ -212,5 +213,5 @@ else
     $_SESSION["notif_msg"] = '<div class="erreur">Erreur dans l\' execution de la requête...</div>';
 
 // on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas
-header('Location: controleur/index.php?' . $retourPage);
+//header('Location: controleur/index.php?' . $retourPage);
 ?>

@@ -1,5 +1,6 @@
 
 <?php
+$_SESSION['referrer'] = current_page_url(); 
 if (isset($_GET['exo_sel']))
 {
 	echo "Exo sel détecté" + $_GET['exo_sel'];
@@ -42,10 +43,6 @@ if ($rq_cours === FALSE) {
 
 $daoCours = new DAOCours($db);
 $listeCours = $daoCours->getAllByProfWithStats($_SESSION['currentUser']->getid());
-foreach($listeCours as $cours)
-{
-	echo $cours->getNbInscrits();
-}
 
 
 //THEMES
@@ -108,7 +105,7 @@ if ($rq_exos === FALSE) {
                         ?>
                         <tr>
                             <!--Titre du cours-->
-                            <td class="autre_colonne">
+                            <td class="autre_colonne vert-align">
                                 <form method="post" name="form_name_<?php echo($mon_cours['id_cours']); ?>" action="../rq_mes_cours.php?section=mes_cours&majtitrecours=<?php echo($mon_cours['id_cours']); ?>">
                                     <input type="text" style="height: 20px; font-size: 10pt;" name="newtitrecours" id="newtitrecours" size="26" value="<?php echo $mon_cours['libelle_cours']; ?>" title="Saisir un nouveau titre de cours" class="inputValDefaut">
                                     <!--submit-->
@@ -117,21 +114,21 @@ if ($rq_exos === FALSE) {
                                 </form>
                             </td>
                             <!--Nombre d'inscris-->
-                            <td class="petite_colonne">
+                            <td class="petite_colonne vert-align">
                                 <?php echo($mon_cours["nb_inscrits"]); ?>
                             </td>
                             <!--Nombre de thèmes-->
-                            <td class="petite_colonne">
+                            <td class="petite_colonne vert-align">
                                 <?php echo($mon_cours["nb_theme"]); ?>
                             </td>
                             <!--Détails-->
-                            <td class="petite_colonne">
+                            <td class="petite_colonne vert-align">
                                 <a href="index.php?section=accueil&c=<?php echo $mon_cours['id_cours']; ?>">
                                     <i class="glyphicon glyphicon-list-alt" title="D&eacute;tails sur ce cours"></i>
                                 </a>
                             </td>
                             <!--Modifier la clé du cours-->
-                            <td class="autre_colonne">
+                            <td class="autre_colonne vert-align">
                                 <form method="post" name="form_cle_<?php echo($mon_cours['id_cle']); ?>" action="../rq_mes_cours.php?section=mes_cours&majclecours=<?php echo($mon_cours['id_cle']); ?>">
                                     <input type="text" style="height: 20px; font-size: 10pt;" name="newclecours" id="newclecours" size="26" value="" title="Saisir une nouvelle clé" class="inputValDefaut">
                                     <!--submit-->
@@ -139,15 +136,12 @@ if ($rq_exos === FALSE) {
                                 </form>
                             </td>
                             <!-- FORUM -->
-                            <td class="petite_colonne">
+                            <td class="petite_colonne vert-align">
                                 <a href="../controleur/index.php?section=index_forum&id_cours=<?php echo($mon_cours['id_cours']); ?>"><i class="glyphicon glyphicon-comment" alt="Forum" title="Forum"></i></a> 
                             </td>
                             <!-- SUPPRESSION COURS   -->
-                            <td class="petite_colonne">
-                                <form id="form_delete_<?php echo($mon_cours['id_cours']); ?>" method="post" action="../rq_mes_cours.php?section=mes_cours&supcours=<?php echo $mon_cours['id_cours']; ?>">
-                                    <!--submit-->
-                                    <a class='img_sup_cours' name ='img_sup_cours' href="#" onClick=form_delete_<?php echo($mon_cours['id_cours']); ?>.submit()><i class="glyphicon glyphicon-minus-sign" title="Modifier la clé de ce cours"></i></a>
-                                </form>
+                            <td class="petite_colonne vert-align">                                    <!--submit-->
+                                <a href="../controleur/delete.php?cours=<?php echo($mon_cours['id_cours']); ?>"><i class="glyphicon glyphicon-minus-sign" alt="Forum" title="Forum"></i></a> 
                             </td>
 
                         </tr>
@@ -168,7 +162,7 @@ if ($rq_exos === FALSE) {
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4 id="myModalLabel" class="modal-title">Ajouter un cours</h4>
             </div>
-            <form method="post" name="form_add_cours" action="../rq_mes_cours.php?section=mes_cours&addcours">
+            <form method="post" name="form_add_cours" action="../controleur/rq_mes_cours.php?section=mes_cours&addcours">
             <br/>
             	<div class="container-fluid">
                 	<div class="row">
@@ -236,7 +230,7 @@ if ($rq_exos === FALSE) {
                             ?>
                             <tr class="trTHEMES_<?php echo($mon_theme["id_cours"]); ?>" >   <!--Pour savoir s'il faut afficher ou pas-->
                                 <!--Titre du thème-->
-                                <td class="autre_colonne">
+                                <td class="autre_colonne vert-align">
                                     <form method="post" name="form_name_theme_<?php echo($mon_theme['id_theme']); ?>" action="../rq_mes_cours.php?section=mes_cours&majtheme=<?php echo($mon_theme['id_theme']); ?>">
 	                                    <input type="text" style="height: 20px; font-size: 10pt;" name="titremajtheme" id="titremajtheme" size="26" value="<?php echo $mon_theme['titre_theme']; ?>" title="Saisir un nouveau titre de cours" class="inputValDefaut">
 	                                    <!--submit-->
@@ -244,11 +238,11 @@ if ($rq_exos === FALSE) {
                                 	</form>
                                 </td>
                                 <!-- Nombre d'exercices : Utile pour garder le numéro du prochain exercice à créer-->
-                                <td class="autre_colonne" id="nbexo_idtheme<?php echo ($mon_theme["id_theme"] ); ?>">
+                                <td class="autre_colonne vert-align" id="nbexo_idtheme<?php echo ($mon_theme["id_theme"] ); ?>">
                                     <?php echo($mon_theme["nb_exo"]); ?>
                                 </td>
                                 <!--SUPPRESSION THEME-->
-                                <td class="autre_colonne">
+                                <td class="autre_colonne vert-align">
 	                                <form id="form_delete_theme_<?php echo($mon_theme['id_theme']); ?>" method="post" action="../rq_mes_cours.php?section=mes_cours&suptheme=<?php echo $mon_theme['id_theme']; ?>">
 	                                    <!--submit-->
 	                                    <a class='img_sup_theme' name ='img_sup_theme' href="#" onClick=form_delete_theme_<?php echo($mon_theme['id_theme']); ?>.submit()><i class="glyphicon glyphicon-minus-sign" title="Supprimer ce thème"></i></a>
@@ -340,11 +334,11 @@ if ($rq_exos === FALSE) {
                             ?>
                             <tr class="trEXO_<?php echo($mon_exo["id_theme"]); ?>">
                                 <!--Numéro d'exercice-->
-                                <td class="petite_colonne">
+                                <td class="petite_colonne vert-align">
                                     <?php echo ($mon_exo["num_exo"]); ?>
                                 </td>
                                 <!--Titre de l'exercice-->
-                                <td class="petite_colonne">
+                                <td class="petite_colonne vert-align">
                                     <form method="post" name="form_name_exo<?php echo $mon_exo['id_exo'];?>" action="../rq_mes_cours.php?section=mes_cours&majexo=<?php echo($mon_exo['id_exo']); ?>">
                                         <!--TITRE-->
                                         <input type="text" style="height: 20px; font-size: 10pt;" name="titremajexo" id="titremajexo" size="26" value="<?php echo ($mon_exo["titre_exo"]); ?>" title="Taper un titre d'exercice" class="inputValDefaut">
@@ -353,16 +347,16 @@ if ($rq_exos === FALSE) {
                                     </form>
                                 </td>
                                 <!--Details-->
-                                <td class="petite_colonne">
+                                <td class="petite_colonne vert-align">
                                     <a title ="Progression de l'exercice" href="index.php?section=details_exercice&c=<?php echo ($mon_exo['id_cours']); ?>&ex=<?php echo ($mon_exo["id_exo"]); ?>">
                                         <i class="glyphicon glyphicon-list-alt" title="D&eacute;tails sur cet exercice"></i>
                                     </a>
                                 </td>
                                 <!--3 Popup: Affichage des fichiers-->
-                                <td class="petite_colonne">
+                                <td class="petite_colonne vert-align">
                                 	<a href="#" data-book-id="<?php echo($mon_exo['id_exo']); ?>" data-toggle="modal" data-target="#ajoutFichier"><i class="glyphicon glyphicon-paperclip" title="Ajouter un fichier à cet exercice"></i></a>  
                                 </td>
-                                <td class="petite_colonne">
+                                <td class="petite_colonne vert-align">
                                     <!--SUPPRESSION d'exo-->
                                     <form method="post" name="form_supp_exo<?php echo($mon_exo['id_exo']); ?>" action="../rq_mes_cours.php?section=mes_cours&supexo=<?php echo ($mon_exo['id_exo']); ?>">
                                         <!--Mémorise l'id du theme de l'exercice concerné-->
@@ -416,32 +410,43 @@ if ($rq_exos === FALSE) {
 </div>  
             
 <div class="modal fade" id="ajoutFichier" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
-     <div class="modal-dialog">  
+     <div class="modal-dialog modal-large">  
         <div class="modal-content">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4 id="myModalLabel" class="modal-title">Ajouter un fichier</h4>
             </div>
             <br/>
-            <form method="post" name="form_add_fichier" action="ajouter_fichier.php">
+            <form method="post" enctype="multipart/form-data" name="form_add_fichier" action="ajouter_fichier.php">
             	<div class="container-fluid">
+            	<?php include('fichiers_exo.php'); ?>
                 	<div class="row">
-                	    <div class="col-sm-1">
+                	    <div class="col-sm-3">
                 		</div>
-                		<div class="col-sm-9">
+                		<div class="col-sm-8">
+                		<div class="form-group">
+                		    <input type="hidden" name="MAX_FILE_SIZE" value="30000000000000000000000000000000" />
+                			<input name="userfile" type="file" />
+                		</div>
 		            		<div class="form-group">
 		            			<label for="nom_fichier">Nom du fichier</label>
 	                			<input type="text" class="input-text" name="nom_fichier" placeholder="Tapez un nom de fichier"/>
 		  						<input type="hidden" name="fichierID" id="fichierID"/>
 			                </div>
+			                <div class="form-group">
+								<label for="commentaires">Commentaires</label>
+								<textarea name="commentaires" rows="2" cols="25"></textarea>
+			                </div>
 	                	    <div class="form-group">
-		            			<label for="en_ligne">Disponible immédiatement</label>
+		            			<label for="en_ligne">Disponible imm&eacute;diatement</label>
 	                			<input type="checkbox" checked="checked" name="en_ligne"/>
 		  						<input type="hidden" name="fichierID" id="fichierID"/>
 			                </div>
 	                		<!--submit-->
-			                <div class="form-group center-content">
-			                	<input type="submit" class="btn btn-primary" name="soumisajouexo" id="soumisajouexo" alt='Ajouter un exercice' title='Ajouter un exerccie' value="Ajouter"/>
+			                <div class="form-group">
+                				<div class="col-lg-5 col-md-offset-4">
+			                		<input type="submit" class="btn btn-primary" name="submit" id="submit" alt='Ajouter un fichier' title='Ajouter un fichier' value="Ajouter"/>
+			    				</div>
 			    			</div>
 		    			</div>
 		    			<div class="col-sm-1">

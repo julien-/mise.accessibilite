@@ -46,10 +46,10 @@ class DAOExercice extends DAOStandard
 	  {
 	  	$result = $this->executeQuery('SELECT * FROM exercice ex, theme t, cours c, etudiant e, cle WHERE ex.id_theme = t.id_theme AND c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND ex.id_exo = ' . $id);
 	  	
-	  	$exercice = $this->fetchArray($result);
-	
-	  	if ($exercice == null)
+	  	if ($result == null)
 	  		return false;
+	  	
+	  	$exercice = $this->fetchArray($result);
 
 	  	return new Exercice (array('id' => $exercice['id_exo'],
 	  								'titre_exo' => $exercice['titre_exo'],
@@ -67,7 +67,7 @@ class DAOExercice extends DAOStandard
 																		  								'pass' => $exercice['pass_etu'],
 																		  								'admin' => $exercice['admin'])),
 														  								'cle' => new Cle(array('id' => $exercice['id_cle'],
-																		  														'cle' => $exercice['valeur_cle']))))))));
+												  														'cle' => $exercice['valeur_cle']))))))));
 	  }
 	  
 	  public function getByAllByTheme($id)

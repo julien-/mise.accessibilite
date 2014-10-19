@@ -1,3 +1,5 @@
+@import url("../font/font.css");
+
 .center-content
 {
 	display:table;
@@ -14,4 +16,24 @@
 	height: 20px; 
 	font-size: 10pt;
 }
+
+body .modal-large {
+    /* new custom width */
+    width:1200px;
+}
+
+.table tbody>tr>td.vert-align{
+    vertical-align: middle;
+}
+
+.font-school
+{
+	font-family: 'please_write_me_a_songmedium';
+}
+
+.size-message-information
+{
+	font-size: 24px;
+}
+
 

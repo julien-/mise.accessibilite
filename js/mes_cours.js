@@ -124,7 +124,16 @@ $(document).ready(function() {
 
 	        $("#form_online_" + $(this).attr("id")).submit();
 	    });
+	    var nb_exo_visible = $(".trFICHIER" + bookId).length;
 	    
+	    if (nb_exo_visible == 0)
+    	{
+	    	$("#tab_fichiers tr").hide(); //cache tous les tr du tableau 
+	    	$("#no-files").text("Aucun fichier n'a été ajouté pour cet exercice");
+    	}
+	    else
+	    	$("#no-files").text("");
+	    	
 	    $.ajax({
 	       url : 'index.php?section=mes_cours',
 	       type : 'GET', // Le type de la requête HTTP, ici devenu POST
