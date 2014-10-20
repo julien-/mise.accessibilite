@@ -1,6 +1,11 @@
 <?php
 class Outils
 {
+	public static function dateToFr($date)
+	{
+		return strftime('%d/%m/%Y',strtotime($date));
+	}
+	
 	public static function toUpper($string) 
 	{
 	   $string = strtoupper($string);

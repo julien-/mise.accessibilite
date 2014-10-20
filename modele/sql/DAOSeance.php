@@ -43,7 +43,7 @@ class DAOSeance extends DAOStandard
 	}
 	public function getAll()
 	{
-		$result = $this->executeQuery('SELECT * FROM seance s, cours c, cle, etudiant e WHERE c.id_prof = e.id_etu AND cle.id_cle = c.id_cle AND s.id_cours = c.id_cours');
+		$result = $this->executeQuery('SELECT * FROM seance s, cours c, cle, etudiant e WHERE c.id_prof = e.id_etu AND cle.id_cle = c.id_cle AND s.id_cours = c.id_cours ORDER BY date_seance ASC');
 		 
 		$listeSeance = array();
 		while ($seance = $this->fetchArray($result)) {

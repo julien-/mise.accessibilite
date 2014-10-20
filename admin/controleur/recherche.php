@@ -16,7 +16,7 @@ if (sizeof($listeResultats) > 0)
 ?>
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
 
-<table id="tableau" class="table table-striped table-bordered">
+<table id="tableau" class="interactive-table table table-striped table-bordered">
 	<thead>
 		<tr>
 			<th class="center-text">Nom</th>

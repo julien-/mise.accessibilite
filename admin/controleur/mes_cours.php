@@ -110,7 +110,6 @@ if ($rq_exos === FALSE) {
                                     <input type="text" style="height: 20px; font-size: 10pt;" name="newtitrecours" id="newtitrecours" size="26" value="<?php echo $mon_cours['libelle_cours']; ?>" title="Saisir un nouveau titre de cours" class="inputValDefaut">
                                     <!--submit-->
                                     <a id='img_edit_titrecours' name ='img_edit_titrecours' href="#" onClick=form_name_<?php echo($mon_cours['id_cours']); ?>.submit()><i class="glyphicon glyphicon-pencil" title="Modifier le nom de ce cours"></i></a> 
-                                
                                 </form>
                             </td>
                             <!--Nombre d'inscris-->

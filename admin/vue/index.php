@@ -17,6 +17,7 @@
         <link href="../../css/tableau.css" rel="stylesheet">
         <link href="../../css/style.css" rel="stylesheet">
         <link href="../../css/<?php echo $page; ?>.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -156,39 +157,12 @@
 		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrapValidator.min.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrap-alert.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/dataValidatorPerso.js"></script>
-
-
-
-  <script type="text/javascript" language="javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-
+		<script type="text/javascript" language="javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+		
 		<script type="text/javascript">
-		$('#tableau').DataTable( {
-		    language: {
-		    	processing:     "Traitement en cours...",
-		        search:         "Rechercher&nbsp;:",
-		        lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
-		        info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-		        infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-		        infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-		        infoPostFix:    "",
-		        loadingRecords: "Chargement en cours...",
-		        zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-		        emptyTable:     "Aucune donnée disponible dans le tableau",
-		        paginate: {
-		            first:      "Premier",
-		            previous:   "Pr&eacute;c&eacute;dent",
-		            next:       "Suivant",
-		            last:       "Dernier"
-		        },
-		        aria: {
-		            sortAscending:  ": activer pour trier la colonne par ordre croissant",
-		            sortDescending: ": activer pour trier la colonne par ordre décroissant"
-		        }
-		        
-			        
-		    }
-		} );
+		
 		</script>
+		
         <!--Integration des fichiers js de chaque page-->
         <script type="text/javascript" src="../../js/<?php echo ($page . ".js"); ?>"></script>
         <script type="text/javascript" src="../../js/commun.js"></script>
