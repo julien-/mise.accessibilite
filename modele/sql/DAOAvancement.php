@@ -33,6 +33,19 @@ class DAOAvancement extends DAOStandard
 		$this->executeQuery('DELETE FROM avancement WHERE id_exo =' . $idExo . ' AND id_etu =' . $idEtu);
 	}
 	
+	public function getAllByCours($id, $limit)
+	{
+		$this->executeQuery("
+				SELECT * 
+				FROM avancement a, exercice e, theme t, cours c, etudiant et
+				WHERE a.id_exo = e.id_exo
+				AND e.id_theme = t.id_theme
+				AND c.id_cours = t.id_cours
+				AND et.id_etu = a.id_etu
+				AND c.id_cours = " . $id ."
+				ORDER BY date");
+	}
+	
 	function getByThemeEtudiant($idTheme, $idEtudiant)
 	{
 		$sql = 'CREATE TEMPORARY TABLE R1
@@ -63,6 +76,7 @@ class DAOAvancement extends DAOStandard
 		 
 		return number_format(($avancement['progression'] / $avancement['total']) * 100, 2);
 	}
+	
   function getByTheme($idTheme)
   {
   	$sql = 'CREATE TEMPORARY TABLE R1

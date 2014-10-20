@@ -1,6 +1,37 @@
 <?php
 class Outils
 {
+	public static function determineDate($date)
+	{
+		$current = strtotime(date("Y-m-d"));
+		$date    = strtotime($date);
+		
+		$datediff = $date - $current;
+		$differance = floor($datediff/(60*60*24));
+		if($differance==0)
+		{
+			return 'aujourd\'hui';
+		}
+		else if($differance > 1)
+		{
+			return 'dans ' . $differance . ' jours';
+		}
+		else if($differance > 0)
+		{
+			return 'demain';
+		}
+		else if($differance < -1)
+		{
+			return 'il y a ' . $differance * -1 . ' jours';
+		}
+		else
+		{
+			return 'hier';
+		}
+		
+	}
+	
+	
 	public static function dateToFr($date)
 	{
 		return strftime('%d/%m/%Y',strtotime($date));
