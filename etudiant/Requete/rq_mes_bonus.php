@@ -6,10 +6,15 @@ include_once('../../fonctions.php');
 
 $db = DBFactory::getMysqlConnexionWithMySQLi();
 $daoAvancement_bonus= new DAOAvancement_bonus($db);
+$daoBonus= new DAOBonus($db);
+
+$redirige = false;
 
 if (isset($_GET["addbonus"])) {
-	//ajout dans la table cle
-	$daoAvancement_bonus->updateRemarqueByEtuBonus($_SESSION['currentUser']->getId(), $_POST['id_bonus'], $_POST['remarque']);
+	$daoBonus->insertByTitreTypeTheme($_POST['titrebonus'], $_POST['typebonus'], $_POST['themebonus']);
+	$id_bonus = $daoBonus->getLastInsertBonus();
+	$daoAvancement_bonus->insertFaitByEtuBonus($_SESSION['currentUser']->getId(), $id_bonus);
+	$message = "Bonus ajouté avec succes";
 	$redirige = true;
 }
 
@@ -27,7 +32,7 @@ else
 session_start();
 
 if ($redirige)
-	$_SESSION["notif_msg"] = '<div class="ok">Requête éffectuée avec succès...</div>';
+	$_SESSION["notif_msg"] = '<div class="ok">'.$message.'</div>';
 else
 	$_SESSION["notif_msg"] = '<div class="erreur">Erreur dans l\' execution de la requête...</div>';
 

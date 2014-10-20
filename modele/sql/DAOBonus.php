@@ -14,6 +14,23 @@ class DAOBonus extends DAOStandard {
 	public function update(Bonus $bonus) {
 		$this->executeQuery ( 'UPDATE bonus SET id_bonus = "' . $bonus->getId () . '", titre_bonus = ' . $bonus->getTitre () . ', type_bonus =' . $bonus->getType () . ' id_theme = ' . $bonus->getTheme ()->getId () );
 	}
+	
+	public function insertByTitreTypeTheme($titre, $type, $theme) {
+	
+		$this->executeQuery ( 'INSERT INTO bonus
+								SET
+								titre_bonus = "' . $titre . '",
+								type_bonus = "' . $type . '",
+								id_theme = ' . $theme);
+		
+	}
+	
+	public function getLastInsertBonus() {
+		$result = $this->executeQuery("SELECT LAST_INSERT_ID() AS id_bonus_insere FROM bonus");
+		$id_bonus = $this->fetchArray ( $result );
+		return $id_bonus['id_bonus_insere'];
+	}
+	
 	public function getByID($id) {
 		$result = $this->executeQuery ( 'SELECT *
 										FROM bonus, theme, cours, etudiant, cle
