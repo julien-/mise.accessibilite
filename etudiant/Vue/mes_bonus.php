@@ -27,7 +27,7 @@ foreach($listeThemes as $theme)
 					<tr class="titre">
 						<th class="center-text">Titre</th>
 						<th class="center-text">Type</th>
-						<th class="center-text">Créateur(s)</th>
+						<th class="center-text">Auteurs(s)</th>
 						<th class="center-text">Moyenne</th>
 					</tr>
 				</thead>
@@ -101,14 +101,32 @@ foreach($listeThemes as $theme)
 		                </div>
 		                <div class="form-group">
 		                	<label for="typebonus">Type de bonus</label>
-		                	<select name="typebonus">
+		                	<select class="test" name="typebonus">
 		                		<option value="Expose">Exposé</option>
 		                		<option value="Exercice">Exercice</option>
 		                	</select>	                	
 		                </div>
+		                <div class="form-group">
+		                	<label for="collaborateursbonus">En collaboration avec</label>
+		                	<select class="collaborateurs" name="collaborateursbonus" id="collaborateurs<?php echo $theme->getId();?>" value="<?php echo $theme->getId();?>">
+		                			<option value=""></option>
+		                		<?php 
+		                			foreach ($listeInscrits as $inscrit)
+		                			{
+		                		?>
+		                				<option value="<?php echo $inscrit->getEtudiant()->getId();?>"><?php echo $inscrit->getEtudiant()->getPrenom()." ".$inscrit->getEtudiant()->getNom();?></option>
+                				<?php 
+		                			}
+	                			?>
+		                	</select>	                	
+		                </div>
+		                <div id="liste_collaborateurs<?php echo $theme->getId();?>"class="form-group">                	
+		                </div>
 		                <!--submit-->
 		                <div class="form-group center-content">
-		                	<input type="hidden" name="themebonus" value="<?php echo $theme->getId();?>"/>
+		                	<div id="donnees_cachees<?php echo $theme->getId();?>">
+		                		<input type="hidden" name="themebonus" value="<?php echo $theme->getId();?>"/>
+		                	</div>
 		                	<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_bonus" alt='Ajouter le bonus' title='Ajouter le bonus' value="Ajouter"/>
 		    			</div>
 		    			</div>

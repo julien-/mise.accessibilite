@@ -14,7 +14,15 @@ if (isset($_GET["addbonus"])) {
 	$daoBonus->insertByTitreTypeTheme($_POST['titrebonus'], $_POST['typebonus'], $_POST['themebonus']);
 	$id_bonus = $daoBonus->getLastInsertBonus();
 	$daoAvancement_bonus->insertFaitByEtuBonus($_SESSION['currentUser']->getId(), $id_bonus);
-	$message = "Bonus ajouté avec succes";
+	if(isset($_POST['Etudiant']))
+	{
+		foreach($_POST['Etudiant'] as $id_etu)
+		{
+			$daoAvancement_bonus->insertFaitByEtuBonus($id_etu, $id_bonus);
+		}
+	}
+	
+	$message = "Bonus crée avec succes";
 	$redirige = true;
 }
 
