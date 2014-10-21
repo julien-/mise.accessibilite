@@ -116,18 +116,26 @@
                                     <?php 
                                     if ($news->getActivite() == 'inscription')
                                     {
-                                    	?><i class="fa fa-plus"></i>  <?php 
+                                    	?><i class="glyphicon glyphicon-star blue"></i>  <?php 
                                     	echo $news->getEtudiant()->getPrenom() . ' ' . $news->getEtudiant()->getNom() . ' s\'est inscrit à ce cours ';
+                                                               				?>                                   
+                           				 <span class="pull-right text-muted small">
+                                    		<span class="badge badge-success pull-right blue-bg"><?php echo Outils::determineDate($news->getDate());?></span>
+                                   		 </span>
+                                   		 <?php                                     
                                     }
+                            		
                                     else if ($news->getActivite() == 'avancement')
                                     {
-                                    	?><i class="fa fa-level-up"></i>  <?php
+                                    	?><i class="glyphicon glyphicon-circle-arrow-up green"></i>  <?php
                                     	echo $news->getEtudiant()->getPrenom() . ' ' . $news->getEtudiant()->getNom() . ' a mis à jour son avancement ';
-                           			}
+                           				?>                                   
+                           				 <span class="pull-right text-muted small">
+                                    		<span class="badge badge-success pull-right green-bg"><?php echo Outils::determineDate($news->getDate());?></span>
+                                   		 </span>
+                                   		 <?php                                     
+                                    }
                             		?>
-                                    <span class="pull-right text-muted small">
-                                    	<span class="badge badge-success pull-right pokemon-red-bg"><?php echo Outils::determineDate($news->getDate());?></span>
-                                    </span>
                                 </a>
                          	<?php 
                             } 

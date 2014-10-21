@@ -16,7 +16,7 @@ class DAOFichier extends DAOStandard
 	
 	public function update(Fichier $fichier)
 	{
-		$this->executeQuery('UPDATE fichiers SET id_exo = "' . $fichier->getExercice()->getId() . '", chemin_fichier = "' . $fichier->getChemin() . '", nom = "' . $fichier->getNom() . '", commentaires = "' . $fichier->getCommentaire() . '", code_lien = "' . $fichier->getCodeLien() . '", enligne = "' . $fichier->getEnLigne() . '" WHERE id_fichier = ' . $fichier->getId());
+		$this->executeQuery('UPDATE fichiers SET telechargements = ' . $fichier->getTelechargements() . ', id_exo = "' . $fichier->getExercice()->getId() . '", chemin_fichier = "' . $fichier->getChemin() . '", nom = "' . $fichier->getNom() . '", commentaires = "' . $fichier->getCommentaire() . '", code_lien = "' . $fichier->getCodeLien() . '", enligne = "' . $fichier->getEnLigne() . '" WHERE id_fichier = ' . $fichier->getId());
 	}
 	
 	public function exists(Fichier $fichier)
@@ -42,15 +42,64 @@ class DAOFichier extends DAOStandard
 			$listResult[] = new Fichier (array(
 							'id' => $fichier['id_fichier'],
 							'exercice' => $daoExercice->getByID($fichier['id_exo']),
-							'cheminFichier' => $fichier['chemin_fichier'],
+							'chemin' => $fichier['chemin_fichier'],
 							'nom' => $fichier['nom'],
 							'commentaire' => $fichier['commentaires'],
 							'codeLien' => $fichier['code_lien'],
-							'enLigne' => $fichier['enligne']
+							'enLigne' => $fichier['enligne'],
+							'telechargements' => $fichier['telechargements']
 							));							
 		}
 	
 		return $listResult;
+	}
+	
+	public function getByCodeLien($code)
+	{
+		$daoExercice = new DAOExercice($db);
+		$result = $this->executeQuery('SELECT * FROM fichiers WHERE code_lien = "' . $code . '"');
+			
+		if ($result == null)
+			return false;
+
+			$fichier = $this->fetchArray($result);
+
+			$daoExercice->getByID($fichier['id_exo']);
+			return new Fichier (array(
+					'id' => $fichier['id_fichier'],
+					'exercice' => $daoExercice->getByID($fichier['id_exo']),
+					'chemin' => $fichier['chemin_fichier'],
+					'nom' => $fichier['nom'],
+					'commentaire' => $fichier['commentaires'],
+					'codeLien' => $fichier['code_lien'],
+					'enLigne' => $fichier['enligne'],
+					'telechargements' => $fichier['telechargements']
+			));
+	
+	}
+	
+	public function getByID($fichier)
+	{
+		$daoExercice = new DAOExercice($db);
+		$result = $this->executeQuery('SELECT * FROM fichiers WHERE id_fichier = ' . $fichier);
+			
+		if ($result == null)
+			return false;
+	
+		$fichier = $this->fetchArray($result);
+	
+		$daoExercice->getByID($fichier['id_exo']);
+		return new Fichier (array(
+				'id' => $fichier['id_fichier'],
+				'exercice' => $daoExercice->getByID($fichier['id_exo']),
+				'chemin' => $fichier['chemin_fichier'],
+				'nom' => $fichier['nom'],
+				'commentaire' => $fichier['commentaires'],
+				'codeLien' => $fichier['code_lien'],
+				'enLigne' => $fichier['enligne'],
+				'telechargements' => $fichier['telechargements']
+		));
+	
 	}
 	
 	public function count()

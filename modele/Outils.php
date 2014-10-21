@@ -1,6 +1,42 @@
 <?php
 class Outils
 {
+	public static $UPLOAD_FOLDER = '/upload/';
+
+	public static function upload($index, $chemin, $dossier, $maxsize = FALSE, $extensions = FALSE) {
+		
+		$cheminComplet = $chemin.$dossier;
+		//Test1: fichier correctement uploadé
+		if (!isset($_FILES[$index]) OR $_FILES[$index]['error'] > 0)
+			return FALSE;
+		//Test2: taille limite
+		if ($maxsize !== FALSE AND $_FILES[$index]['size'] > $maxsize)
+			return FALSE;
+		//Test3: extension
+		$ext = substr(strrchr($_FILES[$index]['name'], '.'), 1);
+		if ($extensions !== FALSE AND !in_array($ext, $extensions))
+			return FALSE;
+	
+		// verifie que le fichier existe pas deja sous ce nom
+		$name = pathinfo($_FILES[$index]['name'], PATHINFO_FILENAME);
+		$extension = pathinfo($_FILES[$index]['name'], PATHINFO_EXTENSION);
+	
+		$increment = ''; 
+	
+		while(file_exists($cheminComplet . $name . $increment . '.' . $extension)) {
+			$increment++;
+		}
+	
+		$basename = $name . $increment . '.' . $extension;
+	
+		//Déplacement
+		if (!move_uploaded_file($_FILES[$index]['tmp_name'], $cheminComplet . $basename))
+			return false;
+	
+		echo $cheminComplet . $basename;
+		return $basename;
+	}
+	
 	public static function determineDate($date)
 	{
 		$current = strtotime(date("Y-m-d"));

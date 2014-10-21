@@ -8,7 +8,8 @@ class Fichier {
 	$nom,
 	$commentaire,
 	$codeLien,
-	$enLigne
+	$enLigne,
+	$telechargements
 	;
 	
 	public function __construct($valeurs = array()) {
@@ -93,6 +94,18 @@ class Fichier {
 		return $this;
 	}
 	
+	public function getTelechargements() {
+		return $this->telechargements;
+	}
 	
+	public function setTelechargements($telechargements) {
+		$this->telechargements = $telechargements;
+		return $this;
+	}
+	
+	public function deleteFromServer($pathToUploadFile)
+	{
+		return unlink($pathToUploadFile.Outils::$UPLOAD_FOLDER.$this->getChemin());
+	}
 	
 }

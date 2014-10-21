@@ -23,16 +23,19 @@ function upload($index, $destination, $maxsize = FALSE, $extensions = FALSE) {
     if ($extensions !== FALSE AND !in_array($ext, $extensions))
         return FALSE;
 
-    // verifie que le fichier existe pas deja sous ce nom
-    $fileExt = pathinfo($_FILES[$index]['name'], PATHINFO_EXTENSION);
-    $fileName = substr(basename($_FILES[$index]['name'], $ext), 0, -1);
-    $count = 1;
-    $tmpDest = $destination;
-    while (file_exists($tmpDest)) {
-        $tmpDest = $destination . $fileName . ' (' . $count . ') .' . $fileExt;
-        $count++;
-    }
-    $destination = $tmpDest;
+	    // verifie que le fichier existe pas deja sous ce nom
+	$name = pathinfo($_FILES[$index]['name'], PATHINFO_FILENAME);
+	$extension = pathinfo($_FILES[$index]['name'], PATHINFO_EXTENSION);
+	
+	$increment = ''; //start with no suffix
+	
+	while(file_exists($name . $increment . '.' . $extension)) {
+	    $increment++;
+	}
+	
+	$basename = $name . $increment . '.' . $extension;
+	
+	echo $basename;
     //Déplacement
     if (!move_uploaded_file($_FILES[$index]['tmp_name'], $destination))
         return false;
@@ -101,5 +104,5 @@ else
     $_SESSION["notif_msg"] = '<div class="erreur">Erreur dans l\' execution de la requête.' . $msgperso . '</div>';
 
 // on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas
-header('Location: index.php?' . $retourPage);
+//header('Location: index.php?' . $retourPage);
 ?>

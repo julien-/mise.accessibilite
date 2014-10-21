@@ -48,12 +48,7 @@ if (sizeof($listeFichiers) != 0) {
                         </td>
                         <!--SUPPRESSION de fichier-->
                         <td class="vert-align">
-                            <form method="post" action="rq_fichiers_exo.php?supfichier=<?php echo ($fichier->getId()); ?>&section=mes_cours&<?php echo(isset($_GET["exo_sel"]) ? "&exo_sel=" . $_GET["exo_sel"] : ""); ?>">
-                                <!--Mémorise l'id du fichier concerné-->
-                                <input type="hidden"  id="id_fic" name="id_fic" value="<?php echo ($fichier->getId()); ?>" />
-                                <!--submit-->
-                                <input type="image" class="soumissupfic" src="../../<?php echo($dossierimg . $dossieradmin . "flat_supp.png"); ?>" alt="Supprimer <?php echo($fichier->getNom()); ?>" title="Supprimer <?php echo($fichier->getNom()); ?>"/>
-                            </form>
+							<a href="supprimer_fichier.php?f=<?php echo $fichier->getId();?>" title="Supprimer"><i class="glyphicon glyphicon-minus-sign" alt="Supprimer"></i></a>
                         </td>
                     </tr>
                 <?php } ?>

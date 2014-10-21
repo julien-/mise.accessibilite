@@ -36,4 +36,40 @@ body .modal-large {
 	font-size: 24px;
 }
 
+/* Colors */
+
+.green
+{
+	color: #A8CD1B;
+}
+
+.green-bg
+{
+	background-color: #A8CD1B;
+}
+
+.blue-bg
+{
+	background-color: #67BCDB;
+}
+
+.blue
+{
+	color: #67BCDB;
+}
+
+.pokemon-red
+{
+    color: #f54f4f;
+}
+
+.pokemon-red-bg
+{
+    background-color: #f54f4f;
+}
+
+.black
+{
+    color: #333;
+}
 
