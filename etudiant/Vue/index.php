@@ -147,7 +147,19 @@
 		                                </ul>
   									</li>
   									<li><a href="#">Ma Progression</a></li>
-  									<li><a href="index.php?section=bonus">Bonus</a></li>
+  									<li class="dropdown">
+  										<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+  											Bonus <b class="caret"></b>
+  										</a>
+  										<ul class="dropdown-menu" role="menu">
+		                                	<li>
+	                                        	<a href="index.php?section=mes_bonus" title="Mes bonus">Mes Bonus</a>
+                                        	</li>
+	                                       	<li>
+	                                        	<a href="index.php?section=autres_bonus" title="Autres bonus">Autres bonus</a>
+                                        	</li>
+		                                </ul>
+  									</li>
   									<li><a href="#">Forum</a></li>
                             <?php 
                         		}
@@ -182,7 +194,7 @@
 	                        </ul>
 
                     </div>
-                    <div class="col-sm-9">
+                    <div id="bloc_page" class="col-sm-9">
                         <?php include_once('../Controleur/' . $page . '.php'); ?>
                     </div>
                 </div><!--/row-->
@@ -200,18 +212,13 @@
             	</p>
             </div>
         </div>
-
-
-
-
+        
         <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-
-
-
-
-
+		<!--Integration des fichiers js de chaque page-->
+        <script type="text/javascript" src="../js/<?php echo ($page . ".js"); ?>"></script>
+        <script type="text/javascript" src="../js/commun.js"></script>
 
         <!-- JavaScript jQuery code from Bootply.com editor  -->
 

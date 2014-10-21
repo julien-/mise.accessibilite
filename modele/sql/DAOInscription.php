@@ -98,4 +98,38 @@ class DAOInscription extends DAOStandard
 	  	}
 	  	return $listeInscription;
 	  }
+	  
+	  public function getAllByCoursExceptEtu($id_cours, $id_etu)
+	  {
+	  	$daoEtudiant = new DAOEtudiant($this->_db);
+	  	$sql = 'SELECT * 
+	  			FROM inscription i, etudiant e, cours c, cle 
+	  			WHERE c.id_cle = cle.id_cle 
+	  			AND i.id_etu != ' . $id_etu . '
+	  			AND i.id_etu = e.id_etu 
+	  			AND i.id_cours = c.id_cours 
+	  			AND i.id_cours = ' . $id_cours . ' 
+	  			GROUP BY e.id_etu
+	  			ORDER BY date_inscription';
+	  
+	  	$result = $this->executeQuery($sql);
+	  	$listeInscription = null;
+	  	while ($inscription = $this->fetchArray($result)) {
+	  
+	  		$listeInscription[] = new Inscription(array( 'cours' => new Cours(array(	'id' => $inscription['id_cours'],
+	  				'libelle' => $inscription['libelle_cours'],
+	  				'couleurCalendar' => $inscription['couleur_calendar'],
+	  				'prof' => $daoEtudiant->getByID($inscription['id_prof']),
+	  				'cle' => new Cle(array('id' => $inscription['id_cle'],
+	  						'cle' => $inscription['valeur_cle'])))),
+	  				'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'],
+	  						'nom' => $inscription['nom_etu'],
+	  						'prenom' => $inscription['prenom_etu'],
+	  						'mail' => $inscription['mail_etu'],
+	  						'login' => $inscription['pseudo_etu'],
+	  						'pass' => $inscription['pass_etu'],
+	  						'admin' => $inscription['admin']))));
+	  	}
+	  	return $listeInscription;
+	  }
 }

@@ -1,5 +1,5 @@
 <?php
-class Avancement {
+class Avancement_bonus {
 	protected 
 	$etudiant,
 	$bonus,
@@ -8,31 +8,20 @@ class Avancement {
 	$note,
 	$remarque;
 	
-	public function __construct($theme, $avancement) {
-	
-		$this->setTheme($theme);
-		$this->setAvancement($avancement);
-	}
-	
-	public function __construct($exercice, $avancement) {
-		
-		$this->setExercice($exercice);
-		$this->setAvancement($avancement);
-	}
-	
 	public function __construct($valeurs = array()) {
 		if (! empty ( $valeurs )) // Si on a sp�cifi� des valeurs, alors on hydrate l'objet.
 		{
 			$this->hydrate ( $valeurs );
 		}
 	}
+		
 	public function hydrate($donnees) {
 		foreach ( $donnees as $attribut => $valeur ) {
 			$methode = 'set' . ucfirst ( $attribut );
-			
+				
 			if (is_callable ( array (
 					$this,
-					$methode 
+					$methode
 			) )) {
 				$this->$methode ( $valeur );
 			}

@@ -49,7 +49,7 @@ else
             <!--Avancement-->
             <td class="autre_colonne">
                  <?php
-                    $progression = $daoAvancement->getByCoursEtudiant($cours->getCours()->getId(), $_SESSION["currentUser"]->getId());
+                    $progression = $daoAvancement->getByCoursEtudiant($cours->getCours()->getId(), $_SESSION['currentUser']->getId());
                     if ($progression <= 25)
                         $color = '#FF6633';
                     else if ($progression > 25 && $progression <= 50)
