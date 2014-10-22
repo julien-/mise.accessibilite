@@ -22,6 +22,9 @@
         		chartArea: {left:0,top:50,height:"75%", width: "100%"},
         		backgroundColor: { fill:'transparent' },
         		vAxis: {minValue: 0},
+        		  viewWindow: {
+        		        min:0
+        		    },
         		legend: {position: 'none'},
         };
         setBarChartOptions('../../chart/get_json_visits.php?c=<?php echo $cours->getId();?>', optionsBarChart, 'lineChart');

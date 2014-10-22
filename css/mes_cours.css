@@ -1,4 +1,43 @@
-/*  Lien utile:  www.iconarchive.com     */
+/* 
+Couleur cours: #f36525
+Couleurs cours hover: #F2814D
+
+Couleurs theme: #FEA539
+Couleur theme hover: #FFAE49
+
+Couleur exo: #fea740
+Couleur exo hover: #FFBC69
+*/
+
+.color-cours-bg
+{
+	background-color: #f36525;
+}
+
+.color-theme-bg
+{
+	background-color: FEA539;
+}
+
+.color-exo-bg
+{
+	background-color: fea740;
+}
+
+.color-cours
+{
+	color: #f36525;
+}
+
+.color-theme
+{
+	color: FEA539;
+}
+
+.color-exo
+{
+	color: fea740;
+}
 
 .JPG ,.PNG ,.JPEG
 {
@@ -23,4 +62,199 @@
 .XLS, .XLSX
 {
     content:url("../images/extension/EXCEL.png");
+}
+
+/* Panel cours */
+.panel-cours {
+  border-color: #f36525    ;
+}
+.panel-cours > .panel-heading {
+  color: #fff;
+  background-color: #f36525  ;
+  border-color: #f36525;
+}
+.panel-cours > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #f36525;
+}
+.panel-cours > .panel-heading .badge {
+  color: #f36525;
+  background-color: #fff;
+}
+.panel-cours > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #f36525;
+}
+
+/* Panel exo */
+
+.panel-exo {
+  border-color: #fea740  ;
+}
+.panel-exo > .panel-heading {
+  color: #fff;
+  background-color: #fea740  ;
+  border-color: #fea740;
+}
+.panel-exo > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #fea740;
+}
+.panel-exo > .panel-heading .badge {
+  color: #fea740;
+  background-color: #fff;
+}
+.panel-exo > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #fea740;
+}
+
+/* Panel theme */
+
+.panel-theme {
+  border-color: #FEA539  ;
+}
+.panel-theme > .panel-heading {
+  color: #fff;
+  background-color: #FEA539  ;
+  border-color: #FEA539;
+}
+.panel-theme > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #FEA539;
+}
+.panel-theme > .panel-heading .badge {
+  color: #FEA539;
+  background-color: #fff;
+}
+.panel-theme > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #FEA539;
+}
+
+/* Boutons */
+
+/* Cours */
+.btn-cours {
+  color: #fff;
+  background-color: #f36525;
+  border-color: #f36525;
+}
+.btn-cours:hover,
+.btn-cours:focus,
+.btn-cours:active,
+.btn-cours.active,
+.open > .dropdown-toggle.btn-cours {
+  color: #fff;
+  background-color: #F2814D;
+  border-color: #F2814D;
+}
+.btn-cours:active,
+.btn-cours.active,
+.open > .dropdown-toggle.btn-cours {
+  background-image: none;
+}
+.btn-cours.disabled,
+.btn-cours[disabled],
+fieldset[disabled] .btn-cours,
+.btn-cours.disabled:hover,
+.btn-cours[disabled]:hover,
+fieldset[disabled] .btn-cours:hover,
+.btn-cours.disabled:focus,
+.btn-cours[disabled]:focus,
+fieldset[disabled] .btn-cours:focus,
+.btn-cours.disabled:active,
+.btn-cours[disabled]:active,
+fieldset[disabled] .btn-cours:active,
+.btn-cours.disabled.active,
+.btn-cours[disabled].active,
+fieldset[disabled] .btn-cours.active {
+  background-color: #F2814D;
+  border-color: #F2814D;
+}
+.btn-cours .badge {
+  color: #428bca;
+  background-color: #fff;
+}
+
+/* Theme */
+
+.btn-theme {
+  color: #fff;
+  background-color: #FEA539;
+  border-color: #FEA539;
+}
+.btn-theme:hover,
+.btn-theme:focus,
+.btn-theme:active,
+.btn-theme.active,
+.open > .dropdown-toggle.btn-cours {
+  color: #fff;
+  background-color: #FFAE49;
+  border-color: #FFAE49;
+}
+.btn-theme:active,
+.btn-theme.active,
+.open > .dropdown-toggle.btn-cours {
+  background-image: none;
+}
+.btn-theme.disabled,
+.btn-theme[disabled],
+fieldset[disabled] .btn-theme,
+.btn-theme.disabled:hover,
+.btn-theme[disabled]:hover,
+fieldset[disabled] .btn-theme:hover,
+.btn-theme.disabled:focus,
+.btn-theme[disabled]:focus,
+fieldset[disabled] .btn-theme:focus,
+.btn-theme.disabled:active,
+.btn-theme[disabled]:active,
+fieldset[disabled] .btn-theme:active,
+.btn-theme.disabled.active,
+.btn-theme[disabled].active,
+fieldset[disabled] .btn-theme.active {
+  background-color: #FFAE49;
+  border-color: #FFAE49;
+}
+.btn-theme .badge {
+  color: #428bca;
+  background-color: #fff;
+}
+
+/* Exo */
+
+.btn-exo {
+  color: #fff;
+  background-color: #fea740;
+  border-color: #fea740;
+}
+.btn-exo:hover,
+.btn-exo:focus,
+.btn-exo:active,
+.btn-exo.active,
+.open > .dropdown-toggle.btn-cours {
+  color: #fff;
+  background-color: #FFBC69;
+  border-color: #FFBC69;
+}
+.btn-exo:active,
+.btn-exo.active,
+.open > .dropdown-toggle.btn-cours {
+  background-image: none;
+}
+.btn-exo.disabled,
+.btn-exo[disabled],
+fieldset[disabled] .btn-exo,
+.btn-exo.disabled:hover,
+.btn-exo[disabled]:hover,
+fieldset[disabled] .btn-exo:hover,
+.btn-exo.disabled:focus,
+.btn-exo[disabled]:focus,
+fieldset[disabled] .btn-exo:focus,
+.btn-exo.disabled:active,
+.btn-exo[disabled]:active,
+fieldset[disabled] .btn-exo:active,
+.btn-exo.disabled.active,
+.btn-exo[disabled].active,
+fieldset[disabled] .btn-exo.active {
+  background-color: #FFBC69;
+  border-color: #FFBC69;
+}
+.btn-exo .badge {
+  color: #428bca;
+  background-color: #fff;
 }

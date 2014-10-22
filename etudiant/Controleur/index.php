@@ -15,9 +15,10 @@ $daoTheme = new DAOTheme($db);
 $daoBonus= new DAOBonus($db);
 $daoEtudiant= new DAOEtudiant($db);
 $daoAvancement_bonus= new DAOAvancement_bonus($db);
-
+$daoHistorique = new DAOHistorique($db);
 
 $listeCours = $daoInscription->getAllByEtudiant($_SESSION["currentUser"]->getId());
+
 
 if (isset($_GET['section']) && !empty($_GET["section"])) 
 {
@@ -32,13 +33,28 @@ if (isset($_GET['section']) && !empty($_GET["section"]))
 			$listeSeances = $daoSeance->getAllByCours($_GET["id_cours"]); 
 		elseif(isset($_SESSION["cours"]) && !empty($_SESSION["cours"]))
 			$listeSeances = $daoSeance->getAllByCours($_SESSION["cours"]->getId());
-		
 	}		
 } 
 else {
 	$page = 'cours';
 }
 
+if (isset($_SESSION['cours']))
+{
+	$cours = $_SESSION['cours']->getId();
+}
+else
+{
+	$cours = 0;
+}
+$historique = new Historique(array(
+		'page' => $page,
+		'dateVisite' => date("Y-m-d"),
+		'heureVisite' => date("H:i:s"),
+		'etudiant' => $_SESSION['currentUser'],
+		'cours' => $cours
+));
+$daoHistorique->save($historique);
 include_once('../Vue/index.php');
 
 ?>

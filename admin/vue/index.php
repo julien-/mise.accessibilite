@@ -126,13 +126,25 @@
                     <div class="col-sm-10">
                           <div>
         <ul class="breadcrumb">
-          <li>
-            <a href="#">Home</a> <span class="divider">/</span>
-          </li>
-          <li>
-            <a href="#">Library</a> <span class="divider">/</span>
-          </li>
-          <li class="active">Data</li>
+        <?php 
+        foreach($filArianne as $titre => $lien)
+        {
+        	if ($lien != 'final')
+        	{
+        	?>
+        	 <li>
+            	<a href="<?php echo $lien; ?>"><?php echo $titre ?></a> <span class="divider"></span>
+          	</li>
+        	<?php 
+        	}
+        	else 
+        	{
+        		?>
+        		<li class="active"><?php echo $titre ?></li>
+        		<?php
+        	}
+        }
+        ?>
         </ul>
       </div>
                         <?php include_once($page . '.php'); ?>

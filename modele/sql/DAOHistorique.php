@@ -2,6 +2,11 @@
 
 class DAOHistorique extends DAOStandard
 {
+	public function save(Historique $historique)
+	{
+		$this->executeQuery("INSERT INTO historique SET page='" . $historique->getPage() . "', date_visite='" . $historique->getDateVisite() . "', heure_visite='".$historique->getHeureVisite()."', id_etu=".$historique->getEtudiant()->getId().", id_cours=".$historique->getCours());
+	}
+	
 	public function getLastVisits($idCours)
 	{
 		$ressource = $this->executeQuery("SELECT distinct(count(id_etu)) as nb_visites, date_visite

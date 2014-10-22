@@ -50,4 +50,10 @@ else
 	</script>
 	<?php 
 }
+switch($page)
+{
+	case 'mes_cours': $filArianne = array('My Study Companion' => 'index.php', 'Mes cours' => 'final'); break;
+	case 'seance': $filArianne = array('My Study Companion' => 'index.php', 'Mes s&eacute;ances' => 'final'); break;
+	case 'accueil': $filArianne = array('My Study Companion' => 'index.php', 'Mes cours' => 'index.php?section=mes_cours', $daoCours->getByID($_GET['c'])->getLibelle() => 'final'); break;
+}
 include_once ('../vue/index.php');
