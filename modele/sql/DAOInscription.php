@@ -21,6 +21,13 @@ class DAOInscription extends DAOStandard
 		$this->executeQuery('DELETE FROM inscription WHERE id_etu = ' . $idEtu . ' AND id_cours = ' . $idCours);
 	}
 	
+	public function countByEtudiantProf($idEtu, $idProf)
+	{
+		$result = $this->executeQuery('SELECT * FROM inscription i, cours c WHERE i.id_cours = c.id_cours AND id_etu = ' . $idEtu . ' AND id_prof = ' . $idProf);
+		
+		return $this->countRows($result);
+	}
+	
 	  public function getAllByEtudiant($id)
 	  {
 	  	$daoEtudiant = new DAOEtudiant($this->_db);
@@ -43,6 +50,33 @@ class DAOInscription extends DAOStandard
 																			  								'pass' => $inscription['pass_etu'],
 																			  								'admin' => $inscription['admin'])),
 	  												'date' => $inscription['date_inscription']
+	  		));
+	  	}
+	  	return $listeInscription;
+	  }
+	  
+	  public function getAllByEtudiantProf($idEtudiant, $idProf)
+	  {
+	  	$daoEtudiant = new DAOEtudiant($this->_db);
+	  	$sql = 'SELECT * FROM inscription i, etudiant e, cours c, cle WHERE c.id_cle = cle.id_cle AND i.id_etu = e.id_etu AND i.id_cours = c.id_cours AND i.id_etu = ' . $idEtudiant . ' AND c.id_prof = ' . $idProf . ' GROUP BY c.id_cours';
+	  	$result = $this->executeQuery($sql);
+	  
+	  	$listeInscription = null;
+	  	while ($inscription = $this->fetchArray($result)) {
+	  		$listeInscription[] = new Inscription(array( 'cours' => new Cours(array(	'id' => $inscription['id_cours'],
+	  				'libelle' => $inscription['libelle_cours'],
+	  				'couleurCalendar' => $inscription['couleur_calendar'],
+	  				'prof' => $daoEtudiant->getByID($inscription['id_prof']),
+	  				'cle' => new Cle(array('id' => $inscription['id_cle'],
+	  						'cle' => $inscription['valeur_cle'])))),
+	  				'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'],
+	  						'nom' => $inscription['nom_etu'],
+	  						'prenom' => $inscription['prenom_etu'],
+	  						'mail' => $inscription['mail_etu'],
+	  						'login' => $inscription['pseudo_etu'],
+	  						'pass' => $inscription['pass_etu'],
+	  						'admin' => $inscription['admin'])),
+	  				'date' => $inscription['date_inscription']
 	  		));
 	  	}
 	  	return $listeInscription;
