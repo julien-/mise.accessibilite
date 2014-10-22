@@ -19,7 +19,6 @@ $daoHistorique = new DAOHistorique($db);
 
 $listeCours = $daoInscription->getAllByEtudiant($_SESSION["currentUser"]->getId());
 
-
 if (isset($_GET['section']) && !empty($_GET["section"])) 
 {
 	$page = $_GET['section'];
@@ -30,31 +29,38 @@ if (isset($_GET['section']) && !empty($_GET["section"]))
 		$now = date("Y-m-d");   //recupère la date d'aujourd'hui
 		
 		if(isset($_GET["id_cours"]) && !empty($_GET["id_cours"]))
+		{
 			$listeSeances = $daoSeance->getAllByCours($_GET["id_cours"]); 
-		elseif(isset($_SESSION["cours"]) && !empty($_SESSION["cours"]))
+			//historique
+			$historique = new Historique(array(
+					'page' => $page,
+					'dateVisite' => date("Y-m-d"),
+					'heureVisite' => date("H:i:s"),
+					'etudiant' => $_SESSION['currentUser'],
+					'cours' => $_GET["id_cours"]
+			));
+			$daoHistorique->save($historique);
+		}
+		elseif(isset($_SESSION['cours']) && !empty($_SESSION['cours']))
+		{
 			$listeSeances = $daoSeance->getAllByCours($_SESSION["cours"]->getId());
+			
+			//historique
+			$historique = new Historique(array(
+					'page' => $page,
+					'dateVisite' => date("Y-m-d"),
+					'heureVisite' => date("H:i:s"),
+					'etudiant' => $_SESSION['currentUser'],
+					'cours' => $_SESSION['cours']->getId()
+			));
+			$daoHistorique->save($historique);
+		}
 	}		
 } 
 else {
-	$page = 'cours';
+	$page = "cours";
 }
 
-if (isset($_SESSION['cours']) && !empty($_SESSION["cours"]))
-{
-	$cours = $_SESSION['cours']->getId();
-}
-else
-{
-	$cours = 0;
-}
-$historique = new Historique(array(
-		'page' => $page,
-		'dateVisite' => date("Y-m-d"),
-		'heureVisite' => date("H:i:s"),
-		'etudiant' => $_SESSION['currentUser'],
-		'cours' => $cours
-));
-$daoHistorique->save($historique);
 include_once('../Vue/index.php');
 
 ?>

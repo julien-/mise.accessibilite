@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -181,15 +180,19 @@
 	                        <hr>
 	                        <ul class="list-unstyled">
 	                            <li class="nav-header"> 
-	                                <a href="index.php?section=cours" data-toggle="collapse" data-target="#userMenu">
-	                                    <h3 class="pokemon-red"><i class="glyphicon glyphicon-pencil pokemon-red"></i> Mes cours</h3>
-	                                </a>
+                            		<h3 style="text-align: center;">
+		                            	<i class="glyphicon glyphicon-th-list pokemon-red"></i>
+		                                <a class="pokemon-red" href="index.php?section=cours">Mes cours</a>
+		                                <font>&nbsp;&nbsp;|&nbsp;&nbsp;</font>
+		                                <i class="glyphicon glyphicon-pencil pokemon-red"></i>
+		                                <a class="pokemon-red" href="index.php?section=liste_cours">Autres cours</a>
+                                	</h3>
 	                                <hr>
 	                                <ul class="nav nav-stacked">
 	                                    <?php
 	                                    foreach ($listeCours as $cours) {
 	                                        ?>
-	                                        <li><a class="black" href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo $cours->getCours()->getLibelle(); ?>"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo $cours->getCours()->getLibelle(); ?></a></li>
+	                                        <li><a class="<?php if((isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) || (isset($_GET["id_cours"]) && $_GET["id_cours"] ==  $cours->getCours()->getId())) echo "active"; else echo "black";?>" href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo $cours->getCours()->getLibelle(); ?>"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo $cours->getCours()->getLibelle(); ?></a></li>
 	                                        <?php
 	                                    }
 	                                    ?>

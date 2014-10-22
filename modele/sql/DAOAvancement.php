@@ -146,21 +146,6 @@ class DAOAvancement extends DAOStandard
 	  	return number_format(($avancement['progression'] / $total) * 100, 2);
   	}
   
-  	function getByCoursEtudiant($idCours, $idEtudiant)
-  	{
-	  	$sql = 'SELECT (SUM(fait+compris+assimile) / (count(e.id_exo) * 100)) * 100 as progression
-				FROM theme t, exercice e
-				LEFT JOIN avancement a ON e.id_exo = a.id_exo
-				AND id_etu = ' . $idEtudiant.'
-				WHERE t.id_cours = ' . $idCours.'
-				AND e.id_theme = t.id_theme
-				GROUP BY t.id_cours';
-	  	
-	  	$req_progression = $this->executeQuery($sql);
-	  	$avancement = $this->fetchArray($req_progression);
-	  	
-	  	return number_format($avancement['progression'], 2);
-  	}
   
   function getByCoursEtudiant($idCours, $idEtudiant)
   {

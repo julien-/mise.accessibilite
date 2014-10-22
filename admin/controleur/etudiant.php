@@ -39,13 +39,16 @@ if ($idEtudiant != false)
             ?>
                 <tr>
                     <td class='autre_colonne vert-align'>
-                        <a href='index.php?section=progression_globale&c=<?php echo $inscription->getCours()->getId(); ?>'><?php echo $inscription->getCours()->getId() ?></a>
+                        <a href='index.php?section=progression_globale&c=<?php echo $inscription->getCours()->getId(); ?>'><?php echo $inscription->getCours()->getLibelle() ?></a>
                     </td>
                     <td class="autre_colonne vert-align">
-                        <span style="color: #339; font-size: 18px; font-weight: bold; font-family: 'please_write_me_a_songmedium';"><?php echo (int) number_format($progression, 2); ?>%</span>
+                        <span style="color: #339; font-size: 18px; font-weight: bold;"><?php echo (int) number_format($progression, 2); ?>%</span>
                         <div style="margin: auto; border: 1px solid black; width: 300px; height: 25px;">
                             <div style="height: 100%; background-color: <?php echo Outils::colorChart($progression); ?>; width: <?php echo $progression; ?>%;">&nbsp;</div>
                         </div>
+                                        <div style="float: left; width: 20%;">
+                	<?php echo $progression; ?> %
+                </div>
                     </td>
                     <td class="autre_colonne vert-align">
                         <a href='index.php?section=progression_etudiant&e=<?php echo $inscription->getEtudiant()->getId(); ?>&c=<?php echo $inscription->getCours()->getId(); ?>'><img title="D&eacute;tails" alt="D&eacute;tails" src="../images/loupe.png" /></a>
