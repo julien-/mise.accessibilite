@@ -87,6 +87,11 @@ if ($rq_exos === FALSE) {
                 #############-->
             <h2 class="titre_scolaire">Gestion de mes cours</h2>
 
+				<div class="panel ">
+                        <div class="panel-heading blue-bg" >
+                            Primary Panel
+                        </div>
+                        <div class="panel-body " style="border:1px solid;border-color: blue;">
             <table class="table table-striped table-bordered" name ="tab_cours" id="tab_cours">
                 <thead>
                     <tr class="titre">
@@ -147,6 +152,8 @@ if ($rq_exos === FALSE) {
                     <?php } ?>
                 </tbody>
             </table>
+                                    </div>
+                    </div>
             <!--#########################   NOUVEAU COURS   #########################-->
             <div id="msg_cours"></div>
             

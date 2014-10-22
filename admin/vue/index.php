@@ -116,6 +116,7 @@
             </div>
             <!-- /Header -->
 
+            
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
@@ -123,6 +124,17 @@
 
                     </div>
                     <div class="col-sm-10">
+                          <div>
+        <ul class="breadcrumb">
+          <li>
+            <a href="#">Home</a> <span class="divider">/</span>
+          </li>
+          <li>
+            <a href="#">Library</a> <span class="divider">/</span>
+          </li>
+          <li class="active">Data</li>
+        </ul>
+      </div>
                         <?php include_once($page . '.php'); ?>
                     </div>
                     <div class="col-sm-1">
