@@ -58,7 +58,7 @@ if (isset($_GET['section']) && !empty($_GET["section"]))
 	}		
 } 
 else {
-	$page = 'cours';
+	$page = "cours";
 }
 
 include_once('../Vue/index.php');
