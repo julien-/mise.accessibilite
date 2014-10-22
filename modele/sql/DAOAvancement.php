@@ -149,28 +149,18 @@ class DAOAvancement extends DAOStandard
   
   function getByCoursEtudiant($idCours, $idEtudiant)
   {
-  	$sqlEtudiant = ' AND id_etu = ' . $idEtudiant . ' ';
-  	
-  	$sql = '    SELECT e.id_exo '
-  			. ' FROM exercice e, theme t '
-  			. ' WHERE t.id_theme = e.id_theme '
-  					. ' AND id_cours = ' . $idCours;
-
-  	$req_total = $this->executeQuery($sql) or die (mysql_error());
-  	$total = $this->countRows($req_total);
-  	
-  	$total = $total * 100;
-  	
-  	$sql = 'SELECT SUM( assimile + compris + fait ) AS progression
-            FROM avancement a, theme t, exercice e
-            WHERE a.id_exo = e.id_exo
-            AND t.id_theme = e.id_theme
-            AND id_cours = ' . $idCours . $sqlEtudiant;
+  	$sql = 'SELECT (SUM(fait+compris+assimile) / (count(e.id_exo) * 100)) * 100 as progression
+			FROM theme t, exercice e
+			LEFT JOIN avancement a ON e.id_exo = a.id_exo
+			AND id_etu = ' . $idEtudiant.'
+			WHERE t.id_cours = ' . $idCours.'
+			AND e.id_theme = t.id_theme
+			GROUP BY t.id_cours';
   	
   	$req_progression = $this->executeQuery($sql);
   	$avancement = $this->fetchArray($req_progression);
   	
-  	return number_format(($avancement['progression'] / $total) * 100, 2);
+  	return number_format($avancement['progression'], 2);
   }
   
   function getBySeanceEtudiant($idSeance, $idEtudiant)
@@ -225,7 +215,7 @@ class DAOAvancement extends DAOStandard
 			AND avancement.id_exo = exercice.id_exo
   			AND exercice.id_theme = '. $idTheme);*/
   	
-  	$result = $this->executeQuery('SELECT e.id_exo, titre_exo, num_exo, e.id_theme, titre_theme, COALESCE(SUM(fait), 0) AS fait, COALESCE(SUM(compris), 0) AS compris, COALESCE(SUM(assimile), 0) AS assimile
+  	$result = $this->executeQuery('SELECT e.id_exo, titre_exo, num_exo, e.id_theme, titre_theme, COALESCE(fait, 0) AS fait, COALESCE(compris, 0) AS compris, COALESCE(assimile, 0) AS assimile
   	FROM theme t, exercice e
   	LEFT JOIN avancement a ON e.id_exo = a.id_exo
   	AND id_etu = '.$idEtudiant.'

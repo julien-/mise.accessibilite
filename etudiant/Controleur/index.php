@@ -39,7 +39,7 @@ else {
 	$page = 'cours';
 }
 
-if (isset($_SESSION['cours']))
+if (isset($_SESSION['cours']) && !empty($_SESSION["cours"]))
 {
 	$cours = $_SESSION['cours']->getId();
 }

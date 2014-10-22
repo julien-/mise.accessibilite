@@ -29,6 +29,7 @@ foreach($listeThemes as $theme)
 		legend: { position: 'top', maxLines: 3 },
 	    bar: { groupWidth: '75%' },
 	    isStacked: true,
+	    backgroundColor: { fill:'transparent' },
 	    colors : ['#FF6633','#FFCC33','#99FF33'],
 	};
 	
@@ -69,7 +70,7 @@ foreach($listeThemes as $theme)
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-stats"></i> Mon Evolution par Thème
+			<i class="glyphicon glyphicon-stats"></i> Mon Evolution par Thême
 		</h3>
 	</div>
 	<div class="panel-body">

@@ -8,10 +8,14 @@
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/bootstrap/bootstrapValidator.min.css" rel="stylesheet">
+        <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
+        <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
         <link href="../../css/style.css" rel="stylesheet">
         <link href="../../css/<?php echo $page; ?>.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -201,7 +205,12 @@
             </div><!--/container-->
         </div><!-- /wrap -->
 
-
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
          <div id="footer">
             <div class="container">
                 <p style="text-align: center;">    
