@@ -103,7 +103,7 @@
                     <div class="collapse navbar-collapse" id="example-navbar-collapse">
                         <ul class="nav navbar-nav">
                         	<?php 
-                        		if(isset($_SESSION["cours"]) || isset($_GET["id_cours"]))
+                        		if(isset($_SESSION['cours']))
                         		{
                         	?>
   									<li><a href="index.php?section=evolution">Mon Evolution</a></li>
@@ -193,7 +193,7 @@
 	                                    <?php
 	                                    foreach ($listeCours as $cours) {
 	                                        ?>
-	                                        <li><a class="<?php if((isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) || (isset($_GET["id_cours"]) && $_GET["id_cours"] ==  $cours->getCours()->getId())) echo "active"; else echo "black";?>" href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo $cours->getCours()->getLibelle(); ?>"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo $cours->getCours()->getLibelle(); ?></a></li>
+	                                        <li><a class="<?php if(isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo "active"; else echo "black";?>" href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo $cours->getCours()->getLibelle(); ?>"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo $cours->getCours()->getLibelle(); ?></a></li>
 	                                        <?php
 	                                    }
 	                                    ?>

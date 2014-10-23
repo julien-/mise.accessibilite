@@ -70,6 +70,7 @@ class DAOBonus extends DAOStandard {
 				) )
 		) );
 	}
+	
 	public function getAllByTheme($id_theme) {
 		$result = $this->executeQuery ( 'SELECT *
 										FROM bonus, theme, cours, etudiant, cle

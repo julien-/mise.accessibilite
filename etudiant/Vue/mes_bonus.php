@@ -111,7 +111,7 @@ foreach($listeThemes as $theme)
 		                	<select class="collaborateurs" name="collaborateursbonus" id="collaborateurs<?php echo $theme->getId();?>" value="<?php echo $theme->getId();?>">
 		                			<option value=""></option>
 		                		<?php 
-		                			foreach ($listeInscrits as $inscrit)
+		                			foreach ($listeInscritsExeptCurrentUser as $inscrit)
 		                			{
 		                		?>
 		                				<option value="<?php echo $inscrit->getEtudiant()->getId();?>"><?php echo $inscrit->getEtudiant()->getPrenom()." ".$inscrit->getEtudiant()->getNom();?></option>
