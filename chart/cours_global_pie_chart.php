@@ -5,18 +5,18 @@ include_once('../modele/sql/DAOAvancement.php');
 include_once('../modele/sql/DAOMysqli.php');
 include_once('../modele/sql/DBFactory.php');
 
-if (isset($_GET['e']))
-    $etudiant = $_GET['e'];
-else
-    $etudiant = -1;
-
-if (isset($_GET['ex']))
-    $exercice = $_GET['ex'];
-else
-    $exercice = -1;
-
 $daoAvancement = new DAOAvancement($db);
-$progression = $daoAvancement->getByCours($_GET['c']);
+
+if (isset($_GET['e']))
+{
+	$progression = $daoAvancement->getByCoursEtudiant($_GET['c'], $_GET['e']);
+}
+    
+else
+{
+	$progression = $daoAvancement->getByCours($_GET['c']);
+}
+
 $table = array();
 $table['cols'] = array(
 

@@ -44,8 +44,6 @@ if ($rq_themes === FALSE) {
 	die ( mysql_error () );
 }
 
-echo "SELECT e.id_exo, e.num_exo, e.titre_exo, e.id_theme,  t.id_cours, count(f.id_fichier) AS nb_fichiers " . 
-"FROM " . $tb_exercice . " e " . "LEFT JOIN " . $tb_fichiers . " f ON e.id_exo = f.id_exo " . "JOIN " . $tb_cours . " c " . "LEFT JOIN " . $tb_theme . " t ON t.id_cours = c.id_cours " . "WHERE e.id_theme = t.id_theme " . "AND id_prof = " . $_SESSION ["currentUser"]->getId () . " " . "GROUP BY e.id_exo " . "ORDER BY t.id_theme, num_exo";
 // EXERCICES
 $rq_exos = mysql_query ( "SELECT e.id_exo, e.num_exo, e.titre_exo, e.id_theme,  t.id_cours, count(f.id_fichier) AS nb_fichiers " . 
 // SELECT *, count(f.id_fichier) AS nb_fichiers " .
@@ -56,23 +54,11 @@ if ($rq_exos === FALSE) {
 // mysql_close($db);
 ?>
 
-<div class="tabbable">
-	<ul class="nav nav-tabs">
-		<li class="<?php if (!isset($_GET['r'])) echo "active";?>"><a
-			href="#gestion" data-toggle="tab">Gestion de mes cours</a></li>
-		<li class="<?php if (isset($_GET['r'])) echo "active";?>"><a
-			href="#recherche" data-toggle="tab">Recherche d'étudiant</a></li>
-	</ul>
-
-	<div class="tab-content">
-		<div class="tab-pane <?php if (!isset($_GET['r'])) echo "active";?>"
-			id="gestion">
 			<!--DIV Sous onglet 1-->
 
 			<!--#############
                     COURS
                 #############-->
-                </br>
                       <button type="button" id="demo" class="btn btn-default btn-lg" data-demo>
         <span class="glyphicon glyphicon-play"></span>
         Start the demo
@@ -193,14 +179,12 @@ if ($rq_exos === FALSE) {
 												type="text" name="titrecours" id="titrecours" size="26"
 												value="" title="Taper un titre de cours"
 												class="inputValDefaut">
-											</td>
 										</div>
 										<div class="form-group">
 											<label for="clecours">Clé du cours</label> <input type="text"
 												name="clecours" id="clecours" size="26" value=""
 												title="Taper une clé unique pour ce cours"
 												class="inputValDefaut">
-											</td>
 										</div>
 										<!--submit-->
 										<div class="form-group center-content">
@@ -561,12 +545,4 @@ if ($rq_exos === FALSE) {
 						</form>
 					</div>
 				</div>
-			</div>
-		</div>
-		<!--DIV Sous onglet 2-->
-		<div class="tab-pane <?php if (isset($_GET['r'])) echo "active";?>"
-			id="recherche">
-            <?php include('recherche.php'); ?>
-        </div>
 	</div>
-</div>

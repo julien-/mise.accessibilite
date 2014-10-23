@@ -18,7 +18,11 @@
 	$rows = array();
 	
 	$daoHistorique = new DAOHistorique();
-	$listeHistorique = $daoHistorique->getLastVisits($_GET['c']);
+	
+	if (isset($_GET['etudiant']))
+		$listeHistorique = $daoHistorique->getLastVisitsByEtudiant($_GET['etudiant']);
+	else
+		$listeHistorique = $daoHistorique->getLastVisitsByCours($_GET['c']);
 
 	for($i = 6; $i >= 0; $i--)
 	{

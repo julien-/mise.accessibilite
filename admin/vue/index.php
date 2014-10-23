@@ -7,7 +7,6 @@
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="../../css/bootstrap/bootstrap.min.css" rel="stylesheet">
-        <link href="../../css/bootstrap/bootstrapValidator.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="../../css/bootstrap/bootstrap-tour.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/dataTables.bootstrap.css" rel="stylesheet">
@@ -15,8 +14,11 @@
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
         <link href="../../css/style.css" rel="stylesheet">
-        <link href="../../css/<?php echo $page; ?>.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         
+        <?php if (file_exists("../../css/" . $page . ".css")){?>
+        <link href="../../css/<?php echo $page; ?>.css" rel="stylesheet">
+        <?php }?>
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -109,6 +111,8 @@
                         <ul class="nav navbar-nav">
                             <li class="<?php if (!isset($_GET['section'])) echo "active";?>"><a href="index.php">Mes cours</a></li>
                             <li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'seance') echo "active";?>"><a href="index.php?section=seance">Mes séances</a></li>
+                        	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'mes_etudiants') echo "active";?>"><a href="index.php?section=mes_etudiants">Mes étudiants</a></li>
+                        	
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -177,14 +181,14 @@
         <script type="text/javascript" src="../../js/bootstrap/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/dataTables.bootstrap.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/dataTablePerso.js"></script>
-		<script type="text/javascript" src="../../js/bootstrap/bootstrapValidator.min.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/bootstrap-alert.js"></script>
-		<script type="text/javascript" src="../../js/dataValidatorPerso.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/bootstrap-tour.min.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/jquery.validate.min.js"></script>
-		<script type="text/javascript" src='../../googleChartAPI.js'></script>
+		<script type="text/javascript" src='../../js/googleChartAPI.js'></script>
         <!--Integration des fichiers js de chaque page-->
+        <?php if (file_exists("../../js/" . $page . ".js")){?>
         <script type="text/javascript" src="../../js/<?php echo ($page . ".js"); ?>"></script>
+        <?php }?>
         <script type="text/javascript" src="../../js/commun.js"></script>
 
         <script type="text/javascript">

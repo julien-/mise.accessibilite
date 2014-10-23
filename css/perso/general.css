@@ -1,4 +1,11 @@
-@import url("../font/font.css");
+@import url("../fonts/font.css");
+
+.progress-borders
+{
+	border: 1px solid rgba(111, 110, 117, 1); 
+	border-radius: 4px; 
+	height: 20px;
+}
 
 .center-content
 {

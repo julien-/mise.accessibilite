@@ -48,28 +48,34 @@ class DAOAvancement extends DAOStandard
 	
 	function getByThemeEtudiant($idTheme, $idEtudiant)
 	{
-		$sql = 'CREATE TEMPORARY TABLE R1
+		$sql = 'CREATE TEMPORARY TABLE TThemes
             SELECT COUNT(*) * 100 as total
             FROM exercice
-            WHERE id_theme = ' . $_GET['theme'];
+            WHERE id_theme = ' . $idTheme;
 		
 		$this->executeQuery($sql);
 		
-		$sql = 'CREATE TEMPORARY TABLE R2
+		$sql = 'CREATE TEMPORARY TABLE TCalcultheme
             SELECT SUM(fait+compris+assimile) as progression FROM theme t, avancement a, exercice e
             WHERE t.id_theme = e.id_theme
             AND e.id_exo = a.id_exo
-            AND id_etu = ' . $_GET['user'] . '
-            AND t.id_theme = ' . $_GET['theme'];
+            AND id_etu = ' . $idEtudiant . '
+            AND t.id_theme = ' . $idTheme;
 		
 		$this->executeQuery($sql);
 		
 		$sql = 'SELECT progression, total
-            FROM R1, R2';
+            FROM TThemes, TCalcultheme';
 		
 		$result = $this->executeQuery($sql);
-		 
+		
 		$avancement = $this->fetchArray($result);
+		
+		$sql = 'DROP TEMPORARY TABLE TThemes;';
+		$result = $this->executeQuery($sql);
+		
+		$sql = 'DROP TEMPORARY TABLE TCalcultheme;';
+		$result = $this->executeQuery($sql);
 		
 		if ($avancement['total'] == 0)
 			return 0;
@@ -104,12 +110,21 @@ class DAOAvancement extends DAOStandard
 	  	$sql = 'SELECT progression, total * nbEtudiants as total
 	        FROM R3, R2, R1';
 	  	
-	  	$result = $this->_db->query($sql) or die (mysql_error());
+	  	$result = $this->executeQuery($sql);
 	  	
 	  	$avancement = $this->fetchArray($result);
 		
 	  	if ($avancement['total'] == 0)
 	  		return 0;
+	  	
+	  	$sql = 'DROP TEMPORARY TABLE R1;';
+	  	$result = $this->executeQuery($sql);
+	  	
+	  	$sql = 'DROP TEMPORARY TABLE R2;';
+	  	$result = $this->executeQuery($sql);
+	  	
+	  	$sql = 'DROP TEMPORARY TABLE R3;';
+	  	$result = $this->executeQuery($sql);
 	  	
 	  	return number_format(($avancement['progression'] / $avancement['total']) * 100, 2);
    	}
