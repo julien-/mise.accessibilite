@@ -1,4 +1,5 @@
 
+
     <table class="interactive-table table table-striped table-bordered" id="tab_seance">
         <thead>
             <tr class="titre">  <!--class pour rester toujours visible-->

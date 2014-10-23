@@ -5,10 +5,10 @@ $daoNews = new DAONews($db);
 
 if (isset($_GET['c']))
 {
-	$liste5DerniersSujets = $daoSujet->getLastFiveByCours($_GET['c']);
+	$liste5DerniersSujets = array();
 	$cours = $daoCours->getByID($_GET['c']);
 	
-	$listeNews = $daoNews->getLastNews(10, $_GET['c']);
+	$listeNews = array();
 	
 
 	include_once('../vue/accueil.php');

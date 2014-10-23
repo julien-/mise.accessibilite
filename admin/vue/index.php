@@ -1,6 +1,3 @@
-<script type="text/javascript"
-  src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","table"]}]}'>
-</script>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,16 +6,17 @@
         <title>My Study Companion</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/bootstrap/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/bootstrapValidator.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="../../css/bootstrap/bootstrap-tour.min.css" rel="stylesheet">
+        <link href="../../css/bootstrap/dataTables.bootstrap.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
         <link href="../../css/style.css" rel="stylesheet">
         <link href="../../css/<?php echo $page; ?>.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
+        
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -174,24 +172,22 @@
             </div>
         </div>
 
-        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-		<script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-		<script type="text/javascript" language="javascript" src="../../js/bootstrap/dataTablePerso.js"></script>
-		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrapValidator.min.js"></script>
-		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrap-alert.js"></script>
-		<script type="text/javascript" language="javascript" src="../../js/dataValidatorPerso.js"></script>
-		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrap-tour.min.js"></script>
-		<script type="text/javascript" language="javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-		
-
-		
+        <script type='text/javascript' src="../../js/jquery-1.11.0.js"></script>
+        <script type="text/javascript" src="../../js/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../js/bootstrap/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/dataTables.bootstrap.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/dataTablePerso.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/bootstrapValidator.min.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/bootstrap-alert.js"></script>
+		<script type="text/javascript" src="../../js/dataValidatorPerso.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/bootstrap-tour.min.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/jquery.validate.min.js"></script>
+		<script type="text/javascript" src='../../googleChartAPI.js'></script>
         <!--Integration des fichiers js de chaque page-->
         <script type="text/javascript" src="../../js/<?php echo ($page . ".js"); ?>"></script>
         <script type="text/javascript" src="../../js/commun.js"></script>
 
-        		<script type="text/javascript">
+        <script type="text/javascript">
 		// Instance the tour
 		
 var tour = new Tour({

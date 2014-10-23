@@ -171,7 +171,7 @@ if ($rq_exos === FALSE) {
 				cours</a>
 
 			<!-- Modal ajout cours-->
-			<div id="lescours" class="modal fade" id="remoteModal" tabindex="-1" role="dialog"
+			<div class="modal fade" id="remoteModal" tabindex="-1" role="dialog"
 				aria-labelledby="remoteModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">

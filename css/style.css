@@ -3,7 +3,7 @@ Couleur rouge foncé: #f54f4f
 Couleur vert clair: #D1F080
 Couleur écriture: #151515
 /* Eléments principaux de la page */
-@import url("font/font.css");
+@import url("fonts/font.css");
 
 body, html
 {
