@@ -43,6 +43,9 @@ $rq_themes = mysql_query ( "SELECT " . $tb_theme . ".id_theme, titre_theme, coun
 if ($rq_themes === FALSE) {
 	die ( mysql_error () );
 }
+
+echo "SELECT e.id_exo, e.num_exo, e.titre_exo, e.id_theme,  t.id_cours, count(f.id_fichier) AS nb_fichiers " . 
+"FROM " . $tb_exercice . " e " . "LEFT JOIN " . $tb_fichiers . " f ON e.id_exo = f.id_exo " . "JOIN " . $tb_cours . " c " . "LEFT JOIN " . $tb_theme . " t ON t.id_cours = c.id_cours " . "WHERE e.id_theme = t.id_theme " . "AND id_prof = " . $_SESSION ["currentUser"]->getId () . " " . "GROUP BY e.id_exo " . "ORDER BY t.id_theme, num_exo";
 // EXERCICES
 $rq_exos = mysql_query ( "SELECT e.id_exo, e.num_exo, e.titre_exo, e.id_theme,  t.id_cours, count(f.id_fichier) AS nb_fichiers " . 
 // SELECT *, count(f.id_fichier) AS nb_fichiers " .
@@ -70,6 +73,10 @@ if ($rq_exos === FALSE) {
                     COURS
                 #############-->
                 </br>
+                      <button type="button" id="demo" class="btn btn-default btn-lg" data-demo>
+        <span class="glyphicon glyphicon-play"></span>
+        Start the demo
+      </button>
 			<div class="panel panel-cours">
 				<div class="panel-heading">Mes cours</div>
 				<div class="panel-body ">
@@ -159,12 +166,12 @@ if ($rq_exos === FALSE) {
 			<div id="msg_cours"></div>
 
 
-			<a class="btn btn-cours" data-toggle="modal"
+			<a class="btn btn-cours" id="addcours" data-toggle="modal"
 				href="modal/remotePage.php" data-target="#remoteModal">Ajouter un
 				cours</a>
 
 			<!-- Modal ajout cours-->
-			<div class="modal fade" id="remoteModal" tabindex="-1" role="dialog"
+			<div id="lescours" class="modal fade" id="remoteModal" tabindex="-1" role="dialog"
 				aria-labelledby="remoteModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">

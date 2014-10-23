@@ -146,43 +146,32 @@ class DAOAvancement extends DAOStandard
 	  	return number_format(($avancement['progression'] / $total) * 100, 2);
   	}
   
-  	function getByCoursEtudiant($idCours, $idEtudiant)
-  	{
-	  	$sql = 'SELECT (SUM(fait+compris+assimile) / (count(e.id_exo) * 100)) * 100 as progression
-				FROM theme t, exercice e
-				LEFT JOIN avancement a ON e.id_exo = a.id_exo
-				AND id_etu = ' . $idEtudiant.'
-				WHERE t.id_cours = ' . $idCours.'
-				AND e.id_theme = t.id_theme
-				GROUP BY t.id_cours';
-	  	
-	  	$req_progression = $this->executeQuery($sql);
-	  	$avancement = $this->fetchArray($req_progression);
-	  	
-	  	return number_format($avancement['progression'], 2);
-  	}
   
-  	function getBySeanceEtudiant($idSeance, $idEtudiant)
-  	{
-	  	$result = $this->executeQuery('SELECT * FROM avancement, theme, exercice 
-	  			WHERE avancement.id_etu = ' . $idEtudiant . '
-				AND avancement.id_seance = ' . $idSeance .'
-				AND avancement.id_exo = exercice.id_exo
-	  			AND exercice.id_theme = theme.id_theme');
-	  	$listeAvancement = array();
-	  	while ($avancement = $this->fetchArray($result)) {
-	  	
-	  			$listeAvancement[] = array('exercice' => array('id' => $avancement['id_exo'],
-																'titre' => $avancement['titre_exo'],
-																'numero' => $avancement['num_exo'],
-																'theme' => array ('id' => $avancement['id_theme'],
-																					'titre' => $avancement['titre_theme'])),
-	  										'fait' => $avancement['fait'],
-	  										'compris' => $avancement['compris'],
-	  										'assimile' => $avancement['assimile']);
-	  	}
-	  	return $listeAvancement;
-  	}
+  function getByCoursEtudiant($idCours, $idEtudiant)
+  {
+  	$sqlEtudiant = ' AND id_etu = ' . $idEtudiant . ' ';
+  	
+  	$sql = '    SELECT e.id_exo '
+  			. ' FROM exercice e, theme t '
+  			. ' WHERE t.id_theme = e.id_theme '
+  					. ' AND id_cours = ' . $idCours;
+
+  	$req_total = $this->executeQuery($sql) or die (mysql_error());
+  	$total = $this->countRows($req_total);
+  	
+  	$total = $total * 100;
+  	
+  	$sql = 'SELECT SUM( assimile + compris + fait ) AS progression
+            FROM avancement a, theme t, exercice e
+            WHERE a.id_exo = e.id_exo
+            AND t.id_theme = e.id_theme
+            AND id_cours = ' . $idCours . $sqlEtudiant;
+  	
+  	$req_progression = $this->executeQuery($sql);
+  	$avancement = $this->fetchArray($req_progression);
+  	
+  	return number_format(($avancement['progression'] / $total) * 100, 2);
+  }
   
   	function getTabByCoursEtudiant($idCours, $idEtudiant)
   	{
@@ -233,28 +222,33 @@ class DAOAvancement extends DAOStandard
 	  	return $listeAvancement;
   	}
   
-  	function getTabByThemeEtudiant($idTheme, $idEtudiant)
-  	{  	
-	  	$result = $this->executeQuery('SELECT e.id_exo, titre_exo, num_exo, e.id_theme, titre_theme, COALESCE(fait, 0) AS fait, COALESCE(compris, 0) AS compris, COALESCE(assimile, 0) AS assimile
-	  	FROM theme t, exercice e
-	  	LEFT JOIN avancement a ON e.id_exo = a.id_exo
-	  	AND id_etu = '.$idEtudiant.'
-	  	WHERE e.id_theme = '.$idTheme.'
-	  	GROUP BY e.id_exo');
-	  	
-	  	$listeAvancement = array();
-	  	
-	  	while ($avancement = $this->fetchArray($result)) {
-	  			
-	  		$listeAvancement[] = array('exercice' => array('id' => $avancement['id_exo'],
-	  				'titre' => $avancement['titre_exo'],
-	  				'numero' => $avancement['num_exo'],
-	  				'theme' => array ('id' => $avancement['id_theme'],
-	  						'titre' => $avancement['titre_theme'])),
-	  				'fait' => $avancement['fait'],
-	  				'compris' => $avancement['compris'],
-	  				'assimile' => $avancement['assimile']);
-	  	}
-	  	return $listeAvancement;
-	}
+  function getTabByThemeEtudiant($idTheme, $idEtudiant)
+  {
+  	/*$result = $this->executeQuery('SELECT * FROM avancement, theme, exercice, seance
+  			WHERE avancement.id_etu = ' . $idEtudiant . '
+			AND avancement.id_exo = exercice.id_exo
+  			AND exercice.id_theme = '. $idTheme);*/
+  	
+  	$result = $this->executeQuery('SELECT e.id_exo, titre_exo, num_exo, e.id_theme, titre_theme, COALESCE(SUM(fait), 0) AS fait, COALESCE(SUM(compris), 0) AS compris, COALESCE(SUM(assimile), 0) AS assimile
+  	FROM theme t, exercice e
+  	LEFT JOIN avancement a ON e.id_exo = a.id_exo
+  	AND id_etu = '.$idEtudiant.'
+  	WHERE e.id_theme = '.$idTheme.'
+  	GROUP BY e.id_exo');
+  	
+  	$listeAvancement = array();
+  	
+  	while ($avancement = $this->fetchArray($result)) {
+  			
+  		$listeAvancement[] = array('exercice' => array('id' => $avancement['id_exo'],
+  				'titre' => $avancement['titre_exo'],
+  				'numero' => $avancement['num_exo'],
+  				'theme' => array ('id' => $avancement['id_theme'],
+  						'titre' => $avancement['titre_theme'])),
+  				'fait' => $avancement['fait'],
+  				'compris' => $avancement['compris'],
+  				'assimile' => $avancement['assimile']);
+  	}
+  	return $listeAvancement;
+  }
 }
