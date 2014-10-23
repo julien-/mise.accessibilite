@@ -12,6 +12,7 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/bootstrapValidator.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="../../css/bootstrap/bootstrap-tour.min.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
@@ -181,48 +182,45 @@
 		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrapValidator.min.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrap-alert.js"></script>
 		<script type="text/javascript" language="javascript" src="../../js/dataValidatorPerso.js"></script>
+		<script type="text/javascript" language="javascript" src="../../js/bootstrap/bootstrap-tour.min.js"></script>
 		<script type="text/javascript" language="javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 		
-		<script type="text/javascript">
-		
-		</script>
+
 		
         <!--Integration des fichiers js de chaque page-->
         <script type="text/javascript" src="../../js/<?php echo ($page . ".js"); ?>"></script>
         <script type="text/javascript" src="../../js/commun.js"></script>
 
-        <script>
-            (function(i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function() {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'UA-40413119-1', 'bootply.com');
-            ga('send', 'pageview');
-        </script>
-        <!-- Quantcast Tag -->
-        <script type="text/javascript">
-            var _qevents = _qevents || [];
+        		<script type="text/javascript">
+		// Instance the tour
+		
+var tour = new Tour({
+  steps: [
+  {
+    element: "#addcours",
+    title: "Welcome",
+    content: "Welcome to our app, take this tour to be familirized with it.",
+    	backdrop:true
+  },
+  {
+    element: "#addcours",
+    title: "This Image",
+    content: "In this application we generate random placeholder images for any case.",
+    backdrop: true
+  }  
+]
+});
+		// Initialize the tour
+		tour.init();
+		 // Added this
 
-            (function() {
-                var elem = document.createElement('script');
-                elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
-                elem.async = true;
-                elem.type = "text/javascript";
-                var scpt = document.getElementsByTagName('script')[0];
-                scpt.parentNode.insertBefore(elem, scpt);
-            })();
+		$("#demo").click(function(){
+			tour.restart();
+			});
 
-            _qevents.push({
-                qacct: "p-0cXb7ATGU9nz5"
-            });
-        </script>
+		
+		</script>
+		
 
     </body>
 </html>

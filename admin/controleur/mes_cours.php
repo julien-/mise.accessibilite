@@ -73,6 +73,10 @@ if ($rq_exos === FALSE) {
                     COURS
                 #############-->
                 </br>
+                      <button type="button" id="demo" class="btn btn-default btn-lg" data-demo>
+        <span class="glyphicon glyphicon-play"></span>
+        Start the demo
+      </button>
 			<div class="panel panel-cours">
 				<div class="panel-heading">Mes cours</div>
 				<div class="panel-body ">
@@ -162,12 +166,12 @@ if ($rq_exos === FALSE) {
 			<div id="msg_cours"></div>
 
 
-			<a class="btn btn-cours" data-toggle="modal"
+			<a class="btn btn-cours" id="addcours" data-toggle="modal"
 				href="modal/remotePage.php" data-target="#remoteModal">Ajouter un
 				cours</a>
 
 			<!-- Modal ajout cours-->
-			<div class="modal fade" id="remoteModal" tabindex="-1" role="dialog"
+			<div id="lescours" class="modal fade" id="remoteModal" tabindex="-1" role="dialog"
 				aria-labelledby="remoteModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
