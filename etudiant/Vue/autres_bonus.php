@@ -1,10 +1,4 @@
 <?php 
-//affichage des notifications
-if (isset($_SESSION["notif_msg"]) && !(empty($_SESSION["notif_msg"]))) {
-	echo ($_SESSION["notif_msg"]);
-	$_SESSION["notif_msg"] = "";
-}
-
 foreach($listeThemes as $theme)
 {
 	$listeBonus = $daoBonus->getAllByTheme($theme->getId());
@@ -103,24 +97,18 @@ foreach($listeThemes as $theme)
 										     <div class="modal-dialog">  
 										        <div class="modal-content">
 										            <div class="modal-header">
-										                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-										                <h4 id="myModalLabel" class="modal-title">Ma Remarque</h4>
+									                	<button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+									                	<h4 id="myModalLabel" class="modal-title">Ma Remarque</h4>
 										            </div>
-										            <br/>
-										            <div class="container-fluid">
-										                <div class="row">
-										                	<div class="col-sm-1">
-										                	</div>
-										                	<div id="afficherremarque" class="col-sm-9">
-										                		<?php echo $mon_avancement['remarque'];?>
-										            			<div class="col-sm-1">
-													    		</div>
-										            		</div>            			
-										            	</div>
+										            <div id="afficherremarque" class="modal-body">
+										            	<p><?php echo $mon_avancement['remarque'];?></p>
 										            </div>
+										            <div class="modal-footer">
+										        		<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+										      		</div>
 										        </div>
 										     </div>
-										</div> 
+										</div> 									
 								<?php 
 				            		}
 				            		else 
@@ -136,26 +124,14 @@ foreach($listeThemes as $theme)
 										                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 										                <h4 id="myModalLabel" class="modal-title">Ajouter une Remarque</h4>
 										            </div>
-										            <br/>
 										            <form method="post" name="form_add_remarque" action="../Requete/rq_autres_bonus.php?section=autres_bonus&addremarque">
-											            <div class="container-fluid">
-										                	<div class="row">
-										                		<div class="col-sm-1">
-										                		</div>
-										                		<div class="col-sm-9">
-												            		<div class="form-group">
-												            			<label for="remarque">Remarque : </label>
-													                	<input type="text" name="remarque" id="remarque" size="60" class="inputValDefaut"/>
-													                </div>
-													                <!--submit-->
-													                <div class="form-group center-content">
-																		<input type="hidden" name="id_bonus" value="<?php echo $bonus->getId();?>"/>
-													                	<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_remarque" alt='Ajouter une remarque' title='Ajouter une remarque' value="Ajouter"/>
-													    			</div>
-													    			<div class="col-sm-1">
-													    			</div>
-												    			</div>
-											    			</div>
+														<div class="modal-body">
+									                		<input type="text" name="remarque" id="remarque" size="60" class="inputValDefaut"/>
+										                </div>
+										                <div class="modal-footer">
+															<input type="hidden" name="id_bonus" value="<?php echo $bonus->getId();?>"/>
+										                	<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_remarque" alt='Ajouter une remarque' title='Ajouter une remarque' value="Ajouter"/>
+										                	<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 										    			</div>
 										            </form>
 										        </div>

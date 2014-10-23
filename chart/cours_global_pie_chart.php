@@ -7,11 +7,14 @@ include_once('../modele/sql/DBFactory.php');
 
 $daoAvancement = new DAOAvancement($db);
 
-if (isset($_GET['e']))
+if(isset($_GET['s']))
+{
+	$progression = $daoAvancement->getByCoursSeanceEtudiant($_GET['c'], $_GET['s'], $_GET['e']);
+}
+elseif(isset($_GET['e']))
 {
 	$progression = $daoAvancement->getByCoursEtudiant($_GET['c'], $_GET['e']);
 }
-    
 else
 {
 	$progression = $daoAvancement->getByCours($_GET['c']);

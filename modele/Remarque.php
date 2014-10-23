@@ -2,7 +2,6 @@
 	class Remarque{
 		
 		protected 
-		$i,
 		$seance,
 		$etudiant,
 		$remarque;
@@ -24,15 +23,6 @@
 					$this->$methode ( $valeur );
 				}
 			}
-		}
-		
-		public function getId() {
-			return $this->id;
-		}
-		
-		public function setId($id) {
-			$this->id = $id;
-			return $this;
 		}
 		
 		public function getSeance() {

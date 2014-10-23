@@ -1,10 +1,4 @@
 <?php 
-//affichage des notifications
-if (isset($_SESSION["notif_msg"]) && !(empty($_SESSION["notif_msg"]))) {
-	echo ($_SESSION["notif_msg"]);
-	$_SESSION["notif_msg"] = "";
-}
-
 foreach($listeThemes as $theme)
 {
 	$listeMesBonus = $daoAvancement_bonus->getByThemeEtudiantFait($theme->getId(),$_SESSION['currentUser']->getId());
@@ -89,50 +83,41 @@ foreach($listeThemes as $theme)
                 <h4 id="myModalLabel" class="modal-title">Ajouter un bonus au theme <?php echo $theme->getTitre();?></h4>
             </div>
             <form method="post" class="form_add_bonus" name="form_add_bonus" action="../Requete/rq_mes_bonus.php?section=mes_bonus&addbonus">
-            <br/>
-            	<div class="container-fluid">
-                	<div class="row">
-                		<div class="col-sm-1">
-                		</div>
-                		<div class="col-sm-9">
-	            		<div class="form-group">
-	            			<label for="titrebonus">Titre du Bonus</label>
-		                	<input type="text" name="titrebonus" id="titrebonus" size="26" class="inputValDefaut">
-		                </div>
-		                <div class="form-group">
-		                	<label for="typebonus">Type de bonus</label>
-		                	<select class="test" name="typebonus">
-		                		<option value="Expose">Exposé</option>
-		                		<option value="Exercice">Exercice</option>
-		                	</select>	                	
-		                </div>
-		                <div class="form-group">
-		                	<label for="collaborateursbonus">En collaboration avec</label>
-		                	<select class="collaborateurs" name="collaborateursbonus" id="collaborateurs<?php echo $theme->getId();?>" value="<?php echo $theme->getId();?>">
-		                			<option value=""></option>
-		                		<?php 
-		                			foreach ($listeInscritsExeptCurrentUser as $inscrit)
-		                			{
-		                		?>
-		                				<option value="<?php echo $inscrit->getEtudiant()->getId();?>"><?php echo $inscrit->getEtudiant()->getPrenom()." ".$inscrit->getEtudiant()->getNom();?></option>
-                				<?php 
-		                			}
-	                			?>
-		                	</select>	                	
-		                </div>
-		                <div id="liste_collaborateurs<?php echo $theme->getId();?>"class="form-group">                	
-		                </div>
-		                <!--submit-->
-		                <div class="form-group center-content">
-		                	<div id="donnees_cachees<?php echo $theme->getId();?>">
-		                		<input type="hidden" name="themebonus" value="<?php echo $theme->getId();?>"/>
-		                	</div>
-		                	<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_bonus" alt='Ajouter le bonus' title='Ajouter le bonus' value="Ajouter"/>
-		    			</div>
-		    			</div>
-		    			<div class="col-sm-1">
-		    			</div>
-	    			</div>
+            	<div class="modal-body">
+            		<div class="form-group">
+            			<label for="titrebonus">Titre du Bonus</label>
+	                	<input type="text" name="titrebonus" id="titrebonus" size="35" class="inputValDefaut">
+	                </div>
+	                <div class="form-group">
+		                <label for="typebonus">Type de bonus</label>
+		                <select class="test" name="typebonus">
+		                	<option value="Expose">Exposé</option>
+		                	<option value="Exercice">Exercice</option>
+		                </select>	
+		            </div> 
+		            <div class="form-group">               	
+		                <label for="collaborateursbonus">En collaboration avec</label>
+		                <select class="collaborateurs" name="collaborateursbonus" id="collaborateurs<?php echo $theme->getId();?>" value="<?php echo $theme->getId();?>">
+	                		<option value=""></option>
+	                		<?php 
+	                		foreach ($listeInscritsExeptCurrentUser as $inscrit)
+	                		{
+	                		?>
+	                			<option value="<?php echo $inscrit->getEtudiant()->getId();?>"><?php echo $inscrit->getEtudiant()->getPrenom()." ".$inscrit->getEtudiant()->getNom();?></option>
+	                		<?php 
+		                	}
+	                		?>
+	                	</select>
+	                </div>	                	
+                	<div id="liste_collaborateurs<?php echo $theme->getId();?>">                	
+                	</div>
+	           </div>
+	           <div class="modal-footer">
+                	<div id="donnees_cachees<?php echo $theme->getId();?>">
+                	</div>
+                	<input type="hidden" name="themebonus" value="<?php echo $theme->getId();?>"/>
+                	<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_bonus" alt='Ajouter le bonus' title='Ajouter le bonus' value="Ajouter"/>
+                	<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
     			</div>
 	    	</form>
         </div>

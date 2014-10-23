@@ -188,6 +188,33 @@ class DAOAvancement extends DAOStandard
   	return number_format(($avancement['progression'] / $total) * 100, 2);
   }
   
+  function getByCoursSeanceEtudiant($idCours, $idSeance, $idEtudiant)
+  {
+  	$sqlEtudiant = ' AND id_etu = ' . $idEtudiant . ' ';
+  	 
+  	$sql = '    SELECT e.id_exo '
+  			. ' FROM exercice e, theme t '
+  					. ' WHERE t.id_theme = e.id_theme '
+  							. ' AND id_cours = ' . $idCours;
+  
+  	$req_total = $this->executeQuery($sql) or die (mysql_error());
+  	$total = $this->countRows($req_total);
+  	 
+  	$total = $total * 100;
+  	 
+  	$sql = 'SELECT SUM( assimile + compris + fait ) AS progression
+            FROM avancement a, theme t, exercice e
+            WHERE a.id_exo = e.id_exo
+  			AND a.id_seance <= ' .$idSeance. '
+            AND t.id_theme = e.id_theme
+            AND id_cours = ' . $idCours . $sqlEtudiant;
+  	 
+  	$req_progression = $this->executeQuery($sql);
+  	$avancement = $this->fetchArray($req_progression);
+  	 
+  	return number_format(($avancement['progression'] / $total) * 100, 2);
+  }
+  
   	function getTabByCoursEtudiant($idCours, $idEtudiant)
   	{
 	  	$result = $this->executeQuery('SELECT * FROM avancement, theme, exercice, seance
@@ -265,5 +292,38 @@ class DAOAvancement extends DAOStandard
   				'assimile' => $avancement['assimile']);
   	}
   	return $listeAvancement;
+  }
+  
+  public function insertFaitByExerciceEtudiantSeance($id_exo, $id_etu, $id_seance)
+  {
+  	$this->executeQuery('INSERT INTO avancement
+  							SET id_etu = ' . $id_etu . ',
+  							id_exo = ' . $id_exo . ',
+  							fait = 25,
+  							compris = 0,
+  							assimile = 0,
+  							id_seance = ' . $id_seance);
+  }
+  
+  public function insertComprisByExerciceEtudiantSeance($id_exo, $id_etu, $id_seance)
+  {
+  	$this->executeQuery('INSERT INTO avancement
+  							SET id_etu = ' . $id_etu . ',
+  							id_exo = ' . $id_exo . ',
+  							fait = 0,
+  							compris = 25,
+  							assimile = 0,
+  							id_seance = ' . $id_seance);
+  }
+  
+  public function insertAssimileByExerciceEtudiantSeance($id_exo, $id_etu, $id_seance)
+  {
+  	$this->executeQuery('INSERT INTO avancement
+  							SET id_etu = ' . $id_etu . ',
+  							id_exo = ' . $id_exo . ',
+  							fait = 0,
+  							compris = 0,
+  							assimile = 50,
+  							id_seance = ' . $id_seance);
   }
 }

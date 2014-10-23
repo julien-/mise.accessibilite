@@ -51,6 +51,12 @@ if (isset($_GET['section']) && !empty($_GET['section']))
 else
 	$page = "cours";
 
+//affichage des notifications
+if (isset($_SESSION["notif_msg"]) && !(empty($_SESSION["notif_msg"]))) {
+	echo ($_SESSION["notif_msg"]);
+	$_SESSION["notif_msg"] = "";
+}
+
 include_once('../Vue/index.php');
 
 ?>
