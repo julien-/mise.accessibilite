@@ -30,4 +30,14 @@ class DAOMessage extends DAOStandard
 
 	}
 	
+	public function countNbNonLu($id_etu)
+	{
+		$result = $this->executeQuery('SELECT * 
+										FROM messages 
+										WHERE destinataire = ' . $id_etu .'
+										AND lu = 0');
+		
+		return $this->countRows($result);
+	}
+	
 }

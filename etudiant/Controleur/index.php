@@ -16,18 +16,32 @@ $daoBonus= new DAOBonus($db);
 $daoEtudiant= new DAOEtudiant($db);
 $daoAvancement_bonus= new DAOAvancement_bonus($db);
 $daoHistorique = new DAOHistorique($db);
+$daoMessage = new DAOMessage($db);
 
 $listeCours = $daoInscription->getAllByEtudiant($_SESSION['currentUser']->getId());
 
 if (isset($_GET['section']) && !empty($_GET['section'])) 
 {
+	$now = date("Y-m-d");   //recupère la date d'aujourd'hui
+	
 	$page = $_GET['section'];
-	if($page == "cours")
-		unset($_SESSION['cours']);
-	else 
+	
+	if($page == "accueil" || $page == "cours" || $page == "compte" || $page == "messagerie")
 	{
-		$now = date("Y-m-d");   //recupère la date d'aujourd'hui
+		//historique
+		$historique = new Historique(array(
+				'page' => $page,
+				'dateVisite' => $now,
+				'heureVisite' => date("H:i:s"),
+				'etudiant' => $_SESSION['currentUser'],
+				'cours' => '0'
+		));
+		$daoHistorique->save($historique);
 		
+		unset($_SESSION['cours']);
+	}
+	else 
+	{		
 		if(isset($_GET['id_cours']) && !empty($_GET['id_cours']))
 		{
 			$_SESSION['cours'] = $daoCours->getByID($_GET['id_cours']);
@@ -49,14 +63,25 @@ if (isset($_GET['section']) && !empty($_GET['section']))
 	}		
 } 
 else
-	$page = "cours";
+	$page = "accueil";
 
 //affichage des notifications
 if (isset($_SESSION["notif_msg"]) && !(empty($_SESSION["notif_msg"]))) {
 	echo ($_SESSION["notif_msg"]);
 	$_SESSION["notif_msg"] = "";
 }
-
+switch($page)
+{
+	case 'accueil': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Accueil' => 'final'); break;
+	case 'compte': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mon Compte' => 'final'); break;
+	case 'messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Ma Messagerie' => 'final'); break;
+	case 'cours': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'final'); break;
+	case 'evolution': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Evolution' => 'final'); break;
+	case 'seance_precedente': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index?section=accueil.php', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Séance du '.transformerDate($daoSeance->getByID($_GET["id_seance"])->getDate()) => 'final'); break;
+	case 'seance_actuelle': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Séance du '.transformerDate($daoSeance->getByID($_GET["id_seance"])->getDate()) => 'final'); break;
+	case 'mes_bonus': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Mes Bonus' => 'final'); break;
+	case 'autres_bonus': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Autres Bonus' => 'final'); break;
+}
 include_once('../Vue/index.php');
 
 ?>

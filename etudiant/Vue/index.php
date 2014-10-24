@@ -79,7 +79,7 @@
 	                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
                                     <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
 	                                <ul id="g-account-menu" class="dropdown-menu" role="menu">
-	                                    <li><a href="#">Mon compte</a></li>
+	                                    <li><a href="index.php?section=compte">Mon compte</a></li>
 	                                    <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>Se déconnecter</a></li>
 	                                </ul>
 	                            </li>
@@ -176,32 +176,48 @@
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-3">
-	                        <hr>
-	                        <ul class="list-unstyled">
-	                            <li class="nav-header"> 
-                            		<h3 style="text-align: center;">
-		                            	<i class="glyphicon glyphicon-th-list pokemon-red"></i>
-		                                <a class="pokemon-red" href="index.php?section=cours">Mes cours</a>
-		                                <font>&nbsp;&nbsp;|&nbsp;&nbsp;</font>
-		                                <i class="glyphicon glyphicon-pencil pokemon-red"></i>
-		                                <a class="pokemon-red" href="index.php?section=liste_cours">Autres cours</a>
-                                	</h3>
-	                                <hr>
-	                                <ul class="nav nav-stacked">
-	                                    <?php
-	                                    foreach ($listeCours as $cours) {
-	                                        ?>
-	                                        <li><a class="<?php if(isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo "active"; else echo "black";?>" href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" title="<?php echo $cours->getCours()->getLibelle(); ?>"><i class="glyphicon glyphicon-book pokemon-red"></i> <?php echo $cours->getCours()->getLibelle(); ?></a></li>
-	                                        <?php
-	                                    }
-	                                    ?>
-	                                </ul>
-	                            </li>
-	                        </ul>
-
+                    <div class="col-sm-2">
+                        <div class="list-group">
+                        	<a href="index.php?section=cours" class="<?php if($page == "cours") echo "list-group-item active"; else echo "list-group-item";?>">
+                        		<i class="glyphicon glyphicon-th-list"></i>
+						        <span style="font-size: x-large; margin-left:5%;">Mes cours</span>
+						   	</a>
+                        	<?php
+                            foreach ($listeCours as $cours) 
+                            {
+                            ?>
+                        	<a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" class="<?php if(isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo "list-group-item active"; else echo "list-group-item";?>" title="<?php echo $cours->getCours()->getLibelle();?>">
+							   <?php echo $cours->getCours()->getLibelle();?>
+							</a>
+							<?php
+                            }
+                            ?>
+                        </div>
                     </div>
-                    <div id="bloc_page" class="col-sm-9">
+                    <div id="bloc_page" class="col-sm-10">
+                    	<div>
+					        <ul class="breadcrumb">
+					        <?php 
+					        foreach($filArianne as $titre => $lien)
+					        {
+					        	if ($lien != 'final')
+					        	{
+					        	?>
+					        	 <li>
+					            	<a href="<?php echo $lien; ?>"><?php echo $titre ?></a> <span class="divider"></span>
+					          	</li>
+					        	<?php 
+					        	}
+					        	else 
+					        	{
+					        		?>
+					        		<li class="active"><?php echo $titre ?></li>
+					        		<?php
+					        	}
+					        }
+					        ?>
+					        </ul>
+				      	</div>
                         <?php include_once('../Controleur/' . $page . '.php'); ?>
                     </div>
                 </div><!--/row-->

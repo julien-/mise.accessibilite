@@ -14,18 +14,6 @@ body, html
 }
 
 /*######## DIV #########*/
-#bloc_page
-{
-    position: relative;
-    width: 70%;
-    margin: auto;
-    background-color: white;
-    top: 50px;
-    background-color: white;
-    padding-bottom: 150px;
-    min-height: 75%;
-    margin-bottom: 2px;
-}
 /*##############
 ### ASSISTANT ##
 ##############*/
