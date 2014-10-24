@@ -11,13 +11,14 @@
         <link href="../../css/bootstrap/bootstrap-tour.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/dataTables.bootstrap.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
+        <link href="../../css/typeahead.css" rel="stylesheet">
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
         <link href="../../css/style.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        
-        <?php if (file_exists("../../css/" . $page . ".css")){?>
-        <link href="../../css/<?php echo $page; ?>.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
+        <?php if (file_exists("../../css/" . $pageWithoutPath . ".css")){?>
+        <link href="../../css/<?php echo $pageWithoutPath; ?>.css" rel="stylesheet">
         <?php }?>
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -78,6 +79,9 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
+							<li>
+                                <a role="button" href="index.php?section=reception_messagerie" style="color: white;"><i class="glyphicon glyphicon-envelope"></i></a>
+                            </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
                                 <?php if (isset($_SESSION['currentUser']))
@@ -183,11 +187,13 @@
 		<script type="text/javascript" src="../../js/bootstrap/dataTablePerso.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/bootstrap-alert.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/bootstrap-tour.min.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/typeahead.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/handlebars.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/jquery.validate.min.js"></script>
 		<script type="text/javascript" src='../../js/googleChartAPI.js'></script>
         <!--Integration des fichiers js de chaque page-->
-        <?php if (file_exists("../../js/" . $page . ".js")){?>
-        <script type="text/javascript" src="../../js/<?php echo ($page . ".js"); ?>"></script>
+        <?php if (file_exists("../../js/" . $pageWithoutPath . ".js")){?>
+        <script type="text/javascript" src="../../js/<?php echo ($pageWithoutPath . ".js"); ?>"></script>
         <?php }?>
         <script type="text/javascript" src="../../js/commun.js"></script>
 

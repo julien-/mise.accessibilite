@@ -133,6 +133,92 @@ class DAOInscription extends DAOStandard
 	  	return $listeInscription;
 	  }
 	  
+	  public function getClassmates($id)
+	  {
+	  	$daoEtudiant = new DAOEtudiant($db);
+	  	
+	  	$sql = 'CREATE TEMPORARY TABLE R1
+				SELECT * 
+				FROM inscription
+				WHERE id_etu = 23;';  
+	  	$result = $this->executeQuery($sql);
+	  	
+	  	$sql = 'CREATE TEMPORARY TABLE R2
+				SELECT inscription.id_etu, nom_etu, prenom_etu, pseudo_etu, mail_etu, pass_etu, admin FROM inscription, etudiant, R1
+				WHERE inscription.id_cours = R1.id_cours
+				AND inscription.id_etu = etudiant.id_etu
+				;'; 
+	  	$result = $this->executeQuery($sql);
+	  	
+	  	$sql = 'SELECT *
+				FROM R2';
+	  	$result = $this->executeQuery($sql);
+	  	
+	  	$sql = 'DROP TEMPORARY TABLE R1';
+	  	$this->executeQuery($sql);
+	  	
+	  	$sql = 'DROP TEMPORARY TABLE R2';
+	  	$this->executeQuery($sql);
+	  	
+	  	$listeInscription = null;
+	  	while ($inscription = $this->fetchArray($result)) {
+	  		$listeInscription[] = new Inscription(array( 
+	  				'cours' => 0,
+	  				'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'],
+	  						'nom' => $inscription['nom_etu'],
+	  						'prenom' => $inscription['prenom_etu'],
+	  						'mail' => $inscription['mail_etu'],
+	  						'login' => $inscription['pseudo_etu'],
+	  						'pass' => $inscription['pass_etu'],
+	  						'admin' => $inscription['admin']))));
+	  	}
+	  	return $listeInscription;
+	  }
+	  
+	  public function searchClassmates($id, $query)
+	  {
+	  	$daoEtudiant = new DAOEtudiant($db);
+	  
+	  	$sql = 'CREATE TEMPORARY TABLE R1
+				SELECT *
+				FROM inscription
+				WHERE id_etu = 23;';
+	  	$result = $this->executeQuery($sql);
+	  
+	  	$sql = 'CREATE TEMPORARY TABLE R2
+				SELECT inscription.id_etu, nom_etu, prenom_etu, pseudo_etu, mail_etu, pass_etu, admin FROM inscription, etudiant, R1
+				WHERE inscription.id_cours = R1.id_cours
+				AND inscription.id_etu = etudiant.id_etu
+	  			AND (nom_etu LIKE "%'.$query.'%"
+  				OR prenom_etu LIKE "%'.$query.'%")
+				;';
+	  	$result = $this->executeQuery($sql);
+	  
+	  	$sql = 'SELECT *
+				FROM R2';
+	  	$result = $this->executeQuery($sql);
+	  
+	  	$sql = 'DROP TEMPORARY TABLE R1';
+	  	$this->executeQuery($sql);
+	  
+	  	$sql = 'DROP TEMPORARY TABLE R2';
+	  	$this->executeQuery($sql);
+	  
+	  	$listeInscription = null;
+	  	while ($inscription = $this->fetchArray($result)) {
+	  		$listeInscription[] = new Inscription(array(
+	  				'cours' => 0,
+	  				'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'],
+	  						'nom' => $inscription['nom_etu'],
+	  						'prenom' => $inscription['prenom_etu'],
+	  						'mail' => $inscription['mail_etu'],
+	  						'login' => $inscription['pseudo_etu'],
+	  						'pass' => $inscription['pass_etu'],
+	  						'admin' => $inscription['admin']))));
+	  	}
+	  	return $listeInscription;
+	  }
+	  
 	  public function getAllByCoursExceptEtu($id_cours, $id_etu)
 	  {
 	  	$daoEtudiant = new DAOEtudiant($this->_db);

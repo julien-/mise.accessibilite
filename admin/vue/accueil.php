@@ -108,7 +108,7 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 		?>
 							<tr>
 								<td class="prem_colonne"><?php echo Outils::raccourcirChaine($sujet->getTitre(), 20); ?></td>
-								<td class="autre_colonne"><?php echo Outils::raccourcirChaine($sujet->getCategorie()->getTitre(), 40); ?></td>
+								<td class="autre_colonne cut-text" style="max-width: 100px;"><?php echo $sujet->getCategorie()->getTitre(); ?></td>
 								<td class="autre_colonne"><?php echo Outils::raccourcirChaine($sujet->getAuteur()->getNom(), 20);?></td>
 								<td class="autre_colonne center-text"><?php echo Outils::sqlDateTimeToFr($sujet->getDateDerniereReponse())?></td>
 							</tr>

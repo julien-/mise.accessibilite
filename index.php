@@ -24,7 +24,7 @@ session_start ();
 	src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","table"]}]}'>
 </script>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="full">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
@@ -94,20 +94,7 @@ footer {
 <body>
 	<div id="wrap">
 		<!-- Header -->
-		<div id="top-nav" class="navbar navbar-inverse navbar-static-top"
-			style="background-color: #f54f4f; margin-bottom: 0px;">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target=".navbar-collapse">
-						<span class="icon-toggle"></span>
-					</button>
-					<a href="index.php"><img src="images/logo_titre_centre.png"
-						alt="logo" /></a>
-				</div>
-			</div>
-			<!-- /container -->
-		</div>
+
 		<!-- /Header -->
 
 		<!-- container -->

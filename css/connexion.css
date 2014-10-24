@@ -1,44 +1,89 @@
-/*
-CSS pour les formulaires de connexion et inscription
-*/
-
-#divconnexion {
-  position: relative;
-  float: left;
-  display: block;
-  width: 49%;
-  border: #151515 dotted 1px;
-  height: 370px;
-  font-family: arial;
+/*    --------------------------------------------------
+	:: Login Section
+	-------------------------------------------------- */
+#login {
+    padding-top: 50px
 }
-
-#divinscription {
-  position: relative;
-  float: right;
-  display: block;
-  border: #151515 dotted 1px;
-  width: 49%;
-  height: 370px;
-  font-family: arial;
+#login .form-wrap {
+    width: 30%;
+    margin: 0 auto;
 }
-
-label
-{
-    margin-left: 50px;
+#login h1 {
+    color: #1fa67b;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 20px;
 }
-
-input{
-    width:150px;
+#login .form-group {
+    margin-bottom: 25px;
 }
-
-.bouton{
+#login .checkbox {
+    margin-bottom: 20px;
     position: relative;
-    margin-bottom: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+#login .checkbox.show:before {
+    content: '\e013';
+    color: #1fa67b;
+    font-size: 17px;
+    margin: 1px 0 0 3px;
+    position: absolute;
+    pointer-events: none;
+    font-family: 'Glyphicons Halflings';
+}
+#login .checkbox .character-checkbox {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    display: inline-block;
+}
+#login .checkbox .label {
+    color: #6d6d6d;
+    font-size: 13px;
+    font-weight: normal;
+}
+#login .btn.btn-custom {
+    font-size: 14px;
+	margin-bottom: 20px;
+}
+#login .forget {
+    font-size: 13px;
+	text-align: center;
+	display: block;
+}
+
+/*    --------------------------------------------------
+	:: Inputs & Buttons
+	-------------------------------------------------- */
+.form-control {
+    color: #212121;
+}
+.btn-custom {
+    color: #fff;
+}
+.btn-custom:hover,
+.btn-custom:focus {
+    color: #fff;
+}
+
+body {
+	background: none;
+}
+
+.full {
+  background: url(../images/fond.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 
-h3{
-    margin-left: 50px;
-    color: #9f005d;
-    font-size: 10pt;
-}

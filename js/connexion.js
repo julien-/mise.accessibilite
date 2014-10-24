@@ -1,3 +1,21 @@
+function showPassword() {
+    
+    var key_attr = $('#mdp').attr('type');
+    
+    if(key_attr != 'text') {
+        
+        $('.checkbox').addClass('show');
+        $('#mdp').attr('type', 'text');
+        
+    } else {
+        
+        $('.checkbox').removeClass('show');
+        $('#mdp').attr('type', 'password');
+        
+    }
+    
+}
+
 $(document).ready(function() {
 
 //Controle après submit :

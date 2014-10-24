@@ -1,5 +1,17 @@
 @import url("../fonts/font.css");
 
+.bold
+{
+	font-weight: bold;
+}
+
+.cut-text
+{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .progress-borders
 {
 	border: 1px solid rgba(111, 110, 117, 1); 

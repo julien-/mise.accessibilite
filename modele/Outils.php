@@ -3,6 +3,7 @@ class Outils
 {
 	public static $UPLOAD_FOLDER = '/upload/';
 
+	
 	public static function upload($index, $chemin, $dossier, $maxsize = FALSE, $extensions = FALSE) {
 		
 		$cheminComplet = $chemin.$dossier;

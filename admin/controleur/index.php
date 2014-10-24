@@ -28,19 +28,26 @@ if (isset($_SESSION['currentUser']))
 	if (isset($_GET['section'])) 
 	{
 		$page = $_GET['section'];
-		
+		$pageWithoutPath = $page;
 		if (strpos($page, 'forum') != false)
 		{
 			$page = '../../forum/controleur/' . $page;
 		}
+		
+		if (strpos($page, 'messagerie') != false)
+		{
+			$page = '../../messagerie/controleur/' . $page;
+		}
 	} else 
 	{
 		$page = 'mes_cours';
+		$pageWithoutPath = $page;
 	}
 }
 else if (isset($_GET['section'])) 
 {
 	$page = $_GET['section'];
+	$pageWithoutPath = $page;
 }
 else
 {
@@ -50,8 +57,11 @@ else
 	</script>
 	<?php 
 }
-switch($page)
+
+switch($pageWithoutPath)
 {
+	case 'envoyer_messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Boîte de réception' => 'index.php?section=reception_messagerie', 'Envoyer un message' => 'final'); break;
+	case 'reception_messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Boîte de réception' => 'final'); break;
 	case 'mes_etudiants': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Mes étudiants' => 'final'); break;
 	case 'mes_cours': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Mes cours' => 'final'); break;
 	case 'seance': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Mes s&eacute;ances' => 'final'); break;

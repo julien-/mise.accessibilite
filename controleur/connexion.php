@@ -22,7 +22,7 @@ if (isset($_POST['submit']))
 	}
 	
 	if (sizeof($errorList) > 0)
-		include_once('../vue/connexion.php');
+		include_once('vue/connexion.php');
 	else 
 	{
 		$etudiant = $daoEtudiant->getByPseudo($pseudo);

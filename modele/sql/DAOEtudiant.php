@@ -1,7 +1,6 @@
 <?php
 class DAOEtudiant extends DAOStandard
 {
-  
   public function saveOrUpdate(Etudiant $etudiant)
   {
   	if ($this->existsByPseudo($etudiant->getLogin()))

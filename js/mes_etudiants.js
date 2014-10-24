@@ -1,5 +1,5 @@
 $('.interactive-table').DataTable( {
-	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ 1,2 ] }],
+	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ 3 ] }],
     language: {
     	processing:     "Traitement en cours...",
         search:         "Rechercher&nbsp;:",
