@@ -92,3 +92,9 @@ body .modal-large {
     color: #333;
 }
 
+.carousel-indicators li {
+  display: none;
+}
+.carousel-indicators .active {
+  display: none;
+}

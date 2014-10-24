@@ -93,9 +93,11 @@ foreach($listeThemes as $theme)
 				</tr>
 				</thead>
 				<?php
+				$i = 0;
 				$listeAvancement = $daoAvancement->getTabBySeanceThemeEtudiant($id_seance, $theme->getId(), $_SESSION["currentUser"]->getId());
 				foreach ($listeAvancement as $avancement)
 				{
+					
 					$avancement_pourcentage = 0;
 					if($avancement['fait'] == 25)
 						$avancement_pourcentage = 25;
@@ -107,24 +109,25 @@ foreach($listeThemes as $theme)
 			    <tbody>
 			        <tr>
 			            <!--Titre de l'exercice-->
-			            <td class="autre_colonne">
+			            <td class="prem_colonne">
 			                <?php echo $avancement['exercice']['titre']; ?>
 			            </td> 
 			            <!--Fait-->
 			            <td class="autre_colonne">
-			            	<input type="checkbox" class="fait" id="fait<?php echo $avancement['exercice']['id']?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage >= 25) echo 'onClick="return false" checked="checked" title="L\'exercice a été fait à une séance précédente"'; else echo 'name="fait[]"';?>/>		            	
+			            	<input type="checkbox" class="fait" id="fait<?php echo $i?>" data-sc="<?php echo $i; ?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage >= 25) echo 'onClick="return false" checked="checked" title="L\'exercice a été fait à une séance précédente"'; else echo 'name="fait[]"';?>/>		            	
 			            </td>
 			            <!--Compris-->
 			            <td class="autre_colonne">
-			                <input type="checkbox" class="compris" id="compris<?php echo $avancement['exercice']['id']?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage >= 50) echo 'onClick="return false" checked="checked" title="L\'exercice a été compris à une séance précédente"'; else echo 'name="compris[]"';?>/>	
+			                <input type="checkbox" class="compris" id="compris<?php echo $i?>" data-sc="<?php echo $i; ?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage >= 50) echo 'onClick="return false" checked="checked" title="L\'exercice a été compris à une séance précédente"'; else echo 'name="compris[]"';?>/>	
 		            	</td>
 			            <!--Assimile-->
 			            <td class="autre_colonne">
-			                <input type="checkbox" class="assimile" id="assimile<?php echo $avancement['exercice']['id']?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage == 100) echo 'onClick="return false" checked="checked" title="L\'exercice a été assimile à une séance précédente"'; else echo 'name="assimile[]"';?>/>	
+			                <input type="checkbox" class="assimile" id="assimile<?php echo $i?>" data-sc="<?php echo $i; ?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage == 100) echo 'onClick="return false" checked="checked" title="L\'exercice a été assimile à une séance précédente"'; else echo 'name="assimile[]"';?>/>	
 			            </td>
 			        </tr>
 			    </tbody>
 				<?php 
+				$i++;
 				} 
 				?>
 			</table>

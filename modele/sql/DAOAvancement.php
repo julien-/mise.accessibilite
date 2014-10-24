@@ -276,6 +276,7 @@ class DAOAvancement extends DAOStandard
   	LEFT JOIN avancement a ON e.id_exo = a.id_exo
   	AND id_etu = '.$idEtudiant.'
   	WHERE e.id_theme = '.$idTheme.'
+  	AND t.id_theme = e.id_theme
   	GROUP BY e.id_exo');
   	
   	$listeAvancement = array();

@@ -22,7 +22,7 @@
 						<label><input type="checkbox" onclick="showPassword()"> Afficher le mot de passe</label>
 					</div>
 					<input type="submit" name="submit" id="btn-login"
-						class="btn btn-custom btn-lg btn-block blue-bg" value="Log in">
+						class="btn btn-custom btn-lg btn-block blue-bg" value="Connexion">
 				</form>
 				<div class="form-group">
 				<a href="../index.php?section=inscription" class="forget">Pas encore inscrit ?</a>
@@ -31,7 +31,6 @@
 					data-target=".forget-modal">Mot de passe oublié ?</a>
 				<hr>
 				<div class="form-group">
-					<div class="col-lg-3 col-md-offset-4">
 						<?php
 						foreach ( $errorList as $error ) {
 							?>
@@ -41,7 +40,6 @@
 						<?php
 						}
 						?>
-					</div>
 				</div>
 			</div>
 			</div>

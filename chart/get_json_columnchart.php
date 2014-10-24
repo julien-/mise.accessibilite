@@ -17,12 +17,17 @@ if ($_GET['theme'] != -1)
 	
 	$table['cols'] = array(
 			array('label' => 'exercice', 'type' => 'string'),
-			array('label' => 'fait', 'type' => 'number'),
+			array('label' => 'fait   ', 'type' => 'number'),
+			array('role' => 'tooltip', 'type' => 'string', 'p' => array( 'role' => 'tooltip')),
 			array('role' => 'style', 'type' => 'string', 'p' => array ('role' => 'style')),
-			array('label' => 'compris', 'type' => 'number'),
+			
+			array('label' => 'compris   ', 'type' => 'number'),
+			array('role' => 'tooltip', 'type' => 'string', 'p' => array( 'role' => 'tooltip')),
 			array('role' => 'style', 'type' => 'string', 'p' => array ('role' => 'style')),
-			array('label' => 'assilime', 'type' => 'number'),
-			array('role' => 'style', 'type' => 'string', 'p' => array ('role' => 'style'))
+			array('label' => 'assimile   ', 'type' => 'number'),
+			array('role' => 'tooltip', 'type' => 'string', 'p' => array( 'role' => 'tooltip')),
+			array('role' => 'style', 'type' => 'string', 'p' => array ('role' => 'style')),
+			
 	);
 	
 	$rows = array ();
@@ -33,16 +38,23 @@ if ($_GET['theme'] != -1)
 		$temp = array ();
 		
 		$temp [] = array (
-				'v' => $avancement["exercice"]["titre"]
+				'v' => $avancement["exercice"]["numero"]
 		);
 		$temp [] = array (
 				'v' => $avancement["fait"]
 		);
 		$temp [] = array (
-				'v' => '#FF6633'
+				'v' => $avancement["exercice"]["titre"]
 		);
 		$temp [] = array (
+				'v' => '#FF6633'
+		);
+
+		$temp [] = array (
 				'v' => $avancement["compris"]
+		);
+		$temp [] = array (
+				'v' => $avancement["exercice"]["titre"]
 		);
 		$temp [] = array (
 				'v' => '#FFCC33'
@@ -51,8 +63,12 @@ if ($_GET['theme'] != -1)
 				'v' => $avancement["assimile"]
 		);
 		$temp [] = array (
+				'v' => $avancement["exercice"]["titre"]
+		);
+		$temp [] = array (
 				'v' => '#99FF33'
 		);
+
 		
 		$rows [] = array (
 				'c' => $temp

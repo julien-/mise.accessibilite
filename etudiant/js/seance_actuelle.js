@@ -1,4 +1,21 @@
 $(document).ready(function() {
+		$(".fait").click(function() {
+			var fait = "input[id=fait" + ($(this).data('sc')-1) + "]";
+			if (!$(fait).is(':checked')) 
+			{
+				var compris = "input[id=fait" + $(this).attr('value') + "]";
+				$(compris).attr('checked', false);
+				
+				$("#bloc_page").append('<div class="erreur">Vous devez avoir au moins fait l\'exercice précédent</div>');
+	            //cache l'erreur
+	            $('.erreur').delay(5000).fadeOut();
+	            //Supprime l'erreur
+	            setTimeout(function() {
+	                $('.erreur').remove();
+	            }, 4000);
+	            return false;
+			}
+		});
 	$(".compris").click(function() {
 		var fait = "input[id=fait" + $(this).attr('value') + "]";
 		if (!$(fait).is(':checked')) 

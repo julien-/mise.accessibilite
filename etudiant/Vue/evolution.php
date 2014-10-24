@@ -25,12 +25,17 @@ foreach($listeThemes as $theme)
 ?>
 	var optionsColumnChart = {
 		height: 300,
+		width: 700,
 		title: '<?php echo $theme->getTitre();?>',
-		legend: { position: 'top', maxLines: 3 },
+		legend: { position: 'none'},
 	    bar: { groupWidth: '75%' },
 	    isStacked: true,
 	    backgroundColor: { fill:'transparent' },
 	    colors : ['#FF6633','#FFCC33','#99FF33'],
+	    vAxis: {
+	        maxValue: 100,
+	        minValue: 0
+	      }
 	};
 	
 	setColumnChartOptions('<?php echo $urlJSON ?>', optionsColumnChart, '<?php echo $theme->getId();?>');
@@ -91,7 +96,7 @@ foreach($listeThemes as $theme)
 				  </ol>
 				
 				  <!-- Wrapper for slides -->
-				  <div class="carousel-inner">
+				  <div class="carousel-inner pokemon-red">
 				  	<?php 
 				  	$i = 0;
 					foreach($listeThemes as $theme)
