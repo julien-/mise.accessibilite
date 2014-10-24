@@ -28,6 +28,13 @@ class DAOInscription extends DAOStandard
 		return $this->countRows($result);
 	}
 	
+	public function countByEtudiant($idEtu)
+	{
+		$result = $this->executeQuery('SELECT * FROM inscription WHERE id_etu = ' . $idEtu);
+	
+		return $this->countRows($result);
+	}
+	
 	  public function getAllByEtudiant($id)
 	  {
 	  	$daoEtudiant = new DAOEtudiant($this->_db);

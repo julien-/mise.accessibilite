@@ -18,7 +18,12 @@ class DAOSeance extends DAOStandard
 	
 	public function getByID($id)
 	{
-		$result = $this->executeQuery('SELECT * FROM seance s, cours c, cle, etudiant e WHERE c.id_prof = e.id_etu AND cle.id_cle = c.id_cle AND s.id_cours = c.id_cours');
+		$result = $this->executeQuery('SELECT * 
+										FROM seance s, cours c, cle cl, etudiant e 
+										WHERE s.id_seance = ' .$id. ' 
+										AND s.id_cours = c.id_cours 
+										AND c.id_prof = e.id_etu 
+										AND c.id_cle = cl.id_cle');
 			
 		$seance = $this->fetchArray($result);
 	

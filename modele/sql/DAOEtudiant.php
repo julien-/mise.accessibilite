@@ -19,6 +19,23 @@ class DAOEtudiant extends DAOStandard
   	$result = $this->executeQuery('UPDATE etudiant SET admin = ' . $etudiant->getAdmin() . ',nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '" WHERE pseudo_etu = "' . $etudiant->getLogin() . '"');
   }
   
+  public function updateNomPrenomMailLoginByEtudiant($nom, $prenom, $mail, $login, $idEtu)
+  {
+  	$result = $this->executeQuery('UPDATE etudiant
+  									SET nom_etu = "' . $nom . '",
+  									prenom_etu = "' . $prenom . '",
+  									mail_etu = "' . $mail . '",
+  									pseudo_etu = "' . $login . '"
+  									WHERE id_etu = ' . $idEtu);
+  }
+  
+  public function updatePasswordByEtudiant($password, $idEtu)
+  {
+  	$result = $this->executeQuery('UPDATE etudiant
+  									SET pass_etu = "' . md5($password) . '"
+  									WHERE id_etu = ' . $idEtu);
+  }
+  
   public function delete($id)
   {
   	$daoAvancement = new DAOAvancement(null);

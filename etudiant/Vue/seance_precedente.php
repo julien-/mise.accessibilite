@@ -24,7 +24,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="fa fa-pie-chart"></i> Progression globale lors de cette séance
+					<i class="glyphicon glyphicon-stats"></i> Progression globale lors de cette séance
 				</h3>
 			</div>
 			<div class="panel-body">
@@ -32,7 +32,7 @@
 					<script type="text/javascript">
 		                var optionsPieChart =   {
 		                                            is3D: 'false',
-		                                            chartArea: {left:"20%",top:50,width:"100%", height:"75%"},
+		                                            chartArea: {top:"5%", bottom:"5%",width:"100%", height:"90%"},
 		                                            tooltip: {text: 'percentage' },
 		                                            backgroundColor: { fill:'transparent' },
 		                                            slices: {
@@ -42,7 +42,7 @@
 		                                        };
 		                setPieChartOptions('<?php echo $urlJSONPieChart;?>', optionsPieChart, "pieChart");
     		        </script>
-					<div id="pieChart" style="width: 100%; height: 300px;"></div>
+					<div id="pieChart"></div>
 				</div>
 			</div>
 		</div>
