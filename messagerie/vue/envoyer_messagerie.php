@@ -1,30 +1,3 @@
-<?php
-$daoMessagerie = new DAOMessagerie($db);
-$daoInscription = new DAOInscription($db);
-$daoEtudiant = new DAOEtudiant($db);
-
-if (isset($_POST['go']) && $_POST['go'] == 'Envoyer le message') 
-{
-	if (empty($_POST['destinataire']) || empty($_POST['titre']) || empty($_POST['message'])) 
-	{
-		$erreur = 'Au moins un des champs est vide.';
-	}
-	else 
-	{
-		$message = new Messagerie(array(
-				'destinataire' => $daoEtudiant->getByID($_POST['destinataire']),
-				'expediteur' => $daoEtudiant->getByID($_SESSION['currentUser']->getId()),
-				'date' => date("Y-m-d H:i:s"),
-				'heure' => date("H:i:s"),
-				'titre' => mysql_real_escape_string($_POST['titre']),
-				'texte' => mysql_real_escape_string($_POST['message']),
-				'lu' => 0
-		));
-		$daoMessagerie->send($message);
-	}
-}
-?>
-
 <h1>Envoyer un message</h1>
 
 <?php
@@ -50,8 +23,8 @@ else {
             <form action="index.php?section=envoyer_messagerie" method="post" class="form_envoyer">
             <div class="col-lg-1">Pour :</div>
             <div class="col-lg-11">
-            <input type="text" style="border: 1px solid darkgray;" class="typeahead" id="nom_destinataire" /><br/>
-            <input type="hidden" class="typeahead" name="destinataire" id="destinataire" /><br/>
+            <input type="text" style="border: 1px solid darkgray;" class="typeahead" id="nom_destinataire" <?php if (isset($_GET['id_message_reponse'])) echo 'readonly="readonly" value="' . $identiteCompleteDestinataire . '"';?>/><br/>
+            <input type="hidden" class="typeahead" name="destinataire" id="destinataire" <?php if (isset($_GET['id_message_reponse'])) echo 'value="' . $idDestinataire . '"';?>/><br/>
             </div>
    		</div>
    		<div class="row">
