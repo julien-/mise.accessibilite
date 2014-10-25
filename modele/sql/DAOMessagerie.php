@@ -16,7 +16,15 @@ class DAOMessagerie extends DAOStandard
 	
 	public function update(Messagerie $etudiant)
 	{
-		$result = $this->executeQuery('UPDATE messages SET expediteur = ' . $messagerie->getExpediteur() . ', destinataire = "' . $messagerie->getDestinataire() . '", date_mess = "' . $messagerie->getDate() . '", heure_mess = "' . $messagerie->getHeure() . '", titre_mess = "' . $messagerie->getTitre() . '", texte_mess = "' . $messagerie->getTexte() . '", lu =' . $$messagerie->getLu());	}
+		$result = $this->executeQuery('UPDATE messages SET expediteur = ' . $messagerie->getExpediteur() . ', destinataire = "' . $messagerie->getDestinataire() . '", date_mess = "' . $messagerie->getDate() . '", heure_mess = "' . $messagerie->getHeure() . '", titre_mess = "' . $messagerie->getTitre() . '", texte_mess = "' . $messagerie->getTexte() . '", lu =' . $$messagerie->getLu());	
+	}
+	
+	public function updateLuById($idMessage)
+	{
+		$result = $this->executeQuery('UPDATE messages 
+										SET lu = 1
+										WHERE id_mess = '.$idMessage);
+	}
 	
 	public function delete($id)
 	{
@@ -28,6 +36,47 @@ class DAOMessagerie extends DAOStandard
 		$daoEtudiant = new DAOEtudiant($db);
 		$result = $this->executeQuery('SELECT * FROM messages');
 		 
+		$listeMessage = array();
+		while ($message = $this->fetchArray($result)) {
+			$listeMessage[] = new Messagerie(array(	'id' => $message['id_mess'],
+					'expediteur' => $daoEtudiant->getByID($message['expediteur']),
+					'destinataire' => $daoEtudiant->getByID($message['destinataire']),
+					'date' => $message['date_mess'],
+					'heure' => $message['heure_mess'],
+					'titre' => $message['titre_mess'],
+					'texte' => $message['texte_mess'],
+					'lu' => $message['lu']
+			));
+		}
+		return $listeMessage;
+	}
+	
+	public function getById($idMessage)
+	{
+		$daoEtudiant = new DAOEtudiant($db);
+		$result = $this->executeQuery('SELECT * 
+										FROM messages
+										WHERE id_mess =' .$idMessage);
+			
+		$message = $this->fetchArray($result);
+		
+		$messagebyid = new Messagerie(array(	'id' => $message['id_mess'],
+				'expediteur' => $daoEtudiant->getByID($message['expediteur']),
+				'destinataire' => $daoEtudiant->getByID($message['destinataire']),
+				'date' => $message['date_mess'],
+				'heure' => $message['heure_mess'],
+				'titre' => $message['titre_mess'],
+				'texte' => $message['texte_mess'],
+				'lu' => $message['lu']
+		));
+		return $messagebyid;
+	}
+	
+	public function getAllSends($id)
+	{
+		$daoEtudiant = new DAOEtudiant($db);
+		$result = $this->executeQuery('SELECT * FROM messages WHERE expediteur = ' . $id . ' ORDER BY date_mess DESC');
+			
 		$listeMessage = array();
 		while ($message = $this->fetchArray($result)) {
 			$listeMessage[] = new Messagerie(array(	'id' => $message['id_mess'],

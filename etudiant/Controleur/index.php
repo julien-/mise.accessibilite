@@ -19,14 +19,31 @@ $daoHistorique = new DAOHistorique($db);
 $daoMessage = new DAOMessage($db);
 
 $listeCours = $daoInscription->getAllByEtudiant($_SESSION['currentUser']->getId());
+$nbMessagesNnLu = $daoMessage->countNbNonLu($_SESSION['currentUser']->getId());
 
 if (isset($_GET['section']) && !empty($_GET['section'])) 
 {
 	$now = date("Y-m-d");   //recupère la date d'aujourd'hui
 	
 	$page = $_GET['section'];
+	$pageWithoutPath = $page;
 	
-	if($page == "accueil" || $page == "cours" || $page == "compte" || $page == "messagerie")
+	if (strpos($page, 'messagerie') != false)
+	{
+		//historique
+		$historique = new Historique(array(
+				'page' => $page,
+				'dateVisite' => $now,
+				'heureVisite' => date("H:i:s"),
+				'etudiant' => $_SESSION['currentUser'],
+				'cours' => '0'
+		));
+		$daoHistorique->save($historique);
+		
+		$page = '../../messagerie/controleur/' . $page;
+		unset($_SESSION['cours']);
+	}
+	elseif($page == "accueil" || $page == "cours" || $page == "compte")
 	{
 		//historique
 		$historique = new Historique(array(
@@ -63,16 +80,23 @@ if (isset($_GET['section']) && !empty($_GET['section']))
 	}		
 } 
 else
+{
 	$page = "accueil";
+	$pageWithoutPath = $page;
+}
 
 //affichage des notifications
 if (isset($_SESSION["notif_msg"]) && !(empty($_SESSION["notif_msg"]))) {
 	echo ($_SESSION["notif_msg"]);
 	$_SESSION["notif_msg"] = "";
 }
-switch($page)
+switch($pageWithoutPath)
 {
 	case 'accueil': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Accueil' => 'final'); break;
+	case 'envoyer_messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Messagerie' => 'index.php?section=reception_messagerie', 'Envoyer un message' => 'final'); break;
+	case 'voir_messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Messagerie' => 'index.php?section=reception_messagerie','Boite de réception' => 'index.php?section=reception_messagerie', 'Message reçu' => 'final'); break;
+	case 'envoyes_messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Messagerie' => 'index.php?section=reception_messagerie', 'Boite d\'envoi' => 'final'); break;
+	case 'reception_messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Messagerie' => 'index.php?section=reception_messagerie', 'Boîte de réception' => 'final'); break;
 	case 'compte': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mon Compte' => 'final'); break;
 	case 'messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Ma Messagerie' => 'final'); break;
 	case 'cours': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'final'); break;

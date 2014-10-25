@@ -22,7 +22,7 @@
 						<tr>
 							<td>Nombre de messages non lus</td>
 							<td>
-								<a href="index.php?section=messagerie"><?php echo $nbMessagesNnLu; ?></a>
+								<a href="index.php?section=reception_messagerie"><?php echo $nbMessagesNnLu; ?></a>
 							</td>
 						</tr>
 						<tr>

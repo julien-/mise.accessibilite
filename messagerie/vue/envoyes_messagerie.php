@@ -1,10 +1,10 @@
-<a class="btn btn-primary" href="index.php?section=envoyes_messagerie">Boite d'envoi</a>
+<a class="btn btn-primary" href="index.php?section=reception_messagerie">Boite de reception</a>
 <a class="btn btn-primary" href="index.php?section=envoyer_messagerie">Envoyer un message</a>
-<h1>Boite de réception</h1>
+<h1>Boite d'envoi</h1>
 <?php
 if (sizeof($listeMessages) == 0) 
 {
-	echo 'Vous n\'avez aucun message.';
+	echo 'Vous n\'avez envoyé aucun message.';
 }
 else 
 {
@@ -14,7 +14,7 @@ else
 <table id="tableau" class="interactive-table table table-striped table-bordered">
 	<thead>
 	<tr>
-		<th class="center-text">Expéditeur</th>
+		<th class="center-text">Destinataire</th>
 		<th class="center-text">Sujet</th>
 		<th class="center-text">Date</th>
 	</tr>
@@ -26,13 +26,11 @@ else
 	foreach($listeMessages as $message)
     {
     	?>
-    	<tr class="<?php if (!$message->getLu()) echo "bold"?>">
+    	<tr class="<?php if (!$message->getLu()) echo "bold"?>" title="<?php if (!$message->getLu()) echo "Message non lu par le destinataire"; else echo "Message lu par le destinataire";?>">
     		<td class="autre_colonne">
-    			<a href="index.php?section=voir_messagerie&id_message=<?php echo $message->getId();?>" title="Lire le message"><?php echo $message->getExpediteur()->getPrenom()."&nbsp;". $message->getExpediteur()->getNom(); ?></a>
+    			<?php echo $message->getDestinataire()->getPrenom()."&nbsp;". $message->getDestinataire()->getNom(); ?>
     		</td>
-    		<td class="prem_colonne">
-    			<a href="index.php?section=voir_messagerie&id_message=<?php echo $message->getId();?>" title="Lire le message"><?php echo $message->getTitre(); ?></a>
-    		</td>
+    		<td class="prem_colonne"><?php echo $message->getTitre(); ?></td>
     		<td class="autre_colonne center-text"><?php echo Outils::dateToFr(substr($message->getDate(), 0, 10)) . " à " . $message->getHeure() ; ?></td>
     	</tr>
     	<?php

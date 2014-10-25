@@ -75,6 +75,9 @@
                     
                     	<div class="navbar-collapse collapse">
 	                        <ul class="nav navbar-nav navbar-right">
+	                        	<li>
+                                	<a role="button" href="index.php?section=reception_messagerie" style="color: white; font-size: 20px;"><?php echo $nbMessagesNnLu;?> <i class="glyphicon glyphicon-envelope"></i></a>
+                            	</li>
 	                            <li class="dropdown">
 	                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
                                     <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
