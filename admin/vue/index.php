@@ -127,10 +127,10 @@
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-1">
+                    <div class="<?php if ($page == 'gestion_cours') echo "col-sm-2"; else echo "col-sm-1";?>">
 
                     </div>
-                    <div class="col-sm-10">
+                    <div class="<?php if ($page == 'gestion_cours') echo "col-sm-8"; else echo "col-sm-10";?>">
                           <div>
         <ul class="breadcrumb">
         <?php 
@@ -156,7 +156,7 @@
       </div>
                         <?php include_once($page . '.php'); ?>
                     </div>
-                    <div class="col-sm-1">
+                    <div class="<?php if ($page == 'gestion_cours') echo "col-sm-0"; else echo "col-sm-2";?>">
 
                     </div>
                 </div><!--/row-->
