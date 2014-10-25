@@ -18,7 +18,7 @@
         <br/>
         <div class="col-lg-1">Message: </div>
         <div class="col-lg-11">
-        	<input type="text" style="width: 100%; height: 200px;" name="message" value="<?php echo $message->getTexte();?>"/>
+        	<textarea style="width: 100%; height: 200px;" name="message"><?php echo $message->getTexte();?></textarea>
         </div>
 </div>
 <br/>
