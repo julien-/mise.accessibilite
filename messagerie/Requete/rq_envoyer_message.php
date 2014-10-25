@@ -56,5 +56,10 @@ else
 }
 
 // on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas
-header('Location: ../../etudiant/Controleur/index.php?' . $retourPage);
+if($_SESSION['currentUser']->getAdmin() == 0)
+	$typeofuser = "etudiant";
+else 
+	$typeofuser = "admin";
+
+header('Location: ../../'.$typeofuser.'/Controleur/index.php?' . $retourPage);
 ?>
