@@ -31,7 +31,7 @@ else
     			<?php echo $message->getDestinataire()->getPrenom()."&nbsp;". $message->getDestinataire()->getNom(); ?>
     		</td>
     		<td class="prem_colonne"><?php echo $message->getTitre(); ?></td>
-    		<td class="autre_colonne center-text"><?php echo Outils::dateToFr(substr($message->getDate(), 0, 10)) . " à " . $message->getHeure() ; ?></td>
+    		<td class="autre_colonne center-text"><span style="display:none"><?php echo $message->getId();?></span><?php echo Outils::dateToFr(substr($message->getDate(), 0, 10)) . " à " . $message->getHeure() ; ?></td>
     	</tr>
     	<?php
 	}
