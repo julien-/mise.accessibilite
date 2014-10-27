@@ -4,7 +4,10 @@
 <div class="row tt-input-group">
             <div class="col-lg-1">De :</div>
             <div class="col-lg-11">
-            	<input type="text" style="width: 100%; border: 1px solid darkgray;" class="typeahead" value="<?php echo $message->getExpediteur()->getNom();?>"/>
+            	<?php 
+            	$identiteCompleteExpediteur = $message->getExpediteur()->getPrenom() . ' ' . $message->getExpediteur()->getNom() . ' (' . $message->getExpediteur()->getLogin() . ')';
+            	?>
+            	<input type="text" style="width: 100%; border: 1px solid darkgray;" class="typeahead" value="<?php echo $identiteCompleteExpediteur;?>"/>
             </div>
 </div>
 <div class="row">
