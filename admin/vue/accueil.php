@@ -192,7 +192,7 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 					?>
                 <tr>
 							<td class='autre_colonne vert-align'><a
-								href='index.php?section=details_themel&c='><?php echo $theme->getTitre(); ?></a>
+								href='index.php?section=details_theme&t=<?php echo $theme->getId(); ?>'><?php echo $theme->getTitre(); ?></a>
 							</td>
 							<td class="prem_colonne vert-align">
 

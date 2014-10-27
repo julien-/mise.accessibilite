@@ -127,8 +127,9 @@
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
+                
                     <div class="<?php if ($page == 'gestion_cours') echo "col-sm-2"; else echo "col-sm-1";?>">
-
+<?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
                     </div>
                     <div class="<?php if ($page == 'gestion_cours') echo "col-sm-8"; else echo "col-sm-10";?>">
                           <div>
@@ -154,10 +155,10 @@
         ?>
         </ul>
       </div>
-                        <?php include_once($page . '.php'); ?>
+                        <?php include_once('../controleur/' . $page . '.php'); ?>
                     </div>
                     <div class="<?php if ($page == 'gestion_cours') echo "col-sm-0"; else echo "col-sm-2";?>">
-
+						
                     </div>
                 </div><!--/row-->
             </div><!--/container-->

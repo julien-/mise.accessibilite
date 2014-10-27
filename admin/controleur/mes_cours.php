@@ -73,6 +73,7 @@ if ($rq_exos === FALSE) {
 								<th class="center-text">Inscrits</th>
 								<th class="center-text">Th&egrave;mes</th>
 								<th class="center-text">Détails</th>
+								<th class="center-text">Gérer</th>
 								<th class="center-text">Modifier la clé du cours</th>
 								<th class="center-text">Forum</th>
 								<th class="center-text">Supprimer</th>
@@ -113,6 +114,11 @@ if ($rq_exos === FALSE) {
 									href="index.php?section=accueil&c=<?php echo $mon_cours['id_cours']; ?>">
 										<i class="glyphicon glyphicon-list-alt color-cours"
 										title="D&eacute;tails sur ce cours"></i>
+								</a></td>
+								<td class="petite_colonne vert-align"><a
+									href="index.php?section=gestion_cours&c=<?php echo $mon_cours['id_cours']; ?>">
+										<i class="glyphicon glyphicon-list-alt color-cours"
+										title="Gérer ce cours"></i>
 								</a></td>
 								<!--Modifier la clé du cours-->
 								<td class="autre_colonne vert-align">

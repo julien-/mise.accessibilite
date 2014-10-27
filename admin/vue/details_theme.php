@@ -1,0 +1,1 @@
+<h1><?php echo $theme->getTitre(); ?></h1>

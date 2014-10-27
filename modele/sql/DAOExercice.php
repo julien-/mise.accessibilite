@@ -75,15 +75,13 @@ class DAOExercice extends DAOStandard
 	  	$result = $this->executeQuery('SELECT * FROM exercice ex, theme t, cours c, etudiant e, cle WHERE ex.id_theme = t.id_theme AND c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND ex.id_theme = ' . $id);
 	  
 	  
-	  	if ($exercice == null)
-	  		return false;
 	  
 	  	$listResult = array();
 	  	
 	  	while($exercice = $this->fetchArray($result))
 	  	{
 		  	$listResult[] = new Exercice (array('id' => $exercice['id_exo'],
-		  			'titre_exo' => $exercice['titre_exo'],
+		  			'titre' => $exercice['titre_exo'],
 		  			'numero' => $exercice['num_exo'],
 		  			'theme' => new Theme(array('id' => $exercice['id_theme'],
 		  					'titre' => $exercice['titre_theme'],

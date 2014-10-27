@@ -60,6 +60,8 @@ else
 
 switch($pageWithoutPath)
 {
+	case 'details_theme': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', $daoTheme->getByID($_GET['t'])->getCours()->getLibelle() => 'index.php?section=accueil&c='.$daoTheme->getByID($_GET['t'])->getCours()->getId(), $daoTheme->getByID($_GET['t'])->getTitre() => 'final'); break;
+	case 'gestion_cours': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Gestion du cours' => 'final'); break;
 	case 'envoyes_messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Messagerie' => 'index.php?section=reception_messagerie', 'Boite d\'envoi' => 'final'); break;
 	case 'voir_messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Messagerie' => 'index.php?section=reception_messagerie', 'Lecture d\'un message' => 'final'); break;
 	case 'envoyer_messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Messagerie' => 'index.php?section=reception_messagerie', 'Envoyer un message' => 'final'); break;
