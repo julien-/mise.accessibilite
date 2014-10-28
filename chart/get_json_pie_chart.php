@@ -1,18 +1,15 @@
 <?php
-include_once('../sql/connexion_mysql.php');
+include_once('../lib/autoload.inc.php');
 
-include_once('../modele/sql/DAOAvancement.php');
-include_once('../modele/sql/DAOMysqli.php');
-include_once('../modele/sql/DBFactory.php');
-$db = DBFactory::getMysqlConnexionWithMySQLi();
-
-if ($_GET['user'] != -1)
+$db = DBFactory::getMysqlConnexionStandard();
+$daoAvancement = new DAOAvancement($db);
+if (isset($_GET['e']))
 {
-	$progression = (int)$daoAvancement->getByThemeEtudiant($_GET['theme'], $_GET['user']);
+	$progression = (int)$daoAvancement->getByThemeEtudiant($_GET['t'], $_GET['e']);
 }
 else
 {
-	$progression = (int)$daoAvancement->getByTheme($_GET['theme']);
+	$progression = (int)$daoAvancement->getByTheme($_GET['t']);
 }
 
 $table = array();
