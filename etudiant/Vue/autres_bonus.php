@@ -90,7 +90,7 @@ foreach($listeThemes as $theme)
 				            		if($mon_avancement['remarque'] != null)
 				            		{
 				            	?>
-					            		<a  id="voir_remarque" class="glyphicon glyphicon-search" data-toggle="modal" data-target="#ViewRemarqueBonus<?php echo $bonus->getId();?>" title="Voir ma remarque" value="<?php echo $mon_avancement['remarque'];?>"></a>   		
+					            		<a class="voir_remarque glyphicon glyphicon-search" data-toggle="modal" data-target="#ViewRemarqueBonus<?php echo $bonus->getId();?>" title="Voir ma remarque"></a>   		
 										
 										<!-- Popup Affichache remarque -->
 										<div class="modal fade" id="ViewRemarqueBonus<?php echo $bonus->getId();?>" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
@@ -98,9 +98,9 @@ foreach($listeThemes as $theme)
 										        <div class="modal-content">
 										            <div class="modal-header">
 									                	<button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-									                	<h4 id="myModalLabel" class="modal-title">Ma Remarque</h4>
+									                	<h4 class="modal-title">Ma Remarque</h4>
 										            </div>
-										            <div id="afficherremarque" class="modal-body">
+										            <div class="modal-body" >
 										            	<p><?php echo $mon_avancement['remarque'];?></p>
 										            </div>
 										            <div class="modal-footer">
@@ -114,7 +114,7 @@ foreach($listeThemes as $theme)
 				            		else 
 				            		{
 		            			?>
-				            			<a id="ajouter_remarque" value="<?php echo $bonus->getId();?>" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ViewAddRemarqueBonus<?php echo $bonus->getId();?>" title="Ajouter une remarque"></a>  
+				            			<a class="ajouter_remarque glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ViewAddRemarqueBonus<?php echo $bonus->getId();?>" title="Ajouter une remarque" value="<?php echo $bonus->getId();?>"></a>  
 				            			
 				            			<!-- Popup Ajout remarque -->
 										<div class="modal fade" id="ViewAddRemarqueBonus<?php echo $bonus->getId();?>" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
@@ -122,15 +122,18 @@ foreach($listeThemes as $theme)
 										        <div class="modal-content">
 										            <div class="modal-header">
 										                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-										                <h4 id="myModalLabel" class="modal-title">Ajouter une Remarque</h4>
+										                <h4 class="modal-title">Ajouter une Remarque</h4>
 										            </div>
-										            <form method="post" name="form_add_remarque" action="../Requete/rq_autres_bonus.php?section=autres_bonus&addremarque">
+										            <form method="post" name="<?php echo "form_add_remarque".$bonus->getId();?>" action="../Requete/rq_autres_bonus.php?section=autres_bonus&addremarque">
 														<div class="modal-body">
-									                		<input type="text" name="remarque" id="remarque" size="60" class="inputValDefaut"/>
+									                		<input type="text" name="remarque" id="remarque<?php echo $bonus->getId();?>" size="60" class="inputValDefaut"/>
+									                		<br/>
+									                		<br/>
+									                		<p></p>
 										                </div>
 										                <div class="modal-footer">
 															<input type="hidden" name="id_bonus" value="<?php echo $bonus->getId();?>"/>
-										                	<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_remarque" alt='Ajouter une remarque' title='Ajouter une remarque' value="Ajouter"/>
+										                	<input type="submit" class="soumettre_remarque btn btn-primary" id="<?php echo $bonus->getId();?>" alt='Ajouter une remarque' title='Ajouter une remarque' value="Ajouter"/>
 										                	<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 										    			</div>
 										            </form>

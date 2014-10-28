@@ -80,13 +80,13 @@ foreach($listeThemes as $theme)
         <div class="modal-content">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 id="myModalLabel" class="modal-title">Ajouter un bonus au theme <?php echo $theme->getTitre();?></h4>
+                <h4 class="modal-title">Ajouter un bonus au theme <?php echo $theme->getTitre();?></h4>
             </div>
-            <form method="post" class="form_add_bonus" name="form_add_bonus" action="../Requete/rq_mes_bonus.php?section=mes_bonus&addbonus">
+            <form method="post" name="<?php echo "form_add_bonus".$theme->getId();?>" action="../Requete/rq_mes_bonus.php?section=mes_bonus&addbonus">
             	<div class="modal-body">
             		<div class="form-group">
             			<label for="titrebonus">Titre du Bonus</label>
-	                	<input type="text" name="titrebonus" id="titrebonus" size="35" class="inputValDefaut">
+	                	<input type="text" name="titrebonus" id="titrebonus<?php echo $theme->getId();?>" size="35" class="inputValDefaut">
 	                </div>
 	                <div class="form-group">
 		                <label for="typebonus">Type de bonus</label>
@@ -111,12 +111,15 @@ foreach($listeThemes as $theme)
 	                </div>	                	
                 	<div id="liste_collaborateurs<?php echo $theme->getId();?>">                	
                 	</div>
+                	<br/>
+					<br/>
+                	<p></p>
 	           </div>
 	           <div class="modal-footer">
                 	<div id="donnees_cachees<?php echo $theme->getId();?>">
                 	</div>
                 	<input type="hidden" name="themebonus" value="<?php echo $theme->getId();?>"/>
-                	<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_bonus" alt='Ajouter le bonus' title='Ajouter le bonus' value="Ajouter"/>
+                	<input type="submit" class="soumettre_bonus btn btn-primary" id="<?php echo $theme->getId();?>" alt='Ajouter le bonus' title='Ajouter le bonus' value="Ajouter"/>
                 	<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
     			</div>
 	    	</form>

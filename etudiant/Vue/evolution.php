@@ -24,8 +24,7 @@ foreach($listeThemes as $theme)
 	$urlJSON = '../../chart/get_json_columnchart.php?theme='.$theme->getId();
 ?>
 	var optionsColumnChart = {
-		height: 300,
-		width: 700,
+		width:"100%",	
 		title: '<?php echo $theme->getTitre();?>',
 		legend: { position: 'none'},
 	    bar: { groupWidth: '75%' },
@@ -103,7 +102,7 @@ foreach($listeThemes as $theme)
 					{
 					?>
 						<div class="<?php if($i == 0) echo "item active"; else echo "item";?>">
-				      		<div id="<?php echo $theme->getId();?>" style="margin-left: auto; margin-right: auto; width: 80%; height: 40%;"></div>
+				      		<div id="<?php echo $theme->getId();?>" style="margin-left: auto; margin-right: auto; width: 80%;"></div>
 				    	</div>
 					<?php 						
 						$i++;

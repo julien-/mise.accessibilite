@@ -1,21 +1,20 @@
 $(document).ready(function() {
-		$(".fait").click(function() {
-			var fait = "input[id=fait" + ($(this).data('sc')-1) + "]";
-			if (!$(fait).is(':checked')) 
-			{
-				var compris = "input[id=fait" + $(this).attr('value') + "]";
-				$(compris).attr('checked', false);
-				
-				$("#bloc_page").append('<div class="erreur">Vous devez avoir au moins fait l\'exercice précédent</div>');
-	            //cache l'erreur
-	            $('.erreur').delay(5000).fadeOut();
-	            //Supprime l'erreur
-	            setTimeout(function() {
-	                $('.erreur').remove();
-	            }, 4000);
-	            return false;
-			}
-		});
+	$(".fait").click(function() {
+		var fait = "input[data-sc=" + ($(this).data('sc')-1) + "]";
+		if (!$(fait).is(':checked')) 
+		{
+			var fait = "input[data-sc=" + $(this).data('sc') + "]";
+			$(fait).attr('checked', false);
+			
+			$('#modal_popup').modal();  
+			$('#modal_popup').find('h4').html('<span style="color:red;">Erreur</span>');
+			$('#modal_popup').find('p').html('<span>Vous devez avoir au moins fait l\'exercice précédent</span>');  
+			$('#modal_popup').modal('show');
+			
+            return false;
+		}
+	});
+	
 	$(".compris").click(function() {
 		var fait = "input[id=fait" + $(this).attr('value') + "]";
 		if (!$(fait).is(':checked')) 
@@ -23,13 +22,11 @@ $(document).ready(function() {
 			var compris = "input[id=compris" + $(this).attr('value') + "]";
 			$(compris).attr('checked', false);
 			
-			$("#bloc_page").append('<div class="erreur">Vous devez avoir fait l\'exercice pour le comprendre</div>');
-            //cache l'erreur
-            $('.erreur').delay(5000).fadeOut();
-            //Supprime l'erreur
-            setTimeout(function() {
-                $('.erreur').remove();
-            }, 4000);
+			$('#modal_popup').modal();  
+			$('#modal_popup').find('h4').html('<span style="color:red;">Erreur</span>');
+			$('#modal_popup').find('p').html('<span>Vous devez avoir fait l\'exercice pour le comprendre</span>');  
+			$('#modal_popup').modal('show');
+			
             return false;
 		}
 	});
@@ -41,14 +38,12 @@ $(document).ready(function() {
 			var assimile = "input[id=assimile" + $(this).attr('value') + "]";
 			$(assimile).attr('checked', false);
 			
-			$("#bloc_page").append('<div class="erreur">Vous devez avoir fait et compris l\'exercice pour l\'assimiler</div>');
-            //cache l'erreur
-            $('.erreur').delay(5000).fadeOut();
-            //Supprime l'erreur
-            setTimeout(function() {
-                $('.erreur').remove();
-            }, 4000);
-            return false;
+			$('#modal_popup').modal();  
+			$('#modal_popup').find('h4').html('<span style="color:red;">Erreur</span>');
+			$('#modal_popup').find('p').html('<span>Vous devez avoir fait et compris l\'exercice pour l\'assimiler</span>');  
+			$('#modal_popup').modal('show');
+			
+			return false;
 		}
 	});
 	
@@ -56,13 +51,11 @@ $(document).ready(function() {
 		var remarque = "input[name=remarque]";
 		if (!$(remarque).val()) 
 		{
-			$("#bloc_page").append('<div class="erreur">Vous devez remplir la remarque avant de valider</div>');
-            //cache l'erreur
-            $('.erreur').delay(5000).fadeOut();
-            //Supprime l'erreur
-            setTimeout(function() {
-                $('.erreur').remove();
-            }, 4000);
+			$('#modal_popup').modal();  
+			$('#modal_popup').find('h4').html('<span style="color:red;">Erreur</span>');
+			$('#modal_popup').find('p').html('<span>Vous devez remplir la remarque avant de valider</span>');  
+			$('#modal_popup').modal('show');
+			
             return false;
 		}
 	});

@@ -29,17 +29,14 @@ $(document).ready(function() {
 		$(input).remove();
 	});
 	
-	$("#soumis_bonus").click(function() {
-		var remarque = "input[id=titrebonus]";
-		if (!$(remarque).val()) 
+	$(".soumettre_bonus").click(function() {
+		var titre = "input[id=titrebonus" + $(this).attr('id') + "]";
+		var modal = "div[id=ViewAjoutBonusTheme" + $(this).attr('id') + "]";
+		if (!$(titre).val()) 
 		{
-			$("#bloc_page").append('<div class="erreur">Vous devez remplir le titre du bonus avant de valider</div>');
-            //cache l'erreur
-            $('.erreur').delay(5000).fadeOut();
-            //Supprime l'erreur
-            setTimeout(function() {
-                $('.erreur').remove();
-            }, 4000);
+			$(modal).modal();  
+			$(modal).find('p').html('<span style="color:red;">Erreur</span><span> Vous devez remplir le titre du bonus avant de valider</span>');
+
             return false;
 		}
 	});

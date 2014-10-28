@@ -21,8 +21,6 @@ if (isset($_GET["addbonus"])) {
 			$daoAvancement_bonus->insertFaitByEtuBonus($id_etu, $id_bonus);
 		}
 	}
-	
-	$message = "Bonus crée avec succes";
 	$redirige = true;
 }
 
@@ -38,11 +36,6 @@ if (isset($_GET['section']))
 else
 	$retourPage = "";
 session_start();
-
-if ($redirige)
-	$_SESSION["notif_msg"] = '<div class="ok">'.$message.'</div>';
-else
-	$_SESSION["notif_msg"] = '<div class="erreur">Erreur dans l\' execution de la requête...</div>';
 
 // on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas
 header('Location: ../Controleur/index.php?' . $retourPage);

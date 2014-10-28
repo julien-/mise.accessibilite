@@ -20,7 +20,6 @@ if ($_GET['theme'] != -1)
 			array('label' => 'fait   ', 'type' => 'number'),
 			array('role' => 'tooltip', 'type' => 'string', 'p' => array( 'role' => 'tooltip')),
 			array('role' => 'style', 'type' => 'string', 'p' => array ('role' => 'style')),
-			
 			array('label' => 'compris   ', 'type' => 'number'),
 			array('role' => 'tooltip', 'type' => 'string', 'p' => array( 'role' => 'tooltip')),
 			array('role' => 'style', 'type' => 'string', 'p' => array ('role' => 'style')),

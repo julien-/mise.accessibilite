@@ -6,15 +6,20 @@
         <title>My Study Companion</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../css/bootstrap/bootstrapValidator.min.css" rel="stylesheet">
+        <link href="../../css/bootstrap/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="../../css/bootstrap/bootstrap-tour.min.css" rel="stylesheet">
+        <link href="../../css/bootstrap/dataTables.bootstrap.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
+        <link href="../../css/typeahead.css" rel="stylesheet">
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
         <link href="../../css/style.css" rel="stylesheet">
-        <link href="../../css/<?php echo $page; ?>.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
+        <?php if (file_exists("../../css/" . $pageWithoutPath . ".css")){?>
+        <link href="../../css/<?php echo $pageWithoutPath; ?>.css" rel="stylesheet">
+        <?php }?>
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -221,6 +226,21 @@
 					        ?>
 					        </ul>
 				      	</div>
+				      	
+				      	<!-- Small modal popup -->						
+						<div  id="modal_popup" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+						  <div class="modal-dialog modal-sm">
+						    <div class="modal-content">
+						    	<div class="modal-header">
+        							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+       								 <h4 class="modal-title"></h4>
+       							</div>
+       							<div class="modal-body">
+						        	<p></p>
+						      	</div>
+						    </div>
+						  </div>
+						</div>
                         <?php include_once('../Controleur/' . $page . '.php'); ?>
                     </div>
                 </div><!--/row-->
@@ -242,26 +262,36 @@
             		<span>Copyright © 2014 - My Study Companion ® - Tous droits réservés</span>
             	</p>
             </div>
-        </div>
+        </div>     
         
-        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script type='text/javascript' src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-		<!--Integration des fichiers js de chaque page-->
-        <script type="text/javascript" src="../js/<?php echo ($page . ".js"); ?>"></script>
-        <script type="text/javascript" src="../js/commun.js"></script>
-
-        <!-- JavaScript jQuery code from Bootply.com editor  -->
-
-        <script type='text/javascript'>
-
-            $(document).ready(function() {
-
-
-
-            });
-
-        </script>
+        
+        <script type='text/javascript' src="../../js/jquery-1.11.0.js"></script>
+        <script type="text/javascript" src="../../js/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../js/bootstrap/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/dataTables.bootstrap.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/dataTablePerso.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/bootstrap-alert.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/bootstrap-tour.min.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/typeahead.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/handlebars.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/jquery.validate.min.js"></script>
+		<script type="text/javascript" src='../../js/googleChartAPI.js'></script>
+        
+        <!--Integration des fichiers js de chaque page-->
+        <?php if (file_exists("../js/" . $pageWithoutPath . ".js"))
+        {
+        ?>
+        	<script type="text/javascript" src="../js/<?php echo ($pageWithoutPath . ".js"); ?>"></script>
+        <?php 
+        }
+        elseif (file_exists("../../js/" . $pageWithoutPath . ".js")) 
+        {
+        ?>
+        	<script type="text/javascript" src="../../js/<?php echo ($pageWithoutPath . ".js"); ?>"></script>
+        <?php 
+        }
+        ?>
+        <script type="text/javascript" src="../../js/commun.js"></script>
 
         <script>
             (function(i, s, o, g, r, a, m) {
@@ -295,6 +325,5 @@
                 qacct: "p-0cXb7ATGU9nz5"
             });
         </script>
-
     </body>
 </html>
