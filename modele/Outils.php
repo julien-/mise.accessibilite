@@ -38,6 +38,20 @@ class Outils
 		return $basename;
 	}
 	
+	public static function formatterNom($str)
+	{
+		$str = strtolower($str);
+		$total=strlen($str); 
+		$str[0] = strtoupper($str[0]); 
+		for ($i=1 ; $i < $total-1; $i++) { 
+		    if (($str[$i] == " ") || ($str[$i] == "-")) { 
+		        $str[$i+1] = strtoupper($str[$i+1]); 
+		        $i++;
+		    }
+		}
+		return $str;
+	}
+	
 	public static function determineDate($date)
 	{
 		$current = strtotime(date("Y-m-d"));

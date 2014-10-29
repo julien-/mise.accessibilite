@@ -1,10 +1,10 @@
 <?php
 class Etudiant {
-	protected $erreurs = array (), $id, $nom, $prenom, $login, $pass, $mail, $admin;
+	protected $id, $nom, $prenom, $login, $pass, $mail, $admin;
 	
 	
 	public function __construct($valeurs = array()) {
-		if (! empty ( $valeurs )) // Si on a spécifié des valeurs, alors on hydrate l'objet.
+		if (! empty ( $valeurs )) // Si on a spï¿½cifiï¿½ des valeurs, alors on hydrate l'objet.
 		{
 			$this->hydrate ( $valeurs );
 		}
@@ -21,9 +21,7 @@ class Etudiant {
 			}
 		}
 	}
-	public function setErreurs($value) {
-		$this->erreurs = $value;
-	}
+
 	public function setId($value) {
 		$this->id = $value;
 	}
@@ -45,17 +43,14 @@ class Etudiant {
 	public function setAdmin($value) {
 		$this->admin = $value;
 	}
-	public function getErreurs() {
-		return $this->erreurs;
-	}
 	public function getId() {
 		return $this->id;
 	}
 	public function getNom() {
-		return $this->nom;
+		return Outils::formatterNom($this->nom);
 	}
 	public function getPrenom() {
-		return $this->prenom;
+		return Outils::formatterNom($this->prenom);
 	}
 	public function getLogin() {
 		return $this->login;
@@ -68,5 +63,8 @@ class Etudiant {
 	}
 	public function getAdmin() {
 		return $this->admin;
+	}
+	public function getPrenomNom() {
+		return $this->getPrenom() . ' ' . $this->getNom();
 	}
 }

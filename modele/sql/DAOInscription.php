@@ -139,7 +139,7 @@ class DAOInscription extends DAOStandard
 	  public function getAllByCours($id)
 	  {
 	  	$daoEtudiant = new DAOEtudiant($this->_db);
-	  	$sql = 'SELECT * FROM inscription i, etudiant e, cours c, cle WHERE c.id_cle = cle.id_cle AND i.id_etu = e.id_etu AND i.id_cours = c.id_cours AND i.id_cours = ' . $id . ' GROUP BY c.id_cours ORDER BY date_inscription';
+	  	$sql = 'SELECT * FROM inscription i, etudiant e, cours c, cle WHERE c.id_cle = cle.id_cle AND i.id_etu = e.id_etu AND i.id_cours = c.id_cours AND i.id_cours = ' . $id . ' GROUP BY i.id_etu ORDER BY nom_etu';
 
 	  	$result = $this->executeQuery($sql);
 	  	$listeInscription = null;

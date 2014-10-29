@@ -29,6 +29,7 @@ foreach($listeThemes as $theme)
 		legend: { position: 'none'},
 	    bar: { groupWidth: '75%' },
 	    isStacked: true,
+	    tooltip: {isHtml: true}, 
 	    backgroundColor: { fill:'transparent' },
 	    colors : ['#FF6633','#FFCC33','#99FF33'],
 	    vAxis: {

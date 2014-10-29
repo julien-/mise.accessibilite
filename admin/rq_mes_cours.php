@@ -170,18 +170,8 @@ if (isset($_GET["addexo"])) {
     mysql_query('INSERT INTO ' . $tb_exercice . ' (id_theme, num_exo, titre_exo) ' .
             'VALUES (' . $_POST['id_them_sel'] . ', ' . $_POST['nbmax_exo'] . ', "' . $_POST['titre_exo'] . '");');
     //récupère l'autoincrement créé
-    $id_autoincrement = mysql_fetch_assoc(mysql_query("SELECT LAST_INSERT_ID() AS id_exo_insere"));
 
-    //Recupere l'id des etudiants inscrits
-    $rq_idetu = mysql_query("SELECT e.id_etu AS IdEtu
-                             FROM etudiant e, theme t, inscription i
-                             WHERE e.id_etu = i.id_etu
-                             AND i.id_cours = t.id_cours
-                             AND t.id_theme = " . $_POST['id_them_sel'] . "") or die(mysql_error());
-    echo "here";
-    while ($id_etu = mysql_fetch_assoc($rq_idetu)) {
-        mysql_query("INSERT INTO avancement VALUES (" . $id_etu['IdEtu'] . "," . $id_autoincrement["id_exo_insere"] . ",0,0,0,0)") or die(mysql_error());
-    }
+   
 
     $redirige = true;
 }

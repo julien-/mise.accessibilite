@@ -83,6 +83,7 @@ class DAOAvancement extends DAOStandard
 		return number_format(($avancement['progression'] / $avancement['total']) * 100, 2);
 	}
 	
+
   	function getByTheme($idTheme)
   	{
   		$sql = 'CREATE TEMPORARY TABLE R1
@@ -129,6 +130,36 @@ class DAOAvancement extends DAOStandard
 	  	return number_format(($avancement['progression'] / $avancement['total']) * 100, 2);
    	}
   
+   	function getByExercice($idExo)
+   	{
+   		$sql = '    
+   				SELECT e.id_exo 
+   				FROM exercice e, theme t
+   				WHERE t.id_theme = e.id_theme
+   				AND e.id_exo = ' . $idExo;
+   		
+   		$req_total = mysql_query($sql) or die (mysql_error());
+   		$total = mysql_num_rows($req_total);
+   		
+   		$sql = 'SELECT e.id_etu FROM etudiant e';
+   		$req_total_etudiant = mysql_query($sql) or die (mysql_error());
+   		$totalEtudiant = mysql_num_rows($req_total_etudiant);
+   		
+   		$total = $total * $totalEtudiant * 100;
+   		
+   		$sql = '
+   				SELECT SUM( assimile + compris + fait ) AS avancement
+	            FROM avancement a, theme t, exercice e
+	            WHERE a.id_exo = e.id_exo
+	            AND t.id_theme = e.id_theme
+				AND e.id_exo = ' . $idExo;
+   		
+   		$req_progression = mysql_query($sql) or die (mysql_error());
+   		$avancement = mysql_fetch_array($req_progression);
+   		return number_format(($avancement['avancement'] / $total) * 100, 2);
+   	}
+   	
+   	
   	function getByCours($idCours)
   	{
 	  	$sql = '    SELECT e.id_exo '
