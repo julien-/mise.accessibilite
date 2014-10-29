@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
 	$(".note").change(function() {
 		var checkbox_bonus = "input[name=bonus_suivi" + $(this).attr('value') + "]";
 		if (!$(checkbox_bonus).is(':checked')) 

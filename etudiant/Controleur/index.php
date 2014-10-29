@@ -43,7 +43,7 @@ if (isset($_GET['section']) && !empty($_GET['section']))
 		$page = '../../messagerie/controleur/' . $page;
 		unset($_SESSION['cours']);
 	}
-	elseif($page == "accueil" || $page == "cours" || $page == "compte")
+	elseif($page == "accueil" || $page == "cours" || $page == "compte" || $page == "inscription_cours")
 	{
 		//historique
 		$historique = new Historique(array(
@@ -85,11 +85,6 @@ else
 	$pageWithoutPath = $page;
 }
 
-//affichage des notifications
-if (isset($_SESSION["notif_msg"]) && !(empty($_SESSION["notif_msg"]))) {
-	echo ($_SESSION["notif_msg"]);
-	$_SESSION["notif_msg"] = "";
-}
 switch($pageWithoutPath)
 {
 	case 'accueil': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Accueil' => 'final'); break;
@@ -100,6 +95,7 @@ switch($pageWithoutPath)
 	case 'compte': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mon Compte' => 'final'); break;
 	case 'messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Ma Messagerie' => 'final'); break;
 	case 'cours': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'final'); break;
+	case 'inscription_cours': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'S\'inscrire' => 'final'); break;
 	case 'evolution': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Evolution' => 'final'); break;
 	case 'seance_precedente': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index?section=accueil.php', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Séance du '.transformerDate($daoSeance->getByID($_GET["id_seance"])->getDate()) => 'final'); break;
 	case 'seance_actuelle': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Séance du '.transformerDate($daoSeance->getByID($_GET["id_seance"])->getDate()) => 'final'); break;

@@ -5,6 +5,11 @@ class DAOInscription extends DAOStandard
 	{
 		$this->executeQuery('INSERT INTO inscription SET date_inscription = "' . $inscription->getDate() . '" id_cours = "' . $inscription->getCours()->getId() . '", id_etu = ' . $inscription->getEtudiant()->getId());
 	}
+	
+	public function insertByDateAndEtuAndCours($date, $idEtu, $idCours)
+	{
+		$this->executeQuery('INSERT INTO inscription SET date_inscription = "'.$date.'", id_cours = ' . $idCours . ', id_etu = ' . $idEtu);
+	}
 	  
 	public function deleteByEtudiant($id)
 	{
@@ -33,6 +38,23 @@ class DAOInscription extends DAOStandard
 		$result = $this->executeQuery('SELECT * FROM inscription WHERE id_etu = ' . $idEtu);
 	
 		return $this->countRows($result);
+	}
+	
+	public function countByCours($idCours)
+	{
+		$result = $this->executeQuery('SELECT * FROM inscription WHERE id_cours = ' . $idCours);
+	
+		return $this->countRows($result);
+	}
+	
+	public function estInscrit($idEtu, $idCours)
+	{
+		$result = $this->executeQuery('SELECT * FROM inscription WHERE id_cours = ' . $idCours . ' AND id_etu = ' . $idEtu);
+	
+		if($this->countRows($result) == 0)
+			return false;
+		else 
+			return true;
 	}
 	
 	  public function getAllByEtudiant($id)

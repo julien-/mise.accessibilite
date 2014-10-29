@@ -1,3 +1,6 @@
+<a class="btn btn-primary" href="index.php?section=inscription_cours">S'inscrire à un cours</a>
+<br/>
+<br/>
 <?php
 
 $consignes = "
@@ -28,11 +31,11 @@ else
             <th class="center-text">Progression</th>
         </tr>
     </thead>
-    <?php
-    foreach ($listeCours as $cours)
-    {
-    ?>
     <tbody>
+    	<?php
+	    foreach ($listeCours as $cours)
+	    {
+	    ?>
         <tr>
             <!--Titre du cours-->
             <td class="autre_colonne">
@@ -65,8 +68,9 @@ else
                 </div>
             </td>
         </tr>
-    </tbody>
         <?php } ?>
+    </tbody>
+        
 </table>
 <?php
 } 
