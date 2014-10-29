@@ -157,7 +157,7 @@
 		                                    ?>
 		                                </ul>
   									</li>
-  									<li><a href="#">Ma Progression</a></li>
+  									<li><a href="index.php?section=progression">Ma Progression</a></li>
   									<li class="dropdown">
   										<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
   											Bonus <b class="caret"></b>

@@ -46,6 +46,44 @@ class DAOAvancement extends DAOStandard
 				ORDER BY date");
 	}
 	
+	function getByCoursThemeEtudiant($idCours, $idTheme, $idEtudiant)
+	{
+		$sql = 'CREATE TEMPORARY TABLE TThemes
+            SELECT COUNT(*) * 100 as total
+            FROM exercice
+            WHERE id_theme = ' . $idTheme;
+		
+		$this->executeQuery($sql);
+		
+		$sql = 'CREATE TEMPORARY TABLE TCalcultheme
+            SELECT SUM(fait+compris+assimile) as progression FROM theme t, avancement a, exercice e
+            WHERE t.id_theme = e.id_theme
+            AND e.id_exo = a.id_exo
+            AND id_etu = ' . $idEtudiant . '
+            AND t.id_theme = ' . $idTheme . '
+			AND t.id_cours = ' . $idCours;
+		
+		$this->executeQuery($sql);
+		
+		$sql = 'SELECT progression, total
+            FROM TThemes, TCalcultheme';
+		
+		$result = $this->executeQuery($sql);
+		
+		$avancement = $this->fetchArray($result);
+		
+		$sql = 'DROP TEMPORARY TABLE TThemes;';
+		$result = $this->executeQuery($sql);
+		
+		$sql = 'DROP TEMPORARY TABLE TCalcultheme;';
+		$result = $this->executeQuery($sql);
+		
+		if ($avancement['total'] == 0)
+			return 0;
+			
+		return number_format(($avancement['progression'] / $avancement['total']) * 100, 2);
+	}
+	
 	function getByThemeEtudiant($idTheme, $idEtudiant)
 	{
 		$sql = 'CREATE TEMPORARY TABLE TThemes

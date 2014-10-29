@@ -1,58 +1,77 @@
 <?php
-include_once('../sql/connexion_mysql.php');
-include_once('../fonctions.php');
+	include_once ('../modele/Etudiant.php');
+	include_once ('../modele/Cours.php');
+	include_once ('../modele/Outils.php');
+	include_once ('../modele/sql/DAOAvancement.php');
+	include_once ('../modele/sql/DBFactory.php');
+	session_start ();
+	
+	$db = null;
+	DBFactory::getMysqlConnexionStandard ();
+	$daoAvancement = new DAOAvancement ( $db );
+	$progressionEtudiant = $daoAvancement->getByCoursEtudiant ( $_SESSION ['cours']->getId (), $_SESSION ['currentUser']->getId () );
+	
+	$table = array ();
+	$table ['cols'] = array (
+			
+			array (
+					'label' => 'Titre',
+					'type' => 'string' 
+			),
+			array (
+					'label' => 'Valeur',
+					'type' => 'number' 
+			),
+			array (
+					'role' => 'tooltip',
+					'type' => 'string',
+					'p' => array (
+							'role' => 'tooltip' 
+					) 
+			),
+			array (
+					'role' => 'style',
+					'type' => 'string',
+					'p' => array (
+							'role' => 'style' 
+					) 
+			) 
+	);
+	
+	$rows = array ();
 
-if (isset($_GET['e']))
-    $etudiant = $_GET['e'];
-else
-    $etudiant = -1;
-
-if (isset($_GET['ex']))
-    $exercice = $_GET['ex'];
-else
-    $exercice = -1;
-
-$infosProgression = progressionEtudiant($etudiant, $_GET['c'], $exercice);
-$table = array();
-$table['cols'] = array(
-
-    array('label' => 'Exercice', 'type' => 'string'),
-    array('label' => 'Progression', 'type' => 'number'),
-    array('role' => 'style', 'type' => 'string', 'p' => array( 'role' => 'style'))    
-);
-
-$rows = array();
-
-if ($infosProgression['total'] != 0)
-    $progression = (($infosProgression['progression']/($infosProgression['total'])) * 100);
-else
-    $progression = 0;
-if ($progression <= 25)
-    $color = '#FF6633';
-else if ($progression > 25 && $progression <= 75)
-    $color = '#FFCC33';
-else
-    $color = '#99FF33';
-$temp = array();
-if (!isset($_GET['t']))
-{
-    $temp[] = array('v' => 'Progression totale ' . number_format($progression, 2) . '%');
-}
-else
-    $temp[] = array('v' => '');
-$temp[] = array('v' => (int)$progression); 
-$temp[] = array('v' => $color); 
-$rows[] = array('c' => $temp);
-
-$table['rows'] = $rows;
-$temp = array('p' => null);
-$table['p']= $temp['p'];
-
-$jsonTable = json_encode($table);
-
-header('Cache-Control: no-cache, must-revalidate');
-header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-header('Content-type: application/json');
-
-echo $jsonTable;
+	/* Ajout de la barre concernant l'étudiant */
+	$temp = array ();
+	
+	$temp [] = array (
+			'v' => 'Moi' 
+	);
+	$temp [] = array (
+			'v' => ( int ) $progressionEtudiant 
+	);
+	$temp [] = array (
+			'v' => 'Mon avancement: ' . $progressionEtudiant . '%' 
+	);
+	$temp [] = array (
+			'v' => Outils::colorChart ( $progressionEtudiant ) 
+	);
+	
+	$rows [] = array (
+			'c' => $temp 
+	);
+	/* Fin de la barre concernant l'étudiant */
+	/* Ajout des deux barres dans le graphique */
+	$table ['rows'] = $rows;
+	$temp = array (
+			'p' => null 
+	);
+	$table ['p'] = $temp ['p'];
+	
+	$jsonTable = json_encode ( $table );
+	
+	header ( 'Cache-Control: no-cache, must-revalidate' );
+	header ( 'Expires: Mon, 26 Jul 1997 05:00:00 GMT' );
+	header ( 'Content-type: application/json' );
+	
+	echo $jsonTable;
 ?>

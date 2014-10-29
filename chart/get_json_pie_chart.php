@@ -3,6 +3,10 @@ include_once('../lib/autoload.inc.php');
 
 $db = DBFactory::getMysqlConnexionStandard();
 $daoAvancement = new DAOAvancement($db);
+if (isset($_GET['c']))
+{
+	$progression = (int)$daoAvancement->getByCoursThemeEtudiant($_GET['c'], $_GET['t'], $_GET['e']);
+}
 if (isset($_GET['e']))
 {
 	$progression = (int)$daoAvancement->getByThemeEtudiant($_GET['t'], $_GET['e']);
