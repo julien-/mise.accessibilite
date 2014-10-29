@@ -1,71 +1,104 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-comment"></i> Remarques sur cette séance
-		</h3>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="../../js/googleChartToolsPieChart.js"></script>
+<div class="row show-grid">
+	<div class="col-md-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="glyphicon glyphicon-comment"></i> Remarques sur cette séance
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div id="morris-area-chart">
+					<?php 
+						if($remarque)
+						{
+							echo $remarque->getRemarque();
+						?>
+							<a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ViewModifyRemarqueBonus" title="Modifier la remarque"></a> 
+							
+							<!-- Popup Ajout remarque -->
+							<div class="modal fade" id="ViewModifyRemarqueBonus" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
+							     <div class="modal-dialog">  
+								 	<div class="modal-content">
+							            <div class="modal-header">
+							                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+							                <h4 id="myModalLabel" class="modal-title">Modifier la Remarque</h4>
+							            </div>
+							            <form method="post" name="form_modify_remarque" action="../Requete/rq_seance_actuelle.php?section=seance_actuelle&modifyremarque">
+											<div class="modal-body">
+						                		<input type="text" name="remarque" size="60" value="<?php echo $remarque->getRemarque();?>" class="inputValDefaut"/>
+							                </div>
+							                <div class="modal-footer">
+												<input type="hidden" name="id_seance" value="<?php echo $id_seance;?>"/>
+						                		<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_remarque" alt='Modifier la remarque' title='Modifier la remarque' value="Modifier"/>
+						                		<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+						    				</div>
+							            </form>
+							        </div>
+								</div>
+							</div>  
+						<?php 
+						}
+						else 
+						{
+							echo "Aucune remarque";
+						?>
+							<a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ViewAddRemarqueBonus" title="Ajouter une remarque"></a> 
+							
+							<!-- Popup Ajout remarque -->
+							<div class="modal fade" id="ViewAddRemarqueBonus" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
+							     <div class="modal-dialog">  
+								 	<div class="modal-content">
+							            <div class="modal-header">
+							                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+							                <h4 id="myModalLabel" class="modal-title">Ajouter une Remarque</h4>
+							            </div>
+							            <form method="post" name="form_add_remarque" action="../Requete/rq_seance_actuelle.php?section=seance_actuelle&addremarque">
+											<div class="modal-body">
+						                		<input type="text" name="remarque" size="60" class="inputValDefaut"/>
+							                </div>
+							                <div class="modal-footer">
+												<input type="hidden" name="id_seance" value="<?php echo $id_seance;?>"/>
+						                		<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_remarque" alt='Ajouter une remarque' title='Ajouter une remarque' value="Ajouter"/>
+						                		<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+						    				</div>
+							            </form>
+							        </div>
+								</div>
+							</div>  
+						<?php 
+						}
+						?>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="panel-body">
-		<div id="morris-area-chart">
-			<?php 
-				if($remarque)
-				{
-					echo $remarque->getRemarque();
-				?>
-					<a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ViewModifyRemarqueBonus" title="Modifier la remarque"></a> 
-					
-					<!-- Popup Ajout remarque -->
-					<div class="modal fade" id="ViewModifyRemarqueBonus" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
-					     <div class="modal-dialog">  
-						 	<div class="modal-content">
-					            <div class="modal-header">
-					                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-					                <h4 id="myModalLabel" class="modal-title">Modifier la Remarque</h4>
-					            </div>
-					            <form method="post" name="form_modify_remarque" action="../Requete/rq_seance_actuelle.php?section=seance_actuelle&modifyremarque">
-									<div class="modal-body">
-				                		<input type="text" name="remarque" size="60" value="<?php echo $remarque->getRemarque();?>" class="inputValDefaut"/>
-					                </div>
-					                <div class="modal-footer">
-										<input type="hidden" name="id_seance" value="<?php echo $id_seance;?>"/>
-				                		<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_remarque" alt='Modifier la remarque' title='Modifier la remarque' value="Modifier"/>
-				                		<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-				    				</div>
-					            </form>
-					        </div>
-						</div>
-					</div>  
-				<?php 
-				}
-				else 
-				{
-					echo "Aucune remarque";
-				?>
-					<a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ViewAddRemarqueBonus" title="Ajouter une remarque"></a> 
-					
-					<!-- Popup Ajout remarque -->
-					<div class="modal fade" id="ViewAddRemarqueBonus" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
-					     <div class="modal-dialog">  
-						 	<div class="modal-content">
-					            <div class="modal-header">
-					                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-					                <h4 id="myModalLabel" class="modal-title">Ajouter une Remarque</h4>
-					            </div>
-					            <form method="post" name="form_add_remarque" action="../Requete/rq_seance_actuelle.php?section=seance_actuelle&addremarque">
-									<div class="modal-body">
-				                		<input type="text" name="remarque" size="60" class="inputValDefaut"/>
-					                </div>
-					                <div class="modal-footer">
-										<input type="hidden" name="id_seance" value="<?php echo $id_seance;?>"/>
-				                		<input type="submit" class="btn btn-primary" name="soumis1" id="soumis_remarque" alt='Ajouter une remarque' title='Ajouter une remarque' value="Ajouter"/>
-				                		<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-				    				</div>
-					            </form>
-					        </div>
-						</div>
-					</div>  
-				<?php 
-				}
-				?>
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="glyphicon glyphicon-stats"></i> Progression globale lors de cette séance
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div id="morris-area-chart">
+					<script type="text/javascript">
+		                var optionsPieChart =   {
+		                                            is3D: 'false',
+		                                            chartArea: {top:"5%", bottom:"5%",width:"100%", height:"90%"},
+		                                            tooltip: {text: 'percentage' },
+		                                            backgroundColor: { fill:'transparent' },
+		                                            slices: {
+		                                                0: { color: '#99FF33' },
+		                                                1: { color: '#FF6633' }
+		                                            }
+		                                        };
+		                setPieChartOptions('<?php echo $urlJSONPieChart;?>', optionsPieChart, "pieChart");
+    		        </script>
+					<div id="pieChart"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
