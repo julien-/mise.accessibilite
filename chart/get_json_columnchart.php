@@ -11,7 +11,7 @@ $daoAvancement = new DAOAvancement ( $db );
 
 if ($_GET['theme'] != -1)
 {
-	$listeAvancement = $daoAvancement->getTabByThemeEtudiant($_GET['theme'], $_SESSION["currentUser"]->getId());
+	$listeAvancement = $daoAvancement->getTabByThemeEtudiant($_GET['theme'], $_GET['e']);
 
 	$table = array ();
 	

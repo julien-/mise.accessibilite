@@ -13,6 +13,6 @@ if (isset($_GET['c']))
 	$titre = $cours->getLibelle();
 	$urlJSONPieChart = '../../chart/cours_global_pie_chart.php?&c=' . $cours->getId();
 	
-	include_once('../vue/accueil.php');
+	include_once('../vue/details_cours.php');
 }
 ?>

@@ -56,47 +56,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-lg-12 center-content">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<i class="fa fa-line-chart"></i> Progression par exercice
-						</h3>
-					</div>
-					<div class="panel-body">
-						<div id="morris-area-chart">
-							<div id="morris-area-chart">
-								<script type="text/javascript">	
-				<?php
-				$urlJSON = '../../chart/get_json_columnchart.php?theme=' . $theme->getId ();
-				?>
-	var optionsColumnChart = {
-		width:"100%",	
-		title: '<?php echo $theme->getTitre();?>',
-		legend: { position: 'none'},
-	    bar: { groupWidth: '75%' },
-	    isStacked: true,
-	    backgroundColor: { fill:'transparent' },
-	    colors : ['#FF6633','#FFCC33','#99FF33'],
-	    vAxis: {
-	        maxValue: 100,
-	        minValue: 0
-	      }
-	};
-	
-	setColumnChartOptions('<?php echo $urlJSON ?>', optionsColumnChart, 'exercices');
-</script>
 
-								<div id="exercices"
-									style="margin-left: auto; margin-right: auto; width: 80%;">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 	<div class="tab-pane" id="etudiant">
 				<br/>
@@ -105,6 +65,7 @@
 				<tr>
 					<th class="center-text">Etudiant</th>
 					<th class="center-text">Progression</th>
+					<th class="center-text">Details</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -129,6 +90,8 @@
 						</div>
 
 					</td>
+					<td class="autre_colonne vert-align"><a
+						href="index.php?section=details_theme_etudiant&t=<?php echo $theme->getId(); ?>&e=<?php echo $etudiant->getEtudiant()->getId(); ?>"><i class="glyphicon glyphicon-list-alt" title="Cliquez pour plus de d&eacute;tails sur cette personne"></i></a></td>
 				</tr>
             <?php
 				}

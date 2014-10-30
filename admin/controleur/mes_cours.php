@@ -111,7 +111,7 @@ if ($rq_exos === FALSE) {
                             </td>
 								<!--Détails-->
 								<td class="petite_colonne vert-align"><a
-									href="index.php?section=accueil&c=<?php echo $mon_cours['id_cours']; ?>">
+									href="index.php?section=details_cours&c=<?php echo $mon_cours['id_cours']; ?>">
 										<i class="glyphicon glyphicon-list-alt color-cours"
 										title="D&eacute;tails sur ce cours"></i>
 								</a></td>

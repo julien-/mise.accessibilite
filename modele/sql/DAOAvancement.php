@@ -333,6 +333,7 @@ class DAOAvancement extends DAOStandard
 	  	return $listeAvancement;
   	}
   
+  	
   function getTabByThemeEtudiant($idTheme, $idEtudiant)
   {
   	/*$result = $this->executeQuery('SELECT * FROM avancement, theme, exercice, seance

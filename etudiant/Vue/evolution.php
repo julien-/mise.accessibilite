@@ -21,7 +21,7 @@ setBarChartOptions('../../chart/get_json_barchart_global.php?', optionsBarChart,
 <?php 
 foreach($listeThemes as $theme)
 {
-	$urlJSON = '../../chart/get_json_columnchart.php?theme='.$theme->getId();
+	$urlJSON = '../../chart/get_json_columnchart.php?e='.$_SESSION['currentUser']->getId().'&theme='.$theme->getId();
 ?>
 	var optionsColumnChart = {
 		width:"100%",	

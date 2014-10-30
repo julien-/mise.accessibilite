@@ -1,7 +1,7 @@
 <script type="text/javascript"
 	src="../../js/googleChartToolsLineChart.js"></script>
 <script type="text/javascript"
-	src="../../../js/googleChartToolsPieChart.js"></script>
+	src="../../js/googleChartToolsPieChart.js"></script>
 
 <h1><?php echo $titre;?></h1>
 <div class="row">
