@@ -42,7 +42,7 @@
 						<tr>
 							<td>Bonus</td>
 							<td><span class="bold">
-        	<?php  echo $bonus; ?>
+        	<?php  echo $totalBonus; ?>
         </span></td></tbody>
 				</table>
 			</div>

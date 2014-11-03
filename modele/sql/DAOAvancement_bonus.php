@@ -106,6 +106,52 @@ class DAOAvancement_bonus extends DAOStandard {
 		return $listeBonus;
 	}
 	
+	public function getByEtudiantFait($id_etu) {
+		$result = $this->executeQuery ( 'SELECT *
+										FROM avancement_bonus, bonus, theme, cours, cle, etudiant
+										WHERE avancement_bonus.id_etu = ' . $id_etu . '
+										AND avancement_bonus.fait = 1
+										AND avancement_bonus.id_bonus = bonus.id_bonus
+										AND bonus.id_theme = theme.id_theme
+										AND theme.id_cours = cours.id_cours
+										AND cours.id_cle = cle.id_cle
+										AND cours.id_prof = etudiant.id_etu
+										GROUP BY bonus.id_bonus' );
+	
+		$listeBonus = array();
+		while($avancement_bonus = $this->fetchArray ( $result ))
+		{
+			$listeBonus[] = new Bonus ( array (
+					'id' => $avancement_bonus ['id_bonus'],
+					'titre' => $avancement_bonus ['titre_bonus'],
+					'type' => $avancement_bonus ['type_bonus'],
+					'theme' => new Theme ( array (
+							'id' => $avancement_bonus ['id_theme'],
+							'titre' => $avancement_bonus ['titre_theme'],
+							'cours' => new Cours ( array (
+									'id' => $avancement_bonus ['id_cours'],
+									'libelle' => $avancement_bonus ['libelle_cours'],
+									'couleurCalendar' => $avancement_bonus ['couleur_calendar'],
+									'idProf' => new Professeur ( array (
+											'id' => $avancement_bonus ['id_etu'],
+											'nom' => $avancement_bonus ['nom_etu'],
+											'prenom' => $avancement_bonus ['prenom_etu'],
+											'mail' => $avancement_bonus ['mail_etu'],
+											'login' => $avancement_bonus ['pseudo_etu'],
+											'pass' => $avancement_bonus ['pass_etu'],
+											'admin' => $avancement_bonus ['admin']
+									) ),
+									'idCle' => new Cle ( array (
+											'id' => $avancement_bonus ['id_cle'],
+											'cle' => $avancement_bonus ['valeur_cle']
+									) )
+							) )
+	
+					) )
+			) );
+		}
+		return $listeBonus;
+	}
 	
 	public function getMoyenneBonus($id_bonus) {
 		$result = $this->executeQuery ( 'SELECT AVG(note) AS Moyenne

@@ -1,10 +1,25 @@
 <?php
 class DAOCategorie extends DAOStandard
 {
+	public function save(Categorie $categorie)
+	{
+		$this->executeQuery('INSERT INTO forum_categorie SET titre_categorie = "' . $categorie->getTitre() . '", description_categorie = "' . $categorie->getDescription() . '", id_cours = ' . $categorie->getCours() . ', id_categorie_parent = null');
+	}
+	
 	
 	public function delete($id)
 	{
+		$daoSujet = new DAOSujet($db);
+		$daoSujet->deleteByCategorie($id);
+		
 		$this->executeQuery("DELETE FROM forum_categorie WHERE id_categorie =" . $id);
+	}
+	
+	public function getNbSujets($id)
+	{
+		$ressource = $this->executeQuery('SELECT * FROM forum_sujets WHERE id_categorie = ' . $id);
+	
+		return $this->countRows($ressource);
 	}
 	
 	public function getByID($id)

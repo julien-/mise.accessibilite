@@ -3,9 +3,49 @@
 if ($_SESSION ['currentUser']->getAdmin ()) 
 {
 	?>
-	<a class="btn btn-primary" href="index.php?section=insert_categorie_forum&id_cours=<?php echo $id_cours; ?>">
-		Insérer une catégorie
-	</a>
+<a class="btn btn-primary" data-toggle="modal" href="#"
+	data-target="#ajoutCategorie">Créer une catégorie</a>
+<div class="modal fade" id="ajoutCategorie" tabindex="-1" role="dialog"
+	aria-labelledby="remoteModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button data-dismiss="modal" class="close" type="button">
+					<span aria-hidden="true">×</span><span class="sr-only">Fermer</span>
+				</button>
+				<h4 id="myModalLabel" class="modal-title">Créer une catégorie</h4>
+			</div>
+			<br />
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-9">
+						<form role="form" method="post"
+							action="../../forum/controleur/ajout_categorie.php">
+							<div class="form-group">
+								<label for="titre">Titre</label> 
+								<input type="text"
+									class="form-control" name="titre">
+							</div>
+							<div class="form-group">
+								<label for="description">Description</label>
+								<input type="text"
+									class="form-control" name="description">
+							</div>
+							<input type="hidden" name="cours"
+								value="<?php echo $_GET['id_cours']; ?>" />
+							<div class="form-group center-content">
+								<button type="submit" class="btn btn-primary">Créer</button>
+							</div>
+							<br />
+						</form>
+					</div>
+					<div class="col-sm-1"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 	<?php
 }
 ?>
@@ -63,7 +103,7 @@ else
 			{
 				?>
 		        <td class="center-text" style="width: auto;">
-		        	<a href="../../forum/delete.php?section=<?php echo $_GET['section']; ?>&cours=<?php echo $id_cours; ?>&type=categorie&id=<?php echo $categorie->getId(); ?>">
+		        	<a href="../../forum/controleur/delete_categorie.php?c=<?php echo $categorie->getId(); ?>">
 		        		<i class="glyphicon glyphicon-minus-sign" alt="Supprimer cette catégorie" title="Supprimer cette catégorie"></i>
 		        	</a>
 		        </td>

@@ -1,6 +1,6 @@
 $('.interactive-table').DataTable( {
-	"aaSorting": [[2,'desc']],
-	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ 3 ] }],
+	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ 1 ] }],
+	"bFilter": false,
 		    language: {
 		    	processing:     "Traitement en cours...",
 		        search:         "Rechercher&nbsp;:",

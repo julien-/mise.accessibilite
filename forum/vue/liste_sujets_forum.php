@@ -4,7 +4,6 @@ if (sizeof ( $listeSujets ) == 0) {
 	?>
 <p class="oldschool">Aucun sujet</p>
 <?php
-	include_once ('insert_sujet_forum.php');
 } else {
 	?>
 <a class="btn btn-primary" data-toggle="modal" href="#"
@@ -32,7 +31,7 @@ if (sizeof ( $listeSujets ) == 0) {
 		?>
             <tr>
 			<td class="vert-align"><a
-				href="index.php?section=voir_sujet_forum&id_sujet_a_lire=<?php echo $sujet->getId()?>"><?php echo htmlentities(trim($sujet->getTitre()));?></a>
+				href="index.php?section=voir_sujet_forum&s=<?php echo $sujet->getId()?>"><?php echo htmlentities(trim($sujet->getTitre()));?></a>
 				<br /> <span style="font-size: 11px">
             		Post&eacute; par 
 					<?php echo htmlentities(trim($sujet->getAuteur()->getPrenom() . ' ' . $sujet->getAuteur()->getNom())); ?>
@@ -41,15 +40,16 @@ if (sizeof ( $listeSujets ) == 0) {
 		<?php echo $sujet->getNbMessages(); ?>
 		</td>
 			<td class="vert-align center-text">
+			<span style="display: none"><?php echo $annee.$mois.$jour.$heure.$minute.$seconde; ?></span>
             <?php
-		echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
+		echo $jour, '/', $mois, '/', $annee, ' ', $heure, ':', $minute, ':', $seconde;
 		?>
             </td>
             <?php
 		if ($_SESSION ['currentUser']->getAdmin ()) {
 			?>
             <td class="vert-align center-text"><a
-				href="../../forum/controleur/delete.php?sujet=<?php echo $sujet->getId(); ?>">
+				href="../../forum/controleur/delete_sujet.php?s=<?php echo $sujet->getId(); ?>">
 					<i class="glyphicon glyphicon-minus-sign"
 					alt="Supprimer ce sujet" title="Supprimer ce sujet"></i>
 			</a></td>
@@ -60,6 +60,10 @@ if (sizeof ( $listeSujets ) == 0) {
            			</tr>
 	</tbody>
 </table>
+
+<?php
+}
+?>
 <a class="btn btn-primary" data-toggle="modal" href="#"
 	data-target="#ajoutSujet">Créer un sujet</a>
 <!-- Modal ajout cours-->
@@ -103,6 +107,3 @@ if (sizeof ( $listeSujets ) == 0) {
 		</div>
 	</div>
 </div>
-<?php
-}
-?>
