@@ -1,89 +1,68 @@
-<!-- infos perso -->
-<div class="col-md-7 personal-info" id="infosperso">
-	<div id="erreur_nom"></div>
-	<div id="erreur_prenom"></div>
-	<div id="erreur_email"></div>
-	<div id="erreur_username"></div>
-	<h3>Informations personnelles</h3>
-
-	<form class="form-horizontal" method="post" name="form_modify_infos" action="../Requete/rq_compte.php?section=compte&modifycompte">
-		<div class="form-group">
-			<label class="col-lg-3 control-label">Nom:</label>
-			<div class="col-lg-8">
-				<input class="form-control" type="text" name="nom"
-					value="<?php echo $_SESSION['currentUser']->getNom();?>">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-lg-3 control-label">Prénom:</label>
-			<div class="col-lg-8">
-				<input class="form-control" type="text" name="prenom"
-					value="<?php echo $_SESSION['currentUser']->getPrenom();?>">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-lg-3 control-label">Email:</label>
-			<div class="col-lg-8">
-				<input class="form-control" type="text" name="mail"
-					value="<?php echo $_SESSION['currentUser']->getMail();?>">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-md-3 control-label">Username:</label>
-			<div class="col-md-8">
-				<input class="form-control" type="text" name="login"
-					value="<?php echo $_SESSION['currentUser']->getLogin();?>">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-md-3 control-label"></label>
-			<div class="col-md-8">
-				<input id="validerinfos" type="submit" class="btn btn-primary" name="valider"
-					value="Sauvegarder les changements"> <span></span> <input
-					type="reset" class="btn btn-default" value="Annuler">
-			</div>
-		</div>
+<div class="col-md-8">
+	<h2>Informations personnelles</h2>
+	<form id="form_info_perso" class="form-horizontal" method="post" action="../Requete/rq_compte.php?section=compte&modifycompte">
+	    <div class="form-group has-feedback">
+	        <label for="nom" class="control-label col-lg-3">Nom</label>
+	        <div class="col-lg-5">
+	            <input type="text" name="nom" id="nom" class="form-control" value="<?php echo $_SESSION['currentUser']->getNom();?>" />
+	            <span class="glyphicon form-control-feedback" id="nom1"></span>
+	       </div>
+	    </div>
+	    <div class="form-group has-feedback">
+	        <label for="prenom" class="control-label col-lg-3">Prénom</label>
+	        <div class="col-lg-5">
+	            <input type="text" name="prenom" id="prenom" class="form-control" value="<?php echo $_SESSION['currentUser']->getPrenom();?>" />
+	            <span class="glyphicon form-control-feedback" id="prenom1"></span>
+	        </div>
+	    </div>
+	    <div class="form-group has-feedback">
+	        <label for="email" class="control-label col-lg-3">Email</label>
+	        <div class="col-lg-5">
+	            <input type="text" name="email" id="email" class="form-control" value="<?php echo $_SESSION['currentUser']->getMail();?>" />
+	            <span class="glyphicon form-control-feedback" id="email1"></span>
+	        </div>
+	    </div>
+	    <div class="form-group has-feedback">
+	        <label for="pseudo" class="control-label col-lg-3">Pseudo</label>
+	        <div class="col-lg-5">
+	            <input type="text" name="pseudo" id="pseudo" class="form-control" value="<?php echo $_SESSION['currentUser']->getLogin();?>" />
+	            <span class="glyphicon form-control-feedback" id="pseudo1"></span>
+	        </div>
+	    </div>
+	    <!-- Upload photo -->
+	    <!-- 
+	    <div class="form-group">
+	        <label for="photo" class="control-label col-lg-3">Photo</label>
+	        <div class="col-lg-5">
+	            <span class="btn btn-default btn-file">
+				    Télécharger <input type="file">
+				</span>
+	        </div>
+	    </div>
+	    -->	      
+	    <button type="submit" class="btn btn-primary">Sauvegarder les changements</button>
+	    <button	type="reset" class="btn btn-default">Annuler</button>
 	</form>
 </div>
-
-<!-- mdp -->
-<div class="col-md-7 personal-info" id="infospassword">
-	<div id="erreur_ancien_vide"></div>
-	<div id="erreur_nouveau_vide"></div>
-	<div id="erreur_confirmation_vide"></div>
-	<div id="erreur_anciens_differents"></div>
-	<div id="erreur_nouveau_confirmation_differents"></div>
+<br>
+<br>
+<div class="col-md-8">
 	<h3>Mot de passe</h3>
-
-	<form class="form-horizontal" method="post" name="form_modify_password" action="../Requete/rq_compte.php?section=compte&modifypassword">
-		 <div class="form-group">
-            <label class="col-md-3 control-label">Ancien Password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password" name="ancien">
-            </div>
-         </div>
-		 <div class="form-group">
-            <label class="col-md-3 control-label">Nouveau Password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password" name="nouveau">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Confirmez Nouveau Password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password" name="confirmation">
-            </div>
-          </div>
-		<div class="form-group">
-			<label class="col-md-3 control-label"></label>
-			<div class="col-md-8">
-				<input id="validerpassword" type="submit" class="btn btn-primary" name="valider"
-					value="Sauvegarder le nouveau mot de passe">
-			</div>
-		</div>
-		<input type="hidden" name="ancien_currentUser" value="<?php echo $_SESSION['currentUser']->getPass();?>"/>
+	<form id="form_mdp" class="form-horizontal" method="post" action="../Requete/rq_compte.php?section=compte&modifypassword">
+	    <div class="form-group has-feedback">
+	        <label for="nouveau_pwd" class="control-label col-lg-3">Nouveau mot de passe</label>
+	        <div class="col-lg-5">
+	            <input type="password" name="nouveau_pwd" id="nouveau_pwd" class="form-control" />
+	            <span class="glyphicon form-control-feedback" id="nouveau_pwd1"></span>
+	        </div>
+	    </div>
+	    <div class="form-group has-feedback">
+	        <label for="confirm_pwd" class="control-label col-lg-3">Confirmation mot de passe</label>
+	        <div class="col-lg-5">
+	            <input type="password" name="confirm_pwd" id="confirm_pwd" class="form-control" />
+	            <span class="glyphicon form-control-feedback" id="confirm_pwd1"></span>
+	        </div>
+	    </div>  
+	    <button type="submit" class="btn btn-primary">Sauvegarder le nouveau mot de passe</button>
 	</form>
 </div>
-
-
-

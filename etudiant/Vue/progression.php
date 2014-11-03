@@ -26,4 +26,24 @@
 		</div>
 	</div>
 </div>
-<?php include('graphiques_avancement_theme.php'); ?>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="glyphicon glyphicon-stats"></i>Progression par thèmes
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div id="morris-area-chart">
+			<?php include('graphiques_avancement_theme.php'); ?>
+		</div>
+	</div>
+</div>
+
+<span class="rating">
+  <span class="star"></span>
+  <span class="star"></span>
+  <span class="star"></span>
+  <span class="star"></span>
+  <span class="star"></span>
+</span>

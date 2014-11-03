@@ -11,7 +11,7 @@ $redirige = false;
 
 if (isset($_GET["modifycompte"])) {
 	$id_etu = $_SESSION['currentUser']->getId();
-	$daoEtudiant->updateNomPrenomMailLoginByEtudiant($_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['login'], $id_etu);
+	$daoEtudiant->updateNomPrenomMailLoginByEtudiant($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['pseudo'], $id_etu);
 	 
 	$_SESSION['currentUser'] = $daoEtudiant->getByID($id_etu);
 	$message = "Compte modifié avec succes";
@@ -20,7 +20,7 @@ if (isset($_GET["modifycompte"])) {
 
 if (isset($_GET["modifypassword"])) {
 	$id_etu = $_SESSION['currentUser']->getId();
-	$daoEtudiant->updatePasswordByEtudiant($_POST['nouveau'], $id_etu);
+	$daoEtudiant->updatePasswordByEtudiant($_POST['nouveau_pwd'], $id_etu);
 	
 	$_SESSION['currentUser'] = $daoEtudiant->getByID($id_etu);
 	$message = "Password modifié avec succes";
