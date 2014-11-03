@@ -17,7 +17,7 @@ class DAOStandard
   	return mysql_num_rows($ressource);
   }
   
-  protected function lastInsertedID()
+  public function lastInsertedID()
   {
   	return mysql_insert_id();
   }

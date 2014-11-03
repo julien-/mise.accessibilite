@@ -1,5 +1,5 @@
 <?php
-$_SESSION['referrer'] = current_page_url();
+$_SESSION['referrer'] = Outils::currentPageURL();
 $daoSeance = new DAOSeance($db);
 $daoCours = new DAOCours($db);
 $listeSeance = $daoSeance->getAll();

@@ -38,6 +38,15 @@ class Outils
 		return $basename;
 	}
 	
+	public static function currentPageURL()
+	{
+		$page_url   = 'http';
+		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'){
+			$page_url .= 's';
+		}
+		return $page_url.'://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+	}
+	
 	public static function formatterNom($str)
 	{
 		$total=strlen($str);

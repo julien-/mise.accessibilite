@@ -364,13 +364,7 @@ function formatURL($message)
 "<A HREF=\"\\1://\\2\\3\" TARGET=\"_blank\">\\1://\\2\\3</A>",$message);
 }
 
-function current_page_url(){ 
-    $page_url   = 'http'; 
-    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'){ 
-        $page_url .= 's'; 
-    } 
-    return $page_url.'://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; 
-} 
+
 
 function strtoupperFr($string) {
 

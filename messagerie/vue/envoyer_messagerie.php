@@ -22,8 +22,8 @@
             			if(isset($listeClassmates) && sizeof($listeClassmates) != 0)
             			{	
 	            		?>
-            				<input type="text" style="width: 100%;" class="typeahead" id="nom_destinataire" /><br/>
-+            				<input type="hidden" class="typeahead" name="destinataire" id="destinataire" /><br/>
+            				<input type="text" style="border: 1px solid darkgray;" class="typeahead" id="nom_destinataire" /><br/>
+            				<input type="hidden" class="typeahead" name="destinataire" id="destinataire" /><br/>
             			<?php 
             			}
             			else

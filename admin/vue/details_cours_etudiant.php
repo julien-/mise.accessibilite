@@ -184,6 +184,7 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 				<tr>
 					<th class="center-text">Thème</th>
 					<th class="center-text">Progression</th>
+					<th class="center-text">Détails</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -206,7 +207,8 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
                                     	<?php echo $progression; ?> %
                                     </div>
 						</div>
-
+					<td class="autre_colonne vert-align"><a
+						href="index.php?section=details_theme_etudiant&t=<?php echo $theme->getId(); ?>&e=<?php echo $_GET['e']; ?>"><i class="glyphicon glyphicon-search" title="Cliquez pour plus de d&eacute;tails sur cette personne"></i></a></td>
 					</td>
 				</tr>
             <?php

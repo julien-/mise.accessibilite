@@ -60,29 +60,22 @@ if (isset ($_POST['go']) && $_POST['go']=='Poster') {
     
 <!-- on fait pointer le formulaire vers la page traitant les données -->
 <form action="index.php?section=insert_sujet_forum" method="post">
-    <table class="tableau">
-        <thead>
-            <tr>
-                <th colspan="2">
-                    Nouveau sujet
-                </th>
-            </tr>
-        </thead>
+    <table>
         <tbody>
             <tr>
-                <td class="autre_colonne_right" style="font-weight:bold;" align="right">Titre </td>
-                <td class="autre_colonne_left">
-                    <input type="text" name="titre" maxlength="47" size="47" value="<?php if (isset($_POST['titre'])) echo htmlentities(trim($_POST['titre'])); ?>">
+                <td  style="font-weight:bold;" align="right">Titre </td>
+                <td >
+                    <input type="text" class="inputValDefaut" name="titre" maxlength="47" size="47" value="<?php if (isset($_POST['titre'])) echo htmlentities(trim($_POST['titre'])); ?>">
                 </td>
             </tr>
             <tr>
-                <td class="autre_colonne_right" style="font-weight:bold;" align="right">Message </td>
-                <td class="autre_colonne_left">
-                    <textarea name="message" cols="50" rows="10"><?php if (isset($_POST['message'])) echo htmlentities(trim($_POST['message'])); ?></textarea>
+                <td style="font-weight:bold;" align="right">Message </td>
+                <td >
+                    <textarea name="message" class="inputValDefaut" cols="50" rows="10"><?php if (isset($_POST['message'])) echo htmlentities(trim($_POST['message'])); ?></textarea>
                 </td>
             </tr>
             <tr>
-                <td class="autre_colonne" colspan="2">
+                <td colspan="2">
                     <input type="submit" name="go" value="Poster" class="button_1">
                     <input type="hidden" name="categorie" value="<?php echo $categorie; ?>">
                     <input type="hidden" name="cours" value="<?php echo $cours; ?>">

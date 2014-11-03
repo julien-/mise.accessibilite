@@ -1,6 +1,6 @@
 <?php
 $id_cours = exists('id_cours', 'cours', 'id_cours');
-$_SESSION['referrer'] = current_page_url(); 
+$_SESSION['referrer'] = Outils::currentPageURL(); 
 $daoCours = new DAOCours($db);
 $daoCategorie = new DAOCategorie($db);
 

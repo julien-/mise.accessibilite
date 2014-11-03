@@ -14,6 +14,14 @@ class DAOAvancement_bonus extends DAOStandard {
 		$this->executeQuery ( 'UPDATE avancement_bonus SET id_etu = ' . $avancement_bonus->getEtudiant ()->getId () . ', id_bonus = ' . $avancement_bonus->getBonus ()->getId () . ', fait =' . $avancement_bonus->getFait () . ' suivi = ' . $avancement_bonus->getSuivi () . ' note= ' . $avancement_bonus->getNote () . ' remarque = ' . $avancement_bonus->getRemarque () );
 	}
 	
+	public function getNumberBonusByEtudiant($idEtudiant)
+	{
+		$result = $this->executeQuery('SELECT * FROM avancement_bonus WHERE fait = 1 AND id_etu = ' . $idEtudiant);
+		
+		return $this->countRows($result);
+	}
+	
+	
 	public function insertSuiviByEtuBonus($id_etu, $id_bonus) {
 	
 		$this->executeQuery ( 'INSERT INTO avancement_bonus

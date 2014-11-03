@@ -1,6 +1,11 @@
 <?php
 class DAOMessage extends DAOStandard
 {
+	public function save(Message $message)
+	{
+		$this->executeQuery('INSERT INTO forum_reponses SET auteur_reponse = ' . $message->getAuteur() . ', message = "' . $message->getMessage() . '", date_reponse = now(), correspondance_sujet = ' . $message->getSujet());	
+	}
+	
 	public function getByID($id)
 	{
 		$daoSujet = new DAOSujet($db);

@@ -60,7 +60,7 @@
 	</div>
 	<div class="tab-pane" id="etudiant">
 				<br/>
-		<table class='interactive-table table table-striped table-bordered'>
+		<table class='interactive-table2 table table-striped table-bordered'>
 			<thead>
 				<tr>
 					<th class="center-text">Etudiant</th>
@@ -91,7 +91,7 @@
 
 					</td>
 					<td class="autre_colonne vert-align"><a
-						href="index.php?section=details_theme_etudiant&t=<?php echo $theme->getId(); ?>&e=<?php echo $etudiant->getEtudiant()->getId(); ?>"><i class="glyphicon glyphicon-list-alt" title="Cliquez pour plus de d&eacute;tails sur cette personne"></i></a></td>
+						href="index.php?section=details_theme_etudiant&t=<?php echo $theme->getId(); ?>&e=<?php echo $etudiant->getEtudiant()->getId(); ?>"><i class="glyphicon glyphicon-search" title="Cliquez pour plus de d&eacute;tails sur cette personne"></i></a></td>
 				</tr>
             <?php
 				}
@@ -101,7 +101,7 @@
 	</div>
 	<div class="tab-pane" id="details_exercices">
 				<br/>
-		<table class='interactive-table table table-striped table-bordered'>
+		<table class='interactive-table1 table table-striped table-bordered'>
 			<thead>
 				<tr>
 					<th class="center-text">Numéro</th>

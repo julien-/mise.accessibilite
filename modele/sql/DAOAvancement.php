@@ -365,6 +365,45 @@ class DAOAvancement extends DAOStandard
   	return $listeAvancement;
   }
   
+  function getScoreEtudiantCours($idCours, $idEtudiant)
+  {
+  	$sqlEtudiant = ' AND id_etu = ' . $idEtudiant . ' ';
+  	 
+  	$sql = '    SELECT e.id_exo '
+  			. ' FROM exercice e, theme t '
+  					. ' WHERE t.id_theme = e.id_theme '
+  							. ' AND id_cours = ' . $idCours;
+  
+  	$req_total = $this->executeQuery($sql) or die (mysql_error());
+  	$total = $this->countRows($req_total);
+  	 
+  	$total = $total * 100;
+  	 
+  	$sql = 'SELECT SUM( assimile + compris + fait ) AS progression
+            FROM avancement a, theme t, exercice e
+            WHERE a.id_exo = e.id_exo
+            AND t.id_theme = e.id_theme
+            AND id_cours = ' . $idCours . $sqlEtudiant;
+  	 
+  	$req_progression = $this->executeQuery($sql);
+  	$avancement = $this->fetchArray($req_progression);
+  	 
+  	return $avancement['progression'];
+  }
+  
+  public function getTotalScoreEtudiant($idEtudiant)
+  {
+  	$daoInscription = new DAOInscription($db);
+  	$score = 0;
+  	$listeCours = $daoInscription->getAllByEtudiant($idEtudiant);
+  	foreach($listeCours as $cours)
+  	{
+  		$score = $this->getScoreEtudiantCours($cours->getCours()->getId(), $idEtudiant) + $score;
+  	}
+  	
+  	return $score;
+  }
+  
   public function insertFaitByExerciceEtudiantSeance($id_exo, $id_etu, $id_seance)
   {
   	$this->executeQuery('INSERT INTO avancement

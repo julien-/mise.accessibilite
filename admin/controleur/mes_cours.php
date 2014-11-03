@@ -1,6 +1,8 @@
 
 <?php
-$_SESSION ['referrer'] = current_page_url ();
+
+
+$_SESSION ['referrer'] = Outils::currentPageURL();
 if (isset ( $_GET ['exo_sel'] )) {
 	echo "Exo sel détecté" + $_GET ['exo_sel'];
 }

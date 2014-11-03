@@ -1,6 +1,6 @@
 <script type="text/javascript"
 	src="../../js/googleChartToolsLineChart.js"></script>
-	
+
 <h1><?php echo $etudiant->getPrenom() . ' ' . $etudiant->getNom(); ?></h1>
 <div class="row show-grid">
 	<div class="col-md-4">
@@ -27,10 +27,28 @@
         	<?php echo $daoInscription->countByEtudiantProf($idEtudiant, $_SESSION['currentUser']->getId()); ?>
         </span></td>
 						</tr>
-					</tbody>
+						<tr>
+							<td>Score total</td>
+							<td><span class="bold">
+        	<?php  echo $score; ?>
+        </span></td>
+						</tr>
+						<tr>
+							<td>Sujets</td>
+							<td><span class="bold">
+        	<?php  echo $nbSujets; ?>
+        </span></td>
+						
+						<tr>
+							<td>Bonus</td>
+							<td><span class="bold">
+        	<?php  echo $bonus; ?>
+        </span></td></tbody>
 				</table>
 			</div>
-		</div>
+	
+					
+						</div>
 
 	</div>
 	<div class="col-md-8">
@@ -87,7 +105,7 @@
 					?>
                 <tr>
 					<td class='autre_colonne vert-align'><a
-						href='index.php?section=accueil&c=<?php echo $inscription->getCours()->getId(); ?>'><?php echo $inscription->getCours()->getLibelle() ?></a>
+						href='index.php?section=details_cours&c=<?php echo $inscription->getCours()->getId(); ?>'><?php echo $inscription->getCours()->getLibelle() ?></a>
 					</td>
 					<td class="prem_colonne vert-align">
 
