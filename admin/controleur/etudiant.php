@@ -15,8 +15,6 @@ if ($idEtudiant != false)
 	$nbSujets = $daoSujet->getPosted($idEtudiant);
 	$totalBonus = $daoAvancementBonus->getNumberBonusByEtudiant($idEtudiant);
 	
-	$listeMesBonus = $daoAvancementBonus->getByEtudiantFait($idEtudiant);
-	include('../vue/bonus.php');
 	include('../vue/etudiant.php');
 }
 ?>

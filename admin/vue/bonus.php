@@ -1,7 +1,16 @@
+<?php 
+foreach($listeThemes as $theme)
+{
+	if (!isset($_GET['e']))
+		$listeMesBonus = $daoAvancementBonus->getByThemeFait($theme->getId());
+	else	
+		$listeMesBonus = $daoAvancementBonus->getByThemeEtudiantFait($theme->getId(),$_GET['e']);
+?>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
 			<i class="glyphicon glyphicon-th-list"></i> 
+			<?php echo $theme->getTitre();?>
 		</h3>
 	</div>
 	<div class="panel-body">
@@ -17,6 +26,7 @@
 						<th class="center-text">Type</th>
 						<th class="center-text">Auteurs(s)</th>
 						<th class="center-text">Moyenne</th>
+						<th class="center-text">Supprimer</th>
 					</tr>
 				</thead>
 				<?php
@@ -50,6 +60,11 @@
 			            <td class="autre_colonne">
 			            	<?php echo round($moyenne,1)." / 5"; ?>
 			            </td>
+			            <td class="autre_colonne">
+			            	<a href="../controleur/delete.php?bonus=<?php echo($bonus->getId()); ?>">
+			            		<i class="glyphicon glyphicon-minus-sign" alt="Supprimer" title="Supprimer"></i>
+			            	</a>
+			            </td>
 			        </tr>
 			    </tbody>
 				<?php 
@@ -58,7 +73,12 @@
 			</table>
 			<?php 	
 			}
+			else 
+				echo "Aucun bonus dans le theme ".$theme->getTitre();
 			?>
 		</div>
 	</div>
 </div>
+<?php 
+}
+?>

@@ -28,6 +28,12 @@ if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getAdmin() == 1
 		$daoSeance = new DAOSeance($db);
 		$daoSeance->delete($_GET['seance']);
 	}
+	
+	if (isset($_GET['bonus']))
+	{
+		$daoBonus = new DAOBonus($db);
+		$daoBonus->delete($_GET['bonus']);
+	}
 }
 header('Location: ' . $_SESSION['referrer']);
 ?>

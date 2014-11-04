@@ -12,6 +12,8 @@
 			</a></li>
 			<li><a href="#theme" data-toggle="tab">Informations par thèmes <i
 					class="fa"></i></a></li>
+			<li><a href="#bonus" data-toggle="tab">Bonus <i
+					class="fa"></i></a></li>
 		</ul>
 	</div>
 </div>
@@ -212,6 +214,12 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 				?>
             </tbody>
 				</table>
+			</div>
+		</div>
+		<div class="tab-pane" id="bonus">
+			<div class="row">
+				<br/>
+				<?php include_once('bonus.php');?>
 			</div>
 		</div>
 	</div>
