@@ -1,20 +1,4 @@
-$(document).ready(function() {
-	$(".fait").click(function() {
-		var fait = "input[data-sc=" + ($(this).data('sc')-1) + "]";
-		if (!$(fait).is(':checked')) 
-		{
-			var fait = "input[data-sc=" + $(this).data('sc') + "]";
-			$(fait).attr('checked', false);
-			
-			$('#modal_popup').modal();  
-			$('#modal_popup').find('h4').html('<span style="color:red;">Erreur</span>');
-			$('#modal_popup').find('p').html('<span>Vous devez avoir au moins fait l\'exercice précédent</span>');  
-			$('#modal_popup').modal('show');
-			
-            return false;
-		}
-	});
-	
+$(document).ready(function() {	
 	$(".compris").click(function() {
 		var fait = "input[id=fait" + $(this).attr('value') + "]";
 		if (!$(fait).is(':checked')) 
