@@ -59,7 +59,23 @@ if (isset($_GET['section']) && !empty($_GET['section']))
 		
 		$page = '../../forum/controleur/' . $page;
 	}
-	elseif($page == "accueil" || $page == "cours" || $page == "compte" || $page == "inscription_cours")
+	elseif($page == "compte" )
+	{
+		//historique
+		$historique = new Historique(array(
+				'page' => $page,
+				'dateVisite' => $now,
+				'heureVisite' => date("H:i:s"),
+				'etudiant' => $_SESSION['currentUser'],
+				'cours' => '0'
+		));
+		$daoHistorique->save($historique);
+		
+		unset($_SESSION['cours']);
+		
+		$page = '../../compte/Controleur/' . $page;
+	}
+	elseif($page == "accueil" || $page == "cours" || $page == "inscription_cours")
 	{
 		//historique
 		$historique = new Historique(array(
