@@ -171,7 +171,7 @@
                                         	</li>
 		                                </ul>
   									</li>
-  									<li><a href="#">Forum</a></li>
+  									<li><a href="index.php?section=index_forum&id_cours=<?php echo $_SESSION['cours']->getId();?>">Forum</a></li>
                             <?php 
                         		}
                             ?>
