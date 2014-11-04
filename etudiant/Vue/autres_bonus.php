@@ -22,7 +22,7 @@ foreach($listeThemes as $theme)
 						<th class="center-text">Type</th>
 						<th class="center-text">Créateur(s)</th>
 						<th class="center-text">Suivi</th>
-						<th class="center-text">Moyenne</th>
+						<!-- <th class="center-text">Moyenne</th> -->
 						<th class="center-text">Ma Note</th>
 						<th class="center-text">Ma Remarque</th>
 					</tr>
@@ -32,7 +32,7 @@ foreach($listeThemes as $theme)
 				{
 					if(!$daoAvancement_bonus->VerifCreateur($bonus->getId(), $_SESSION['currentUser']->getId()))
 					{
-						$moyenne = $daoAvancement_bonus->getMoyenneBonus($bonus->getId());
+						//$moyenne = $daoAvancement_bonus->getMoyenneBonus($bonus->getId());
 						$mon_avancement = $daoAvancement_bonus->getByEtudiantBonus($_SESSION['currentUser']->getId(), $bonus->getId());
 						$liste_createurs = $daoAvancement_bonus->getCreateurs($bonus->getId());
 				?>
@@ -65,9 +65,11 @@ foreach($listeThemes as $theme)
 	            				</form>
 				            </td>
 				            <!--Moyenne du bonus-->
+				            <!-- 
 				            <td class="autre_colonne">
-				            	<?php echo round($moyenne,1)." / 5"; ?>
+				            	<?php //echo round($moyenne,1)." / 5"; ?>
 				            </td>
+				             -->
 				            <!--Note du bonus-->
 				            <td class="autre_colonne">
 	            				<form method="post" name="<?php echo "form_add_note".$bonus->getId();?>" action="../Requete/rq_autres_bonus.php?section=autres_bonus&addnote">
@@ -101,7 +103,7 @@ foreach($listeThemes as $theme)
 									                	<h4 class="modal-title">Ma Remarque</h4>
 										            </div>
 										            <div class="modal-body" >
-										            	<p><?php echo $mon_avancement['remarque'];?></p>
+										            	<textarea style="width:100%;" rows="4" readonly><?php echo $mon_avancement['remarque'];?></textarea>
 										            </div>
 										            <div class="modal-footer">
 										        		<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -125,11 +127,8 @@ foreach($listeThemes as $theme)
 										                <h4 class="modal-title">Ajouter une Remarque</h4>
 										            </div>
 										            <form method="post" name="<?php echo "form_add_remarque".$bonus->getId();?>" action="../Requete/rq_autres_bonus.php?section=autres_bonus&addremarque">
-														<div class="modal-body">
-									                		<input type="text" name="remarque" id="remarque<?php echo $bonus->getId();?>" size="60" class="inputValDefaut"/>
-									                		<br/>
-									                		<br/>
-									                		<p></p>
+														<div id="message<?php echo $bonus->getId();?>" class="modal-body">
+									                		<textarea name="remarque" id="remarque<?php echo $bonus->getId();?>" style="width:100%;" rows="4"><?php echo $mon_avancement['remarque'];?></textarea>
 										                </div>
 										                <div class="modal-footer">
 															<input type="hidden" name="id_bonus" value="<?php echo $bonus->getId();?>"/>

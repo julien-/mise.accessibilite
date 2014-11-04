@@ -85,19 +85,19 @@ foreach($listeThemes as $theme)
             <form method="post" name="<?php echo "form_add_bonus".$theme->getId();?>" action="../Requete/rq_mes_bonus.php?section=mes_bonus&addbonus">
             	<div class="modal-body">
             		<div class="form-group">
-            			<label for="titrebonus">Titre du Bonus</label>
-	                	<input type="text" name="titrebonus" id="titrebonus<?php echo $theme->getId();?>" size="35" class="inputValDefaut">
+            			<label for="titrebonus" style="width:35%;">Titre du Bonus</label>
+	                	<input type="text" name="titrebonus" id="titrebonus<?php echo $theme->getId();?>" class="inputValDefaut" style="width:64%;">
 	                </div>
 	                <div class="form-group">
-		                <label for="typebonus">Type de bonus</label>
-		                <select class="test" name="typebonus">
+		                <label for="typebonus" style="width:35%;">Type de bonus</label>
+		                <select name="typebonus" style="width:35%;">
 		                	<option value="Expose">Exposé</option>
 		                	<option value="Exercice">Exercice</option>
 		                </select>	
 		            </div> 
 		            <div class="form-group">               	
-		                <label for="collaborateursbonus">En collaboration avec</label>
-		                <select class="collaborateurs" name="collaborateursbonus" id="collaborateurs<?php echo $theme->getId();?>" value="<?php echo $theme->getId();?>">
+		                <label for="collaborateursbonus" style="width:35%;">En collaboration avec</label>
+		                <select class="collaborateurs" name="collaborateursbonus" id="collaborateurs<?php echo $theme->getId();?>" value="<?php echo $theme->getId();?>" style="width:35%;">
 	                		<option value=""></option>
 	                		<?php 
 	                		foreach ($listeInscritsExeptCurrentUser as $inscrit)

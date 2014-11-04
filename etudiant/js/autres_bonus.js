@@ -37,13 +37,12 @@ $(document).ready(function() {
 	});
 	
 	$(".soumettre_remarque").click(function() {
-		var remarque = "input[id=remarque" + $(this).attr('id') + "]";
-		var modal = "div[id=ViewAddRemarqueBonus" + $(this).attr('id') + "]";
+		var remarque = "textarea[id=remarque" + $(this).attr('id') + "]";
 		
 		if (!$(remarque).val()) 
 		{
-			$(modal).modal();  
-			$(modal).find('p').html('<span style="color:red;">Erreur</span><span> Vous devez remplir la remarque avant de valider</span>');
+			var message = "div[id=message" + $(this).attr('id') + "]";
+			$(message).append('<label for="erreur" style="color:red;">Erreur&nbsp;:&nbsp;</label><label for="message_erreur">Vous devez remplir la remarque avant de valider</label>');
 			
             return false;
 		}
