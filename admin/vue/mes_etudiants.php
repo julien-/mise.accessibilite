@@ -27,7 +27,7 @@ if (sizeof($listeResultats) > 0)
                     <?php echo $resultat->getEtudiant()->getLogin(); ?>
                 </td>
 			<td class="autre_colonne"><a
-				href="index.php?section=etudiant&e=<?php echo $resultat->getEtudiant()->getId(); ?>"><i class="glyphicon glyphicon-search" title="Cliquez pour plus de d&eacute;tails sur cette personne"></i></a></td>
+				href="index.php?section=details_cours_etudiant&e=<?php echo $resultat->getEtudiant()->getId(); ?>"><i class="glyphicon glyphicon-search" title="Cliquez pour plus de d&eacute;tails sur cette personne"></i></a></td>
 		</tr>
                 <?php
 			}
@@ -35,5 +35,11 @@ if (sizeof($listeResultats) > 0)
         </tbody>
 </table>
 <?php 
+}
+else
+{
+?>
+	<p class="no_results">Aucun étudiant n'est inscrit à ce cours :(</p>
+<?php
 }
 ?>

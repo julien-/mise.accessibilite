@@ -4,8 +4,12 @@ $daoExercice = new DAOExercice($db);
 $daoCours = new DAOCours($db);
 $daoFichiers = new DAOFichier($db);
 
-$listeThemes = $daoTheme->getAllByCours($_GET['c']);
-$cours = $daoCours->getByID($_GET['c']);
+if (isset($_GET['c']))
+	$_SESSION['cours'] = $daoCours->getByID($_GET['c']);
+
+
+$listeThemes = $daoTheme->getAllByCours($_SESSION['cours']->getId());
+$cours = $_SESSION['cours'];
 
 include_once('../vue/gestion_cours.php');
 ?>

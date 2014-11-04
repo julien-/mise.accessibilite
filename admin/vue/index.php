@@ -113,10 +113,10 @@
                     </div>
                     <div class="collapse navbar-collapse" >
                         <ul class="nav navbar-nav">
-                            <li class="<?php if (!isset($_GET['section'])) echo "active";?>"><a href="index.php">Mes cours</a></li>
-                            <li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'seance') echo "active";?>"><a href="index.php?section=seance">Mes séances</a></li>
-                        	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'mes_etudiants') echo "active";?>"><a href="index.php?section=mes_etudiants">Mes étudiants</a></li>
-                        	
+                            <li class="<?php if (!isset($_GET['section'])) echo "active";?>"><a href="index.php?section=gestion_cours">Gestion du cours</a></li>
+                            <li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'seance') echo "active";?>"><a href="index.php?section=seance">Séances</a></li>
+                        	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'mes_etudiants') echo "active";?>"><a href="index.php?section=mes_etudiants">Etudiants</a></li>
+                        	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'details_cours') echo "active";?>"><a href="index.php?section=details_cours">Statistiques</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -128,10 +128,28 @@
             <div class="container-fluid">
                 <div class="row">
                 
-                    <div class="<?php if ($page == 'gestion_cours') echo "col-sm-2"; else echo "col-sm-1";?>">
-<?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
+                    <div class="col-sm-2">
+
+
+                        <div class="list-group">
+                        	<a href="index.php?section=cours" class="<?php if($page == "cours") echo "list-group-item active"; else echo "list-group-item";?>">
+                        		<i class="glyphicon glyphicon-th-list"></i>
+						        <span style="font-size: x-large; margin-left:5%;">Mes cours</span>
+						   	</a>
+                        	<?php
+                            foreach ($listeCours as $cours) 
+                            {
+                            ?>
+                        	<a href="index.php?section=gestion_cours&c=<?php echo $cours->getId(); ?>" class="<?php if(isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getId()) echo "list-group-item active"; else echo "list-group-item";?>" title="<?php echo $cours->getLibelle();?>">
+							   <?php echo $cours->getLibelle();?>
+							</a>
+							<?php
+                            }
+                            ?>
+                        </div>
+                        <?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
                     </div>
-                    <div class="<?php if ($page == 'gestion_cours') echo "col-sm-8"; else echo "col-sm-10";?>">
+                    <div class="col-sm-10">
                           <div>
         <ul class="breadcrumb">
         <?php 
@@ -156,9 +174,7 @@
         </ul>
       </div>
                         <?php include_once('../controleur/' . $page . '.php'); ?>
-                    </div>
-                    <div class="<?php if ($page == 'gestion_cours') echo "col-sm-0"; else echo "col-sm-2";?>">
-						
+                    </div>						
                     </div>
                 </div><!--/row-->
             </div><!--/container-->

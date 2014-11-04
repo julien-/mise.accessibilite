@@ -159,6 +159,7 @@ class DAOInscription extends DAOStandard
 	  						'pass' => $inscription['pass_etu'],
 	  						'admin' => $inscription['admin']))));
 	  	}
+	  	
 	  	return $listeInscription;
 	  }
 	  

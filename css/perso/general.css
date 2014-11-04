@@ -1,5 +1,12 @@
 @import url("../fonts/font.css");
 
+.no_results
+{
+	text-align: center;
+	font-size: 20px;
+	margin-top: 10%;
+	font-weight: bold;
+}
 .bold
 {
 	font-weight: bold;

@@ -3,12 +3,12 @@ $daoSujet = new DAOSujet($db);
 $daoCours =new DAOCours($db);
 $daoNews = new DAONews($db);
 $_SESSION ['referrer'] = Outils::currentPageURL();
-if (isset($_GET['c']))
+if (isset($_SESSION['cours']))
 {
-	$liste5DerniersSujets = $daoSujet->getLastFiveByCours($_GET['c']);
-	$cours = $daoCours->getByID($_GET['c']);
-	$listeThemes = $daoTheme->getAllByCours($_GET['c']);
-	$listeNews = $daoNews->getLastNews(10, $_GET['c']);
+	$liste5DerniersSujets = $daoSujet->getLastFiveByCours($_SESSION['cours']->getId());
+	$cours = $daoCours->getByID($_SESSION['cours']->getId());
+	$listeThemes = $daoTheme->getAllByCours($_SESSION['cours']->getId());
+	$listeNews = $daoNews->getLastNews(10, $_SESSION['cours']->getId());
 	
 	$titre = $cours->getLibelle();
 	$urlJSONPieChart = '../../chart/cours_global_pie_chart.php?&c=' . $cours->getId();

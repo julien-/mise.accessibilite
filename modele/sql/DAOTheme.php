@@ -26,6 +26,13 @@ class DAOTheme extends DAOStandard
 		return $this->countRows($result);
 	}
 	
+	public function countByCours($idCours)
+	{
+		$result = $this->executeQuery('SELECT * FROM theme WHERE id_cours = ' . $idCours);
+	
+		return $this->countRows($result);
+	}
+	
 	public function delete($id)
 	{
 		$daoAvancement = new DAOAvancement($db);
