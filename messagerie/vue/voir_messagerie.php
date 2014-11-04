@@ -21,7 +21,7 @@
         <br/>
         <div class="col-lg-1">Message: </div>
         <div class="col-lg-11">
-        	<textarea style="width: 100%; height: 200px;" name="message"><?php echo nl2br($message->getTexte());?></textarea>
+        	<textarea style="width: 100%; height: 200px;" name="message"><?php echo $message->getTexte();?></textarea>
         </div>
 </div>
 <br/>
