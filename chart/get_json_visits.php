@@ -5,6 +5,7 @@
 	include_once ('../modele/sql/DAOAvancement.php');
 	include_once ('../modele/sql/DAOHistorique.php');
 	include_once ('../modele/sql/DBFactory.php');
+	require 'jsonwrapper.php';
 	session_start ();
 	
 	DBFactory::getMysqlConnexionStandard();

@@ -46,5 +46,5 @@ else
 	$_SESSION["notif_msg"] = '<div class="erreur">Erreur, requete invalide/div>';
 
 // on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas
-header('Location: ../Controleur/index.php?' . $retourPage);
+header('Location: ' . $_SESSION['referrer']);
 ?>

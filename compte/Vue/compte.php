@@ -1,6 +1,6 @@
 <div class="col-md-8">
 	<h2>Informations personnelles</h2>
-	<form id="form_info_perso" class="form-horizontal" method="post" action="../Requete/rq_compte.php?section=compte&modifycompte">
+	<form id="form_info_perso" class="form-horizontal" method="post" action="../../compte/Requete/rq_compte.php?section=compte&modifycompte">
 	    <div class="form-group has-feedback">
 	        <label for="nom" class="control-label col-lg-3">Nom</label>
 	        <div class="col-lg-5">
@@ -48,7 +48,7 @@
 <br>
 <div class="col-md-8">
 	<h3>Mot de passe</h3>
-	<form id="form_mdp" class="form-horizontal" method="post" action="../Requete/rq_compte.php?section=compte&modifypassword">
+	<form id="form_mdp" class="form-horizontal" method="post" action="../../compte/Requete/rq_compte.php?section=compte&modifypassword">
 	    <div class="form-group has-feedback">
 	        <label for="nouveau_pwd" class="control-label col-lg-3">Nouveau mot de passe</label>
 	        <div class="col-lg-5">

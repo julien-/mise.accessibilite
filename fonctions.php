@@ -396,4 +396,3 @@ function est_inscrit_mes_cours($id_etu, $id_prof){
         return false;
 }
 ?>
-

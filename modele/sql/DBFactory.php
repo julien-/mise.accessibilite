@@ -8,7 +8,7 @@ class DBFactory
 		$mdp = ''; 
 		$base = 'apprentissage'; 
 
-		$db = mysql_connect($server, $user, $mdp) or die("erreur de connexion");
+		$db = mysql_connect($server, $user, $mdp) or die("Erreur de connexion MySQL");
 		
 		mysql_select_db($base, $db) or die("erreur de selection base");
 		mysql_query("SET NAMES UTF8"); 

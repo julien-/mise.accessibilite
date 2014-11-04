@@ -1,8 +1,6 @@
 <?php
-$idEtudiant = exists ( 'e', 'etudiant', 'id_etu' );
 
-if ($idEtudiant != false) 
-{
+	$idEtudiant = $_GET['e'];
 	$daoEtudiant = new DAOEtudiant ( $db );
 	$daoInscription = new DAOInscription ( $db );
 	$daoAvancement = new DAOAvancement ( $db );
@@ -16,5 +14,4 @@ if ($idEtudiant != false)
 	$totalBonus = $daoAvancementBonus->getNumberBonusByEtudiant($idEtudiant);
 	
 	include('../vue/etudiant.php');
-}
 ?>

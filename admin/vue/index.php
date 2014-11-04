@@ -91,7 +91,7 @@
                                 }
                                 ?>
                                 <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                                    <li><a href="#"> Mon profil</a></li>
+                                    <li><a href="index.php?section=compte"> Mon compte</a></li>
                                     <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i> Se deconnecter</a></li>
                                 </ul>
                             </li>

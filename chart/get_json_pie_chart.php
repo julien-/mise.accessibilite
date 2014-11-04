@@ -1,7 +1,9 @@
 <?php
-include_once('../lib/autoload.inc.php');
+include_once ('../modele/sql/DAOAvancement.php');
+include_once ('../modele/sql/DBFactory.php');
+require 'jsonwrapper.php';
 
-$db = DBFactory::getMysqlConnexionStandard();
+DBFactory::getMysqlConnexionStandard();
 $daoAvancement = new DAOAvancement($db);
 if (isset($_GET['c']))
 {
@@ -22,7 +24,6 @@ $table['cols'] = array(
     array('label' => 'nombre', 'type' => 'number')
 );
 
-$daoAvancement = new DAOAvancement($db);
 $rows = array();
 $temp = array();
 $temp[] = array('v' => 'Fait');

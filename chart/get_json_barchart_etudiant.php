@@ -4,6 +4,7 @@
 	include_once ('../modele/Outils.php');
 	include_once ('../modele/sql/DAOAvancement.php');
 	include_once ('../modele/sql/DBFactory.php');
+	require 'jsonwrapper.php';
 	session_start ();
 	
 	$db = null;

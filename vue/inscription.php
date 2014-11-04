@@ -5,10 +5,19 @@
 }
 </style>
 
+
+
 <div class="container-fluid">
-	<div class="row" style="padding-top: 120px">
-		<div class="col-lg-12 center-content">
-			<form id="inscription" class="form-horizontal" method="post">
+	<div class="row" style="padding-top: 90px;">
+		<div class="col-xs-2"></div>
+		<div class="col-xs-8">
+		<div class="panel panel-primary panel-transparent">
+   <div class="panel-body">
+			<div class="form-wrap">
+				<h1>Inscription</h1>
+				<h4>Tous les champs sont requis</h4>
+				
+<form id="inscription" class="form-horizontal" method="post">
 		<?php
 		if (isset ( $_GET ['prof'] )) {
 			?>
@@ -88,10 +97,40 @@
 				</div>
 				</div>
 			</form>
+			</div>
+			</div>
+			</div>
 		</div>
+		<div class="col-xs-2"></div>
+		<!-- /.col-xs-12 -->
 	</div>
 	<!--/row-->
 </div>
 <!--/container-->
+
+<div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+					<span class="sr-only">Fermer</span>
+				</button>
+				<h4 class="modal-title">Mot de passe oublié</h4>
+			</div>
+			<div class="modal-body">
+				<p>Tapez votre adresse email</p>
+				<input type="email" name="recovery-email" id="recovery-email" class="form-control" autocomplete="off">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+				<button type="button" class="btn btn-custom">Envoyer</button>
+			</div>
+		</div> <!-- /.modal-content -->
+	</div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->
+
+
+
 
 

@@ -3,6 +3,7 @@ include_once ('../modele/Etudiant.php');
 include_once ('../modele/Cours.php');
 include_once ('../modele/sql/DAOAvancement.php');
 include_once ('../modele/sql/DBFactory.php');
+require 'jsonwrapper.php';
 session_start ();
 
 $db = null;

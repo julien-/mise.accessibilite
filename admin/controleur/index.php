@@ -1,7 +1,6 @@
 <?php
 include_once('../../lib/autoload.inc.php');
 
-include_once('../../fonctions.php');
 include_once('../../config.php');
 session_start();
 
@@ -37,6 +36,11 @@ if (isset($_SESSION['currentUser']))
 		{
 			$page = '../../messagerie/controleur/' . $page;
 		}
+		
+		if($page == "compte" )
+		{
+			$page = '../../compte/Controleur/' . $page;
+		}
 	} else 
 	{
 		$page = 'mes_cours';
@@ -59,6 +63,7 @@ else
 
 switch($pageWithoutPath)
 {
+	case 'compte': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mon Compte' => 'final'); break;
 	case 'details_theme': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?', $daoTheme->getByID($_GET['t'])->getCours()->getLibelle() => 'index.php?section=details_cours&c='.$daoTheme->getByID($_GET['t'])->getCours()->getId(), $daoTheme->getByID($_GET['t'])->getTitre() => 'final'); break;
 	case 'gestion_cours': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?', 'Gestion du cours' => 'final'); break;
 	case 'envoyes_messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?', 'Messagerie' => 'index.php?section=reception_messagerie', 'Boite d\'envoi' => 'final'); break;

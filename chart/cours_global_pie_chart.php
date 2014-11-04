@@ -1,12 +1,9 @@
 <?php
-include_once('../sql/connexion_mysql.php');
-include_once('../fonctions.php');
 include_once('../modele/sql/DAOAvancement.php');
-include_once('../modele/sql/DAOMysqli.php');
 include_once('../modele/sql/DBFactory.php');
-
+require 'jsonwrapper.php';
 $daoAvancement = new DAOAvancement($db);
-
+DBFactory::getMysqlConnexionStandard();
 if(isset($_GET['s']))
 {
 	$progression = $daoAvancement->getByCoursSeanceEtudiant($_GET['c'], $_GET['s'], $_GET['e']);

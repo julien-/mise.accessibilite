@@ -1,5 +1,6 @@
 <?php
 include_once('../sql/connexion_mysql.php');
+require 'jsonwrapper.php';
 
 if ($_GET['user'] == -1)
 {

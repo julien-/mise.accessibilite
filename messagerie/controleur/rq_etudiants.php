@@ -1,5 +1,7 @@
 <?php 
 include_once('../../lib/autoload.inc.php');
+
+require 'jsonwrapper.php';
 session_start();
 
 DBFactory::getMysqlConnexionStandard();
