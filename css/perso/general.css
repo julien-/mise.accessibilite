@@ -1,5 +1,13 @@
 @import url("../fonts/font.css");
 
+.blur {
+    -webkit-filter: blur(2px) grayscale(10%);
+}
+
+.italic{
+	font-style: italic;
+}
+
 .no_results
 {
 	text-align: center;

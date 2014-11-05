@@ -12,7 +12,9 @@
                             <a href="#T<?php echo $theme->getId(); ?>"><?php echo $theme->getTitre(); ?></a>
                         </h4>
                     </div>
+                    
                     <div id="<?php echo $theme->getId(); ?>" class="panel-collapse collapse">
+                   
                         <div class="panel-body">
                             <table class="table">
                             <?php 
@@ -22,7 +24,7 @@
                             ?>
                                 <tr>
                                     <td class="cut-text" style="max-width: 50px;">
-                                        <span><?php echo $exos->getNumero(); ?></span>   <a href="#E<?php echo $exos->getId(); ?>"><?php echo $exos->getTitre(); ?></a>
+                                        <span><?php echo $exos->getNumero(); ?></span>   <a data-toggle="collapse" data-target="#bloc-<?php echo $exos->getId(); ?>" href="#E<?php echo $exos->getId(); ?>"><?php echo $exos->getTitre(); ?></a>
                                     </td>
                                 </tr>
                             <?php   

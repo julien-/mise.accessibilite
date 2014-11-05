@@ -13,6 +13,8 @@ foreach($listeThemes as $theme)
 				</h3>
 			</div>
 			<div class="panel-body">
+				<table class="table table-bordered">
+
 						<?php 
 						$listeExos = $daoExercice->getByAllByTheme($theme->getId());
 						foreach($listeExos as $exos)
@@ -20,12 +22,16 @@ foreach($listeThemes as $theme)
 							$listeFichiers = $daoFichiers->getAllByExercice($exos->getId());
 						?>
 						
-							<div class="row" id="E<?php echo $exos->getId();?>">
-								<a href="#" data-toggle="collapse" data-target="#bloc-<?php $exos->getId(); ?>">
+					<tr>
+						<td>
+							<div id="E<?php echo $exos->getId();?>">
+								<a href="#" data-toggle="collapse" data-target="#bloc-<?php echo $exos->getId(); ?>">
 									<?php echo $exos->getTitre(); ?>
 								</a>
 							</div>
-							<div id="bloc-<?php $exos->getId(); ?>" class="collapse">
+							 
+							<div id="bloc-<?php echo $exos->getId(); ?>" class="collapse">
+							<hr>
 									<table style="background-color: #F0F0F0 ; width: 100%;" >
 									<?php 
 									foreach($listeFichiers as $fichier)
@@ -42,10 +48,12 @@ foreach($listeThemes as $theme)
 									?>
 									</table>
 							</div>
-						
+					</tr>
+						</td>
 						<?php 
 						}
 						?>
+				</table>
 			</div>
 		</div>
 	</div>

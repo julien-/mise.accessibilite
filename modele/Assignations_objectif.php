@@ -4,8 +4,9 @@ class Assignations_objectif {
 	$etudiant,
 	$objectif,
 	$cours,
-	$date;
-	
+	$date,
+	$pourcentage
+	;
 	
 	public function __construct($valeurs = array()) {
 		if (! empty ( $valeurs )) // Si on a sp�cifi� des valeurs, alors on hydrate l'objet.
@@ -32,6 +33,15 @@ class Assignations_objectif {
 	
 	public function setEtudiant($etudiant) {
 		$this->etudiant = $etudiant;
+		return $this;
+	}
+	
+	public function getPourcentage() {
+		return $this->pourcentage;
+	}
+	
+	public function setPourcentage($pourcentage) {
+		$this->pourcentage = $pourcentage;
 		return $this;
 	}
 	

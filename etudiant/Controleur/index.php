@@ -25,6 +25,7 @@ $daoAssignations_objectif = new DAOAssignations_objectif($db);
 $listeCours = $daoInscription->getAllByEtudiant($_SESSION['currentUser']->getId());
 $nbMessagesNnLu = $daoMessage->countNbNonLu($_SESSION['currentUser']->getId());
 
+
 if (isset($_GET['section']) && !empty($_GET['section'])) 
 {
 	$now = date("Y-m-d");   //recupère la date d'aujourd'hui
@@ -58,6 +59,11 @@ if (isset($_GET['section']) && !empty($_GET['section']))
 				'cours' => '0'
 		));
 		$daoHistorique->save($historique);
+		
+		/* Check objectifs */
+		$daoAssignations_objectif = new DAOAssignations_objectif($db);
+		$listeAssignationsObjectifs = $daoAssignations_objectif->checkAllByEtudiantCours($_SESSION['currentUser']->getId(), $_SESSION['cours']->getId());
+		
 		
 		$page = '../../forum/controleur/' . $page;
 	}
@@ -97,6 +103,10 @@ if (isset($_GET['section']) && !empty($_GET['section']))
 		{
 			$_SESSION['cours'] = $daoCours->getByID($_GET['id_cours']);
 		}
+		
+		/* Check objectifs */
+		$daoAssignations_objectif = new DAOAssignations_objectif($db);
+		$listeAssignationsObjectifs = $daoAssignations_objectif->checkAllByEtudiantCours($_SESSION['currentUser']->getId(), $_SESSION['cours']->getId());
 		
 		$listeSeances = $daoSeance->getAllByCours($_SESSION["cours"]->getId());
 		$listeThemes = $daoTheme->getAllByCours($_SESSION['cours']->getId());

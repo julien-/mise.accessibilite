@@ -18,9 +18,16 @@ class DAOMessage extends DAOStandard
 	
 	public function countBySujet($id)
 	{
-		echo 'SELECT * FROM forum_reponses WHERE correspondance_sujet = ' . $id;
 		$ressource = $this->executeQuery('SELECT * FROM forum_reponses WHERE correspondance_sujet = ' . $id);
 		
+		return $this->countRows($ressource);
+	}
+	
+	public function countByEtudiantCours($idEtu, $idCours)
+	{
+		$sql = 'SELECT * FROM forum_reponses r, forum_sujets s, forum_categorie c WHERE r.correspondance_sujet = s.id_sujet AND s.id_categorie = c.id_categorie AND auteur_reponse = ' . $idEtu . ' AND id_cours =' . $idCours;
+		$ressource = $this->executeQuery($sql);
+	
 		return $this->countRows($ressource);
 	}
 	

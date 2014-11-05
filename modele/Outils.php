@@ -2,7 +2,7 @@
 class Outils
 {
 	public static $UPLOAD_FOLDER = '/upload/';
-
+	
 	
 	public static function upload($index, $chemin, $dossier, $maxsize = FALSE, $extensions = FALSE) {
 		
@@ -36,6 +36,11 @@ class Outils
 	
 		echo $cheminComplet . $basename;
 		return $basename;
+	}
+	
+	public static function getServerURL()
+	{
+		return 'http://' . $_SERVER['SERVER_NAME'];
 	}
 	
 	public static function currentPageURL()
