@@ -23,6 +23,7 @@ class DAOAssignations_objectif extends DAOStandard
   {
   	$daoEtudiant = new DAOEtudiant($db);
   	$daoObjectif = new DAOObjectif($db);
+  	$daoCours = new DAOCours($db);
   	$result = $this->executeQuery('SELECT *
 									FROM assignations_objectif, objectif, etudiant, cours
 									WHERE assignations_objectif.id_etu =' .$idEtu. '
@@ -35,7 +36,7 @@ class DAOAssignations_objectif extends DAOStandard
 		$listeObjectifs[] = new Assignations_objectif(array(
 				'etudiant' => $daoEtudiant->getByID($objectif['id_etu']),
 				'objectif' => $daoObjectif->getByID($objectif['id_objectif']),
-				'cours' => $daoObjectif->getByID($objectif['id_cours']),
+				'cours' => $daoCours->getByID($objectif['id_cours']),
 				'date' => $objectif['date']
 		));
 	}
