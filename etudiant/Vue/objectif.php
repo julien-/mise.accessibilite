@@ -14,8 +14,7 @@ foreach ($listeAssignationsObjectifs as $assignation)
 			<?php echo $assignation->getObjectif()->getDescription(); ?>
 				<div class="progress progress-striped progress-borders"
 					style="margin-top: 12px;">
-					<div class="progress-bar progress-bar-primary vert-align" 
-                         style="color: black; background-color: <?php echo Outils::colorChart($assignation->getPourcentage()); ?>; width: <?php echo $assignation->getPourcentage(); ?>%;">
+					<div class="progress-bar progress-bar-primary vert-align" style="color: black; background-color: <?php echo Outils::colorChart($assignation->getPourcentage()); ?>; width: <?php echo $assignation->getPourcentage(); ?>%;">
                          <?php echo $assignation->getPourcentage(); ?> %
                     </div>
 				</div>

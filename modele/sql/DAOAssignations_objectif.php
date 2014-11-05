@@ -97,15 +97,59 @@ class DAOAssignations_objectif extends DAOStandard
   	return $pourcentage * 100; 
   }
   
+  public function checkBavard($idEtu, $idCours)
+  {
+  	$daoMessage = new DAOMessage($db);
+  	$pourcentage = $daoMessage->countByEtudiantCours($idEtu, $idCours) / 15;
+  	return $pourcentage * 100;
+  }
+  
   public function checkExpert($idEtu, $idCours)
   {
   	$daoAvancement = new DAOAvancement($db);
-  	
   	return $daoAvancement->getByCoursEtudiant($idCours, $idEtu);
   }
   
   public function checkEn_bonne_voie($idEtu, $idCours)
   {
-  	 
+  	$daoAvancement = new DAOAvancement($db);
+  	$pourcentage = $daoAvancement->getByCoursEtudiant($idCours, $idEtu) * 4;
+  	return $pourcentage;
   }
+  
+  public function checkJuge($idEtu, $idCours)
+  {
+  	$daoAvancement_bonus = new DAOAvancement_bonus($db);
+  	$pourcentage = $daoAvancement_bonus->countNotesByEtudiantCours($idEtu, $idCours) / 5;
+  	return $pourcentage * 100;
+  }
+  
+  public function checkProfesseur_en_herbe($idEtu, $idCours)
+  {
+  	$daoAvancement_bonus = new DAOAvancement_bonus($db);
+  	$pourcentage = $daoAvancement_bonus->countFaitByEtudiantCours($idEtu, $idCours);
+  	return $pourcentage * 100;
+  }
+  
+  public function checkIdole($idEtu, $idCours)
+  {
+  	$daoAvancement_bonus = new DAOAvancement_bonus($db);
+  	$pourcentage = $daoAvancement_bonus->countNotesRecuesEgal5ByEtudiantCours($idEtu, $idCours) / 15;
+  	return $pourcentage * 100;
+  }
+  
+  public function checkHabitue($idEtu, $idCours)
+  {
+  	$daoHistorique = new DAOHistorique($db);
+  	$pourcentage = $daoHistorique->verifConnexion4JoursAffile($idEtu, $idCours) / 4;
+  	return $pourcentage * 100;
+  }
+  
+  public function checkSavant_fou($idEtu, $idCours)
+  {
+  	$daoAvancement_bonus = new DAOAvancement_bonus($db);
+  	$pourcentage = $daoAvancement_bonus->countFaitByEtudiantCours($idEtu, $idCours) / 5;
+  	return $pourcentage * 100;
+  }
+  
 }

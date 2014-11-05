@@ -272,6 +272,67 @@ class DAOAvancement_bonus extends DAOStandard {
 			return false;			
 	}
 	
+	public function countNotesByEtudiantCours($idEtu, $idCours) {
+		$sql = 'SELECT * 
+				FROM avancement_bonus, bonus, theme
+				WHERE avancement_bonus.id_etu = ' .$idEtu . '
+				AND avancement_bonus.suivi = 1
+				AND avancement_bonus.note IS NOT NULL 
+				AND avancement_bonus.id_bonus = bonus.id_bonus
+				AND bonus.id_theme = theme.id_theme
+				AND theme.id_cours = ' .$idCours;
+		$ressource = $this->executeQuery($sql);
 	
+		return $this->countRows($ressource);
+	}
+	
+	public function countFaitByEtudiantCours($idEtu, $idCours) {
+		$sql = 'SELECT * 
+				FROM avancement_bonus, bonus, theme
+				WHERE avancement_bonus.id_etu = ' .$idEtu . '
+				AND avancement_bonus.fait = 1
+				AND avancement_bonus.id_bonus = bonus.id_bonus
+				AND bonus.id_theme = theme.id_theme
+				AND theme.id_cours = ' .$idCours;
+		$ressource = $this->executeQuery($sql);
+	
+		return $this->countRows($ressource);
+	}
+	
+	public function countNotesRecuesEgal5ByEtudiantCours($idEtu, $idCours){
+		
+		$sql = 'CREATE TEMPORARY TABLE R1
+				SELECT avancement_bonus.id_bonus
+				FROM avancement_bonus, bonus, theme
+				WHERE avancement_bonus.id_etu = '.$idEtu.'
+				AND avancement_bonus.fait = 1
+				AND avancement_bonus.id_bonus = bonus.id_bonus
+				AND bonus.id_theme = theme.id_theme
+				AND theme.id_cours = ' .$idCours.';';
+		
+		$result = $this->executeQuery($sql);
+		
+		$sql = 'CREATE TEMPORARY TABLE R2
+				SELECT avancement_bonus.id_bonus 
+				FROM avancement_bonus, R1
+				WHERE avancement_bonus.id_bonus = R1.id_bonus
+				AND avancement_bonus.suivi = 1
+				AND avancement_bonus.note = 5;';
+		
+		$result = $this->executeQuery($sql);
+		
+		$sql = 'SELECT *
+				FROM R2';
+		
+		$ressource = $this->executeQuery($sql);
+		
+		$sql = 'DROP TEMPORARY TABLE R1';
+		$this->executeQuery($sql);
+		
+		$sql = 'DROP TEMPORARY TABLE R2';
+		$this->executeQuery($sql);
+		
+		return $this->countRows($ressource);
+	}
 }
 ?>

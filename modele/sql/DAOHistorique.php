@@ -44,5 +44,10 @@ class DAOHistorique extends DAOStandard
 	
 		return $result;
 	}
+	
+	public function verifConnexion4JoursAffile($idEtu, $idCours)
+	{
+		
+	}
 } 
 ?>
