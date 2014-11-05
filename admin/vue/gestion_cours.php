@@ -13,41 +13,39 @@ foreach($listeThemes as $theme)
 				</h3>
 			</div>
 			<div class="panel-body">
-			<table class="table table-condensed table-responsive table-user-information">
-					<tbody>
 						<?php 
 						$listeExos = $daoExercice->getByAllByTheme($theme->getId());
 						foreach($listeExos as $exos)
 						{
 							$listeFichiers = $daoFichiers->getAllByExercice($exos->getId());
 						?>
-						<tr id="E<?php echo $exos->getId();?>">
-							<td style="font-weight: bold;"><?php echo $exos->getTitre(); ?></td>
-						</tr>
-						<tr>
-							<td>
-								<table style="background-color: #F0F0F0 ; width: 100%;" >
-								<?php 
-								foreach($listeFichiers as $fichier)
-								{
-								?>
-									<ul>
-										<li>
-											<a href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a> 
-										</li>
-									<?php echo $fichier->getCommentaire();?>
-									</ul>
-								<?php 
-								}
-								?>
-								</table>
-							</td>
-						</tr>
+						
+							<div class="row" id="E<?php echo $exos->getId();?>">
+								<a href="#" data-toggle="collapse" data-target="#bloc-<?php $exos->getId(); ?>">
+									<?php echo $exos->getTitre(); ?>
+								</a>
+							</div>
+							<div id="bloc-<?php $exos->getId(); ?>" class="collapse">
+									<table style="background-color: #F0F0F0 ; width: 100%;" >
+									<?php 
+									foreach($listeFichiers as $fichier)
+									{
+									?>
+										<ul>
+											<li>
+												<a href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a> 
+											</li>
+										<?php echo $fichier->getCommentaire();?>
+										</ul>
+									<?php 
+									}
+									?>
+									</table>
+							</div>
+						
 						<?php 
 						}
 						?>
-					</tbody>
-			</table>
 			</div>
 		</div>
 	</div>

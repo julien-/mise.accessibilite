@@ -20,6 +20,10 @@ if (isset ( $_GET ['section'] ))
 else
 	$page = 'connexion';
 session_start ();
+if (isset($_SESSION['cours']))
+{
+	unset($_SESSION['cours']);
+}
 ?><script type="text/javascript"
 	src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart","table"]}]}'>
 </script>

@@ -111,6 +111,10 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
+                    <?php
+                    if (isset($_SESSION['cours']))
+                    {
+                    ?>
                     <div class="collapse navbar-collapse" >
                         <ul class="nav navbar-nav">
                             <li class="<?php if (!isset($_GET['section'])) echo "active";?>"><a href="index.php?section=gestion_cours">Gestion du cours</a></li>
@@ -119,6 +123,9 @@
                         	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'details_cours') echo "active";?>"><a href="index.php?section=details_cours">Statistiques</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <!-- /Header -->
@@ -129,8 +136,6 @@
                 <div class="row">
                 
                     <div class="col-sm-2">
-
-
                         <div class="list-group">
                         	<a href="index.php?section=cours" class="<?php if($page == "cours") echo "list-group-item active"; else echo "list-group-item";?>">
                         		<i class="glyphicon glyphicon-th-list"></i>
@@ -140,7 +145,7 @@
                             foreach ($listeCours as $cours) 
                             {
                             ?>
-                        	<a href="index.php?section=gestion_cours&c=<?php echo $cours->getId(); ?>" class="<?php if(isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getId()) echo "list-group-item active"; else echo "list-group-item";?>" title="<?php echo $cours->getLibelle();?>">
+                        	<a href="index.php?section=gestion_cours&c=<?php echo $cours->getId(); ?>" class="<?php if($page != 'cours' && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getId()) echo "list-group-item active"; else echo "list-group-item";?>" title="<?php echo $cours->getLibelle();?>">
 							   <?php echo $cours->getLibelle();?>
 							</a>
 							<?php

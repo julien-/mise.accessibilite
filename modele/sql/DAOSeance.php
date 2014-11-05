@@ -1,9 +1,9 @@
 <?php
 class DAOSeance extends DAOStandard
 {	
-	public function add(Seance $seance)
+	public function save(Seance $seance)
 	{
-		$this->executeQuery('INSERT INTO seance SET date_seance = "' . $seance->getId() . '", id_cours = ' . $seance->getCours()->getId());
+		$this->executeQuery('INSERT INTO seance SET date_seance = "' . $seance->getDate() . '", id_cours = ' . $seance->getCours());
 	}
 	
 	public function update(Seance $seance)

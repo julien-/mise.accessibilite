@@ -1,5 +1,7 @@
-
-
+<?php 
+if (sizeof($listeSeance) > 0)
+{
+?>
     <table class="interactive-table table table-striped table-bordered" id="tab_seance">
         <thead>
             <tr class="titre">  <!--class pour rester toujours visible-->
@@ -35,6 +37,15 @@
             ?>
         </tbody>
     </table> 
+<?php 
+}
+else
+{
+?>
+	<p class="no_results">Aucune séance n'est prévue pour ce cours</p>
+<?php
+}
+?>
 <a  class="btn btn-primary" data-toggle="modal" data-target="#ajoutExo">Ajouter une s&eacute;ance</a>  
 <div class="modal fade" id="ajoutExo" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
      <div class="modal-dialog">  
@@ -44,19 +55,23 @@
                 <h4 id="myModalLabel" class="modal-title">Ajouter une séance</h4>
             </div>
             <br/>
-            <form method="post" action="rq_seance.php?section=seance&addseance">
+            <form method="post" class="form-horizontal" action="rq_seance.php?section=seance&addseance">
             	<div class="container-fluid">
                 	<div class="row">
                 		<div class="col-sm-1">
                 		</div>
                 		<div class="col-sm-9">
 	            		<div class="form-group">
-	            			<label for="titre_exo">Date de la séance</label>
-                            <input type="date" style="height: 20px; font-size: 10pt;" name="dateseanceadd" id="dateseanceadd"/>		                </div>
+	            			<label for="date" class="control-label col-lg-5">Date de la séance</label>
+                            <div class="col-lg-6">
+                            	<input class="form-control" type="date" name="date"/>	
+                            </div>	                
+                        </div>
                 		<!--submit-->
 		                <div class="form-group center-content">
-		                	<input type="submit" class="btn btn-primary" name="soumisadd" id="soumisadd" alt='Ajouter un exercice' title='Ajouter un exerccie' value="Ajouter"/>
+		                	<input type="submit" class="btn btn-primary" name="submit" id="submit" alt='Ajouter une séance' title='Ajouter une séance' value="Ajouter"/>
 		    			</div>
+		    			<br/>
 		    			</div>
 		    			<div class="col-sm-1">
 		    			</div>

@@ -20,4 +20,6 @@ if (isset($_SESSION['cours']) && isset($_GET['e']))
 	$daoAvancementBonus = new DAOAvancement_bonus($db);
 	include_once('../vue/details_cours_etudiant.php');
 }
+else
+	include('../vue/erreur.php');
 ?>
