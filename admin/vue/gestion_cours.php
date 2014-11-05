@@ -25,8 +25,21 @@ foreach($listeThemes as $theme)
 					<tr>
 						<td>
 							<div id="E<?php echo $exos->getId();?>">
-								<a href="#" data-toggle="collapse" data-target="#bloc-<?php echo $exos->getId(); ?>">
+								<input type="text" id="exo-<?php echo $exos->getId(); ?>" class="base-hidden form-control hidden input-exo" value="<?php echo $exos->getTitre(); ?>" data-input-exo-id="<?php echo $exos->getId(); ?>"/>
+								
+								<p class="center-text">
+									<a href="#" id="edit-valid-exo-<?php echo $exos->getId(); ?>" class="hidden base-hidden validate-icon-exo" data-modif-exo-id="<?php echo $exos->getId(); ?>">
+										<br/><i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle" title="Valider"></i>
+									</a>
+									<a href="#" id="edit-abort-exo-<?php echo $exos->getId(); ?>" class="hidden base-hidden abort-icon-exo">
+										<i style="font-size: 50px;" class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
+									</a>
+								</p>
+								<a href="#" class="base" id="titre-exo-<?php echo $exos->getId(); ?>" data-toggle="collapse" data-target="#bloc-<?php echo $exos->getId(); ?>">
 									<?php echo $exos->getTitre(); ?>
+								</a>
+								<a href="#" id="edit-icon-exo-<?php echo $exos->getId(); ?>" class="base edit-icon-exo" data-modif-exo-id="<?php echo $exos->getId(); ?>">
+									<i class="glyphicon glyphicon-pencil" title="Modifier le titre de cet exercice"></i>
 								</a>
 							</div>
 							 
