@@ -14,6 +14,13 @@ if (isset($_POST['titre-exo']))
 	$daoExercice->update($exercice);
 }
 
+if (isset($_POST['titre-theme']))
+{
+	$theme = $daoTheme->getByID($_POST['id-theme']);
+	$theme = $theme->setTitre($_POST['titre-theme']);
+	$daoTheme->update($exercice);
+}
+
 $listeThemes = $daoTheme->getAllByCours($_SESSION['cours']->getId());
 $cours = $_SESSION['cours'];
 

@@ -13,7 +13,7 @@
 	?>
 		<tr>
 			<td>
-				<?php echo $cours->getLibelle(); ?>
+				<a href="../controleur/index.php?section=gestion_cours&c=<?php echo $cours->getId(); ?>"><?php echo $cours->getLibelle(); ?></a>
 			</td>
 			<td class="autre_colonne">
 				<?php echo $daoInscription->countByCours($cours->getId()); ?>
