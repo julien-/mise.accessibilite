@@ -19,6 +19,8 @@ $daoHistorique = new DAOHistorique($db);
 $daoMessage = new DAOMessage($db);
 $daoCategorie = new DAOCategorie($db);
 $daoSujet = new DAOSujet($db);
+$daoObjectif = new DAOObjectif($db);
+$daoAssignations_objectif = new DAOAssignations_objectif($db);
 
 $listeCours = $daoInscription->getAllByEtudiant($_SESSION['currentUser']->getId());
 $nbMessagesNnLu = $daoMessage->countNbNonLu($_SESSION['currentUser']->getId());

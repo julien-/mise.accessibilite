@@ -4,8 +4,7 @@ class News {
 	protected 
 	$date,
 	$activite,
-	$etudiant
-	;
+	$etudiant;
 	
 	public function __construct($valeurs = array()) {
 		if (! empty ( $valeurs )) // Si on a sp�cifi� des valeurs, alors on hydrate l'objet.
