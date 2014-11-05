@@ -6,7 +6,7 @@ foreach ($listeAssignationsObjectifs as $assignation)
 ?>
 	<div class="row">
 		<div class="col-lg-3">
-			<img class="<?php if ($assignation->getPourcentage() < 100) echo 'blur';?>" src="<?php echo Outils::getServerURL() . '/images/Badges/' . str_replace(' ', '_', $assignation->getObjectif()->getObjectif()) . '.png'; ?>" alt="<?php echo $assignation->getObjectif()->getObjectif(); ?>" />
+			<img class="<?php if ($assignation->getPourcentage() < 100) echo 'blur';?>" src="<?php echo '../../images/Badges/' . str_replace(' ', '_', $assignation->getObjectif()->getObjectif()) . '.png'; ?>" alt="<?php echo $assignation->getObjectif()->getObjectif(); ?>" />
 		</div>
 		<div class="col-lg-8">
 			<span class="bold"><?php echo $assignation->getObjectif()->getObjectif(); ?></span><span class="italic" style="font-size: 12px;"><?php if ($assignation->getPourcentage() == 100) echo ' Obtenu le ' . Outils::dateToFr($assignation->getDate()); ?></span>
