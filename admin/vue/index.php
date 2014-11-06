@@ -10,14 +10,11 @@
         <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="../../css/bootstrap/bootstrap-tour.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/dataTables.bootstrap.css" rel="stylesheet">
-        <link href="../../css/bootstrap/bootstrap-wysihtml5.css" rel="stylesheet">
-
         <link href="../../css/perso/index.css" rel="stylesheet">
         <link href="../../css/typeahead.css" rel="stylesheet">
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
         <link href="../../css/style.css" rel="stylesheet">
-        <link href="../../css/prettify.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
         <?php if (file_exists("../../css/" . $pageWithoutPath . ".css")){?>
@@ -31,19 +28,7 @@
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
         <!-- CSS code from Bootply.com editor -->
-<style type="text/css" media="screen">
-	.btn.jumbo {
-		font-size: 20px;
-		font-weight: normal;
-		padding: 14px 24px;
-		margin-right: 10px;
-		-webkit-border-radius: 6px;
-		-moz-border-radius: 6px;
-		border-radius: 6px;
-	}
-	
-	
-</style>
+
         <style type="text/css">
             .navbar-static-top {
                 margin-bottom:20px;
@@ -227,19 +212,13 @@
 		<script type="text/javascript" src="../../js/bootstrap/typeahead.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/handlebars.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/jquery.validate.min.js"></script>
-		<script type="text/javascript" src='../../js/wysihtml5-0.3.0.js'></script>
-		<script type="text/javascript" src='../../js/prettify.js'></script>
-		<script type="text/javascript" src="../../js/bootstrap/bootstrap-wysihtml5.js"></script>
 		<script type="text/javascript" src='../../js/googleChartAPI.js'></script>
-		
         <!--Integration des fichiers js de chaque page-->
         <?php if (file_exists("../../js/" . $pageWithoutPath . ".js")){?>
         <script type="text/javascript" src="../../js/<?php echo ($pageWithoutPath . ".js"); ?>"></script>
         <?php }?>
         <script type="text/javascript" src="../../js/commun.js"></script>
-<script type="text/javascript" charset="utf-8">
-	$(prettyPrint);
-</script>
+
         <script type="text/javascript">
 		// Instance the tour
 		
