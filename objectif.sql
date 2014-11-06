@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 05 Novembre 2014 à 13:51
+-- Généré le :  Jeu 06 Novembre 2014 à 21:59
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.4.24
 
@@ -23,27 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `assignations_objectif`
---
-
-CREATE TABLE IF NOT EXISTS `assignations_objectif` (
-  `id_etu` int(11) NOT NULL,
-  `id_objectif` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `id_cours` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `assignations_objectif`
---
-
-INSERT INTO `assignations_objectif` (`id_etu`, `id_objectif`, `date`, `id_cours`) VALUES
-(65, 2, '2014-11-13', 0),
-(65, 3, '2014-11-20', 0);
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `objectif`
 --
 
@@ -53,22 +32,27 @@ CREATE TABLE IF NOT EXISTS `objectif` (
   `description` varchar(1000) NOT NULL,
   `points` int(11) NOT NULL,
   PRIMARY KEY (`id_objectif`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Contenu de la table `objectif`
 --
 
 INSERT INTO `objectif` (`id_objectif`, `objectif`, `description`, `points`) VALUES
-(4, 'Expert', 'Finir le cours à 100 %', 200),
-(2, 'Piplette', 'Poster 5 messages sur le forum', 25),
-(3, 'Bavard', 'Poster 15 messages sur le forum', 50),
-(5, 'En bonne voie', 'Avoir un avancement supérieur à 25 %', 50),
-(6, 'Juge', 'Noter 5 bonus', 50),
-(7, 'Professeur en herbe', 'Créer son premier bonus', 50),
-(8, 'Idole', 'Plus de 15 étudiants ont mis 5 à un de tes bonus', 200),
-(9, 'Habitué', 'Venir chaque jour durant 4 jours d''affilé', 100),
-(10, 'Savant fou', 'Réaliser 5 bonus', 100);
+(1, 'Débutant', 'Avoir un avancement global supérieur à 25 %', 250),
+(2, 'Intermédiaire', 'Avoir un avancement global supérieur à 50 %', 500),
+(3, 'Avancé', 'Avoir un avancement global supérieur à 75 %', 750),
+(4, 'Expert', 'Avoir un avancement global égal à 100 %', 1000),
+(5, 'Discret', 'Poster son premier message sur le forum', 50),
+(6, 'Loquace', 'Poster 5 messages sur le forum', 100),
+(7, 'Bavard', 'Poster 15 messages sur le forum', 300),
+(8, 'Professeur en herbe', 'Créer son premier bonus', 50),
+(9, 'Petit génie', 'Créer 5 bonus', 100),
+(10, 'Savant fou', 'Créer 15 bonus', 300),
+(11, 'Juge', 'Noter un premier bonus', 50),
+(12, 'Juré', 'Noter 5 bonus', 100),
+(13, 'Bourreau', 'Noter 15 bonus', 300),
+(14, 'Idole', 'Plus de 15 étudiants ont mis 5 à un de tes bonus', 200);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
