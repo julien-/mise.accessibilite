@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.1.4
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 04 Novembre 2014 à 14:47
--- Version du serveur :  5.5.39
--- Version de PHP :  5.4.31
+-- Généré le :  Jeu 06 Novembre 2014 à 23:51
+-- Version du serveur :  5.6.15-log
+-- Version de PHP :  5.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,6 +23,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `assignations_objectif`
+--
+
+CREATE TABLE IF NOT EXISTS `assignations_objectif` (
+  `id_etu` int(11) NOT NULL,
+  `id_objectif` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `id_cours` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `assignations_objectif`
+--
+
+INSERT INTO `assignations_objectif` (`id_etu`, `id_objectif`, `date`, `id_cours`) VALUES
+(65, 2, '2014-11-13', 0),
+(65, 3, '2014-11-20', 0),
+(65, 5, '2014-11-05', 1),
+(65, 7, '2014-11-05', 1),
+(65, 8, '2014-11-06', 1),
+(65, 11, '2014-11-06', 1),
+(65, 15, '2014-11-06', 27);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `assignations_pokemon`
 --
 
@@ -30,7 +56,11 @@ CREATE TABLE IF NOT EXISTS `assignations_pokemon` (
   `id_etu` int(11) NOT NULL,
   `id_pokemon` int(11) NOT NULL,
   `id_exo` int(11) NOT NULL,
-  `poke_courant` int(11) NOT NULL
+  `poke_courant` int(11) NOT NULL,
+  PRIMARY KEY (`id_etu`,`id_pokemon`),
+  KEY `id_pokemon` (`id_pokemon`),
+  KEY `assign_exo` (`id_exo`),
+  KEY `id_etu` (`id_etu`,`id_pokemon`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -1374,7 +1404,9 @@ CREATE TABLE IF NOT EXISTS `avancement` (
   `compris` int(1) NOT NULL,
   `assimile` int(1) NOT NULL,
   `id_seance` int(11) NOT NULL,
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  KEY `id_exo` (`id_exo`),
+  KEY `id_seance` (`id_seance`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -2352,7 +2384,10 @@ CREATE TABLE IF NOT EXISTS `avancement_bonus` (
   `suivi` tinyint(1) NOT NULL,
   `note` tinyint(5) DEFAULT NULL,
   `remarque` varchar(400) DEFAULT NULL,
-  `id_seance` int(11) NOT NULL
+  `id_seance` int(11) NOT NULL,
+  PRIMARY KEY (`id_etu`,`id_bonus`,`id_seance`),
+  KEY `id_bonus` (`id_bonus`),
+  KEY `id_seance` (`id_seance`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -2408,8 +2443,8 @@ INSERT INTO `avancement_bonus` (`id_etu`, `id_bonus`, `fait`, `suivi`, `note`, `
 (64, 5, 0, 0, NULL, NULL, 8),
 (64, 6, 0, 0, NULL, NULL, 8),
 (125, 6, 0, 0, NULL, NULL, 14),
-(65, 5, 0, 0, 1, NULL, 8),
-(65, 6, 0, 0, NULL, NULL, 8),
+(65, 6, 0, 1, 2, NULL, 0),
+(65, 18, 1, 0, NULL, NULL, 0),
 (125, 5, 0, 0, NULL, NULL, 14),
 (66, 5, 0, 0, NULL, NULL, 14),
 (66, 6, 0, 0, NULL, NULL, 14),
@@ -2428,7 +2463,17 @@ INSERT INTO `avancement_bonus` (`id_etu`, `id_bonus`, `fait`, `suivi`, `note`, `
 (122, 6, 0, 0, NULL, NULL, 14),
 (71, 5, 0, 0, NULL, NULL, 14),
 (71, 6, 0, 0, NULL, NULL, 14),
-(122, 5, 0, 0, NULL, NULL, 14);
+(122, 5, 0, 0, NULL, NULL, 14),
+(31, 17, 0, 1, 4, NULL, 0),
+(61, 15, 1, 0, NULL, NULL, 0),
+(59, 15, 1, 0, NULL, NULL, 0),
+(55, 15, 1, 0, NULL, NULL, 0),
+(65, 17, 1, 0, NULL, NULL, 0),
+(23, 16, 1, 0, NULL, NULL, 0),
+(55, 16, 1, 0, NULL, NULL, 0),
+(46, 16, 1, 0, NULL, NULL, 0),
+(30, 17, 0, 1, 5, NULL, 0),
+(30, 18, 1, 0, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2437,11 +2482,13 @@ INSERT INTO `avancement_bonus` (`id_etu`, `id_bonus`, `fait`, `suivi`, `note`, `
 --
 
 CREATE TABLE IF NOT EXISTS `bonus` (
-`id_bonus` int(11) NOT NULL,
+  `id_bonus` int(11) NOT NULL AUTO_INCREMENT,
   `titre_bonus` varchar(200) NOT NULL,
   `type_bonus` varchar(200) NOT NULL,
-  `id_theme` int(11) NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+  `id_theme` int(11) NOT NULL,
+  PRIMARY KEY (`id_bonus`),
+  KEY `id_theme` (`id_theme`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Contenu de la table `bonus`
@@ -2449,7 +2496,11 @@ CREATE TABLE IF NOT EXISTS `bonus` (
 
 INSERT INTO `bonus` (`id_bonus`, `titre_bonus`, `type_bonus`, `id_theme`) VALUES
 (5, 'Intérêt et limite des BdD ', 'Exposé', 7),
-(6, 'ISFATES', 'Exercice', 8);
+(6, 'ISFATES', 'Exercice', 8),
+(15, 'test', 'Expose', 7),
+(16, 'test', 'Exercice', 7),
+(17, 'test', 'Expose', 7),
+(18, 'sefsd', 'Expose', 8);
 
 -- --------------------------------------------------------
 
@@ -2458,9 +2509,10 @@ INSERT INTO `bonus` (`id_bonus`, `titre_bonus`, `type_bonus`, `id_theme`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cle` (
-`id_cle` int(11) NOT NULL,
-  `valeur_cle` varchar(120) NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+  `id_cle` int(11) NOT NULL AUTO_INCREMENT,
+  `valeur_cle` varchar(120) NOT NULL,
+  PRIMARY KEY (`id_cle`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Contenu de la table `cle`
@@ -2480,7 +2532,8 @@ INSERT INTO `cle` (`id_cle`, `valeur_cle`) VALUES
 (26, 'eab71244afb687f16d8c4f5ee9d6ef0e'),
 (27, 'eab71244afb687f16d8c4f5ee9d6ef0e'),
 (28, 'eab71244afb687f16d8c4f5ee9d6ef0e'),
-(29, 'eab71244afb687f16d8c4f5ee9d6ef0e');
+(29, 'eab71244afb687f16d8c4f5ee9d6ef0e'),
+(30, '098f6bcd4621d373cade4e832627b4f6');
 
 -- --------------------------------------------------------
 
@@ -2489,12 +2542,13 @@ INSERT INTO `cle` (`id_cle`, `valeur_cle`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cours` (
-`id_cours` int(11) NOT NULL,
+  `id_cours` int(11) NOT NULL AUTO_INCREMENT,
   `libelle_cours` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `couleur_calendar` varchar(7) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   `id_prof` int(11) NOT NULL,
-  `id_cle` int(11) NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+  `id_cle` int(11) NOT NULL,
+  PRIMARY KEY (`id_cours`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
 -- Contenu de la table `cours`
@@ -2504,7 +2558,8 @@ INSERT INTO `cours` (`id_cours`, `libelle_cours`, `couleur_calendar`, `id_prof`,
 (1, 'Base de données', NULL, 17, 1),
 (24, 'nnn', NULL, 17, 27),
 (23, 'Biologie', NULL, 124, 19),
-(25, 'nnn', NULL, 17, 28);
+(25, 'nnn', NULL, 17, 28),
+(27, 'Test', NULL, 17, 30);
 
 -- --------------------------------------------------------
 
@@ -2513,13 +2568,14 @@ INSERT INTO `cours` (`id_cours`, `libelle_cours`, `couleur_calendar`, `id_prof`,
 --
 
 CREATE TABLE IF NOT EXISTS `etudiant` (
-`id_etu` int(3) NOT NULL,
+  `id_etu` int(3) NOT NULL AUTO_INCREMENT,
   `nom_etu` varchar(200) NOT NULL,
   `prenom_etu` varchar(200) NOT NULL,
   `pseudo_etu` varchar(200) NOT NULL,
   `mail_etu` varchar(200) NOT NULL,
   `pass_etu` varchar(200) NOT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT '0'
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_etu`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=130 ;
 
 --
@@ -2566,7 +2622,7 @@ INSERT INTO `etudiant` (`id_etu`, `nom_etu`, `prenom_etu`, `pseudo_etu`, `mail_e
 (62, 'ADEBAYOR', 'Emmanuel', 'Adeba', 'ade@manu.fr', 'f4c2c8a86d7c9879f1d69c95838abd5a', 0),
 (63, 'Buehler', 'Cindy', 'cinderella', 'elenanosaltarin@gmx.de', '9feb4c00dad9409f01a8e8b006691e0c', 0),
 (64, 'gabi', 'gabi', 'gabi', 'gabi@gabi.com', 'a0d499c751053663c611a32779a57104', 1),
-(65, 'TEST', 'TEST', 'TEST', 'TEST@TEST.COM', '033bd94b1168d7e4f0d644c3c95e35bf', 0),
+(65, 'Test', 'Test', 'TEST', 'collet.damien@hotmail.fr', '033bd94b1168d7e4f0d644c3c95e35bf', 0),
 (66, 'GALMICHE', 'Nicolas', 'nico', 'gabi@gabfffi.com', '410ec15153a6dff0bed851467309bcbd', 1),
 (67, 'NICK', 'Df', 'dfdf', 'dffd@ggl.fr', 'b52c96bea30646abf8170f333bbd42b9', 1),
 (68, 'TESTPROF', 'Testprof', 'testprof', 'testprof@testprof.fr', '694ae24230bc0baa4eabdc0d3d2995c8', 1),
@@ -2638,7 +2694,9 @@ INSERT INTO `etudiant` (`id_etu`, `nom_etu`, `prenom_etu`, `pseudo_etu`, `mail_e
 
 CREATE TABLE IF NOT EXISTS `evolutions` (
   `id_pokemon` int(11) NOT NULL,
-  `id_evolution` int(11) NOT NULL
+  `id_evolution` int(11) NOT NULL,
+  PRIMARY KEY (`id_pokemon`,`id_evolution`),
+  KEY `id_evolution` (`id_evolution`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -2694,10 +2752,12 @@ INSERT INTO `evolutions` (`id_pokemon`, `id_evolution`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `exercice` (
-`id_exo` int(11) NOT NULL,
+  `id_exo` int(11) NOT NULL AUTO_INCREMENT,
   `titre_exo` varchar(200) NOT NULL,
   `num_exo` int(11) NOT NULL,
-  `id_theme` int(11) NOT NULL
+  `id_theme` int(11) NOT NULL,
+  PRIMARY KEY (`id_exo`),
+  KEY `id_chap` (`id_theme`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
 
 --
@@ -2736,14 +2796,15 @@ INSERT INTO `exercice` (`id_exo`, `titre_exo`, `num_exo`, `id_theme`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `fichiers` (
-`id_fichier` int(11) NOT NULL,
+  `id_fichier` int(11) NOT NULL AUTO_INCREMENT,
   `id_exo` int(11) NOT NULL,
   `chemin_fichier` varchar(200) NOT NULL,
   `nom` varchar(200) NOT NULL,
   `commentaires` varchar(500) NOT NULL,
   `code_lien` varchar(100) NOT NULL,
   `enligne` tinyint(1) NOT NULL,
-  `telechargements` int(11) NOT NULL DEFAULT '0'
+  `telechargements` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_fichier`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -2761,19 +2822,21 @@ INSERT INTO `fichiers` (`id_fichier`, `id_exo`, `chemin_fichier`, `nom`, `commen
 --
 
 CREATE TABLE IF NOT EXISTS `forum_categorie` (
-`id_categorie` int(11) NOT NULL,
+  `id_categorie` int(11) NOT NULL AUTO_INCREMENT,
   `titre_categorie` varchar(200) NOT NULL,
   `description_categorie` varchar(90) NOT NULL,
   `id_cours` int(11) NOT NULL,
-  `id_categorie_parent` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+  `id_categorie_parent` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_categorie`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Contenu de la table `forum_categorie`
 --
 
 INSERT INTO `forum_categorie` (`id_categorie`, `titre_categorie`, `description_categorie`, `id_cours`, `id_categorie_parent`) VALUES
-(47, 'Blabla des étudiants', 'Pour parler de tout et de rien', 1, NULL);
+(47, 'Blabla des étudiants', 'Pour parler de tout et de rien', 1, NULL),
+(48, 'Blabla des étudiants', 'Pour parler de tout et de rien', 30, NULL);
 
 -- --------------------------------------------------------
 
@@ -2782,11 +2845,12 @@ INSERT INTO `forum_categorie` (`id_categorie`, `titre_categorie`, `description_c
 --
 
 CREATE TABLE IF NOT EXISTS `forum_reponses` (
-`id_reponse` int(6) NOT NULL,
+  `id_reponse` int(6) NOT NULL AUTO_INCREMENT,
   `auteur_reponse` varchar(30) NOT NULL,
   `message` text NOT NULL,
   `date_reponse` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `correspondance_sujet` int(6) NOT NULL
+  `correspondance_sujet` int(6) NOT NULL,
+  PRIMARY KEY (`id_reponse`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
 
 --
@@ -2803,11 +2867,12 @@ INSERT INTO `forum_reponses` (`id_reponse`, `auteur_reponse`, `message`, `date_r
 --
 
 CREATE TABLE IF NOT EXISTS `forum_sujets` (
-`id_sujet` int(6) NOT NULL,
+  `id_sujet` int(6) NOT NULL AUTO_INCREMENT,
   `auteur` varchar(30) NOT NULL,
   `titre` text NOT NULL,
   `date_derniere_reponse` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `id_categorie` int(11) NOT NULL
+  `id_categorie` int(11) NOT NULL,
+  PRIMARY KEY (`id_sujet`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
@@ -2824,13 +2889,15 @@ INSERT INTO `forum_sujets` (`id_sujet`, `auteur`, `titre`, `date_derniere_repons
 --
 
 CREATE TABLE IF NOT EXISTS `historique` (
-`id_historique` int(11) NOT NULL,
+  `id_historique` int(11) NOT NULL AUTO_INCREMENT,
   `page` varchar(200) NOT NULL,
   `date_visite` date NOT NULL,
   `heure_visite` time NOT NULL,
   `id_etu` int(11) NOT NULL,
-  `id_cours` int(11) NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5016 ;
+  `id_cours` int(11) NOT NULL,
+  PRIMARY KEY (`id_historique`),
+  KEY `id_etu` (`id_etu`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5284 ;
 
 --
 -- Contenu de la table `historique`
@@ -7830,7 +7897,276 @@ INSERT INTO `historique` (`id_historique`, `page`, `date_visite`, `heure_visite`
 (5012, 'evolution', '2014-10-30', '17:14:19', 65, 1),
 (5013, 'progression', '2014-10-30', '17:14:28', 65, 1),
 (5014, 'evolution', '2014-11-04', '14:27:14', 65, 1),
-(5015, 'progression', '2014-11-04', '14:27:58', 65, 1);
+(5015, 'progression', '2014-11-04', '14:27:58', 65, 1),
+(5016, 'index_forum', '2014-11-04', '14:54:39', 65, 0),
+(5017, 'evolution', '2014-11-04', '14:54:49', 65, 1),
+(5018, 'index_forum', '2014-11-04', '14:55:00', 65, 0),
+(5019, 'liste_sujets_forum', '2014-11-04', '14:55:10', 65, 0),
+(5020, 'liste_sujets_forum', '2014-11-04', '14:56:21', 65, 0),
+(5021, 'voir_sujet_forum', '2014-11-04', '14:56:40', 65, 0),
+(5022, 'liste_sujets_forum', '2014-11-04', '14:57:11', 65, 0),
+(5023, 'liste_sujets_forum', '2014-11-04', '14:58:20', 65, 0),
+(5024, 'index_forum', '2014-11-04', '14:58:32', 65, 0),
+(5025, 'liste_sujets_forum', '2014-11-04', '14:58:36', 65, 0),
+(5026, 'cours', '2014-11-04', '14:59:15', 65, 0),
+(5027, 'evolution', '2014-11-04', '14:59:23', 65, 1),
+(5028, 'progression', '2014-11-04', '14:59:46', 65, 1),
+(5029, 'index_forum', '2014-11-04', '14:59:58', 65, 0),
+(5030, 'compte', '2014-11-04', '15:00:16', 65, 0),
+(5031, 'compte', '2014-11-04', '15:01:19', 65, 0),
+(5032, 'reception_messagerie', '2014-11-04', '15:03:21', 65, 0),
+(5033, 'voir_messagerie', '2014-11-04', '15:03:35', 65, 0);
+INSERT INTO `historique` (`id_historique`, `page`, `date_visite`, `heure_visite`, `id_etu`, `id_cours`) VALUES
+(5034, 'envoyer_messagerie', '2014-11-04', '15:03:43', 65, 0),
+(5035, 'reception_messagerie', '2014-11-04', '15:03:53', 65, 0),
+(5036, 'voir_messagerie', '2014-11-04', '15:03:57', 65, 0),
+(5037, 'envoyer_messagerie', '2014-11-04', '15:04:10', 65, 0),
+(5038, 'envoyes_messagerie', '2014-11-04', '15:04:18', 65, 0),
+(5039, 'reception_messagerie', '2014-11-04', '15:04:28', 65, 0),
+(5040, 'reception_messagerie', '2014-11-04', '15:04:30', 65, 0),
+(5041, 'envoyer_messagerie', '2014-11-04', '15:04:32', 65, 0),
+(5042, 'reception_messagerie', '2014-11-04', '15:04:59', 65, 0),
+(5043, 'envoyer_messagerie', '2014-11-04', '15:05:03', 65, 0),
+(5044, 'envoyes_messagerie', '2014-11-04', '15:05:17', 65, 0),
+(5045, 'reception_messagerie', '2014-11-04', '15:05:31', 65, 0),
+(5046, 'voir_messagerie', '2014-11-04', '15:05:34', 65, 0),
+(5047, 'envoyer_messagerie', '2014-11-04', '15:05:39', 65, 0),
+(5048, 'envoyes_messagerie', '2014-11-04', '15:05:49', 65, 0),
+(5049, 'reception_messagerie', '2014-11-04', '15:05:53', 65, 0),
+(5050, 'voir_messagerie', '2014-11-04', '15:05:56', 65, 0),
+(5051, 'voir_messagerie', '2014-11-04', '15:06:33', 65, 0),
+(5052, 'cours', '2014-11-04', '15:13:18', 65, 0),
+(5053, 'compte', '2014-11-04', '15:13:24', 65, 0),
+(5054, 'compte', '2014-11-04', '15:13:55', 65, 0),
+(5055, 'compte', '2014-11-04', '15:14:15', 65, 0),
+(5056, 'compte', '2014-11-04', '15:14:43', 65, 0),
+(5057, 'compte', '2014-11-04', '15:14:57', 65, 0),
+(5058, 'evolution', '2014-11-04', '15:19:30', 65, 1),
+(5059, 'seance_actuelle', '2014-11-04', '15:19:46', 65, 1),
+(5060, 'evolution', '2014-11-04', '15:20:15', 65, 1),
+(5061, 'progression', '2014-11-04', '15:21:02', 65, 1),
+(5062, 'mes_bonus', '2014-11-04', '15:23:31', 65, 1),
+(5063, 'evolution', '2014-11-04', '15:24:58', 65, 1),
+(5064, 'seance_actuelle', '2014-11-04', '15:26:39', 65, 1),
+(5065, 'autres_bonus', '2014-11-04', '15:27:55', 65, 1),
+(5066, 'mes_bonus', '2014-11-04', '15:28:27', 65, 1),
+(5067, 'mes_bonus', '2014-11-04', '15:28:42', 65, 1),
+(5068, 'cours', '2014-11-04', '15:28:48', 65, 0),
+(5069, 'evolution', '2014-11-04', '15:29:20', 65, 1),
+(5070, 'seance_actuelle', '2014-11-04', '15:48:15', 65, 1),
+(5071, 'cours', '2014-11-04', '15:59:48', 65, 0),
+(5072, 'inscription_cours', '2014-11-04', '16:01:04', 65, 0),
+(5073, 'evolution', '2014-11-04', '16:03:58', 65, 1),
+(5074, 'seance_actuelle', '2014-11-04', '16:04:59', 65, 1),
+(5075, 'seance_precedente', '2014-11-04', '16:07:09', 65, 1),
+(5076, 'seance_precedente', '2014-11-04', '16:07:24', 65, 1),
+(5077, 'evolution', '2014-11-04', '16:08:52', 65, 1),
+(5078, 'mes_bonus', '2014-11-04', '16:11:47', 65, 1),
+(5079, 'mes_bonus', '2014-11-04', '16:13:00', 65, 1),
+(5080, 'autres_bonus', '2014-11-04', '16:13:35', 65, 1),
+(5081, 'mes_bonus', '2014-11-04', '16:14:04', 65, 1),
+(5082, 'index_forum', '2014-11-04', '16:14:29', 65, 0),
+(5083, 'liste_sujets_forum', '2014-11-04', '16:14:38', 65, 0),
+(5084, 'progression', '2014-11-04', '16:15:01', 65, 1),
+(5085, 'evolution', '2014-11-04', '16:15:50', 65, 1),
+(5086, 'cours', '2014-11-04', '16:17:08', 65, 0),
+(5087, 'evolution', '2014-11-04', '16:17:19', 65, 1),
+(5088, 'evolution', '2014-11-04', '16:37:39', 65, 1),
+(5089, 'seance_actuelle', '2014-11-04', '16:37:47', 65, 1),
+(5090, 'evolution', '2014-11-04', '17:32:16', 65, 1),
+(5091, 'mes_bonus', '2014-11-04', '17:32:56', 65, 1),
+(5092, 'evolution', '2014-11-04', '17:33:08', 65, 1),
+(5093, 'evolution', '2014-11-04', '17:34:08', 65, 1),
+(5094, 'accueil', '2014-11-04', '17:37:14', 65, 0),
+(5095, 'accueil', '2014-11-04', '18:15:57', 65, 0),
+(5096, 'accueil', '2014-11-04', '18:19:10', 65, 0),
+(5097, 'evolution', '2014-11-04', '18:19:15', 65, 1),
+(5098, 'objectif', '2014-11-04', '18:19:25', 65, 1),
+(5099, 'objectif', '2014-11-04', '18:40:46', 65, 1),
+(5100, 'objectif', '2014-11-04', '18:42:07', 65, 1),
+(5101, 'objectif', '2014-11-04', '18:43:08', 65, 1),
+(5102, 'objectif', '2014-11-04', '18:45:41', 65, 1),
+(5103, 'objectif', '2014-11-04', '18:46:34', 65, 1),
+(5104, 'objectif', '2014-11-04', '18:47:21', 65, 1),
+(5105, 'objectif', '2014-11-04', '18:49:22', 65, 1),
+(5106, 'objectif', '2014-11-04', '18:49:59', 65, 1),
+(5107, 'objectif', '2014-11-04', '19:05:30', 65, 1),
+(5108, 'objectif', '2014-11-04', '19:05:38', 65, 1),
+(5109, 'objectif', '2014-11-04', '19:06:11', 65, 1),
+(5110, 'objectif', '2014-11-04', '19:06:59', 65, 1),
+(5111, 'evolution', '2014-11-04', '19:11:54', 65, 1),
+(5112, 'objectif', '2014-11-04', '19:12:03', 65, 1),
+(5113, 'objectif', '2014-11-04', '19:13:11', 65, 1),
+(5114, 'objectif', '2014-11-04', '19:14:16', 65, 1),
+(5115, 'objectif', '2014-11-04', '19:14:58', 65, 1),
+(5116, 'objectif', '2014-11-04', '19:16:47', 65, 1),
+(5117, 'objectif', '2014-11-04', '19:17:24', 65, 1),
+(5118, 'objectif', '2014-11-04', '19:17:49', 65, 1),
+(5119, 'objectif', '2014-11-04', '19:18:23', 65, 1),
+(5120, 'objectif', '2014-11-04', '19:39:46', 65, 1),
+(5121, 'objectif', '2014-11-04', '19:41:55', 65, 1),
+(5122, 'objectif', '2014-11-04', '19:43:17', 65, 1),
+(5123, 'evolution', '2014-11-05', '11:54:45', 65, 1),
+(5124, 'objectif', '2014-11-05', '11:54:56', 65, 1),
+(5125, 'objectif', '2014-11-05', '11:55:55', 65, 1),
+(5126, 'objectif', '2014-11-05', '11:55:58', 65, 1),
+(5127, 'cours', '2014-11-05', '13:45:31', 65, 0),
+(5128, 'evolution', '2014-11-05', '13:46:37', 65, 1),
+(5129, 'objectif', '2014-11-05', '13:59:05', 65, 1),
+(5130, 'objectif', '2014-11-05', '15:25:35', 65, 1),
+(5131, 'objectif', '2014-11-05', '15:26:23', 65, 1),
+(5132, 'objectif', '2014-11-05', '15:26:29', 65, 1),
+(5133, 'objectif', '2014-11-05', '15:27:02', 65, 1),
+(5134, 'evolution', '2014-11-05', '15:27:42', 65, 1),
+(5135, 'objectif', '2014-11-05', '15:27:54', 65, 1),
+(5136, 'evolution', '2014-11-05', '15:29:22', 65, 1),
+(5137, 'evolution', '2014-11-05', '15:29:57', 65, 1),
+(5138, 'objectif', '2014-11-05', '15:30:02', 65, 1),
+(5139, 'objectif', '2014-11-05', '15:34:38', 65, 1),
+(5140, 'objectif', '2014-11-05', '15:35:09', 65, 1),
+(5141, 'evolution', '2014-11-05', '15:35:35', 65, 1),
+(5142, 'objectif', '2014-11-05', '15:35:45', 65, 1),
+(5143, 'objectif', '2014-11-05', '15:38:08', 65, 1),
+(5144, 'objectif', '2014-11-05', '15:38:21', 65, 1),
+(5145, 'objectif', '2014-11-05', '15:38:34', 65, 1),
+(5146, 'objectif', '2014-11-05', '15:38:46', 65, 1),
+(5147, 'objectif', '2014-11-05', '15:40:43', 65, 1),
+(5148, 'objectif', '2014-11-05', '15:43:30', 65, 1),
+(5149, 'index_forum', '2014-11-05', '15:43:40', 65, 0),
+(5150, 'liste_sujets_forum', '2014-11-05', '15:43:45', 65, 0),
+(5151, 'voir_sujet_forum', '2014-11-05', '15:43:51', 65, 0),
+(5152, 'voir_sujet_forum', '2014-11-05', '15:44:04', 65, 0),
+(5153, 'voir_sujet_forum', '2014-11-05', '15:44:12', 65, 0),
+(5154, 'voir_sujet_forum', '2014-11-05', '15:44:24', 65, 0),
+(5155, 'objectif', '2014-11-05', '15:54:31', 65, 1),
+(5156, 'objectif', '2014-11-05', '15:56:22', 65, 1),
+(5157, 'objectif', '2014-11-05', '16:00:06', 65, 1),
+(5158, 'objectif', '2014-11-05', '16:01:23', 65, 1),
+(5159, 'objectif', '2014-11-05', '16:07:29', 65, 1),
+(5160, 'autres_bonus', '2014-11-05', '16:07:59', 65, 1),
+(5161, 'mes_bonus', '2014-11-05', '16:08:04', 65, 1),
+(5162, 'objectif', '2014-11-05', '16:11:38', 65, 1),
+(5163, 'objectif', '2014-11-05', '16:14:18', 65, 1),
+(5164, 'objectif', '2014-11-05', '16:15:33', 65, 1),
+(5165, 'objectif', '2014-11-05', '16:16:25', 65, 1),
+(5166, 'mes_bonus', '2014-11-05', '16:16:43', 65, 1),
+(5167, 'mes_bonus', '2014-11-05', '16:16:56', 65, 1),
+(5168, 'objectif', '2014-11-05', '16:17:03', 65, 1),
+(5169, 'objectif', '2014-11-05', '16:18:05', 65, 1),
+(5170, 'objectif', '2014-11-05', '16:19:20', 65, 1),
+(5171, 'objectif', '2014-11-05', '16:19:25', 65, 1),
+(5172, 'objectif', '2014-11-05', '16:20:52', 65, 1),
+(5173, 'objectif', '2014-11-05', '16:21:38', 65, 1),
+(5174, 'objectif', '2014-11-05', '16:22:00', 65, 1),
+(5175, 'objectif', '2014-11-05', '16:51:57', 65, 1),
+(5176, 'objectif', '2014-11-05', '16:54:39', 65, 1),
+(5177, 'objectif', '2014-11-05', '16:55:24', 65, 1),
+(5178, 'objectif', '2014-11-05', '16:55:40', 65, 1),
+(5179, 'objectif', '2014-11-05', '16:56:13', 65, 1),
+(5180, 'objectif', '2014-11-05', '17:00:03', 65, 1),
+(5181, 'mes_bonus', '2014-11-05', '17:00:13', 65, 1),
+(5182, 'mes_bonus', '2014-11-05', '17:00:28', 65, 1),
+(5183, 'objectif', '2014-11-05', '17:00:33', 65, 1),
+(5184, 'objectif', '2014-11-05', '17:07:49', 65, 1),
+(5185, 'objectif', '2014-11-05', '17:11:58', 65, 1),
+(5186, 'objectif', '2014-11-05', '17:15:00', 65, 1),
+(5187, 'objectif', '2014-11-05', '17:15:50', 65, 1),
+(5188, 'objectif', '2014-11-05', '17:16:19', 65, 1),
+(5189, 'objectif', '2014-11-05', '17:16:58', 65, 1),
+(5190, 'objectif', '2014-11-05', '17:18:57', 65, 1),
+(5191, 'objectif', '2014-11-05', '17:19:31', 65, 1),
+(5192, 'objectif', '2014-11-05', '17:20:48', 65, 1),
+(5193, 'objectif', '2014-11-05', '17:21:18', 65, 1),
+(5194, 'objectif', '2014-11-05', '17:21:49', 65, 1),
+(5195, 'objectif', '2014-11-05', '17:23:02', 65, 1),
+(5196, 'objectif', '2014-11-05', '17:31:09', 65, 1),
+(5197, 'evolution', '2014-11-05', '21:50:21', 65, 1),
+(5198, 'objectif', '2014-11-05', '21:50:32', 65, 1),
+(5199, 'evolution', '2014-11-06', '20:49:27', 65, 1),
+(5200, 'objectif', '2014-11-06', '20:49:38', 65, 1),
+(5201, 'objectif', '2014-11-06', '20:53:17', 65, 1),
+(5202, 'objectif', '2014-11-06', '20:53:34', 65, 1),
+(5203, 'objectif', '2014-11-06', '20:54:02', 65, 1),
+(5204, 'objectif', '2014-11-06', '20:54:19', 65, 1),
+(5205, 'objectif', '2014-11-06', '20:56:17', 65, 1),
+(5206, 'progression', '2014-11-06', '21:00:05', 65, 1),
+(5207, 'evolution', '2014-11-06', '21:00:18', 65, 1),
+(5208, 'objectif', '2014-11-06', '21:07:15', 65, 1),
+(5209, 'objectif', '2014-11-06', '21:11:14', 65, 1),
+(5210, 'objectif', '2014-11-06', '21:29:35', 65, 1),
+(5211, 'objectif', '2014-11-06', '21:30:42', 65, 1),
+(5212, 'objectif', '2014-11-06', '21:33:13', 65, 1),
+(5213, 'objectif', '2014-11-06', '21:35:17', 65, 1),
+(5214, 'objectif', '2014-11-06', '21:35:48', 65, 1),
+(5215, 'objectif', '2014-11-06', '21:41:13', 65, 1),
+(5216, 'objectif', '2014-11-06', '21:42:49', 65, 1),
+(5217, 'objectif', '2014-11-06', '21:42:51', 65, 1),
+(5218, 'objectif', '2014-11-06', '21:44:20', 65, 1),
+(5219, 'objectif', '2014-11-06', '21:44:46', 65, 1),
+(5220, 'objectif', '2014-11-06', '21:46:09', 65, 1),
+(5221, 'objectif', '2014-11-06', '21:49:09', 65, 1),
+(5222, 'objectif', '2014-11-06', '21:50:30', 65, 1),
+(5223, 'objectif', '2014-11-06', '21:53:15', 65, 1),
+(5224, 'objectif', '2014-11-06', '21:53:42', 65, 1),
+(5225, 'objectif', '2014-11-06', '21:56:26', 65, 1),
+(5226, 'objectif', '2014-11-06', '21:57:17', 65, 1),
+(5227, 'objectif', '2014-11-06', '22:16:04', 65, 1),
+(5228, 'objectif', '2014-11-06', '22:16:11', 65, 1),
+(5229, 'cours', '2014-11-06', '22:16:16', 65, 0),
+(5230, 'cours', '2014-11-06', '22:16:56', 65, 0),
+(5231, 'evolution', '2014-11-06', '22:17:05', 65, 1),
+(5232, 'objectif', '2014-11-06', '22:17:23', 65, 1),
+(5233, 'evolution', '2014-11-06', '22:17:28', 65, 1),
+(5234, 'seance_actuelle', '2014-11-06', '22:17:47', 65, 1),
+(5235, 'progression', '2014-11-06', '22:18:26', 65, 1),
+(5236, 'evolution', '2014-11-06', '22:18:43', 65, 1),
+(5237, 'evolution', '2014-11-06', '22:25:08', 65, 1),
+(5238, 'evolution', '2014-11-06', '22:26:47', 65, 1),
+(5239, 'evolution', '2014-11-06', '22:27:46', 65, 1),
+(5240, 'objectif', '2014-11-06', '22:27:58', 65, 1),
+(5241, 'cours', '2014-11-06', '22:28:20', 65, 0),
+(5242, 'evolution', '2014-11-06', '22:28:24', 65, 1),
+(5243, 'evolution', '2014-11-06', '22:29:01', 65, 1),
+(5244, 'objectif', '2014-11-06', '22:29:38', 65, 1),
+(5245, 'objectif', '2014-11-06', '22:31:05', 65, 1),
+(5246, 'evolution', '2014-11-06', '22:31:14', 65, 1),
+(5247, 'progression', '2014-11-06', '22:31:57', 65, 1),
+(5248, 'objectif', '2014-11-06', '22:32:10', 65, 1),
+(5249, 'objectif', '2014-11-06', '22:32:53', 65, 1),
+(5250, 'objectif', '2014-11-06', '22:36:54', 65, 1),
+(5251, 'evolution', '2014-11-06', '22:37:01', 65, 1),
+(5252, 'cours', '2014-11-06', '22:55:49', 65, 0),
+(5253, 'inscription_cours', '2014-11-06', '22:55:53', 65, 0),
+(5254, 'inscription_cours', '2014-11-06', '22:56:17', 65, 0),
+(5255, 'inscription_cours', '2014-11-06', '23:06:13', 65, 0),
+(5256, 'evolution', '2014-11-06', '23:08:56', 65, 27),
+(5257, 'objectif', '2014-11-06', '23:09:04', 65, 27),
+(5258, 'evolution', '2014-11-06', '23:09:12', 65, 1),
+(5259, 'cours', '2014-11-06', '23:09:21', 65, 0),
+(5260, 'evolution', '2014-11-06', '23:10:15', 65, 1),
+(5261, 'evolution', '2014-11-06', '23:10:24', 65, 27),
+(5262, 'objectif', '2014-11-06', '23:10:33', 65, 27),
+(5263, 'evolution', '2014-11-06', '23:10:40', 65, 1),
+(5264, 'evolution', '2014-11-06', '23:11:37', 65, 1),
+(5265, 'evolution', '2014-11-06', '23:12:17', 65, 1),
+(5266, 'evolution', '2014-11-06', '23:13:05', 65, 1),
+(5267, 'evolution', '2014-11-06', '23:13:16', 65, 27),
+(5268, 'evolution', '2014-11-06', '23:13:34', 65, 1),
+(5269, 'evolution', '2014-11-06', '23:15:04', 65, 1),
+(5270, 'evolution', '2014-11-06', '23:15:33', 65, 1),
+(5271, 'evolution', '2014-11-06', '23:15:44', 65, 27),
+(5272, 'evolution', '2014-11-06', '23:16:16', 65, 27),
+(5273, 'objectif', '2014-11-06', '23:16:23', 65, 27),
+(5274, 'evolution', '2014-11-06', '23:18:05', 65, 1),
+(5275, 'objectif', '2014-11-06', '23:18:45', 65, 1),
+(5276, 'compte', '2014-11-06', '23:47:54', 65, 0),
+(5277, 'compte', '2014-11-06', '23:48:27', 65, 0),
+(5278, 'compte', '2014-11-06', '23:48:52', 65, 0),
+(5279, 'evolution', '2014-11-06', '23:48:56', 65, 1),
+(5280, 'seance_actuelle', '2014-11-06', '23:49:10', 65, 1),
+(5281, 'compte', '2014-11-06', '23:49:18', 65, 0),
+(5282, 'compte', '2014-11-06', '23:49:29', 65, 0),
+(5283, 'compte', '2014-11-06', '23:50:27', 65, 0);
 
 -- --------------------------------------------------------
 
@@ -7839,54 +8175,57 @@ INSERT INTO `historique` (`id_historique`, `page`, `date_visite`, `heure_visite`
 --
 
 CREATE TABLE IF NOT EXISTS `inscription` (
+  `id_inscription` int(11) NOT NULL AUTO_INCREMENT,
   `id_cours` int(11) NOT NULL,
   `id_etu` int(11) NOT NULL,
-  `date_inscription` date NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `date_inscription` date NOT NULL,
+  PRIMARY KEY (`id_inscription`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 --
 -- Contenu de la table `inscription`
 --
 
-INSERT INTO `inscription` (`id_cours`, `id_etu`, `date_inscription`) VALUES
-(1, 23, '2014-10-14'),
-(1, 24, '2014-10-21'),
-(1, 25, '2014-10-14'),
-(1, 26, '2014-10-14'),
-(1, 27, '2014-10-14'),
-(1, 28, '2014-10-14'),
-(1, 29, '2014-10-14'),
-(1, 30, '2014-10-14'),
-(1, 31, '2014-10-14'),
-(1, 32, '2014-10-14'),
-(1, 33, '2014-10-14'),
-(1, 34, '2014-10-14'),
-(1, 35, '2014-10-14'),
-(1, 36, '2014-10-14'),
-(1, 37, '2014-10-14'),
-(1, 38, '2014-10-14'),
-(1, 39, '2014-10-14'),
-(1, 40, '2014-10-14'),
-(1, 49, '2014-10-14'),
-(1, 48, '2014-10-14'),
-(1, 45, '2014-10-14'),
-(1, 46, '2014-10-14'),
-(1, 47, '2014-10-14'),
-(1, 51, '2014-10-14'),
-(1, 52, '2014-10-14'),
-(1, 53, '2014-10-14'),
-(1, 54, '2014-10-14'),
-(1, 55, '2014-10-14'),
-(1, 56, '2014-10-14'),
-(1, 57, '2014-10-14'),
-(1, 58, '2014-10-14'),
-(1, 59, '2014-10-14'),
-(1, 60, '2014-10-14'),
-(1, 61, '2014-10-14'),
-(1, 62, '2014-10-14'),
-(1, 63, '2014-10-14'),
-(1, 65, '2014-10-14'),
-(3, 65, '2014-10-14');
+INSERT INTO `inscription` (`id_inscription`, `id_cours`, `id_etu`, `date_inscription`) VALUES
+(1, 1, 23, '2014-10-14'),
+(2, 1, 24, '2014-10-21'),
+(3, 1, 25, '2014-10-14'),
+(4, 1, 26, '2014-10-14'),
+(5, 1, 27, '2014-10-14'),
+(6, 1, 28, '2014-10-14'),
+(7, 1, 29, '2014-10-14'),
+(8, 1, 30, '2014-10-14'),
+(9, 1, 31, '2014-10-14'),
+(10, 1, 32, '2014-10-14'),
+(11, 1, 33, '2014-10-14'),
+(12, 1, 34, '2014-10-14'),
+(13, 1, 35, '2014-10-14'),
+(14, 1, 36, '2014-10-14'),
+(15, 1, 37, '2014-10-14'),
+(16, 1, 38, '2014-10-14'),
+(17, 1, 39, '2014-10-14'),
+(18, 1, 40, '2014-10-14'),
+(19, 1, 49, '2014-10-14'),
+(20, 1, 48, '2014-10-14'),
+(21, 1, 45, '2014-10-14'),
+(22, 1, 46, '2014-10-14'),
+(23, 1, 47, '2014-10-14'),
+(24, 1, 51, '2014-10-14'),
+(25, 1, 52, '2014-10-14'),
+(26, 1, 53, '2014-10-14'),
+(27, 1, 54, '2014-10-14'),
+(28, 1, 55, '2014-10-14'),
+(29, 1, 56, '2014-10-14'),
+(30, 1, 57, '2014-10-14'),
+(31, 1, 58, '2014-10-14'),
+(32, 1, 59, '2014-10-14'),
+(33, 1, 60, '2014-10-14'),
+(34, 1, 61, '2014-10-14'),
+(35, 1, 62, '2014-10-14'),
+(36, 1, 63, '2014-10-14'),
+(37, 1, 65, '2014-10-14'),
+(38, 3, 65, '2014-10-14'),
+(39, 27, 65, '2014-11-06');
 
 -- --------------------------------------------------------
 
@@ -7895,15 +8234,19 @@ INSERT INTO `inscription` (`id_cours`, `id_etu`, `date_inscription`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `messages` (
-`id_mess` int(11) NOT NULL,
+  `id_mess` int(11) NOT NULL AUTO_INCREMENT,
   `expediteur` int(11) NOT NULL,
   `destinataire` int(11) NOT NULL,
   `date_mess` datetime NOT NULL,
   `heure_mess` time NOT NULL,
   `titre_mess` varchar(1000) NOT NULL,
   `texte_mess` varchar(1000) NOT NULL,
-  `lu` int(11) NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
+  `lu` int(11) NOT NULL,
+  PRIMARY KEY (`id_mess`),
+  KEY `expediteur` (`expediteur`,`destinataire`),
+  KEY `destinataire` (`destinataire`),
+  KEY `expediteur_2` (`expediteur`,`destinataire`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
 -- Contenu de la table `messages`
@@ -7952,7 +8295,45 @@ INSERT INTO `messages` (`id_mess`, `expediteur`, `destinataire`, `date_mess`, `h
 (69, 17, 36, '2014-10-24 15:03:42', '15:03:42', 'rrr', 'rrr', 0),
 (70, 17, 60, '2014-10-24 15:37:18', '15:37:18', 'Wesh rimk', 'bien ou bien', 0),
 (71, 17, 27, '2014-10-25 19:23:56', '19:23:56', 'lol', 'lol', 0),
-(72, 17, 65, '2014-10-25 19:41:47', '19:41:47', 'bv', 'ghgh', 0);
+(72, 17, 65, '2014-10-25 19:41:47', '19:41:47', 'bv', 'ghgh', 1),
+(73, 65, 17, '2014-11-04 15:04:16', '15:04:16', 'RE: bv', 'dfsdfsdf\r\nDate : 2014-10-25 19:41:47\r\nSujet : bv\r\nDe : My Study Companion\r\nMessage : ghgh', 0),
+(74, 65, 65, '2014-11-04 15:05:15', '15:05:15', 'ksqdho', 'qsdqsd', 1),
+(75, 65, 65, '2014-11-04 15:05:47', '15:05:47', 'RE: ksqdho', 'zdeqsd\r\n\r\nDate : 2014-11-04 15:05:15\r\nSujet : ksqdho\r\nDe : Test\r\nMessage : qsdqsd', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `objectif`
+--
+
+CREATE TABLE IF NOT EXISTS `objectif` (
+  `id_objectif` int(11) NOT NULL AUTO_INCREMENT,
+  `objectif` varchar(1000) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `points` int(11) NOT NULL,
+  PRIMARY KEY (`id_objectif`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+--
+-- Contenu de la table `objectif`
+--
+
+INSERT INTO `objectif` (`id_objectif`, `objectif`, `description`, `points`) VALUES
+(1, 'Débutant', 'Avoir un avancement global supérieur à 25 %', 250),
+(2, 'Intermédiaire', 'Avoir un avancement global supérieur à 50 %', 500),
+(3, 'Avancé', 'Avoir un avancement global supérieur à 75 %', 750),
+(4, 'Expert', 'Avoir un avancement global égal à 100 %', 1000),
+(5, 'Discret', 'Poster son premier message sur le forum', 50),
+(6, 'Loquace', 'Poster 5 messages sur le forum', 100),
+(7, 'Bavard', 'Poster 15 messages sur le forum', 300),
+(8, 'Prof en herbe', 'Créer son premier bonus', 50),
+(9, 'Petit génie', 'Créer 5 bonus', 100),
+(10, 'Savant fou', 'Créer 15 bonus', 300),
+(11, 'Juge', 'Noter un premier bonus', 50),
+(12, 'Juré', 'Noter 5 bonus', 100),
+(13, 'Bourreau', 'Noter 15 bonus', 300),
+(14, 'Idole', 'Plus de 15 étudiants ont mis 5 à un de tes bonus', 200),
+(15, 'Pionier', 'Etre le premier à s''être inscrit au cours', 200);
 
 -- --------------------------------------------------------
 
@@ -7961,9 +8342,10 @@ INSERT INTO `messages` (`id_mess`, `expediteur`, `destinataire`, `date_mess`, `h
 --
 
 CREATE TABLE IF NOT EXISTS `pokemon` (
-`id_pokemon` int(11) NOT NULL,
+  `id_pokemon` int(11) NOT NULL AUTO_INCREMENT,
   `nom_pokemon` varchar(200) NOT NULL,
-  `pokemon_base` int(11) NOT NULL
+  `pokemon_base` int(11) NOT NULL,
+  PRIMARY KEY (`id_pokemon`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
 
 --
@@ -8065,7 +8447,10 @@ INSERT INTO `professeur` (`id_prof`) VALUES
 CREATE TABLE IF NOT EXISTS `remarque_seances` (
   `id_seance` int(11) NOT NULL,
   `id_etu` int(11) NOT NULL,
-  `remarque` varchar(400) NOT NULL
+  `remarque` varchar(400) NOT NULL,
+  PRIMARY KEY (`id_seance`,`id_etu`),
+  KEY `id_seance` (`id_seance`),
+  KEY `id_etudiant` (`id_etu`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -8114,9 +8499,10 @@ INSERT INTO `remarque_seances` (`id_seance`, `id_etu`, `remarque`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `seance` (
-`id_seance` int(11) NOT NULL,
+  `id_seance` int(11) NOT NULL AUTO_INCREMENT,
   `date_seance` date NOT NULL,
-  `id_cours` int(11) NOT NULL
+  `id_cours` int(11) NOT NULL,
+  PRIMARY KEY (`id_seance`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
@@ -8145,9 +8531,10 @@ INSERT INTO `seance` (`id_seance`, `date_seance`, `id_cours`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `theme` (
-`id_theme` int(11) NOT NULL,
+  `id_theme` int(11) NOT NULL AUTO_INCREMENT,
   `titre_theme` varchar(200) NOT NULL,
-  `id_cours` int(11) NOT NULL
+  `id_cours` int(11) NOT NULL,
+  PRIMARY KEY (`id_theme`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
@@ -8162,198 +8549,6 @@ INSERT INTO `theme` (`id_theme`, `titre_theme`, `id_cours`) VALUES
 (18, 'Les bases', 22),
 (13, 'ff', 3);
 
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `assignations_pokemon`
---
-ALTER TABLE `assignations_pokemon`
- ADD PRIMARY KEY (`id_etu`,`id_pokemon`), ADD KEY `id_pokemon` (`id_pokemon`), ADD KEY `assign_exo` (`id_exo`), ADD KEY `id_etu` (`id_etu`,`id_pokemon`);
-
---
--- Index pour la table `avancement`
---
-ALTER TABLE `avancement`
- ADD KEY `id_exo` (`id_exo`), ADD KEY `id_seance` (`id_seance`);
-
---
--- Index pour la table `avancement_bonus`
---
-ALTER TABLE `avancement_bonus`
- ADD PRIMARY KEY (`id_etu`,`id_bonus`,`id_seance`), ADD KEY `id_bonus` (`id_bonus`), ADD KEY `id_seance` (`id_seance`);
-
---
--- Index pour la table `bonus`
---
-ALTER TABLE `bonus`
- ADD PRIMARY KEY (`id_bonus`), ADD KEY `id_theme` (`id_theme`);
-
---
--- Index pour la table `cle`
---
-ALTER TABLE `cle`
- ADD PRIMARY KEY (`id_cle`);
-
---
--- Index pour la table `cours`
---
-ALTER TABLE `cours`
- ADD PRIMARY KEY (`id_cours`);
-
---
--- Index pour la table `etudiant`
---
-ALTER TABLE `etudiant`
- ADD PRIMARY KEY (`id_etu`);
-
---
--- Index pour la table `evolutions`
---
-ALTER TABLE `evolutions`
- ADD PRIMARY KEY (`id_pokemon`,`id_evolution`), ADD KEY `id_evolution` (`id_evolution`);
-
---
--- Index pour la table `exercice`
---
-ALTER TABLE `exercice`
- ADD PRIMARY KEY (`id_exo`), ADD KEY `id_chap` (`id_theme`);
-
---
--- Index pour la table `fichiers`
---
-ALTER TABLE `fichiers`
- ADD PRIMARY KEY (`id_fichier`);
-
---
--- Index pour la table `forum_categorie`
---
-ALTER TABLE `forum_categorie`
- ADD PRIMARY KEY (`id_categorie`);
-
---
--- Index pour la table `forum_reponses`
---
-ALTER TABLE `forum_reponses`
- ADD PRIMARY KEY (`id_reponse`);
-
---
--- Index pour la table `forum_sujets`
---
-ALTER TABLE `forum_sujets`
- ADD PRIMARY KEY (`id_sujet`);
-
---
--- Index pour la table `historique`
---
-ALTER TABLE `historique`
- ADD PRIMARY KEY (`id_historique`), ADD KEY `id_etu` (`id_etu`);
-
---
--- Index pour la table `messages`
---
-ALTER TABLE `messages`
- ADD PRIMARY KEY (`id_mess`), ADD KEY `expediteur` (`expediteur`,`destinataire`), ADD KEY `destinataire` (`destinataire`), ADD KEY `expediteur_2` (`expediteur`,`destinataire`);
-
---
--- Index pour la table `pokemon`
---
-ALTER TABLE `pokemon`
- ADD PRIMARY KEY (`id_pokemon`);
-
---
--- Index pour la table `remarque_seances`
---
-ALTER TABLE `remarque_seances`
- ADD PRIMARY KEY (`id_seance`,`id_etu`), ADD KEY `id_seance` (`id_seance`), ADD KEY `id_etudiant` (`id_etu`);
-
---
--- Index pour la table `seance`
---
-ALTER TABLE `seance`
- ADD PRIMARY KEY (`id_seance`);
-
---
--- Index pour la table `theme`
---
-ALTER TABLE `theme`
- ADD PRIMARY KEY (`id_theme`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `bonus`
---
-ALTER TABLE `bonus`
-MODIFY `id_bonus` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
---
--- AUTO_INCREMENT pour la table `cle`
---
-ALTER TABLE `cle`
-MODIFY `id_cle` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
---
--- AUTO_INCREMENT pour la table `cours`
---
-ALTER TABLE `cours`
-MODIFY `id_cours` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
---
--- AUTO_INCREMENT pour la table `etudiant`
---
-ALTER TABLE `etudiant`
-MODIFY `id_etu` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=130;
---
--- AUTO_INCREMENT pour la table `exercice`
---
-ALTER TABLE `exercice`
-MODIFY `id_exo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=56;
---
--- AUTO_INCREMENT pour la table `fichiers`
---
-ALTER TABLE `fichiers`
-MODIFY `id_fichier` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT pour la table `forum_categorie`
---
-ALTER TABLE `forum_categorie`
-MODIFY `id_categorie` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=48;
---
--- AUTO_INCREMENT pour la table `forum_reponses`
---
-ALTER TABLE `forum_reponses`
-MODIFY `id_reponse` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
---
--- AUTO_INCREMENT pour la table `forum_sujets`
---
-ALTER TABLE `forum_sujets`
-MODIFY `id_sujet` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
---
--- AUTO_INCREMENT pour la table `historique`
---
-ALTER TABLE `historique`
-MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5016;
---
--- AUTO_INCREMENT pour la table `messages`
---
-ALTER TABLE `messages`
-MODIFY `id_mess` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=73;
---
--- AUTO_INCREMENT pour la table `pokemon`
---
-ALTER TABLE `pokemon`
-MODIFY `id_pokemon` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
---
--- AUTO_INCREMENT pour la table `seance`
---
-ALTER TABLE `seance`
-MODIFY `id_seance` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
---
--- AUTO_INCREMENT pour la table `theme`
---
-ALTER TABLE `theme`
-MODIFY `id_theme` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
