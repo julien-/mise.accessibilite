@@ -140,7 +140,7 @@ class DAOAssignations_objectif extends DAOStandard
   	return $pourcentage * 100;
   }
   
-  public function checkProfesseur_en_herbe($idEtu, $idCours)
+  public function checkProf_en_herbe($idEtu, $idCours)
   {
   	$daoAvancement_bonus = new DAOAvancement_bonus($db);
   	$pourcentage = $daoAvancement_bonus->countFaitByEtudiantCours($idEtu, $idCours);
@@ -188,4 +188,14 @@ class DAOAssignations_objectif extends DAOStandard
   	$pourcentage = $daoAvancement_bonus->countNotesRecuesEgal5ByEtudiantCours($idEtu, $idCours) / 15;
   	return $pourcentage * 100;
   }  
+  
+  public function checkPionier($idEtu, $idCours)
+  {
+  	$daoInscription= new DAOInscription($db);
+  	$firstStudentid = $daoInscription->getFirstEtudiantInscritByCours($idCours);
+  	if($firstStudentid == $idEtu)
+  		return 100;
+  	else
+  		return 0;
+  }
 }

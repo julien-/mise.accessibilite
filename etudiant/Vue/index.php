@@ -113,7 +113,7 @@
                         		if(isset($_SESSION['cours']))
                         		{
                         	?>
-                        			<li><a href="index.php?section=objectif">Mes Objectifs</a></li>
+                        			<li><a href="index.php?section=objectif">Mes Badges</a></li>
   									<li><a href="index.php?section=evolution">Mon Evolution</a></li>
   									<li class="dropdown">
   										<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">

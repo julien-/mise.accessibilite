@@ -282,4 +282,16 @@ class DAOInscription extends DAOStandard
 	  	}
 	  	return $listeInscription;
 	  }
+	  
+	  public function getFirstEtudiantInscritByCours($idCours)
+	  {
+	  	$sql = 'SELECT id_etu
+	  			FROM inscription
+	  			WHERE id_cours = ' . $idCours .'
+	  			ORDER BY id_inscription ASC
+	  			LIMIT 1';
+	  	$result = $this->executeQuery($sql);
+	  	$first_etudiant = $this->fetchArray($result);
+	  	return $first_etudiant['id_etu'];
+	  }
 }

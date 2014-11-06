@@ -62,12 +62,28 @@ foreach($listeThemes as $theme)
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-leaf"></i> Mes Pokémons
+			<i class="glyphicon glyphicon-leaf"></i> Mes Badges
 		</h3>
 	</div>
 	<div class="panel-body">
 		<div id="morris-area-chart">
-
+			<?php 
+			foreach ($listeAssignationsObjectifs as $assignation)
+			{
+				if ($assignation->getPourcentage() >= 100)
+				{
+					$objectif = str_replace(' ', '_', $assignation->getObjectif()->getObjectif()); 
+					$objectif = stripAccents($objectif);
+			?>
+				
+					<div class="col-lg-2 text-center">
+						<img src="<?php echo '../../images/Badges/' . $objectif . '.png'; ?>" alt="<?php echo $assignation->getObjectif()->getObjectif(); ?>" />
+						<span class="bold"><?php echo $assignation->getObjectif()->getObjectif(); ?></span>
+					</div>
+			<?php 
+				}
+			}
+			?>
 		</div>
 	</div>
 </div>
