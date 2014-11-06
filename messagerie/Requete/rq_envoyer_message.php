@@ -10,10 +10,11 @@ $daoEtudiant= new DAOEtudiant($db);
 
 $redirige = false;
 
-if (isset($_GET["envoyermessage"])) {
+if (isset($_POST["envoyer"])) {
 	
 	if($_POST['destinataire'] != "" && $_POST['titre'] != "" & $_POST['message'] != "" )
 	{
+		echo "def";
 		$message = new Messagerie(array(
 				'destinataire' => $daoEtudiant->getByID($_POST['destinataire']),
 				'expediteur' => $daoEtudiant->getByID($_SESSION['currentUser']->getId()),
@@ -30,36 +31,4 @@ if (isset($_GET["envoyermessage"])) {
 	}
 }
 
-/* #################
- * ## REDIRECTION ##
- * #################
- */
-mysql_close($db);
-
-if ($redirige)
-{
-	$retourPage = "section=". $_GET['section'];
-	session_start();
-	
-	$_SESSION["notif_msg"] = '<div class="ok">'.$message.'</div>';
-}
-else
-{
-	if(isset($_GET['id_message_reponse']))
-		$retourPage = "section=envoyer_messagerie&id_message_reponse=".$_GET['id_message_reponse'];
-	else
-		$retourPage = "section=envoyer_messagerie&destinataire=".$_POST['destinataire']."&titre=".$_POST['titre']."&message=".$_POST['message'];
-	
-	session_start();
-	
-	$_SESSION["notif_msg"] = '<div class="erreur">Erreur, certains éléments sont vides</div>';
-}
-
-// on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas
-if($_SESSION['currentUser']->getAdmin() == 0)
-	$typeofuser = "etudiant";
-else 
-	$typeofuser = "admin";
-
-header('Location: ../../'.$typeofuser.'/Controleur/index.php?' . $retourPage);
 ?>

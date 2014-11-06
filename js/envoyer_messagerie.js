@@ -67,3 +67,5 @@ var employeeIdItemSelectedHandler = function (eventObject, suggestionObject, sug
 // Associate the typeahead:selected event with the bespoke handler
 employeeNameTypeahead.on('typeahead:selected', employeeNameItemSelectedHandler);
 employeeIdTypeahead.on('typeahead:selected', employeeIdItemSelectedHandler);
+
+$('.textarea').wysihtml5();
