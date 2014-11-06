@@ -18,7 +18,7 @@ if (isset($_POST['titre-theme']))
 {
 	$theme = $daoTheme->getByID($_POST['id-theme']);
 	$theme = $theme->setTitre($_POST['titre-theme']);
-	$daoTheme->update($exercice);
+	$daoTheme->update($theme);
 }
 
 $listeThemes = $daoTheme->getAllByCours($_SESSION['cours']->getId());
