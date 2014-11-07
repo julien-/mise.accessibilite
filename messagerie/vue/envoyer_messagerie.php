@@ -47,7 +47,7 @@
     <div class="row">
         <br/>
         <div class="col-lg-1">Message: </div>
-        <div class="col-lg-11"><textarea style="width: 100%; height: 200px;" name="message"><?php if (isset($message_reponse)) echo "Date : ".$message_reponse->getDate()."\nSujet : ".$message_reponse->getTitre()."\nDe : ".$message_reponse->getExpediteur()->getNom()."\nMessage : ".$message_reponse->getTexte(); else if(isset($_GET['message'])) echo $_GET['message'];?></textarea></div>
+        <div class="col-lg-11"><textarea class="textarea" style="width: 100%; height: 200px;" name="message"><?php if (isset($message_reponse)) echo "Date : ".$message_reponse->getDate()."\nSujet : ".$message_reponse->getTitre()."\nDe : ".$message_reponse->getExpediteur()->getNom()."\nMessage : ".$message_reponse->getTexte(); else if(isset($_GET['message'])) echo $_GET['message'];?></textarea></div>
     </div>
     <?php 
     if((isset($listeClassmates) && sizeof($listeClassmates) != 0) || isset($message_reponse))

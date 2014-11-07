@@ -81,6 +81,10 @@ $(".validate-icon-exo").click(function() {
 	changeExerciseTitle();
 });
 
+$(".add-exercice").click(function() {
+	$("#id_theme").val($(this).data('id-theme'));
+});
+
 $(".abort-icon-exo").click(function() {
 	$("#exo-" + clickedIndex).val($("#titre-exo-" + clickedIndex).text().trim());
 	disableEditMode();
@@ -132,11 +136,10 @@ $(".header-theme").hover(function()
 		 }
 );
 
-$(".edit-icon-theme").click(function() {
+
+$(".edit-theme").click(function() {
 	clickedIndex = $(this).data('modif-theme-id');
-	
-	disableEditMode();
-	
+
 	$("#theme-" + clickedIndex).removeClass('hidden');
 	$("#theme-" + clickedIndex).focus();
 	$("#edit-valid-theme-" + clickedIndex).removeClass('hidden');
@@ -145,6 +148,16 @@ $(".edit-icon-theme").click(function() {
 	$("#titre-theme-" + clickedIndex).addClass('hidden');
 	editMode = true;
 });
+
+$(".delete-theme-confirm").click(function() {
+	deleteTheme();	
+});
+
+$(".delete-theme").click(function() {
+	clickedIndex = $(this).data('modif-theme-id');
+	disableEditMode();
+});
+
 
 $(".validate-icon-theme").click(function() {
 	changeThemeTitle();
@@ -173,6 +186,7 @@ function changeThemeTitle()
 	var donnees = {};
 	donnees["id-theme"] = clickedIndex;
     donnees["titre-theme"] = $("#theme-" + clickedIndex).val();
+    donnees["type"] = "edit";
     
     var ajax = $.ajax({
         type: "post",
@@ -181,6 +195,27 @@ function changeThemeTitle()
         data: donnees,
         success: function() {
         	$("#titre-theme-" + clickedIndex).text(donnees["titre-theme"]);
+        },
+        error: function() {
+        	alert('erreur');
+        }
+    });
+    disableEditMode();
+}
+
+function deleteTheme()
+{
+	var donnees = {};
+	donnees["id-theme"] = clickedIndex;
+	donnees["type"] = "delete";
+    
+    var ajax = $.ajax({
+        type: "post",
+        url: "../controleur/index.php?section=gestion_cours",
+        dataType: "html",
+        data: donnees,
+        success: function() {
+        	$("#T" + clickedIndex).addClass("hidden");
         },
         error: function() {
         	alert('erreur');

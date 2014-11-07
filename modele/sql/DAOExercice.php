@@ -11,7 +11,9 @@ class DAOExercice extends DAOStandard
 	
 	public function save(Exercice $exercice)
 	{
-		$this->executeQuery('INSERT INTO exercice SET titre_exo = "' . $exercice->getTitre() . '", num_exo = ' . $exercice->getNumero() . ', id_theme =' . $exercice->getTheme()->getId());
+		echo $this->getNextAvailableNumber($exercice->getTheme());
+
+		$this->executeQuery('INSERT INTO exercice SET titre_exo = "' . $exercice->getTitre() . '", num_exo = ' . $this->getNextAvailableNumber($exercice->getTheme()) . ', id_theme =' . $exercice->getTheme());
 	}
 	
 	public function update(Exercice $exercice)
@@ -24,6 +26,14 @@ class DAOExercice extends DAOStandard
 		$result = $this->executeQuery('SELECT * FROM exercice ex, theme t, cours c, etudiant e, cle WHERE ex.id_theme = t.id_theme AND c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND ex.id_exo = ' . $id);
 		
 		return $this->countRows($result) > 0;
+	}
+	
+	public function getNextAvailableNumber($idTheme)
+	{
+		$result = $this->executeQuery('SELECT max(num_exo)+1 as num FROM exercice WHERE id_theme = ' . $idTheme);
+		echo "ok";
+		$numero = $this->fetchArray($result);
+		return $numero['num'];
 	}
 	
 	public function delete($id)
