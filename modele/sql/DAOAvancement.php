@@ -254,7 +254,10 @@ class DAOAvancement extends DAOStandard
   	$req_progression = $this->executeQuery($sql);
   	$avancement = $this->fetchArray($req_progression);
   	
-  	return number_format(($avancement['progression'] / $total) * 100, 2);
+  	if($avancement['progression'] > 0)
+  		return number_format(($avancement['progression'] / $total) * 100, 2);
+  	else 
+  		return 0;
   }
   
   function getByCoursSeanceEtudiant($idCours, $idSeance, $idEtudiant)
