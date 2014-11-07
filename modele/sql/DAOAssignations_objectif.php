@@ -192,8 +192,7 @@ class DAOAssignations_objectif extends DAOStandard
   public function checkPionier($idEtu, $idCours)
   {
   	$daoInscription= new DAOInscription($db);
-  	$firstStudentid = $daoInscription->getFirstEtudiantInscritByCours($idCours);
-  	if($firstStudentid == $idEtu)
+  	if($daoInscription->isFirstEtudiantInscritByCours($idCours, $idEtu))
   		return 100;
   	else
   		return 0;

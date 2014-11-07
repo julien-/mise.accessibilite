@@ -283,7 +283,7 @@ class DAOInscription extends DAOStandard
 	  	return $listeInscription;
 	  }
 	  
-	  public function getFirstEtudiantInscritByCours($idCours)
+	  public function isFirstEtudiantInscritByCours($idCours, $idEtu)
 	  {
 	  	$sql = 'SELECT id_etu
 	  			FROM inscription
@@ -291,7 +291,16 @@ class DAOInscription extends DAOStandard
 	  			ORDER BY id_inscription ASC
 	  			LIMIT 1';
 	  	$result = $this->executeQuery($sql);
-	  	$first_etudiant = $this->fetchArray($result);
-	  	return $first_etudiant['id_etu'];
+	  	$id = $this->fetchArray($result);
+	  	if($id['id_etu'] == $idEtu)
+	  		return true;
+	  	else
+	  		return false;
+	  }
+	  
+	  public function count()
+	  {
+	  	$result = $this->executeQuery('SELECT *	FROM inscription');
+	  	return $this->countRows($result);
 	  }
 }

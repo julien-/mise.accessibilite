@@ -66,7 +66,7 @@
 
     <!-- HTML code from Bootply.com editor -->
 
-    <body  >
+    <body>
         <div id="wrap">
             <!-- Header -->
             <div id="top-nav" class="navbar navbar-inverse navbar-static-top" style="background-color: #f54f4f; margin-bottom: 0px;">
@@ -94,7 +94,6 @@
 	                        </ul>
                     	</div>                    
                 </div><!-- /container -->
-
             </div>
             <div class="navbar navbar-inverse" role="navigation" style="border-top: 1px solid white;">
                 <div class="container">
@@ -255,14 +254,32 @@
 		<br/>
 		<br/>
          <div id="footer">
-            <div class="container">
-                <p style="text-align: center;">    
-                <br/>     
-                	<span>Remarques, questions, bugs : <a href="mailto:mystudycompanion@gmail.com">mystudycompanion@gmail.com</a></span>
-            		<br/>
-            		<span>Copyright © 2014 - My Study Companion ® - Tous droits réservés</span>
-            	</p>
-            </div>
+            <div class="row">
+			  <div class="col-sm-2 col-sm-offset-4">
+			  	<h4>A Propos</h4>
+		  	  </div>
+			  <div class="col-sm-1">
+			  	<h4>Statistiques</h4>
+	  		  </div>
+			  <div class="col-sm-1">
+			  	<h4>Aide</h4>
+			  </div>
+			</div> 
+			<div class="row">
+			  <div class="col-sm-2 col-sm-offset-4">
+			  	MyStudyCompanion est un outil de gestion de cours pour les étudiants et les enseignants
+			  </div>
+			  <div class="col-sm-1"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoInscription->count();?> Inscripts<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
+			  <div class="col-sm-1"><a href ="#">Contact</a><br><a href ="#">FAQ</a></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+			  <div class="col-sm-2 col-sm-offset-4">
+			  	MyStudyCompanion - Tous droits réservés
+			  </div>
+			  <div class="col-sm-2">
+			  	<a href ="#">Conditions générales d'utilisation</a>
+			  </div>
+			</div>
         </div>     
         
         
@@ -294,37 +311,5 @@
         ?>
         <script type="text/javascript" src="../../js/commun.js"></script>
 
-        <script>
-            (function(i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function() {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'UA-40413119-1', 'bootply.com');
-            ga('send', 'pageview');
-        </script>
-        <!-- Quantcast Tag -->
-        <script type="text/javascript">
-            var _qevents = _qevents || [];
-
-            (function() {
-                var elem = document.createElement('script');
-                elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
-                elem.async = true;
-                elem.type = "text/javascript";
-                var scpt = document.getElementsByTagName('script')[0];
-                scpt.parentNode.insertBefore(elem, scpt);
-            })();
-
-            _qevents.push({
-                qacct: "p-0cXb7ATGU9nz5"
-            });
-        </script>
     </body>
 </html>

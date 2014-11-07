@@ -123,4 +123,10 @@ class DAOCours extends DAOStandard
   	}
   	return $listeCours;
   }
+  
+  public function count()
+  {
+  	$result = $this->executeQuery('SELECT *	FROM cours');
+  	return $this->countRows($result);
+  }
 }
