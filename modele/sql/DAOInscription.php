@@ -298,9 +298,5 @@ class DAOInscription extends DAOStandard
 	  		return false;
 	  }
 	  
-	  public function count()
-	  {
-	  	$result = $this->executeQuery('SELECT *	FROM inscription');
-	  	return $this->countRows($result);
-	  }
+	  
 }

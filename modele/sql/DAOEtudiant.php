@@ -111,4 +111,10 @@ class DAOEtudiant extends DAOStandard
   	return $this->countRows($result) > 0;
   }
   
+  public function count()
+  {
+  	$result = $this->executeQuery('SELECT *	FROM etudiant');
+  	return $this->countRows($result);
+  }
+  
 }
