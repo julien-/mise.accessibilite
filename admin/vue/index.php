@@ -192,15 +192,33 @@
 		<br/>
 		<br/>
         <div id="footer">
-            <div class="container">
-                <p style="text-align: center;">    
-                <br/>     
-                	<span>Remarques, questions, bugs : <a href="mailto:mystudycompanion@gmail.com">mystudycompanion@gmail.com</a></span>
-            		<br/>
-            		<span>Copyright © 2014 - My Study Companion ® - Tous droits réservés</span>
-            	</p>
-            </div>
-        </div>
+            <div class="row">
+			  <div class="col-sm-2 col-sm-offset-4">
+			  	<h4>A Propos</h4>
+		  	  </div>
+			  <div class="col-sm-1">
+			  	<h4>Statistiques</h4>
+	  		  </div>
+			  <div class="col-sm-1">
+			  	<h4>Aide</h4>
+			  </div>
+			</div> 
+			<div class="row">
+			  <div class="col-sm-2 col-sm-offset-4">
+			  	MyStudyCompanion est un outil de gestion de cours pour les étudiants et les enseignants
+			  </div>
+			  <div class="col-sm-1"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoInscription->count();?> Inscripts<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
+			  <div class="col-sm-1"><a href ="#">Contact</a><br><a href ="#">FAQ</a></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+			  <div class="col-sm-2 col-sm-offset-4">
+			  	MyStudyCompanion - Tous droits réservés
+			  </div>
+			  <div class="col-sm-2">
+			  	<a href ="#">Conditions générales d'utilisation</a>
+			  </div>
+			</div>
+        </div> 
 
         <script type='text/javascript' src="../../js/jquery-1.11.0.js"></script>
         <script type="text/javascript" src="../../js/bootstrap/bootstrap.min.js"></script>
