@@ -46,11 +46,88 @@ function disableEditMode()
 			$(this).addClass('hidden');
 		}
 	});
+	
+	$("#icon-cours").removeClass('hidden');
 	editMode = false;
 }
 
 
+/** Cours **/
 
+/*
+$(".header-cours").hover(function() 
+		{
+			if (!editMode)
+				$("#icon-cours").removeClass('hidden');	
+				  	}, function() 
+				  	{
+				  		$("#icon-cours").addClass('hidden');
+				 }
+		);
+*/
+
+$(".edit-cours").click(function() {
+	clickedIndex = $(this).data('id-cours');
+	disableEditMode();
+	
+	$("#input-cours").removeClass('hidden');
+	$("#input-cours").focus();
+	$("#valid-cours").removeClass('hidden');
+	$("#abort-cours").removeClass('hidden');
+	$("#icon-cours").addClass('hidden');
+	$("#titre-cours").addClass('hidden');
+	editMode = true;
+});
+
+$(".valid-cours").click(function() {
+	changeCoursTitle();
+});
+
+$(".add-theme").click(function() {
+	$("#id_cours").val($(this).data('id-cours'));
+});
+
+$(".abort-cours").click(function() {
+	$("#input-cours").val($("#titre-cours").text().trim());
+	disableEditMode();
+});
+
+$(".input-cours").keyup(function (e) {
+	  
+	  if (e.which == 13) 
+	  {
+		  alert('lol');
+		  changeCoursTitle();
+	  }
+	  else if (e.which == 27)
+	  {
+		  $("#input-cours").val($("#titre-cours").text().trim());
+		  disableEditMode();
+	  }
+});
+
+function changeCoursTitle()
+{
+	var donnees = {};
+	donnees["id-cours"] = clickedIndex;
+    donnees["titre-cours"] = $("#input-cours").val();
+    donnees["type"] = "edit";
+    
+    var ajax = $.ajax({
+        type: "post",
+        url: "../controleur/index.php?section=gestion_cours",
+        dataType: "html",
+        data: donnees,
+        success: function() {
+        	$("#titre-cours").text(donnees["titre-cours"]);
+        	$("#icon-cours").removeClass('hidden');
+        },
+        error: function() {
+        	alert('erreur');
+        }
+    });
+    disableEditMode();
+}
 /** Exercices **/
 
 $(".header-exo").hover(function() 
@@ -76,6 +153,8 @@ $(".edit-icon-exo").click(function() {
 	$("#titre-exo-" + clickedIndex).addClass('hidden');
 	editMode = true;
 });
+
+
 
 $(".validate-icon-exo").click(function() {
 	changeExerciseTitle();
@@ -108,6 +187,7 @@ function changeExerciseTitle()
 	var donnees = {};
 	donnees["id-exo"] = clickedIndex;
     donnees["titre-exo"] = $("#exo-" + clickedIndex).val();
+    donnees["type"] = "edit";
     
     var ajax = $.ajax({
         type: "post",

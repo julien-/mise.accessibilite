@@ -24,6 +24,14 @@ if (isset($_POST['type']))
 			$theme = $theme->setTitre($_POST['titre-theme']);
 			$daoTheme->update($theme);
 		}
+		
+		if (isset($_POST['titre-cours']))
+		{
+			$cours = $daoCours->getByID($_POST['id-cours']);
+			$cours = $cours->setLibelle($_POST['titre-cours']);
+			$daoCours->update($cours);
+			$_SESSION['cours'] = $cours;
+		}
 	}
 	else if ($_POST['type'] == 'delete')
 	{
