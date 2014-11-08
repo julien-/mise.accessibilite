@@ -4,7 +4,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-stats"></i>Progression sur tout le cours
+			<i class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;Progression sur tout le cours
 		</h3>
 	</div>
 	<div class="panel-body">
@@ -13,16 +13,16 @@
             var optionsBarChart =   {
                                 title:"",
                                 enableInteractivity: false,
-                                width:1000, height:100, axisTitlesPosition: 'none',
+                                height:100, axisTitlesPosition: 'none',
                                 legend: {position: 'none'},
-                                chartArea: {left:"20%",top:0,width:500,height:"75%"},
+                                chartArea: {top:0,height:"75%"},
                                 vAxis: {title: "Exercices"},
                                 backgroundColor: { fill:'transparent' },
                                 hAxis: {title: "Avancement en %" , maxValue: 100,  minValue: 0}
                             };
             setBarChartOptions('../../chart/get_json_barchart_etudiant.php', optionsBarChart, 'barChart');
         	</script>
-        	<div id="barChart" style="width: auto; height: auto;"></div>
+        	<div id="barChart"></div>
 		</div>
 	</div>
 </div>
@@ -30,7 +30,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-stats"></i>Progression par thèmes
+			<i class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;Progression par thèmes
 		</h3>
 	</div>
 	<div class="panel-body">
@@ -39,11 +39,3 @@
 		</div>
 	</div>
 </div>
-
-<span class="rating">
-  <span class="star"></span>
-  <span class="star"></span>
-  <span class="star"></span>
-  <span class="star"></span>
-  <span class="star"></span>
-</span>

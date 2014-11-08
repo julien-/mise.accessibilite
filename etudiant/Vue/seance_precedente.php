@@ -1,7 +1,7 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="../../js/googleChartToolsPieChart.js"></script>
 <div class="row show-grid">
-	<div class="col-md-8">
+	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -20,7 +20,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -65,12 +65,12 @@ foreach($listeThemes as $theme)
 		<div id="morris-area-chart">
 			<table class="table table-striped table-bordered">
 				<thead>
-				<tr class="titre">
-				<th class="center-text">Exercice</th>
-				<th class="center-text">Fait</th>
-				<th class="center-text">Compris</th>
-				<th class="center-text">Assimile</th>
-				</tr>
+					<tr>
+						<th class="col-xs-6 col-sm-6 center-text">Exercice</th>
+						<th class="col-xs-2 col-sm-2 center-text">Fait</th>
+						<th class="col-xs-2 col-sm-2 center-text">Compris</th>
+						<th class="col-xs-2 col-sm-2 center-text">Assimile</th>
+					</tr>
 				</thead>
 				<?php
 				$listeAvancement = $daoAvancement->getTabBySeanceThemeEtudiant($_GET["id_seance"], $theme->getId(), $_SESSION["currentUser"]->getId());
@@ -87,19 +87,19 @@ foreach($listeThemes as $theme)
 			    <tbody>
 			        <tr>
 			            <!--Titre de l'exercice-->
-			            <td class="autre_colonne">
+			            <td class="col-xs-6 col-sm-6">
 			                <?php echo $avancement['exercice']['titre']; ?>
 			            </td> 
 			            <!--Fait-->
-			            <td class="autre_colonne">
+			            <td class="col-xs-2 col-sm-2 center-text">
 			            	<i class="<?php if($avancement_pourcentage >= 25) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
 			            </td>
 			            <!--Compris-->
-			            <td class="autre_colonne">
+			            <td class="col-xs-2 col-sm-2 center-text">
 			                 <i class="<?php if($avancement_pourcentage >= 50) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
 			            </td>
 			            <!--Assimile-->
-			            <td class="autre_colonne">
+			            <td class="col-xs-2 col-sm-2 center-text">
 			                 <i class="<?php if($avancement_pourcentage == 100) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
 			            </td>
 			        </tr>

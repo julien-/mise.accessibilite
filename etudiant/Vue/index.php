@@ -97,7 +97,6 @@
             </div>
             <div class="navbar navbar-inverse" role="navigation" style="border-top: 1px solid white;">
                 <div class="container">
-				
                       <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
@@ -184,7 +183,7 @@
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-2">
+                    <div class="col-xs-12 col-sm-12 col-lg-2">
                         <div class="list-group">
                         	<a href="index.php?section=cours" class="<?php if($page == "cours") echo "list-group-item active"; else echo "list-group-item";?>">
                         		<i class="glyphicon glyphicon-th-list"></i>
@@ -202,7 +201,7 @@
                             ?>
                         </div>
                     </div>
-                    <div id="bloc_page" class="col-sm-10">
+                    <div id="bloc_page" class="col-xs-12 col-sm-12 col-lg-10">
                     	<div>
 					        <ul class="breadcrumb">
 					        <?php 

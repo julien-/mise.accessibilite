@@ -4,11 +4,12 @@
 <script type="text/javascript" src="../../js/googleChartToolsBarChart.js"></script>
 <script type="text/javascript" src="../../js/googleChartToolsColumnChart.js"></script>
 
+
 <script type="text/javascript">
 var optionsBarChart =   {
 	enableInteractivity: true,
-	width:"100%", height:100, axisTitlesPosition: 'none',
-	chartArea: {left:"10%",top:0,right:"10%",height:"75%"},
+	height:100, axisTitlesPosition: 'none',
+	chartArea: {top:0,height:"75%"},
 	backgroundColor: { fill:'transparent' },
 	vAxis: {title: "Exercices"},
 	legend: {position: 'none'},
@@ -17,6 +18,10 @@ var optionsBarChart =   {
 setBarChartOptions('../../chart/get_json_barchart_global.php?', optionsBarChart, 'barChart');
 </script>
 
+<?php 
+if(!empty($listeThemes))
+{
+?>
 <script type="text/javascript">	
 <?php 
 foreach($listeThemes as $theme)
@@ -43,31 +48,35 @@ foreach($listeThemes as $theme)
 }
 ?>
 </script>
+<?php
+}
+?>
 
 <!-- Avancement global -->
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-align-left"></i> Avancement Global
+			<i class="glyphicon glyphicon-align-left"></i>&nbsp;&nbsp;Avancement Global
 		</h3>
 	</div>
 	<div class="panel-body">
 		<div id="morris-area-chart">
-			<div id="barChart" style="width: auto; height: auto;"></div>
+			<div id="barChart"></div>
 		</div>
 	</div>
 </div>
 
-<!-- Visualisation Pokemons -->
+<!-- Visualisation Badges -->
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-leaf"></i> Mes Badges
+			<i class="glyphicon glyphicon-leaf"></i>&nbsp;&nbsp;Mes Badges
 		</h3>
 	</div>
 	<div class="panel-body">
 		<div id="morris-area-chart">
 			<?php 
+			$minimum_un_objectif = false;
 			foreach ($listeAssignationsObjectifs as $assignation)
 			{
 				if ($assignation->getPourcentage() >= 100)
@@ -76,12 +85,20 @@ foreach($listeThemes as $theme)
 					$objectif = stripAccents($objectif);
 			?>
 				
-					<div class="col-lg-2 text-center">
+					<div class="col-xs-4 col-sm-2 text-center">
 						<img src="<?php echo '../../images/Badges/' . $objectif . '.png'; ?>" alt="<?php echo $assignation->getObjectif()->getObjectif(); ?>" />
+						<br>
 						<span class="bold"><?php echo $assignation->getObjectif()->getObjectif(); ?></span>
 					</div>
 			<?php 
+					$minimum_un_objectif= true;
 				}
+			}
+			if(!$minimum_un_objectif)
+			{
+			?>
+				<span>Aucun badge n'a encore été obtenu, voir la liste des badges dans le menu Mes Badges</span>
+			<?php 
 			}
 			?>
 		</div>
@@ -91,11 +108,15 @@ foreach($listeThemes as $theme)
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-stats"></i> Mon Evolution par Thême
+			<i class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;Mon Evolution par Thême
 		</h3>
 	</div>
 	<div class="panel-body">
 		<div id="morris-area-chart">
+			<?php 
+			if(!empty($listeThemes))
+			{
+			?>
 			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
 				  <ol class="carousel-indicators">
@@ -135,10 +156,15 @@ foreach($listeThemes as $theme)
 				    <span class="pokemon-red glyphicon glyphicon-chevron-right"></span>
 				  </a>
 			</div>
+			<?php 						
+			}
+			else 
+			{
+			?>
+				<span>Aucun Thème n'a été créé par l'enseignant du cours</span>
+			<?php 
+			}
+			?>
 		</div>
 	</div>
 </div>
-
-
-
-

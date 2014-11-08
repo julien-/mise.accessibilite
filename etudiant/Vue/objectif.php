@@ -3,10 +3,10 @@ foreach ($listeAssignationsObjectifs as $assignation)
 {
 ?>
 	<div class="row">
-		<div class="col-lg-2 text-center">
+		<div class="col-sm-2 text-center">
 			<img class="<?php if ($assignation->getPourcentage() < 100) echo 'blur';?>" src="<?php $objectif = str_replace(' ', '_', $assignation->getObjectif()->getObjectif()); $objectif = stripAccents($objectif); echo '../../images/Badges/' . $objectif . '.png'; ?>" alt="<?php echo $assignation->getObjectif()->getObjectif(); ?>" />
 		</div>
-		<div class="col-lg-6">
+		<div class="col-sm-8">
 			<span class="bold"><?php echo $assignation->getObjectif()->getObjectif(); ?></span><span class="italic" style="font-size: 12px;"><?php if ($assignation->getPourcentage() == 100) echo ' Obtenu le ' . Outils::dateToFr($assignation->getDate()); ?></span>
 			<br/>
 			<?php echo $assignation->getObjectif()->getDescription(); ?>

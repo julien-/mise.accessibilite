@@ -7,7 +7,7 @@ foreach($listeTheme as $theme) // pour chaque th�me on va chercher les exos
 {
     $urlJSON = '../../chart/get_json_pie_chart.php?c=' . $_SESSION['cours']->getId() . '&t=' . $theme->getId() . '&e=' . $_SESSION['currentUser']->getId();
 ?>
-	<div class="col-md-4">
+	<div class="col-sm-6 col-lg-4">
         <h2><?php echo $theme->getTitre(); ?></h2>
         <script type="text/javascript">
                 var optionsPieChart =   {

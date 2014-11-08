@@ -1,7 +1,7 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="../../js/googleChartToolsPieChart.js"></script>
 <div class="row show-grid">
-	<div class="col-md-8">
+	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -74,7 +74,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -118,12 +118,13 @@ foreach($listeThemes as $theme)
 		<div id="morris-area-chart">
 			<table class="table table-striped table-bordered">
 				<thead>
-				<tr class="titre">
-				<th class="center-text">Exercice</th>
-				<th class="center-text">Fait</th>
-				<th class="center-text">Compris</th>
-				<th class="center-text">Assimile</th>
-				</tr>
+					<tr>
+						<th class="col-xs-4 col-sm-4 center-text">Exercice</th>
+						<th class="col-xs-2 col-sm-2 center-text">Aide</th>
+						<th class="col-xs-2 col-sm-2 center-text">Fait</th>
+						<th class="col-xs-2 col-sm-2 center-text">Compris</th>
+						<th class="col-xs-2 col-sm-2 center-text">Assimile</th>
+					</tr>
 				</thead>
 				<?php
 				$listeAvancement = $daoAvancement->getTabBySeanceThemeEtudiant($id_seance, $theme->getId(), $_SESSION["currentUser"]->getId());
@@ -141,19 +142,23 @@ foreach($listeThemes as $theme)
 			    <tbody>
 			        <tr>
 			            <!--Titre de l'exercice-->
-			            <td class="prem_colonne">
+			            <td class="col-xs-4 col-sm-4">
 			                <?php echo $avancement['exercice']['titre']; ?>
 			            </td> 
+			            <!--Aide-->
+			            <td class="col-xs-2 col-sm-2 center-text">
+			            	
+			            </td>
 			            <!--Fait-->
-			            <td class="autre_colonne">
+			            <td class="col-xs-2 col-sm-2 center-text">
 			            	<input type="checkbox" class="fait" id="fait<?php echo $avancement['exercice']['id'];?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage >= 25) echo 'onClick="return false" checked="checked" title="L\'exercice a été fait à une séance précédente"'; else echo 'name="fait[]"';?>/>		            	
 			            </td>
 			            <!--Compris-->
-			            <td class="autre_colonne">
+			            <td class="col-xs-2 col-sm-2 center-text">
 			                <input type="checkbox" class="compris" id="compris<?php echo $avancement['exercice']['id'];?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage >= 50) echo 'onClick="return false" checked="checked" title="L\'exercice a été compris à une séance précédente"'; else echo 'name="compris[]"';?>/>	
 		            	</td>
 			            <!--Assimile-->
-			            <td class="autre_colonne">
+			            <td class="col-xs-2 col-sm-2 center-text">
 			                <input type="checkbox" class="assimile" id="assimile<?php echo $avancement['exercice']['id'];?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage == 100) echo 'onClick="return false" checked="checked" title="L\'exercice a été assimile à une séance précédente"'; else echo 'name="assimile[]"';?>/>	
 			            </td>
 			        </tr>

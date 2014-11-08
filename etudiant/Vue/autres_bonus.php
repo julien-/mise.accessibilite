@@ -22,7 +22,6 @@ foreach($listeThemes as $theme)
 						<th class="center-text">Type</th>
 						<th class="center-text">Créateur(s)</th>
 						<th class="center-text">Suivi</th>
-						<!-- <th class="center-text">Moyenne</th> -->
 						<th class="center-text">Ma Note</th>
 						<th class="center-text">Ma Remarque</th>
 					</tr>
@@ -64,12 +63,6 @@ foreach($listeThemes as $theme)
 	            					<input type="checkbox" name="<?php echo "bonus_suivi".$bonus->getId();?>" onClick=<?php if($mon_avancement['suivi'] != null) echo "'return false'"; else echo "'this.form.submit()'"?> <?php if($mon_avancement['suivi'] != null) echo "checked='checked'";?>/>
 	            				</form>
 				            </td>
-				            <!--Moyenne du bonus-->
-				            <!-- 
-				            <td class="autre_colonne">
-				            	<?php //echo round($moyenne,1)." / 5"; ?>
-				            </td>
-				             -->
 				            <!--Note du bonus-->
 				            <td class="autre_colonne">
 	            				<form method="post" name="<?php echo "form_add_note".$bonus->getId();?>" action="../Requete/rq_autres_bonus.php?section=autres_bonus&addnote">

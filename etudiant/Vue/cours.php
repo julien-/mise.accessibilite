@@ -22,13 +22,12 @@ if($nbcours == 0)
 else
 {
 ?>
-
 <table class="table table-striped table-bordered">
     <thead>
-        <tr class="titre">
-            <th class="center-text">Cours</th>
-            <th class="center-text">Enseignant</th>
-            <th class="center-text">Progression</th>
+        <tr>
+            <th class="col-xs-3 col-sm-3 center-text">Cours</th>
+            <th class="col-xs-3 col-sm-3 center-text">Enseignant</th>
+            <th class="col-xs-6 col-sm-6 center-text">Progression</th>
         </tr>
     </thead>
     <tbody>
@@ -38,19 +37,19 @@ else
 	    ?>
         <tr>
             <!--Titre du cours-->
-            <td class="autre_colonne">
+            <td class="col-xs-3 col-sm-3">
                 <a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId();?>">
                 	<?php echo $cours->getCours()->getLibelle(); ?>
                 </a>
             </td>
             <!--Nom du professeur-->
-            <td class="autre_colonne">
+            <td class="col-xs-3 col-sm-3">
                 <?php                	
                     echo $cours->getCours()->getProf()->getNom() . ' ' . $cours->getCours()->getProf()->getPrenom(); 
                 ?>
             </td> 
             <!--Avancement-->
-            <td class="autre_colonne">
+            <td class="col-xs-6 col-sm-6">
                  <?php
                     $progression = $daoAvancement->getByCoursEtudiant($cours->getCours()->getId(), $_SESSION['currentUser']->getId());
                     if ($progression <= 25)
@@ -59,13 +58,22 @@ else
                         $color = '#FFCC33';
                     else
                         $color = '#99FF33';
-                 ?>
+                 ?>  
+                 
+                 <div class="progress progress-striped progress-borders">
+					<div class="progress-bar progress-bar-primary vert-align" style="color: black; background-color: <?php echo Outils::colorChart($progression); ?>; width: <?php echo $progression; ?>%;">
+                    	<?php echo $progression; ?> %
+                    </div>
+				</div>
+                               
+                <?php /*
                 <div style="float: left; border: 1px solid black; width: 79%; height: 20px;">
                     <div style="height: 100%; background-color: <?php echo $color; ?>; width: <?php echo $progression; ?>%;">&nbsp;</div>
                 </div>
                 <div style="float: left; width: 20%;">
                 	<?php echo $progression; ?> %
                 </div>
+                */?>
             </td>
         </tr>
         <?php } ?>
