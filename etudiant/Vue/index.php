@@ -27,41 +27,6 @@
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
-        <!-- CSS code from Bootply.com editor -->
-
-        <style type="text/css">
-            .navbar-static-top {
-                background-color: #f54f4f; margin-bottom: 0px; line-height:60px;
-            }
-
-            i {
-                font-size:18px;
-            }
-
-            footer {
-                margin-top:20px;
-                padding-top:20px;
-                padding-bottom:20px;
-                background-color:#efefef;
-            }
-
-            .nav>li .count {
-                position: absolute;
-                top: 10%;
-                right: 25%;
-                font-size: 10px;
-                font-weight: normal;
-                background: rgba(41,200,41,0.75);
-                color: rgb(255,255,255);
-                line-height: 1em;
-                padding: 2px 4px;
-                -webkit-border-radius: 10px;
-                -moz-border-radius: 10px;
-                -ms-border-radius: 10px;
-                -o-border-radius: 10px;
-                border-radius: 10px;
-            }
-        </style>
     </head>
 
     <!-- HTML code from Bootply.com editor -->
@@ -69,29 +34,28 @@
     <body>
     	<div id="wrap">
             <!-- Header -->
-            <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-                <div class="container">
-                    <div class="col-xs-12 col-sm-6">
-                        <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a>
-                    </div>                    
-                    <div class="col-xs-12 col-sm-6 text-right">
-	                	<div class="col-xs-6 col-md-offset-6 col-md-3">
-                            	<a role="button" href="index.php?section=reception_messagerie" style="color: white; font-size: 20px;"><?php echo $nbMessagesNnLu;?> <i class="glyphicon glyphicon-envelope"></i></a>
-                        </div>
-                        <div class="col-xs-6 col-md-3">
-	                        	<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
-                                <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
-	                            <ul id="g-account-menu" class="dropdown-menu" role="menu">
-	                            	<li><a href="index.php?section=compte">Mon compte</a></li>
-	                                <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>Se déconnecter</a></li>
-	                            </ul>
-						</div>
-                    </div>                    
-                </div><!-- /container -->
-            </div>
-            <div class="navbar navbar-inverse" role="navigation" style="border-top: 1px solid white;">
-                <div class="container">
-                      <div class="navbar-header">
+            <nav class="navbar navbar-default" role="navigation">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a>
+			    </div>
+			      <ul class="nav navbar-nav navbar-right">
+			        <li><a role="button" href="index.php?section=reception_messagerie"><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a></li>
+			        <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?> <span class="caret"></span></a>
+			          <ul class="dropdown-menu" role="menu">
+			            <li><a href="index.php?section=compte">Mon compte</a></li>
+			            <li class="divider"></li>
+	                    <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>&nbsp;Se déconnecter</a></li>
+			          </ul>
+			        </li>
+			      </ul>
+
+			  </div>
+			</nav>
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="container-fluid">
+                   	<div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -99,7 +63,7 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-                    <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                    <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
                         	<?php 
                         		if(isset($_SESSION['cours']))
@@ -169,9 +133,9 @@
                         		}
                             ?>
                         </ul>
-                    </div><!--/.nav-collapse -->
+                    </div>
                 </div>
-            </div>
+            </nav>
             <!-- /Header -->
             <!-- container -->
             <div class="container-fluid">
@@ -239,31 +203,26 @@
             </div>
             <!--/container-->
 		</div>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
+        <!-- footer -->
         <div id="footer">
-            <div class="row">
-			  <div class="col-sm-2 col-sm-offset-4">
-			  	<h4>A Propos</h4>
-		  	  </div>
-			  <div class="col-sm-1">
-			  	<h4>Statistiques</h4>
-	  		  </div>
-			  <div class="col-sm-1">
-			  	<h4>Aide</h4>
-			  </div>
-			</div> 
-			<div class="row">
-			  <div class="col-sm-2 col-sm-offset-4">
-			  	MyStudyCompanion est un outil de gestion de cours pour les étudiants et les enseignants
-			  </div>
-			  <div class="col-sm-1"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoEtudiant->count();?> Inscripts<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
-			  <div class="col-sm-1"><a href ="#">Contact</a><br><a href ="#">FAQ</a></div>
-			</div>
+	    	<div class="row">
+				<div class="col-sm-2 col-sm-offset-4">
+				  	<h4>A Propos</h4>
+			  	 </div>
+				 <div class="col-sm-1">
+				  	<h4>Statistiques</h4>
+		  		 </div>
+				 <div class="col-sm-1">
+				  	<h4>Aide</h4>
+				 </div>
+			 </div> 
+			 <div class="row">
+				  <div class="col-sm-2 col-sm-offset-4">
+				  	MyStudyCompanion est un outil de gestion de cours pour les étudiants et les enseignants
+				  </div>
+				  <div class="col-sm-1"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoEtudiant->count();?> Inscripts<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
+			  	  <div class="col-sm-1"><a href ="#">Contact</a><br><a href ="#">FAQ</a></div>
+			 </div>
 			<div class="row" style="margin-top: 10px;">
 			  <div class="col-sm-2 col-sm-offset-4">
 			  	MyStudyCompanion - Tous droits réservés
@@ -272,9 +231,8 @@
 			  	<a href ="#">Conditions générales d'utilisation</a>
 			  </div>
 			</div>
-        </div>     
-        
-        
+        </div>
+        <!-- /footer -->     
         <script type='text/javascript' src="../../js/jquery-1.11.0.js"></script>
         <script type="text/javascript" src="../../js/bootstrap/bootstrap.min.js"></script>
         <script type="text/javascript" src="../../js/bootstrap/jquery.dataTables.min.js"></script>
@@ -286,7 +244,6 @@
 		<script type="text/javascript" src="../../js/bootstrap/handlebars.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/jquery.validate.min.js"></script>
 		<script type="text/javascript" src='../../js/googleChartAPI.js'></script>
-        
         <!--Integration des fichiers js de chaque page-->
         <?php if (file_exists("../js/" . $pageWithoutPath . ".js"))
         {
