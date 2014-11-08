@@ -31,7 +31,7 @@
 
         <style type="text/css">
             .navbar-static-top {
-                margin-bottom:20px;
+                background-color: #f54f4f; margin-bottom: 0px; line-height:60px;
             }
 
             i {
@@ -67,32 +67,26 @@
     <!-- HTML code from Bootply.com editor -->
 
     <body>
-        <div id="wrap">
+    	<div id="wrap">
             <!-- Header -->
-            <div id="top-nav" class="navbar navbar-inverse navbar-static-top" style="background-color: #f54f4f; margin-bottom: 0px;">
+            <div class="navbar navbar-inverse navbar-static-top" role="navigation">
                 <div class="container">
                     <div class="col-xs-12 col-sm-6">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-toggle"></span>
-                        </button>
                         <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a>
-                    </div>
-                    
-                    	<div class="col-xs-12 col-sm-6">
-	                        <ul class="nav navbar-nav navbar-right">
-	                        	<li>
-                                	<a role="button" href="index.php?section=reception_messagerie" style="color: white; font-size: 20px;"><?php echo $nbMessagesNnLu;?> <i class="glyphicon glyphicon-envelope"></i></a>
-                            	</li>
-	                            <li class="dropdown">
-	                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
-                                    <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
-	                                <ul id="g-account-menu" class="dropdown-menu" role="menu">
-	                                    <li><a href="index.php?section=compte">Mon compte</a></li>
-	                                    <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>Se déconnecter</a></li>
-	                                </ul>
-	                            </li>
-	                        </ul>
-                    	</div>                    
+                    </div>                    
+                    <div class="col-xs-12 col-sm-6 text-right">
+	                	<div class="col-xs-6 col-md-offset-6 col-md-3">
+                            	<a role="button" href="index.php?section=reception_messagerie" style="color: white; font-size: 20px;"><?php echo $nbMessagesNnLu;?> <i class="glyphicon glyphicon-envelope"></i></a>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+	                        	<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
+                                <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
+	                            <ul id="g-account-menu" class="dropdown-menu" role="menu">
+	                            	<li><a href="index.php?section=compte">Mon compte</a></li>
+	                                <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>Se déconnecter</a></li>
+	                            </ul>
+						</div>
+                    </div>                    
                 </div><!-- /container -->
             </div>
             <div class="navbar navbar-inverse" role="navigation" style="border-top: 1px solid white;">
@@ -179,7 +173,6 @@
                 </div>
             </div>
             <!-- /Header -->
-
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
@@ -202,6 +195,21 @@
                         </div>
                     </div>
                     <div id="bloc_page" class="col-xs-12 col-sm-12 col-lg-10">
+                    	<!-- Small modal popup -->						
+						<div  id="modal_popup" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+						  <div class="modal-dialog modal-sm">
+						    <div class="modal-content">
+						    	<div class="modal-header">
+        							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+       								 <h4 class="modal-title"></h4>
+       							</div>
+       							<div class="modal-body">
+						        	<p></p>
+						      	</div>
+						    </div>
+						  </div>
+						</div>
+                    	<!-- Fil d'arianne -->
                     	<div>
 					        <ul class="breadcrumb">
 					        <?php 
@@ -224,35 +232,20 @@
 					        }
 					        ?>
 					        </ul>
-				      	</div>
-				      	
-				      	<!-- Small modal popup -->						
-						<div  id="modal_popup" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-						  <div class="modal-dialog modal-sm">
-						    <div class="modal-content">
-						    	<div class="modal-header">
-        							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-       								 <h4 class="modal-title"></h4>
-       							</div>
-       							<div class="modal-body">
-						        	<p></p>
-						      	</div>
-						    </div>
-						  </div>
-						</div>
+				      	</div>				      	
                         <?php include_once('../Controleur/' . $page . '.php'); ?>
                     </div>
-                </div><!--/row-->
-            </div><!--/container-->
-        </div><!-- /wrap -->
-
+                </div>
+            </div>
+            <!--/container-->
+		</div>
 		<br/>
 		<br/>
 		<br/>
 		<br/>
 		<br/>
 		<br/>
-         <div id="footer">
+        <div id="footer">
             <div class="row">
 			  <div class="col-sm-2 col-sm-offset-4">
 			  	<h4>A Propos</h4>
