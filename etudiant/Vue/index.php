@@ -71,14 +71,14 @@
             <!-- Header -->
             <div id="top-nav" class="navbar navbar-inverse navbar-static-top" style="background-color: #f54f4f; margin-bottom: 0px;">
                 <div class="container">
-                    <div class="navbar-header">
+                    <div class="col-xs-12 col-sm-6">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="icon-toggle"></span>
                         </button>
                         <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a>
                     </div>
                     
-                    	<div class="navbar-collapse collapse">
+                    	<div class="col-xs-12 col-sm-6">
 	                        <ul class="nav navbar-nav navbar-right">
 	                        	<li>
                                 	<a role="button" href="index.php?section=reception_messagerie" style="color: white; font-size: 20px;"><?php echo $nbMessagesNnLu;?> <i class="glyphicon glyphicon-envelope"></i></a>
