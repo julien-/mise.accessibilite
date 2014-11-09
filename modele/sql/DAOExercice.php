@@ -31,9 +31,13 @@ class DAOExercice extends DAOStandard
 	public function getNextAvailableNumber($idTheme)
 	{
 		$result = $this->executeQuery('SELECT max(num_exo)+1 as num FROM exercice WHERE id_theme = ' . $idTheme);
-		echo "ok";
+
 		$numero = $this->fetchArray($result);
-		return $numero['num'];
+
+		if ($numero['num'] == '')
+			return 1;
+		else 
+			return $numero['num'];
 	}
 	
 	public function delete($id)

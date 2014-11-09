@@ -84,7 +84,7 @@ $(".valid-cours").click(function() {
 });
 
 $(".add-theme").click(function() {
-	$("#id_cours").val($(this).data('id-cours'));
+	$("#id-cours").val($(this).data('id-cours'));
 });
 
 $(".abort-cours").click(function() {
@@ -96,7 +96,6 @@ $(".input-cours").keyup(function (e) {
 	  
 	  if (e.which == 13) 
 	  {
-		  alert('lol');
 		  changeCoursTitle();
 	  }
 	  else if (e.which == 27)
@@ -128,6 +127,10 @@ function changeCoursTitle()
     });
     disableEditMode();
 }
+
+$(".delete-cours").click(function() {
+	$("#cours-delete").val($(this).data('id-cours'));
+});
 /** Exercices **/
 
 $(".header-exo").hover(function() 
@@ -140,7 +143,7 @@ $(".header-exo").hover(function()
 				 }
 		);
 
-$(".edit-icon-exo").click(function() {
+$(".edit-exo").click(function() {
 	clickedIndex = $(this).data('modif-exo-id');
 	
 	disableEditMode();
@@ -155,6 +158,14 @@ $(".edit-icon-exo").click(function() {
 });
 
 
+$(".delete-exo-confirm").click(function() {
+	deleteExercise();	
+});
+
+$(".delete-exo").click(function() {
+	clickedIndex = $(this).data('modif-exo-id');
+	disableEditMode();
+});
 
 $(".validate-icon-exo").click(function() {
 	changeExerciseTitle();
@@ -196,6 +207,27 @@ function changeExerciseTitle()
         data: donnees,
         success: function() {
         	$("#titre-exo-" + clickedIndex).text(donnees["titre-exo"]);
+        },
+        error: function() {
+        	alert('erreur');
+        }
+    });
+    disableEditMode();
+}
+
+function deleteExercise()
+{
+	var donnees = {};
+	donnees["id-exo"] = clickedIndex;
+	donnees["type"] = "delete";
+    
+    var ajax = $.ajax({
+        type: "post",
+        url: "../controleur/index.php?section=gestion_cours",
+        dataType: "html",
+        data: donnees,
+        success: function() {
+        	$("#E" + clickedIndex).addClass("hidden");
         },
         error: function() {
         	alert('erreur');

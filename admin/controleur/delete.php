@@ -17,10 +17,15 @@ if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getAdmin() == 1
 		$daoExercice->delete($_GET['exercice']);
 	}
 	
-	if (isset($_GET['cours']))
+	if (isset($_GET['cours-delete']))
 	{
 		$daoCours = new DAOCours($db);
-		$daoCours->delete($_GET['cours']);
+		if (isset($_SESSION['cours']) && $_SESSION['cours']->getId() == $_GET['cours-delete'])
+		{
+			unset($_SESSION['cours']);
+			$_SESSION['referrer'] = 'index.php';
+		}
+		$daoCours->delete($_GET['cours-delete']);
 	}
 	
 	if (isset($_GET['seance']))

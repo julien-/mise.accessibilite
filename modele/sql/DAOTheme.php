@@ -11,7 +11,7 @@ class DAOTheme extends DAOStandard
 	
 	public function save(Theme $theme)
 	{
-		$this->executeQuery('INSERT INTO theme SET titre_theme = "' . $theme->getTitre() . '", id_cours = "' . $theme->getCours()->getId() . '"');
+		$this->executeQuery('INSERT INTO theme SET titre_theme = "' . $theme->getTitre() . '", id_cours = "' . $theme->getCours() . '"');
 	}
 	
 	public function update(Theme $theme)

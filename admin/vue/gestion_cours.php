@@ -3,14 +3,14 @@
 	<div class="col-lg-9"></div>
 	<div class="col-lg-3">
 		<div class="dropdown">
-			<button style="height: 30px;" id="icon-cours"
+			<button id="icon-cours"
 				data-cours-id="<?php echo $cours->getId(); ?>"
-				class="settings-icon btn btn-default dropdown-toggle glyphicon glyphicon-cog"
-				type="button" id="dropdownMenu1" data-toggle="dropdown">
+				class="settings-icon btn btn-default dropdown-toggle"
+				type="button" id="dropdownMenu1" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> Outils
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="options">
-				<li role="presentation"><a class="add-theme" data-toggle="modal"
+				<li role="presentation"><a data-id-cours="<?php echo $cours->getId(); ?>" class="add-theme" data-toggle="modal"
 					data-target="#modalAddTheme"> <i style="font-size: 15px;"
 						class="glyphicon glyphicon-plus-sign"
 						title="Ajouter un thème à ce cours"></i> Ajouter un thème
@@ -18,13 +18,13 @@
 				<li role="presentation"><a class="edit-cours"
 					data-id-cours="<?php echo $cours->getId(); ?>"> <i
 						style="font-size: 15px;" class="glyphicon glyphicon-pencil"
-						title="Modifier le titre de ce cours"></i> Modifier le titre
+						title="Modifier le titre de ce cours"></i> Modifier le titre du cours
 				</a></li>
 				<li role="presentation"><a class="delete-cours" data-toggle="modal"
 					data-target="#modalDeleteCours"
 					data-id-cours="<?php echo $cours->getId(); ?>"> <i
 						style="font-size: 15px;" class="glyphicon glyphicon-trash"
-						title="Supprimer ce cours"></i> Supprimer
+						title="Supprimer ce cours"></i> Supprimer le cours
 				</a></li>
 			</ul>
 		</div>
@@ -137,34 +137,65 @@ foreach ( $listeThemes as $theme ) {
 						<td>
 							<div class="header-exo" id="E<?php echo $exos->getId();?>"
 								data-modif-exo-id="<?php echo $exos->getId(); ?>">
-								<input type="text" id="exo-<?php echo $exos->getId(); ?>"
-									class="base-hidden form-control hidden input-exo"
-									value="<?php echo $exos->getTitre(); ?>"
-									data-input-exo-id="<?php echo $exos->getId(); ?>" />
-								<p class="center-text">
-									<a id="edit-valid-exo-<?php echo $exos->getId(); ?>"
-										class="hidden base-hidden validate-icon-exo"
-										data-modif-exo-id="<?php echo $exos->getId(); ?>"> <br />
-									<i style="font-size: 50px;"
-										class="glyphicon glyphicon-ok-circle" title="Valider"></i>
-									</a> <a id="edit-abort-exo-<?php echo $exos->getId(); ?>"
-										class="hidden base-hidden abort-icon-exo"> <i
-										style="font-size: 50px;"
-										class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
+								<div class="row">
+									<div class="col-lg-10">
+										<input type="text" id="exo-<?php echo $exos->getId(); ?>"
+											class="base-hidden form-control hidden input-exo"
+											value="<?php echo $exos->getTitre(); ?>"
+											data-input-exo-id="<?php echo $exos->getId(); ?>" />
+										<p class="center-text">
+											<a id="edit-valid-exo-<?php echo $exos->getId(); ?>"
+												class="hidden base-hidden validate-icon-exo"
+												data-modif-exo-id="<?php echo $exos->getId(); ?>"> <br />
+											<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
+												title="Valider"></i>
+											</a> <a id="edit-abort-exo-<?php echo $exos->getId(); ?>"
+												class="hidden base-hidden abort-icon-exo"> <i
+												style="font-size: 50px;"
+												class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
+											</a>
+										</p>
+				
+										<a class="base titre"
+											id="titre-exo-<?php echo $exos->getId(); ?>"
+											data-modif-exo-id="<?php echo $exos->getId(); ?>"
+											data-toggle="collapse"
+											data-target="#bloc-<?php echo $exos->getId(); ?>">
+										<?php echo $exos->getTitre(); ?>
 									</a>
-								</p>
-								<a class="base titre"
-									id="titre-exo-<?php echo $exos->getId(); ?>"
-									data-modif-exo-id="<?php echo $exos->getId(); ?>"
-									data-toggle="collapse"
-									data-target="#bloc-<?php echo $exos->getId(); ?>">
-									<?php echo $exos->getTitre(); ?>
-								</a> <a id="edit-icon-exo-<?php echo $exos->getId(); ?>"
-									class="hidden-base edit-icon-exo hidden"
-									data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
-									style="font-size: 15px;" class="glyphicon glyphicon-pencil"
-									title="Modifier le titre de cet exercice"></i>
-								</a>
+									</div>
+									<div class="col-lg-2">
+										<div class="dropdown">
+											<button style="height: 30px;"
+												id="edit-icon-exo-<?php echo $exos->getId(); ?>"
+												data-modif-exo-id="<?php echo $exos->getId(); ?>"
+												class="settings-icon hidden-base hidden btn btn-default dropdown-toggle glyphicon glyphicon-cog"
+												type="button" id="dropdownMenu1" data-toggle="dropdown">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu" role="menu" aria-labelledby="options">
+												<li role="presentation"><a class="add-exercice"
+													data-toggle="modal" data-target="#modalAddFichier"
+													data-id-exo="<?php echo $exos->getId(); ?>"> <i
+														style="font-size: 15px;" class="glyphicon glyphicon-plus-sign"
+														title="Ajouter un exercice à ce thème""></i> Ajouter un
+														fichier
+												</a></li>
+												<li role="presentation"><a class="edit-exo"
+													data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
+														style="font-size: 15px;" class="glyphicon glyphicon-pencil"
+														title="Modifier le titre de ce thème"></i> Modifier le titre de l'exercice
+												</a></li>
+												<li role="presentation"><a class="delete-exo"
+													data-toggle="modal" data-target="#modalDeleteExo"
+													data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
+														style="font-size: 15px;" class="glyphicon glyphicon-trash"
+														title="Supprimer ce thème"></i> Supprimer l'exercice
+												</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
 							</div>
 
 							<div id="bloc-<?php echo $exos->getId(); ?>" class="collapse">
@@ -196,13 +227,35 @@ foreach ( $listeThemes as $theme ) {
 	</div>
 </div>
 
+<!--  Modales exercices -->
+<div class="modal fade" id="modalDeleteExo" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Supprimer l'exercice</h4>
+			</div>
+			<div class="modal-body">Voulez-vous vraimez supprimer cet exercice ?</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+				<button type="button" class="delete-exo-confirm btn btn-primary"
+					data-dismiss="modal">Supprimer</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--  Modales thème -->
 <div class="modal fade" id="modalDeleteTheme" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					<span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span>
 				</button>
 				<h4 class="modal-title" id="myModalLabel">Supprimer</h4>
 			</div>
@@ -222,7 +275,7 @@ foreach ( $listeThemes as $theme ) {
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					<span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span>
 				</button>
 				<h4 class="modal-title">Ajouter un exercice</h4>
 			</div>
@@ -260,14 +313,18 @@ foreach ( $listeThemes as $theme ) {
 		</div>
 	</div>
 </div>
+<?php
+}
+?>
 
+<!--  Modales cours -->
 <div class="modal fade" id="modalAddTheme" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					<span aria-hidden="true">&times;</span><span class="sr-only">Fermrt</span>
 				</button>
 				<h4 class="modal-title">Ajouter un thème</h4>
 			</div>
@@ -281,8 +338,9 @@ foreach ( $listeThemes as $theme ) {
 								<div class="form-group">
 									<label for="titre_exo">Titre du thème</label> <input
 										type="text" name="titre_theme" id="titre_theme" size="26" value=""
-										title="Taper un titre de thème" class="form-control"> <input
-										type="hidden" name="id_cours" id="id_cours" />
+										title="Taper un titre de thème" class="form-control"> 
+										<input
+										type="hidden" name="id-cours" id="id-cours" />
 								</div>
 							</div>
 							<div class="col-sm-1"></div>
@@ -300,6 +358,27 @@ foreach ( $listeThemes as $theme ) {
 		</div>
 	</div>
 </div>
-<?php
-}
-?>
+
+<div class="modal fade" id="modalDeleteCours" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Supprimer</h4>
+			</div>
+			<form action="../controleur/delete.php" method="GET">
+				<div class="modal-body">Voulez-vous vraimez supprimer ce cours ?</div>
+				<input type="hidden" name="cours-delete" id="cours-delete"/>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+					<input type="submit" class="btn btn-primary"
+						title="Supprimer le cours"
+						value="Supprimer" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
