@@ -10,17 +10,17 @@
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="options">
-				<li role="presentation"><a data-id-cours="<?php echo $cours->getId(); ?>" class="add-theme" data-toggle="modal"
+				<li role="presentation"><a data-id-cours="<?php echo $cours->getId(); ?>" class="pointer add-theme" data-toggle="modal"
 					data-target="#modalAddTheme"> <i style="font-size: 15px;"
 						class="glyphicon glyphicon-plus-sign"
 						title="Ajouter un thème à ce cours"></i> Ajouter un thème
 				</a></li>
-				<li role="presentation"><a class="edit-cours"
+				<li role="presentation"><a class=" pointeredit-cours"
 					data-id-cours="<?php echo $cours->getId(); ?>"> <i
 						style="font-size: 15px;" class="glyphicon glyphicon-pencil"
 						title="Modifier le titre de ce cours"></i> Modifier le titre du cours
 				</a></li>
-				<li role="presentation"><a class="delete-cours" data-toggle="modal"
+				<li role="presentation"><a class="pointer delete-cours" data-toggle="modal"
 					data-target="#modalDeleteCours"
 					data-id-cours="<?php echo $cours->getId(); ?>"> <i
 						style="font-size: 15px;" class="glyphicon glyphicon-trash"
@@ -37,11 +37,11 @@
 			value="<?php echo $cours->getLibelle(); ?>"
 			data-cours-id="<?php echo $cours->getId(); ?>" />
 		<p class="center-text button-group base-hidden">
-			<a id="valid-cours" class="hidden base-hidden valid-cours"
+			<a id="pointer valid-cours" class="hidden base-hidden valid-cours"
 				data-cours-id="<?php echo $cours->getId(); ?>"> <br />
 			<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
 				title="Valider"></i>
-			</a> <a id="abort-cours" class="hidden base-hidden abort-cours"> <i
+			</a> <a pointer id="abort-cours" class="hidden base-hidden abort-cours"> <i
 				style="font-size: 50px;" class="glyphicon glyphicon-remove-circle"
 				title="Annuler"></i>
 			</a>
@@ -71,19 +71,19 @@ foreach ( $listeThemes as $theme ) {
 							value="<?php echo $theme->getTitre(); ?>"
 							data-input-theme-id="<?php echo $theme->getId(); ?>" />
 						<p class="center-text">
-							<a id="edit-valid-theme-<?php echo $theme->getId(); ?>"
+							<a id="pointer edit-valid-theme-<?php echo $theme->getId(); ?>"
 								class="hidden base-hidden validate-icon-theme"
 								data-modif-theme-id="<?php echo $theme->getId(); ?>"> <br />
 							<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
 								title="Valider"></i>
 							</a> <a id="edit-abort-theme-<?php echo $theme->getId(); ?>"
-								class="hidden base-hidden abort-icon-theme"> <i
+								class="pointer hidden base-hidden abort-icon-theme"> <i
 								style="font-size: 50px;"
 								class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
 							</a>
 						</p>
 
-						<a class="base titre"
+						<a class="pointer base titre"
 							id="titre-theme-<?php echo $theme->getId(); ?>"
 							data-modif-theme-id="<?php echo $theme->getId(); ?>"
 							data-toggle="collapse"
@@ -101,19 +101,19 @@ foreach ( $listeThemes as $theme ) {
 								<span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="options">
-								<li role="presentation"><a class="add-exercice"
+								<li role="presentation"><a class="pointer add-exercice"
 									data-toggle="modal" data-target="#modalAddExercice"
 									data-id-theme="<?php echo $theme->getId(); ?>"> <i
 										style="font-size: 15px;" class="glyphicon glyphicon-plus-sign"
 										title="Ajouter un exercice à ce thème""></i> Ajouter un
 										exercice
 								</a></li>
-								<li role="presentation"><a class="edit-theme"
+								<li role="presentation"><a class="pointer edit-theme"
 									data-modif-theme-id="<?php echo $theme->getId(); ?>"> <i
 										style="font-size: 15px;" class="glyphicon glyphicon-pencil"
 										title="Modifier le titre de ce thème"></i> Modifier le titre
 								</a></li>
-								<li role="presentation"><a class="delete-theme"
+								<li role="presentation"><a class="pointer delete-theme"
 									data-toggle="modal" data-target="#modalDeleteTheme"
 									data-modif-theme-id="<?php echo $theme->getId(); ?>"> <i
 										style="font-size: 15px;" class="glyphicon glyphicon-trash"
@@ -144,19 +144,19 @@ foreach ( $listeThemes as $theme ) {
 											value="<?php echo $exos->getTitre(); ?>"
 											data-input-exo-id="<?php echo $exos->getId(); ?>" />
 										<p class="center-text">
-											<a id="edit-valid-exo-<?php echo $exos->getId(); ?>"
+											<a id="pointer edit-valid-exo-<?php echo $exos->getId(); ?>"
 												class="hidden base-hidden validate-icon-exo"
 												data-modif-exo-id="<?php echo $exos->getId(); ?>"> <br />
 											<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
 												title="Valider"></i>
 											</a> <a id="edit-abort-exo-<?php echo $exos->getId(); ?>"
-												class="hidden base-hidden abort-icon-exo"> <i
+												class="pointer hidden base-hidden abort-icon-exo"> <i
 												style="font-size: 50px;"
 												class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
 											</a>
 										</p>
 				
-										<a class="base titre"
+										<a class="pointer base titre"
 											id="titre-exo-<?php echo $exos->getId(); ?>"
 											data-modif-exo-id="<?php echo $exos->getId(); ?>"
 											data-toggle="collapse"
@@ -174,19 +174,19 @@ foreach ( $listeThemes as $theme ) {
 												<span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu" role="menu" aria-labelledby="options">
-												<li role="presentation"><a class="add-fichier-exo"
+												<li role="presentation"><a class="pointer add-fichier-exo"
 													data-toggle="modal" data-target="#modalAddFichier"
 													data-id-exo="<?php echo $exos->getId(); ?>"> <i
 														style="font-size: 15px;" class="glyphicon glyphicon-plus-sign"
 														title="Ajouter un exercice à ce thème""></i> Ajouter un
 														fichier
 												</a></li>
-												<li role="presentation"><a class="edit-exo"
+												<li role="presentation"><a class="pointer edit-exo"
 													data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
 														style="font-size: 15px;" class="glyphicon glyphicon-pencil"
 														title="Modifier le titre de ce thème"></i> Modifier le titre de l'exercice
 												</a></li>
-												<li role="presentation"><a class="delete-exo"
+												<li role="presentation"><a class="pointer delete-exo"
 													data-toggle="modal" data-target="#modalDeleteExo"
 													data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
 														style="font-size: 15px;" class="glyphicon glyphicon-trash"
@@ -213,13 +213,13 @@ foreach ( $listeThemes as $theme ) {
 														value="<?php echo $exos->getTitre(); ?>"
 														data-input-exo-id="<?php echo $exos->getId(); ?>" />
 													<p class="center-text">
-														<a id="edit-valid-exo-<?php echo $exos->getId(); ?>"
+														<a id="pointer edit-valid-exo-<?php echo $exos->getId(); ?>"
 															class="hidden base-hidden validate-icon-exo"
 															data-modif-exo-id="<?php echo $exos->getId(); ?>"> <br />
 														<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
 															title="Valider"></i>
 														</a> <a id="edit-abort-exo-<?php echo $exos->getId(); ?>"
-															class="hidden base-hidden abort-icon-exo"> <i
+															class="pointer hidden base-hidden abort-icon-exo"> <i
 															style="font-size: 50px;"
 															class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
 														</a>
@@ -238,12 +238,12 @@ foreach ( $listeThemes as $theme ) {
 															<span class="caret"></span>
 														</button>
 														<ul class="dropdown-menu" role="menu" aria-labelledby="options">
-															<li role="presentation"><a class="edit-exo"
+															<li role="presentation"><a class="pointer edit-exo"
 																data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
 																	style="font-size: 15px;" class="glyphicon glyphicon-pencil"
 																	title="Modifier le titre de ce thème"></i> Modifier le fichier
 															</a></li>
-															<li role="presentation"><a class="delete-exo"
+															<li role="presentation"><a class="pointer delete-exo"
 																data-toggle="modal" data-target="#modalDeleteExo"
 																data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
 																	style="font-size: 15px;" class="glyphicon glyphicon-trash"

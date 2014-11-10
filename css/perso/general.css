@@ -1,5 +1,9 @@
 @import url("../fonts/font.css");
 
+.pointer{
+	cursor: pointer;
+}
+
 .blur {
     -webkit-filter: blur(2px) grayscale(10%);
 }
