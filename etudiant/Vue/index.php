@@ -34,15 +34,15 @@
     <body>
     	<div id="wrap">
             <!-- Header -->
-            <nav class="navbar navbar-default" role="navigation" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleur($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
+            <nav class="navbar navbar-default" role="navigation" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
 			  <div class="container-fluid">
 			    <div class="navbar-header">
 			      <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a>
 			    </div>
 			      <ul class="nav navbar-nav navbar-right">
-			        <li><a role="button" href="index.php?section=reception_messagerie"><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a></li>
+			        <li><a role="button" href="index.php?section=reception_messagerie" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a></li>
 			        <li class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?> <span class="caret"></span></a>
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>><i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?> <span class="caret"></span></a>
 			          <ul class="dropdown-menu" role="menu">
 			            <li><a href="index.php?section=compte">Mon compte</a></li>
 			            <li class="divider"></li>
@@ -151,7 +151,7 @@
                             foreach ($listeCours as $cours) 
                             {
                             ?>
-                        	<a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" class="list-group-item" title="<?php echo $cours->getCours()->getLibelle();?>" <?php if(isset($_SESSION['cours']) && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo 'style="color: white; font-weight: bold; background-color: '.$daoInscription->getCouleur($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
+                        	<a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" class="list-group-item" title="<?php echo $cours->getCours()->getLibelle();?>" <?php if(isset($_SESSION['cours']) && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo 'style="font-weight: bold; background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
 							   <?php echo $cours->getCours()->getLibelle();?>
 							</a>
 							<?php
@@ -205,7 +205,7 @@
             <!--/container-->
 		</div>
         <!-- footer -->
-        <div id="footer" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleur($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
+        <div id="footer" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
 	    	<div class="row">
 				<div class="col-sm-2 col-sm-offset-4">
 				  	<h4>A Propos</h4>

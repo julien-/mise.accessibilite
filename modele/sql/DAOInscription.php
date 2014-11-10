@@ -298,24 +298,38 @@ class DAOInscription extends DAOStandard
 	  		return false;
 	  }
 	  
-	  public function getCouleur($idCours, $idEtu)
+	  public function getCouleurFond($idCours, $idEtu)
 	  {
-	  	$sql = 'SELECT couleur_cours
+	  	$sql = 'SELECT couleur_fond
 	  			FROM inscription
 	  			WHERE id_cours = ' . $idCours .'
 	  			AND id_etu = ' . $idEtu;
 	  	$result = $this->executeQuery($sql);
 	  	$couleur = $this->fetchArray($result);
-	  	if($couleur['couleur_cours'] == NULL)
+	  	if($couleur['couleur_fond'] == NULL)
 	  		return "#f54f4f";
 	  	else
-	  		return $couleur['couleur_cours'];
+	  		return $couleur['couleur_fond'];
 	  }
 	  
-	  public function modifierCouleur($idCours, $idEtu, $couleur)
+	  public function getCouleurTexte($idCours, $idEtu)
+	  {
+	  	$sql = 'SELECT couleur_texte
+	  			FROM inscription
+	  			WHERE id_cours = ' . $idCours .'
+	  			AND id_etu = ' . $idEtu;
+	  	$result = $this->executeQuery($sql);
+	  	$couleur = $this->fetchArray($result);
+	  	if($couleur['couleur_texte'] == NULL)
+	  		return "white";
+	  	else
+	  		return $couleur['couleur_texte'];
+	  }
+	  
+	  public function modifierCouleur($idCours, $idEtu, $couleur_fond, $couleur_texte)
 	  {
 	  	$this->executeQuery ( 'UPDATE inscription
-								SET couleur_cours = "' . $couleur . '"
+								SET couleur_fond = "' . $couleur_fond . '", couleur_texte = "' . $couleur_texte . '"
 								WHERE id_etu = ' . $idEtu . '
 								AND id_cours = ' . $idCours );
 	  }

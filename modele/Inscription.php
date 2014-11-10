@@ -5,7 +5,8 @@ class Inscription {
 	$cours,
 	$etudiant,
 	$date,
-	$couleur_cours;
+	$couleur_fond,
+	$couleur_texte;
 	
 	public function __construct($valeurs = array()) {
 		if (! empty ( $valeurs )) // Si on a sp�cifi� des valeurs, alors on hydrate l'objet.
@@ -53,12 +54,21 @@ class Inscription {
 		return $this->date;
 	}
 	
-	public function setCouleur($couleur_cours) {
-		$this->couleur_cours = $couleur_cours;
+	public function setCouleurFond($couleur_fond) {
+		$this->couleur_fond = $couleur_fond;
 		return $this;
 	}
 	
-	public function getCouleur() {
-		return $this->couleur_cours;
+	public function getCouleurFond() {
+		return $this->couleur_fond;
+	}
+	
+	public function setCouleurTexte($couleur_texte) {
+		$this->couleur_texte = $couleur_texte;
+		return $this;
+	}
+	
+	public function getCouleurTexte() {
+		return $this->couleur_texte;
 	}
 }
