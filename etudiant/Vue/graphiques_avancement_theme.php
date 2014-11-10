@@ -23,7 +23,7 @@ foreach($listeTheme as $theme) // pour chaque th�me on va chercher les exos
                 setPieChartOptions('<?php echo $urlJSON ?>', optionsPieChart, <?php echo $theme->getId() ?>);
         </script>
         <div id="<?php echo $theme->getId(); ?>"></div>
-	    <a href="index.php?section=details_theme_etudiant&theme=<?php echo $theme->getId();?>">Details</a>
+	    <a href="index.php?section=details_theme_etudiant&id_theme=<?php echo $theme->getId();?>">Details</a>
     </div>
 <?php
 }

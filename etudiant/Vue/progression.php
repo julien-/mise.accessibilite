@@ -10,18 +10,17 @@
 	<div class="panel-body">
 		<div id="morris-area-chart">
 			<script type="text/javascript">
-            var optionsBarChart =   {
-                                title:"",
-                                enableInteractivity: false,
-                                height:100, axisTitlesPosition: 'none',
-                                legend: {position: 'none'},
-                                chartArea: {top:0,height:"75%"},
-                                vAxis: {title: "Exercices"},
-                                backgroundColor: { fill:'transparent' },
-                                hAxis: {title: "Avancement en %" , maxValue: 100,  minValue: 0}
-                            };
-            setBarChartOptions('../../chart/get_json_barchart_etudiant.php', optionsBarChart, 'barChart');
-        	</script>
+			var optionsBarChart =   {
+				enableInteractivity: true,
+				height:100, axisTitlesPosition: 'none',
+				chartArea: {top:0,height:"75%"},
+				backgroundColor: { fill:'transparent' },
+				vAxis: {title: "Exercices"},
+				legend: {position: 'none'},
+				hAxis: {maxValue: 100,  minValue: 0}
+			};
+			setBarChartOptions('../../chart/get_json_barchart_etudiant.php?', optionsBarChart, 'barChart');
+			</script>
         	<div id="barChart"></div>
 		</div>
 	</div>

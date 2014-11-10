@@ -4,7 +4,6 @@
 <script type="text/javascript" src="../../js/googleChartToolsBarChart.js"></script>
 <script type="text/javascript" src="../../js/googleChartToolsColumnChart.js"></script>
 
-
 <script type="text/javascript">
 var optionsBarChart =   {
 	enableInteractivity: true,
@@ -86,7 +85,7 @@ foreach($listeThemes as $theme)
 			?>
 				
 					<div class="col-xs-4 col-sm-2 text-center">
-						<img src="<?php echo '../../images/Badges/' . $objectif . '.png'; ?>" alt="<?php echo $assignation->getObjectif()->getObjectif(); ?>" />
+						<img src="<?php echo '../../images/Badges/' . $objectif . '.png'; ?>" alt="<?php echo $assignation->getObjectif()->getObjectif(); ?>" title="<?php echo $assignation->getObjectif()->getDescription(); ?>" />
 						<br>
 						<span class="bold"><?php echo $assignation->getObjectif()->getObjectif(); ?></span>
 					</div>

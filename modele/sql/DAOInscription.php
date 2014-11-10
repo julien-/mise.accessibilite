@@ -3,7 +3,7 @@ class DAOInscription extends DAOStandard
 {	
 	public function add(Inscription $inscription)
 	{
-		$this->executeQuery('INSERT INTO inscription SET date_inscription = "' . $inscription->getDate() . '" id_cours = "' . $inscription->getCours()->getId() . '", id_etu = ' . $inscription->getEtudiant()->getId());
+		$this->executeQuery('INSERT INTO inscription SET date_inscription = "' . $inscription->getDate() . '" id_cours = "' . $inscription->getCours()->getId() . '", id_etu = ' . $inscription->getEtudiant()->getId().', couleur_cours = '. $inscription->getCouleur());
 	}
 	
 	public function insertByDateAndEtuAndCours($date, $idEtu, $idCours)
@@ -298,5 +298,25 @@ class DAOInscription extends DAOStandard
 	  		return false;
 	  }
 	  
+	  public function getCouleur($idCours, $idEtu)
+	  {
+	  	$sql = 'SELECT couleur_cours
+	  			FROM inscription
+	  			WHERE id_cours = ' . $idCours .'
+	  			AND id_etu = ' . $idEtu;
+	  	$result = $this->executeQuery($sql);
+	  	$couleur = $this->fetchArray($result);
+	  	if($couleur['couleur_cours'] == NULL)
+	  		return "#f54f4f";
+	  	else
+	  		return $couleur['couleur_cours'];
+	  }
 	  
+	  public function modifierCouleur($idCours, $idEtu, $couleur)
+	  {
+	  	$this->executeQuery ( 'UPDATE inscription
+								SET couleur_cours = "' . $couleur . '"
+								WHERE id_etu = ' . $idEtu . '
+								AND id_cours = ' . $idCours );
+	  }
 }

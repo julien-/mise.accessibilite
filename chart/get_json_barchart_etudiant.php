@@ -61,12 +61,11 @@
 			'c' => $temp 
 	);
 	/* Fin de la barre concernant l'étudiant */
-	/* Ajout des deux barres dans le graphique */
-	$table ['rows'] = $rows;
-	$temp = array (
-			'p' => null 
-	);
-	$table ['p'] = $temp ['p'];
+	/* Ajout de la barre dans le graphique */
+	$table['rows'] = $rows;
+	$temp = array('p' => null);
+	$table['p']= $temp['p'];
+	
 	
 	$jsonTable = json_encode ( $table );
 	

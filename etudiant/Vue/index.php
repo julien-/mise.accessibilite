@@ -34,7 +34,7 @@
     <body>
     	<div id="wrap">
             <!-- Header -->
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-default" role="navigation" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleur($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
 			  <div class="container-fluid">
 			    <div class="navbar-header">
 			      <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a>
@@ -69,6 +69,7 @@
                         		if(isset($_SESSION['cours']))
                         		{
                         	?>
+                        			<li><a href="index.php?section=test">test</a></li>
                         			<li><a href="index.php?section=objectif">Mes Badges</a></li>
   									<li><a href="index.php?section=evolution">Mon Evolution</a></li>
   									<li class="dropdown">
@@ -150,7 +151,7 @@
                             foreach ($listeCours as $cours) 
                             {
                             ?>
-                        	<a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" class="<?php if(isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo "list-group-item active"; else echo "list-group-item";?>" title="<?php echo $cours->getCours()->getLibelle();?>">
+                        	<a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" class="list-group-item" title="<?php echo $cours->getCours()->getLibelle();?>" <?php if(isset($_SESSION['cours']) && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo 'style="color: white; font-weight: bold; background-color: '.$daoInscription->getCouleur($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
 							   <?php echo $cours->getCours()->getLibelle();?>
 							</a>
 							<?php
@@ -204,7 +205,7 @@
             <!--/container-->
 		</div>
         <!-- footer -->
-        <div id="footer">
+        <div id="footer" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleur($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
 	    	<div class="row">
 				<div class="col-sm-2 col-sm-offset-4">
 				  	<h4>A Propos</h4>
