@@ -133,10 +133,10 @@ foreach ( $listeThemes as $theme ) {
 		$listeFichiers = $daoFichiers->getAllByExercice ( $exos->getId () );
 		?>
 						
-					<tr>
-						<td>
-							<div class="header-exo" id="E<?php echo $exos->getId();?>"
+					<tr class="header-exo" id="E<?php echo $exos->getId();?>"
 								data-modif-exo-id="<?php echo $exos->getId(); ?>">
+						<td>
+							<div>
 								<div class="row">
 									<div class="col-lg-10">
 										<input type="text" id="exo-<?php echo $exos->getId(); ?>"
@@ -174,7 +174,7 @@ foreach ( $listeThemes as $theme ) {
 												<span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu" role="menu" aria-labelledby="options">
-												<li role="presentation"><a class="add-exercice"
+												<li role="presentation"><a class="add-fichier-exo"
 													data-toggle="modal" data-target="#modalAddFichier"
 													data-id-exo="<?php echo $exos->getId(); ?>"> <i
 														style="font-size: 15px;" class="glyphicon glyphicon-plus-sign"
@@ -205,8 +205,54 @@ foreach ( $listeThemes as $theme ) {
 		foreach ( $listeFichiers as $fichier ) {
 			?>
 										<ul>
-										<li><a
-											href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a>
+											<li>
+											<div class="row">
+												<div class="col-lg-10">
+													<input type="text" id="exo-<?php echo $exos->getId(); ?>"
+														class="base-hidden form-control hidden input-exo"
+														value="<?php echo $exos->getTitre(); ?>"
+														data-input-exo-id="<?php echo $exos->getId(); ?>" />
+													<p class="center-text">
+														<a id="edit-valid-exo-<?php echo $exos->getId(); ?>"
+															class="hidden base-hidden validate-icon-exo"
+															data-modif-exo-id="<?php echo $exos->getId(); ?>"> <br />
+														<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
+															title="Valider"></i>
+														</a> <a id="edit-abort-exo-<?php echo $exos->getId(); ?>"
+															class="hidden base-hidden abort-icon-exo"> <i
+															style="font-size: 50px;"
+															class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
+														</a>
+													</p>
+							
+												<a href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a>
+													
+												</div>
+												<div class="col-lg-2">
+													<div class="dropdown">
+														<button style="height: 30px;"
+															id="edit-icon-exo-<?php echo $exos->getId(); ?>"
+															data-modif-exo-id="<?php echo $exos->getId(); ?>"
+															class="settings-icon hidden-base hidden btn btn-default dropdown-toggle glyphicon glyphicon-cog"
+															type="button" id="dropdownMenu1" data-toggle="dropdown">
+															<span class="caret"></span>
+														</button>
+														<ul class="dropdown-menu" role="menu" aria-labelledby="options">
+															<li role="presentation"><a class="edit-exo"
+																data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
+																	style="font-size: 15px;" class="glyphicon glyphicon-pencil"
+																	title="Modifier le titre de ce thème"></i> Modifier le fichier
+															</a></li>
+															<li role="presentation"><a class="delete-exo"
+																data-toggle="modal" data-target="#modalDeleteExo"
+																data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
+																	style="font-size: 15px;" class="glyphicon glyphicon-trash"
+																	title="Supprimer ce thème"></i> Supprimer le fichier
+															</a></li>
+														</ul>
+													</div>
+												</div>
+											</div>
 										</li>
 										<?php echo $fichier->getCommentaire();?>
 										</ul>
@@ -279,9 +325,9 @@ foreach ( $listeThemes as $theme ) {
 				</button>
 				<h4 class="modal-title">Ajouter un exercice</h4>
 			</div>
-			<div class="modal-body">
-				<form method="post" name="form_add_exo"
+			<form method="post" name="form_add_exo"
 					action="../controleur/rq_add_cours.php">
+			<div class="modal-body">
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-sm-1"></div>
@@ -292,24 +338,19 @@ foreach ( $listeThemes as $theme ) {
 										title="Taper un titre d'exercice" class="form-control"> <input
 										type="hidden" name="id_theme" id="id_theme" />
 								</div>
-								<!--submit-->
-								<div class="form-group center-content">
-									<input type="submit" class="btn btn-primary"
-										name="soumisajouexo" id="soumisajouexo"
-										alt='Ajouter un exercice' title='Ajouter un exercice'
-										value="Ajouter" />
-								</div>
 							</div>
 							<div class="col-sm-1"></div>
 						</div>
 					</div>
-				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-				<button type="button" class="delete-theme-confirm btn btn-primary"
-					data-dismiss="modal">Supprimer</button>
+				<input type="submit" class="btn btn-primary"
+					name="soumisajouexo" id="soumisajouexo"
+					alt='Ajouter un exercice' title='Ajouter un exercice'
+					value="Ajouter" />
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -377,6 +418,55 @@ foreach ( $listeThemes as $theme ) {
 					<input type="submit" class="btn btn-primary"
 						title="Supprimer le cours"
 						value="Supprimer" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalAddFichier" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Supprimer</h4>
+			</div>
+			<form class="form-horizontal" action="../controleur/ajouter_fichier.php" method="POST" enctype="multipart/form-data">
+				<div class="modal-body">
+					<fieldset>
+						<!-- File Button --> 
+						<div class="form-group">
+						  <label class="col-md-4 control-label" for="fichier">Fichier</label>
+						  <div class="col-md-4">
+						    <input id="fichier" name="fichier" class="input-file" type="file">
+						    <input id="exercice-fichier" name="exercice-fichier" type="hidden">
+						  </div>
+						</div>
+						<!-- Textarea -->
+						<div class="form-group">
+						  <label class="col-md-4 control-label" for="desc-fichier">Description</label>
+						  <div class="col-md-4">                     
+						    <textarea class="form-control" id="desc-fichier" name="desc-fichier" cols="50"></textarea>
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label class="col-md-4 control-label" for="online">En ligne</label>
+						  <div class="col-md-4">
+						  	<div class="radio">
+						      <input type="checkbox" name="online" id="online" value="" checked="checked">
+							</div>
+						  </div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+						<input type="submit" class="btn btn-primary" name="submit"
+							title="Supprimer le cours"
+							value="Ajouter" />
 				</div>
 			</form>
 		</div>

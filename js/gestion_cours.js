@@ -157,6 +157,9 @@ $(".edit-exo").click(function() {
 	editMode = true;
 });
 
+$(".add-fichier-exo").click(function() {
+	$("#exercice-fichier").val($(this).data('id-exo'));	
+});
 
 $(".delete-exo-confirm").click(function() {
 	deleteExercise();	
