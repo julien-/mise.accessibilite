@@ -206,55 +206,13 @@ foreach ( $listeThemes as $theme ) {
 			?>
 										<ul>
 											<li class="header-fichier" data-fichier-id="<?php echo $fichier->getId(); ?>">
-											<div class="row">
-												<div class="col-lg-10">
-													<input type="text" id="exo-<?php echo $exos->getId(); ?>"
-														class="base-hidden form-control hidden input-exo"
-														value="<?php echo $exos->getTitre(); ?>"
-														data-input-exo-id="<?php echo $exos->getId(); ?>" />
-													<p class="center-text">
-														<a id="edit-valid-exo-<?php echo $exos->getId(); ?>"
-															class="pointer hidden base-hidden validate-icon-exo"
-															data-modif-exo-id="<?php echo $exos->getId(); ?>"> <br />
-														<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
-															title="Valider"></i>
-														</a> <a id="edit-abort-exo-<?php echo $exos->getId(); ?>"
-															class="pointer hidden base-hidden abort-icon-exo"> <i
-															style="font-size: 50px;"
-															class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
-														</a>
-													</p>
-							
-												<a href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a>
-													
-												</div>
-												<div class="col-lg-2">
-													<div class="dropdown">
-														<button style="height: 30px;"
-															id="icon-fichier-<?php echo $fichier->getId(); ?>"
-															data-modif-exo-id="<?php echo $fichier->getId(); ?>"
-															class="settings-icon hidden-base hidden btn btn-default dropdown-toggle glyphicon glyphicon-cog"
-															type="button" id="dropdownMenu1" data-toggle="dropdown">
-															<span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu" role="menu" aria-labelledby="options">
-															<li role="presentation"><a class="pointer edit-exo"
-																data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
-																	style="font-size: 15px;" class="glyphicon glyphicon-pencil"
-																	title="Modifier le titre de ce thème"></i> Modifier le fichier
-															</a></li>
-															<li role="presentation"><a class="pointer delete-exo"
-																data-toggle="modal" data-target="#modalDeleteExo"
-																data-modif-exo-id="<?php echo $exos->getId(); ?>"> <i
-																	style="font-size: 15px;" class="glyphicon glyphicon-trash"
-																	title="Supprimer ce thème"></i> Supprimer le fichier
-															</a></li>
-														</ul>
-													</div>
-												</div>
-											</div>
+													<a href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a>
+													<br/>
+													<label class="control-label" for="online-fichier-<?php echo $fichier->getId(); ?>">Visible en ligne    </label>
+											      	<input name="online-fichier-<?php echo $fichier->getId(); ?>" id="online-fichier-<?php echo $fichier->getId(); ?>" class="online-fichier" type="checkbox" data-id-fichier="<?php echo $fichier->getId(); ?>" name="online" value="" <?php if ($fichier->getEnLigne()) echo 'checked="checked"';?>>
+													<hr>	
+													<span class="desc-fichier-texte" id="desc-fichier-<?php echo $fichier->getId(); ?>" data-id-fichier=""<?php echo $exos->getId(); ?>""><?php echo $fichier->getCommentaire();?></span>
 										</li>
-										<?php echo $fichier->getCommentaire();?>
 										</ul>
 									<?php
 		}
