@@ -15,7 +15,7 @@
 						class="glyphicon glyphicon-plus-sign"
 						title="Ajouter un thème à ce cours"></i> Ajouter un thème
 				</a></li>
-				<li role="presentation"><a class=" pointeredit-cours"
+				<li role="presentation"><a class="pointer edit-cours"
 					data-id-cours="<?php echo $cours->getId(); ?>"> <i
 						style="font-size: 15px;" class="glyphicon glyphicon-pencil"
 						title="Modifier le titre de ce cours"></i> Modifier le titre du cours
@@ -37,11 +37,11 @@
 			value="<?php echo $cours->getLibelle(); ?>"
 			data-cours-id="<?php echo $cours->getId(); ?>" />
 		<p class="center-text button-group base-hidden">
-			<a id="pointer valid-cours" class="hidden base-hidden valid-cours"
+			<a id="valid-cours" class="pointer hidden base-hidden valid-cours"
 				data-cours-id="<?php echo $cours->getId(); ?>"> <br />
 			<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
 				title="Valider"></i>
-			</a> <a pointer id="abort-cours" class="hidden base-hidden abort-cours"> <i
+			</a> <a id="abort-cours" class="pointer hidden base-hidden abort-cours"> <i
 				style="font-size: 50px;" class="glyphicon glyphicon-remove-circle"
 				title="Annuler"></i>
 			</a>
@@ -71,8 +71,8 @@ foreach ( $listeThemes as $theme ) {
 							value="<?php echo $theme->getTitre(); ?>"
 							data-input-theme-id="<?php echo $theme->getId(); ?>" />
 						<p class="center-text">
-							<a id="pointer edit-valid-theme-<?php echo $theme->getId(); ?>"
-								class="hidden base-hidden validate-icon-theme"
+							<a id="edit-valid-theme-<?php echo $theme->getId(); ?>"
+								class="pointer hidden base-hidden validate-icon-theme"
 								data-modif-theme-id="<?php echo $theme->getId(); ?>"> <br />
 							<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
 								title="Valider"></i>
@@ -144,8 +144,8 @@ foreach ( $listeThemes as $theme ) {
 											value="<?php echo $exos->getTitre(); ?>"
 											data-input-exo-id="<?php echo $exos->getId(); ?>" />
 										<p class="center-text">
-											<a id="pointer edit-valid-exo-<?php echo $exos->getId(); ?>"
-												class="hidden base-hidden validate-icon-exo"
+											<a id="edit-valid-exo-<?php echo $exos->getId(); ?>"
+												class="pointer hidden base-hidden validate-icon-exo"
 												data-modif-exo-id="<?php echo $exos->getId(); ?>"> <br />
 											<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
 												title="Valider"></i>
@@ -205,7 +205,7 @@ foreach ( $listeThemes as $theme ) {
 		foreach ( $listeFichiers as $fichier ) {
 			?>
 										<ul>
-											<li>
+											<li class="header-fichier" data-fichier-id="<?php echo $fichier->getId(); ?>">
 											<div class="row">
 												<div class="col-lg-10">
 													<input type="text" id="exo-<?php echo $exos->getId(); ?>"
@@ -213,8 +213,8 @@ foreach ( $listeThemes as $theme ) {
 														value="<?php echo $exos->getTitre(); ?>"
 														data-input-exo-id="<?php echo $exos->getId(); ?>" />
 													<p class="center-text">
-														<a id="pointer edit-valid-exo-<?php echo $exos->getId(); ?>"
-															class="hidden base-hidden validate-icon-exo"
+														<a id="edit-valid-exo-<?php echo $exos->getId(); ?>"
+															class="pointer hidden base-hidden validate-icon-exo"
 															data-modif-exo-id="<?php echo $exos->getId(); ?>"> <br />
 														<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
 															title="Valider"></i>
@@ -231,8 +231,8 @@ foreach ( $listeThemes as $theme ) {
 												<div class="col-lg-2">
 													<div class="dropdown">
 														<button style="height: 30px;"
-															id="edit-icon-exo-<?php echo $exos->getId(); ?>"
-															data-modif-exo-id="<?php echo $exos->getId(); ?>"
+															id="icon-fichier-<?php echo $fichier->getId(); ?>"
+															data-modif-exo-id="<?php echo $fichier->getId(); ?>"
 															class="settings-icon hidden-base hidden btn btn-default dropdown-toggle glyphicon glyphicon-cog"
 															type="button" id="dropdownMenu1" data-toggle="dropdown">
 															<span class="caret"></span>
@@ -284,10 +284,10 @@ foreach ( $listeThemes as $theme ) {
 				</button>
 				<h4 class="modal-title" id="myModalLabel">Supprimer l'exercice</h4>
 			</div>
-			<div class="modal-body">Voulez-vous vraimez supprimer cet exercice ?</div>
+			<div class="modal-body">Voulez-vous vraiment supprimer cet exercice ?</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-				<button type="button" class="delete-exo-confirm btn btn-primary"
+				<button type="button" class="delete-exo-confirm btn btn-danger"
 					data-dismiss="modal">Supprimer</button>
 			</div>
 		</div>
@@ -305,10 +305,10 @@ foreach ( $listeThemes as $theme ) {
 				</button>
 				<h4 class="modal-title" id="myModalLabel">Supprimer</h4>
 			</div>
-			<div class="modal-body">Voulez-vous vraimez supprimer ?</div>
+			<div class="modal-body">Voulez-vous vraiment supprimer ?</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-				<button type="button" class="delete-theme-confirm btn btn-primary"
+				<button type="button" class="delete-theme-confirm btn btn-danger"
 					data-dismiss="modal">Supprimer</button>
 			</div>
 		</div>
@@ -326,7 +326,7 @@ foreach ( $listeThemes as $theme ) {
 				<h4 class="modal-title">Ajouter un exercice</h4>
 			</div>
 			<form method="post" name="form_add_exo"
-					action="../controleur/rq_add_cours.php">
+					action="../requetes/rq_add_exercice.php">
 			<div class="modal-body">
 					<div class="container-fluid">
 						<div class="row">
@@ -369,8 +369,8 @@ foreach ( $listeThemes as $theme ) {
 				</button>
 				<h4 class="modal-title">Ajouter un thème</h4>
 			</div>
-							<form method="post" name="form_add_theme"
-					action="../controleur/rq_add_theme.php">
+					<form method="post" name="form_add_theme"
+					action="../requetes/rq_add_theme.php">
 			<div class="modal-body">
 					<div class="container-fluid">
 						<div class="row">
@@ -411,11 +411,11 @@ foreach ( $listeThemes as $theme ) {
 				<h4 class="modal-title" id="myModalLabel">Supprimer</h4>
 			</div>
 			<form action="../controleur/delete.php" method="GET">
-				<div class="modal-body">Voulez-vous vraimez supprimer ce cours ?</div>
+				<div class="modal-body">Voulez-vous vraiment supprimer ce cours ?</div>
 				<input type="hidden" name="cours-delete" id="cours-delete"/>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-					<input type="submit" class="btn btn-primary"
+					<input type="submit" class="btn btn-danger"
 						title="Supprimer le cours"
 						value="Supprimer" />
 				</div>
@@ -434,7 +434,7 @@ foreach ( $listeThemes as $theme ) {
 				</button>
 				<h4 class="modal-title" id="myModalLabel">Supprimer</h4>
 			</div>
-			<form class="form-horizontal" action="../controleur/ajouter_fichier.php" method="POST" enctype="multipart/form-data">
+			<form class="form-horizontal" action="../requetes/rq_add_fichier.php" method="POST" enctype="multipart/form-data">
 				<div class="modal-body">
 					<fieldset>
 						<!-- File Button --> 

@@ -4,7 +4,10 @@ class DAOCours extends DAOStandard
   
 	public function save(Cours $cours)
 	{
-  		return $this->executeQuery('INSERT INTO cours SET libelle_cours = "' . $cours->getLibelle() . '", couleur_calendar = ' . $cours->getCouleurCalendar() . ' , id_prof = ' . $cours->getProf()->getId() . ', id_cle = ' . $cours->getCle()->getId());
+		$daoCle = new DAOCle($db);
+		$idCle = $daoCle->save($cours->getCle());
+		
+  		return $this->executeQuery('INSERT INTO cours SET libelle_cours = "' . $cours->getLibelle() . '", couleur_calendar = ' . $cours->getCouleurCalendar() . ' , id_prof = ' . $cours->getProf() . ', id_cle = ' . $idCle);
 	}
 	
 	public function update(Cours $cours)

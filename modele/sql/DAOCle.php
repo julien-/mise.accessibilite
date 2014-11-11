@@ -5,6 +5,8 @@ class DAOCle extends DAOStandard
 	public function save(Cle $cle)
 	{
 		$this->executeQuery('INSERT INTO cle SET valeur_cle = "' . $cle->getCle() . '"');
+		
+		return $this->lastInsertedID();
 	}
 	
 	public function update(Cle $cle)

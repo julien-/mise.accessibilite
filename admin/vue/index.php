@@ -145,7 +145,7 @@
                             foreach ($listeCours as $cours) 
                             {
                             ?>
-                        	<a href="index.php?section=gestion_cours&c=<?php echo $cours->getId(); ?>" class="<?php if($page != 'cours' && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getId()) echo "list-group-item active"; else echo "list-group-item";?>" title="<?php echo $cours->getLibelle();?>">
+                        	<a id="cours-accordion-<?php echo $cours->getId(); ?>" href="index.php?section=gestion_cours&c=<?php echo $cours->getId(); ?>" class="cut-text <?php if($page != 'cours' && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getId()) echo "list-group-item active"; else echo "list-group-item";?>" title="<?php echo $cours->getLibelle();?>">
 							   <?php echo $cours->getLibelle();?>
 							</a>
 							<?php

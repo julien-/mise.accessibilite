@@ -96,6 +96,11 @@ body .modal-large {
 	color: #67BCDB;
 }
 
+.focus-color-bg
+{
+	background-color: whitesmoke ;
+}
+
 .pokemon-red
 {
     color: #f54f4f;
@@ -109,6 +114,11 @@ body .modal-large {
 .black
 {
     color: #333;
+}
+
+.white-bg
+{
+	background-color: #ffffff;
 }
 
 .carousel-indicators li {

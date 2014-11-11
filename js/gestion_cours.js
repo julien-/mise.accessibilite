@@ -24,9 +24,20 @@ $(".icon").click(function() {
 		$(this).addClass('glyphicon-plus-sign');
 	}
 });
+
+
+
 /**********************************************/
+function resetColors()
+{
+	$('.panel').removeClass('focus-color-bg');
+}
 
-
+$(".accordion-theme").click(function() {
+	resetColors();
+	clickedIndex = $(this).data('id-theme');
+	$('#T' + clickedIndex).addClass('focus-color-bg');
+});
 
 
 function disableEditMode()
@@ -72,6 +83,7 @@ $(".edit-cours").click(function() {
 	
 	$("#input-cours").removeClass('hidden');
 	$("#input-cours").focus();
+	$(".button-group").removeClass('hidden');
 	$("#valid-cours").removeClass('hidden');
 	$("#abort-cours").removeClass('hidden');
 	$("#icon-cours").addClass('hidden');
@@ -119,6 +131,8 @@ function changeCoursTitle()
         data: donnees,
         success: function() {
         	$("#titre-cours").text(donnees["titre-cours"]);
+        	$("#cours-accordion-"+clickedIndex).html(donnees["titre-cours"]);
+        	$("#cours-accordion-"+clickedIndex).attr("title", donnees["titre-cours"]);
         	$("#icon-cours").removeClass('hidden');
         },
         error: function() {
@@ -210,6 +224,8 @@ function changeExerciseTitle()
         data: donnees,
         success: function() {
         	$("#titre-exo-" + clickedIndex).text(donnees["titre-exo"]);
+        	$("#exo-accordion-" + clickedIndex).html(donnees["titre-exo"]);
+        	$("#exo-accordion-"+clickedIndex).attr("title", donnees["titre-exo"]);
         },
         error: function() {
         	alert('erreur');
@@ -310,6 +326,8 @@ function changeThemeTitle()
         data: donnees,
         success: function() {
         	$("#titre-theme-" + clickedIndex).text(donnees["titre-theme"]);
+        	$("#theme-accordion-" + clickedIndex).html(donnees["titre-theme"]);
+        	$("#theme-accordion-"+clickedIndex).attr("title", donnees["titre-theme"]);
         },
         error: function() {
         	alert('erreur');
@@ -331,6 +349,7 @@ function deleteTheme()
         data: donnees,
         success: function() {
         	$("#T" + clickedIndex).addClass("hidden");
+        	$("#panel-theme-accordion-" + clickedIndex).addClass("hidden");
         },
         error: function() {
         	alert('erreur');
@@ -338,6 +357,18 @@ function deleteTheme()
     });
     disableEditMode();
 }
+
+/** Fichiers **/
+
+$(".header-fichier").hover(function() 
+		{
+			if (!editMode)
+				$("#icon-fichier-" + $(this).data('fichier-id')).removeClass('hidden');	
+				  	}, function() 
+				  	{
+				  		$("#icon-fichier-" + $(this).data('fichier-id')).addClass('hidden');
+				 }
+		);
 
 
 /**********************************************/
