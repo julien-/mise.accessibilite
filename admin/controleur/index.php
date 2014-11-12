@@ -24,6 +24,8 @@ $daoMessage = new DAOMessage($db);
 
 if (isset($_SESSION['currentUser']))
 {
+	$nbMessagesNnLu = $daoMessage->countNbNonLu($_SESSION['currentUser']->getId());
+	
 	if (isset($_GET['c']))
 		$_SESSION['cours'] = $daoCours->getByID($_GET['c']);
 	$daoCours = new DAOCours($db);

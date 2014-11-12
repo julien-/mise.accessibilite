@@ -209,33 +209,35 @@
 		</div>
         <!-- footer -->
         <div id="footer" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
-	    	<div class="row">
-				<div class="col-sm-2 col-sm-offset-4">
+        	<div class="container">
+	            <div class="row">
+				  <div class="col-sm-4 col-sm-offset-2">
 				  	<h4>A Propos</h4>
-			  	 </div>
-				 <div class="col-sm-1">
+			  	  </div>
+				  <div class="col-sm-2">
 				  	<h4>Statistiques</h4>
-		  		 </div>
-				 <div class="col-sm-1">
+		  		  </div>
+				  <div class="col-sm-2">
 				  	<h4>Aide</h4>
-				 </div>
-			 </div> 
-			 <div class="row">
-				  <div class="col-sm-2 col-sm-offset-4">
+				  </div>
+				</div> 
+				<div class="row">
+				  <div class="col-sm-4 col-sm-offset-2">
 				  	MyStudyCompanion est un outil de gestion de cours pour les étudiants et les enseignants
 				  </div>
-				  <div class="col-sm-1"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoEtudiant->count();?> Inscripts<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
-			  	  <div class="col-sm-1"><a href ="#">Contact</a><br><a href ="#">FAQ</a></div>
-			 </div>
-			<div class="row" style="margin-top: 10px;">
-			  <div class="col-sm-2 col-sm-offset-4">
-			  	MyStudyCompanion - Tous droits réservés
-			  </div>
-			  <div class="col-sm-2">
-			  	<a href ="#">Conditions générales d'utilisation</a>
-			  </div>
+				  <div class="col-sm-2"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoEtudiant->count();?> Inscripts<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
+				  <div class="col-sm-2"><a href ="#" <?php if(isset($_SESSION['cours'])) echo 'style="font-weight: bold; text-decoration: underline; color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>Contact</a><br><a href ="#"<?php if(isset($_SESSION['cours'])) echo 'style="font-weight: bold; text-decoration: underline; color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>FAQ</a></div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+				  <div class="col-sm-4 col-sm-offset-2">
+				  	MyStudyCompanion - Tous droits réservés
+				  </div>
+				  <div class="col-sm-4">
+				  	<a href ="#" <?php if(isset($_SESSION['cours'])) echo 'style="font-weight: bold; text-decoration: underline; color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>Conditions générales d'utilisation</a>
+				  </div>
+				</div>
 			</div>
-        </div>
+        </div> 
         <!-- /footer -->     
         <script type='text/javascript' src="../../js/jquery-1.11.0.js"></script>
         <script type="text/javascript" src="../../js/bootstrap/bootstrap.min.js"></script>

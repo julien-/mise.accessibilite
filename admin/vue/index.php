@@ -28,81 +28,37 @@
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
         <!-- CSS code from Bootply.com editor -->
-
-        <style type="text/css">
-            .navbar-static-top {
-                margin-bottom:20px;
-            }
-
-            i {
-                font-size:18px;
-            }
-
-            footer {
-                margin-top:20px;
-                padding-top:20px;
-                padding-bottom:20px;
-                background-color:#efefef;
-            }
-
-            .nav>li .count {
-                position: absolute;
-                top: 10%;
-                right: 25%;
-                font-size: 10px;
-                font-weight: normal;
-                background: rgba(41,200,41,0.75);
-                color: rgb(255,255,255);
-                line-height: 1em;
-                padding: 2px 4px;
-                -webkit-border-radius: 10px;
-                -moz-border-radius: 10px;
-                -ms-border-radius: 10px;
-                -o-border-radius: 10px;
-                border-radius: 10px;
-            }
-        </style>
     </head>
 
     <!-- HTML code from Bootply.com editor -->
 
-    <body  >
+    <body>
         <div id="wrap">
-            <!-- Header -->
-            <div id="top-nav" class="navbar navbar-inverse navbar-static-top" style="background-color: #f54f4f; margin-bottom: 0px;">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-toggle"></span>
-                        </button>
-                        <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-							<li>
-                                <a role="button" href="index.php?section=reception_messagerie" style="color: white;"><i class="glyphicon glyphicon-envelope"></i></a>
-                            </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#" style="color: white;">
-                                <?php if (isset($_SESSION['currentUser']))
-                                {?>
-                                    <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?><span class="caret"></span></a>
-                                <?php 
-                                }
-                                ?>
-                                <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                                    <li><a href="index.php?section=compte"> Mon compte</a></li>
-                                    <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i> Se deconnecter</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div><!-- /container -->
+            <!-- Header -->            
+            <nav class="navbar navbar-default" role="navigation">
+			  <div class="container-fluid">
+			    <!--<div class="navbar-header">
+			      <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a> 
+			    </div>-->
+			    <ul class="nav navbar-nav navbar-left">
+			    	<li><a role="button" href="index.php">MY STUDY COMPANION</a></li>
+			    </ul>
+			      <ul class="nav navbar-nav navbar-right">
+			        <li><a role="button" href="index.php?section=reception_messagerie"><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a></li>
+			        <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?> <span class="caret"></span></a>
+			          <ul class="dropdown-menu" role="menu">
+			            <li><a href="index.php?section=compte">Mon compte</a></li>
+			            <li class="divider"></li>
+	                    <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>&nbsp;Se déconnecter</a></li>
+			          </ul>
+			        </li>
+			      </ul>
 
-            </div>
-            <div class="navbar navbar-inverse" role="navigation" style="border-top: 1px solid white;">
-                <div class="container">
-
+			  </div>
+			</nav>           
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
@@ -127,7 +83,7 @@
                     }
                     ?>
                 </div>
-            </div>
+            </nav>
             <!-- /Header -->
 
             
@@ -183,41 +139,38 @@
                 </div><!--/row-->
             </div><!--/container-->
         </div><!-- /wrap -->
-
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
+        <!-- footer -->
         <div id="footer">
-            <div class="row">
-			  <div class="col-sm-2 col-sm-offset-4">
-			  	<h4>A Propos</h4>
-		  	  </div>
-			  <div class="col-sm-1">
-			  	<h4>Statistiques</h4>
-	  		  </div>
-			  <div class="col-sm-1">
-			  	<h4>Aide</h4>
-			  </div>
-			</div> 
-			<div class="row">
-			  <div class="col-sm-2 col-sm-offset-4">
-			  	MyStudyCompanion est un outil de gestion de cours pour les étudiants et les enseignants
-			  </div>
-			  <div class="col-sm-1"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoEtudiant->count();?> Inscripts<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
-			  <div class="col-sm-1"><a href ="#">Contact</a><br><a href ="#">FAQ</a></div>
-			</div>
-			<div class="row" style="margin-top: 10px;">
-			  <div class="col-sm-2 col-sm-offset-4">
-			  	MyStudyCompanion - Tous droits réservés
-			  </div>
-			  <div class="col-sm-2">
-			  	<a href ="#">Conditions générales d'utilisation</a>
-			  </div>
+        	<div class="container">
+	            <div class="row">
+				  <div class="col-sm-4 col-sm-offset-2">
+				  	<h4>A Propos</h4>
+			  	  </div>
+				  <div class="col-sm-2">
+				  	<h4>Statistiques</h4>
+		  		  </div>
+				  <div class="col-sm-2">
+				  	<h4>Aide</h4>
+				  </div>
+				</div> 
+				<div class="row">
+				  <div class="col-sm-4 col-sm-offset-2">
+				  	MyStudyCompanion est un outil de gestion de cours pour les étudiants et les enseignants
+				  </div>
+				  <div class="col-sm-2"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoEtudiant->count();?> Inscripts<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
+				  <div class="col-sm-2"><a href ="#">Contact</a><br><a href ="#">FAQ</a></div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+				  <div class="col-sm-4 col-sm-offset-2">
+				  	MyStudyCompanion - Tous droits réservés
+				  </div>
+				  <div class="col-sm-4">
+				  	<a href ="#">Conditions générales d'utilisation</a>
+				  </div>
+				</div>
 			</div>
         </div> 
+        <!-- /footer --> 
 
         <script type='text/javascript' src="../../js/jquery-1.11.0.js"></script>
         <script type="text/javascript" src="../../js/bootstrap/bootstrap.min.js"></script>
