@@ -134,9 +134,10 @@
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
-                
-                    <div class="col-sm-2">
-                        <div class="list-group">
+                <div class="col-sm-1" style="width: 2px;">
+                </div>
+                    <div class="col-sm-2" style="background-color: #f5f5f5; height: 100%; ">
+                        <div class="list-group" style="padding: 4%">
                         	<a href="index.php?section=cours" class="<?php if($page == "cours") echo "list-group-item active"; else echo "list-group-item";?>">
                         		<i class="glyphicon glyphicon-th-list"></i>
 						        <span style="font-size: x-large; margin-left:5%;">Mes cours</span>
@@ -154,7 +155,7 @@
                         </div>
                         <?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
                     </div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                           <div>
         <ul class="breadcrumb">
         <?php 

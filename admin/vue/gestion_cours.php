@@ -200,10 +200,14 @@ foreach ( $listeThemes as $theme ) {
 
 							<div id="bloc-<?php echo $exos->getId(); ?>" class="collapse">
 								<hr>
+								<?php 
+								if (sizeof($listeFichiers) > 0)
+								{
+								?>
 								<table style="background-color: #F0F0F0; width: 100%;">
 									<?php
-		foreach ( $listeFichiers as $fichier ) {
-			?>
+									foreach ( $listeFichiers as $fichier ) {
+									?>
 										<ul>
 											<li class="header-fichier" data-fichier-id="<?php echo $fichier->getId(); ?>">
 													<a href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a>
@@ -214,10 +218,21 @@ foreach ( $listeThemes as $theme ) {
 													<span class="desc-fichier-texte" id="desc-fichier-<?php echo $fichier->getId(); ?>" data-id-fichier=""<?php echo $exos->getId(); ?>""><?php echo $fichier->getCommentaire();?></span>
 										</li>
 										</ul>
-									<?php
-		}
-		?>
+								<?php
+									}
+								?>
+		
 									</table>
+								<?php
+								}
+								else 
+								{
+								?>
+								<p class="no_results">Aucun fichier pour cet exercice</p>
+								<?php 
+								}
+								?>
+								
 							</div>
 					
 					</tr>
