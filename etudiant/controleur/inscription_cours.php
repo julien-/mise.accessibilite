@@ -1,4 +1,4 @@
 <?php
 $listeAllCours = $daoCours->getAll();
-include_once('../Vue/inscription_cours.php');
+include_once('../vue/inscription_cours.php');
 ?>

@@ -71,5 +71,5 @@ else
 	$_SESSION["notif_msg"] = '<div class="erreur">Erreur dans l\' execution de la requête...</div>';
 
 // on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas
-header('Location: ../Controleur/index.php?' . $retourPage);
+header('Location: ../controleur/index.php?' . $retourPage);
 ?>

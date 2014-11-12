@@ -1,4 +1,4 @@
 <?php
 $_SESSION['referrer'] = Outils::currentPageURL();
-include_once('../../compte/Vue/compte.php');
+include_once('../../compte/vue/compte.php');
 ?>

@@ -1,4 +1,4 @@
 <?php
 $listeObjectifs = $daoObjectif->getAll();
-include_once('../Vue/objectif.php');
+include_once('../vue/objectif.php');
 ?>

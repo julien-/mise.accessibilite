@@ -36,9 +36,12 @@
             <!-- Header -->
             <nav class="navbar navbar-default" role="navigation" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
 			  <div class="container-fluid">
-			    <div class="navbar-header">
-			      <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a>
-			    </div>
+			    <!--<div class="navbar-header">
+			      <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a> 
+			    </div>-->
+			    <ul class="nav navbar-nav navbar-left">
+			    	<li><a role="button" href="index.php" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>MY STUDY COMPANION</a></li>
+			    </ul>
 			      <ul class="nav navbar-nav navbar-right">
 			        <li><a role="button" href="index.php?section=reception_messagerie" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a></li>
 			        <li class="dropdown">
@@ -69,7 +72,7 @@
                         		if(isset($_SESSION['cours']))
                         		{
                         	?>
-                        			<li><a href="index.php?section=test">test</a></li>
+                        			<li><a href="index.php?section=informations">Informations</a></li>
                         			<li><a href="index.php?section=objectif">Mes Badges</a></li>
   									<li><a href="index.php?section=evolution">Mon Evolution</a></li>
   									<li class="dropdown">

@@ -2,7 +2,7 @@
 <a class="btn btn-primary" href="index.php?section=envoyes_messagerie">Boite d'envoi</a>
 <h1>Envoyer un message</h1>
 
-<form class="form-horizontal" method="post" name="form_envoyer_message" action="../../messagerie/Requete/rq_envoyer_message.php?section=envoyes_messagerie&envoyermessage<?php if(isset($message_reponse)) echo "&id_message_reponse=".$message_reponse->getId();?>">
+<form class="form-horizontal" method="post" name="form_envoyer_message" action="../../messagerie/requete/rq_envoyer_message.php?section=envoyes_messagerie&envoyermessage<?php if(isset($message_reponse)) echo "&id_message_reponse=".$message_reponse->getId();?>">
 	<div class="row tt-input-group">  
       	<div class="col-lg-1">Pour :</div>
        	<div class="col-lg-11">

@@ -140,6 +140,7 @@ switch($pageWithoutPath)
 	case 'messagerie': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Ma Messagerie' => 'final'); break;
 	case 'cours': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'final'); break;
 	case 'inscription_cours': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'S\'inscrire' => 'final'); break;
+	case 'informations': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Informations' => 'final'); break;
 	case 'objectif': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Mes Badges' => 'final'); break;
 	case 'evolution': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Mon Evolution' => 'final'); break;
 	case 'progression': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours', $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Ma Progression' => 'final'); break;
@@ -152,6 +153,6 @@ switch($pageWithoutPath)
 	case 'liste_sujets_forum': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours',  $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Index du forum' => 'index.php?section=index_forum&id_cours='.$_SESSION['cours']->getId(), Outils::raccourcirChaine($daoCategorie->getByID($_GET['categorie'])->getTitre(), 50) => 'final'); break;
 	case 'voir_sujet_forum': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php?section=accueil', 'Mes Cours' => 'index.php?section=cours',  $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=evolution', 'Index du forum' => 'index.php?section=index_forum&id_cours='.$_SESSION['cours']->getId(), Outils::raccourcirChaine($daoSujet->getByID($_GET['s'])->getCategorie()->getTitre(), 50) => 'index.php?section=liste_sujets_forum&categorie=' . $daoSujet->getByID($_GET['s'])->getCategorie()->getId(), $daoSujet->getByID($_GET['s'])->getTitre() => 'final'); break;
 }
-include_once('../Vue/index.php');
+include_once('../vue/index.php');
 
 ?>

@@ -25,7 +25,7 @@
 							                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 							                <h4 id="myModalLabel" class="modal-title">Modifier la Remarque</h4>
 							            </div>
-							            <form method="post" name="form_modify_remarque" action="../Requete/rq_seance_actuelle.php?section=seance_actuelle&modifyremarque">
+							            <form method="post" name="form_modify_remarque" action="../requete/rq_seance_actuelle.php?section=seance_actuelle&modifyremarque">
 											<div class="modal-body">
 						                		<input type="text" name="remarque" size="60" value="<?php echo $remarque->getRemarque();?>" class="inputValDefaut"/>
 							                </div>
@@ -54,7 +54,7 @@
 							                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 							                <h4 id="myModalLabel" class="modal-title">Ajouter une Remarque</h4>
 							            </div>
-							            <form method="post" name="form_add_remarque" action="../Requete/rq_seance_actuelle.php?section=seance_actuelle&addremarque">
+							            <form method="post" name="form_add_remarque" action="../requete/rq_seance_actuelle.php?section=seance_actuelle&addremarque">
 											<div class="modal-body">
 						                		<input type="text" name="remarque" size="60" class="inputValDefaut"/>
 							                </div>
@@ -103,7 +103,7 @@
 	</div>
 </div>
 
-<form method="post" name="form_maj_avancement" action="../Requete/rq_seance_actuelle.php?section=seance_actuelle&maj_avancement">
+<form method="post" name="form_maj_avancement" action="../requete/rq_seance_actuelle.php?section=seance_actuelle&maj_avancement">
 <?php 
 foreach($listeThemes as $theme)
 {
