@@ -1,5 +1,4 @@
 <?php
-
 class DAOHistorique extends DAOStandard
 {
 	public function save(Historique $historique)

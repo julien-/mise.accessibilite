@@ -1,10 +1,9 @@
 <?php
 include_once ('../../lib/autoload.inc.php');
 session_start();
-include_once('../../sql/connexion_mysql.php');
-include_once('../../fonctions.php');
 
-$db = DBFactory::getMysqlConnexionWithMySQLi();
+$db = DBFactory::getMysqlConnexionStandard();
+
 $daoRemarque= new DAORemarque($db);
 $daoAvancement= new DAOAvancement($db);
 

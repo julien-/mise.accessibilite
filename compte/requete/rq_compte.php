@@ -1,10 +1,9 @@
 <?php
 include_once ('../../lib/autoload.inc.php');
 session_start();
-include_once('../../sql/connexion_mysql.php');
-include_once('../../fonctions.php');
 
-$db = DBFactory::getMysqlConnexionWithMySQLi();
+$db = DBFactory::getMysqlConnexionStandard();
+
 $daoEtudiant= new DAOEtudiant($db);
 
 $redirige = false;
@@ -41,10 +40,10 @@ else
 session_start();
 
 if ($redirige)
-	$_SESSION["notif_msg"] = '<div class="ok">'.$message.'</div>';
+	$_SESSION["notif_msg"] = $message;
 else
-	$_SESSION["notif_msg"] = '<div class="erreur">Erreur, requete invalide/div>';
+	$_SESSION["notif_msg"] = "Erreur lors de l'execution de la requete";
 
 // on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas
-header('Location: ' . $_SESSION['referrer']);
+header('Location: ../../etudiant/controleur/index.php?' . $retourPage);
 ?>

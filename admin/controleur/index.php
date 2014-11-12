@@ -1,9 +1,6 @@
 <?php
 include_once('../../lib/autoload.inc.php');
-
-include_once('../../config.php');
 session_start();
-
 
 $db = DBFactory::getMysqlConnexionStandard();
 $daoProfesseur = new DAOProfesseur($db);

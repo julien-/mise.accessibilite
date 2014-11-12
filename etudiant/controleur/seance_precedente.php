@@ -1,5 +1,5 @@
 <?php
-if(isset($_GET["id_seance"]) && !empty($_GET["id_seance"]))
+if((isset($_SESSION['currentUser']) && !empty($_SESSION['currentUser'])) && (isset($_SESSION['cours']) && !empty($_SESSION['cours'])) && (isset($_GET["id_seance"]) && !empty($_GET["id_seance"])))
 {
 	$remarque = $daoRemarque->getByEtuSeance($_SESSION["currentUser"]->getId(), $_GET["id_seance"]);
 	$listeThemes = $daoTheme->getAllByCours($_SESSION["cours"]->getId());

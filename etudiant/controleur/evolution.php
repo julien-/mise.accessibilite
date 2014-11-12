@@ -1,5 +1,5 @@
 <?php
-if(isset($_SESSION['cours']) && !empty($_SESSION['cours']))
+if((isset($_SESSION['currentUser']) && !empty($_SESSION['currentUser'])) && (isset($_SESSION['cours']) && !empty($_SESSION['cours'])))
 {
 	$listeObjectifs = $daoObjectif->getAll();
 	include_once('../vue/evolution.php');
