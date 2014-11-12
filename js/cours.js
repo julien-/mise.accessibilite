@@ -1,6 +1,4 @@
-  $( ".fading-alert" ).fadeOut( 4000, function() {
-	  $( ".fading-alert" ).addClass('hidden');
-  });
+
   
   $('.interactive-table').DataTable( {
 	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [] }],

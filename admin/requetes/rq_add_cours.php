@@ -14,6 +14,6 @@ $daoCours->save(new Cours(array(
 				))	
 		)
 ));
-
+$_SESSION['coursAdded'] = 'true';
 header('Location: ' . $_SESSION['referrer']);
 ?>

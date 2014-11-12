@@ -1,6 +1,13 @@
+/** Messages fading **/
+  $( ".fading-alert" ).fadeOut( 4000, function() {
+	  $( ".fading-alert" ).addClass('hidden');
+  });
+  
+
 //##############
 //Les input text
 //##############
+
 $(".inputValDefaut").bind({
     blur: function() {  //perd le focus du input
         if ($(this).val() === "")
