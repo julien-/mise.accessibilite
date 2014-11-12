@@ -1,4 +1,6 @@
 <?php 
+
+$_SESSION['referrer'] = Outils::currentPageURL();
 $daoMessagerie = new DAOMessagerie($db);
 
 $listeMessages = $daoMessagerie->getAllReceived($_SESSION['currentUser']->getId());

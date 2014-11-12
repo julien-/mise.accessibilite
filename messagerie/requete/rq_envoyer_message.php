@@ -14,7 +14,7 @@ if (isset($_POST["envoyer"])) {
 	
 	if($_POST['destinataire'] != "" && $_POST['titre'] != "" & $_POST['message'] != "" )
 	{
-		echo "def";
+		
 		$message = new Messagerie(array(
 				'destinataire' => $daoEtudiant->getByID($_POST['destinataire']),
 				'expediteur' => $daoEtudiant->getByID($_SESSION['currentUser']->getId()),
@@ -30,5 +30,5 @@ if (isset($_POST["envoyer"])) {
 		$redirige = true;
 	}
 }
-
+header('Location: ' . $_SESSION['referrer']);
 ?>

@@ -53,7 +53,7 @@
     if((isset($listeClassmates) && sizeof($listeClassmates) != 0) || isset($message_reponse))
     {
     ?>
-    <div align="center"><input class="btn btn-primary" style="width: auto;" type="submit" name="go" value="Envoyer le message"></div>
+    <div align="center"><input class="btn btn-primary" style="width: auto;" type="submit" name="envoyer" value="Envoyer le message"></div>
     <?php 
     }
     ?>        
