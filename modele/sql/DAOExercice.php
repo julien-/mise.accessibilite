@@ -11,8 +11,6 @@ class DAOExercice extends DAOStandard
 	
 	public function save(Exercice $exercice)
 	{
-		echo $this->getNextAvailableNumber($exercice->getTheme());
-
 		$this->executeQuery('INSERT INTO exercice SET titre_exo = "' . $exercice->getTitre() . '", num_exo = ' . $this->getNextAvailableNumber($exercice->getTheme()) . ', id_theme =' . $exercice->getTheme());
 	}
 	
@@ -86,7 +84,7 @@ class DAOExercice extends DAOStandard
 	  
 	  public function getByAllByTheme($id)
 	  {
-	  	$result = $this->executeQuery('SELECT * FROM exercice ex, theme t, cours c, etudiant e, cle WHERE ex.id_theme = t.id_theme AND c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND ex.id_theme = ' . $id);
+	  	$result = $this->executeQuery('SELECT * FROM exercice ex, theme t, cours c, etudiant e, cle WHERE ex.id_theme = t.id_theme AND c.id_cle = cle.id_cle AND c.id_prof = e.id_etu AND t.id_cours = c.id_cours AND ex.id_theme = ' . $id . ' ORDER BY num_exo');
 	  
 	  
 	  

@@ -201,7 +201,7 @@
 					        ?>
 					        </ul>
 				      	</div>				      	
-                        <?php include_once('../Controleur/' . $page . '.php'); ?>
+                        <?php include_once('../controleur/' . $page . '.php'); ?>
                     </div>
                 </div>
             </div>

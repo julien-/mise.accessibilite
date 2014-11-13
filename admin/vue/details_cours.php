@@ -2,7 +2,7 @@
 	src="../../js/googleChartToolsLineChart.js"></script>
 <script type="text/javascript"
 	src="../../js/googleChartToolsPieChart.js"></script>
-
+<script type='text/javascript' src="../../js/jquery-1.11.0.js"></script>
 <h1><?php echo $titre;?></h1>
 <div class="row">
 	<div class="col-lg-12 center-content">

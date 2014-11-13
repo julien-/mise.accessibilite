@@ -124,6 +124,10 @@ class DAOAvancement extends DAOStandard
 
   	function getByTheme($idTheme)
   	{
+  		$daoExercice = new DAOExercice($db);
+  		$daoExercice->getByAllByTheme($idTheme);
+  		if (sizeof($daoExercice->getByAllByTheme($idTheme)) > 0)
+  		{
   		$sql = 'CREATE TEMPORARY TABLE R1
         SELECT COUNT(*) * 100 as total
         FROM exercice
@@ -166,6 +170,9 @@ class DAOAvancement extends DAOStandard
 	  	$result = $this->executeQuery($sql);
 	  	
 	  	return number_format(($avancement['progression'] / $avancement['total']) * 100, 2);
+  		}
+  		else
+  			return 0;
    	}
   
    	function getByExercice($idExo)

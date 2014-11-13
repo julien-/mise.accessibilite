@@ -23,19 +23,7 @@ if (isset($_GET["addbonus"])) {
 	$redirige = true;
 }
 
-/* #################
- * ## REDIRECTION ##
- * #################
- */
-mysql_close($db);
-
-// on regarde de quel page il venait
-if (isset($_GET['section']))
-	$retourPage = "section=". $_GET['section'];
-else
-	$retourPage = "";
-session_start();
 
 // on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas
-header('Location: ../controleur/index.php?' . $retourPage);
+header('Location: ' . $_SESSION['referrer']);
 ?>

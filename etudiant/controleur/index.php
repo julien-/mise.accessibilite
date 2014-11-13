@@ -2,7 +2,7 @@
 include_once('../../fonctions.php');
 include_once('../../lib/autoload.inc.php');
 session_start();
-
+$_SESSION['referrer'] = Outils::currentPageURL();
 $db = DBFactory::getMysqlConnexionStandard();
 $daoCours = new DAOCours($db);
 $daoInscription = new DAOInscription($db);
