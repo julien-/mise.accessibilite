@@ -1,14 +1,6 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="../../js/googleChartToolsLineChart.js"></script>
 
-<span class="rating">
-  <span class="star"></span>
-  <span class="star"></span>
-  <span class="star"></span>
-  <span class="star"></span>
-  <span class="star"></span>
-</span>
-
 <h1>Bienvenue <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?></h1>
 <div class="row show-grid">
 	<div class="col-md-4">

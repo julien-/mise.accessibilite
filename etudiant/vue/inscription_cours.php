@@ -26,7 +26,7 @@
 				                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 				                <h4 class="modal-title">S'inscrire au cours : <?php echo $cours->getLibelle();?></h4>
 				            </div>
-				            <form method="post" name="form_inscription_cours<?php echo $cours->getId();?>" action="../requete/rq_inscription_cours.php?section=inscription_cours&inscriptioncours">
+				            <form method="post" name="form_inscription_cours<?php echo $cours->getId();?>" action="../requete/rq_inscription_cours.php?inscriptioncours">
 								<div class="modal-body">
 									<div class="form-group">
 				            			<label for="cle">Clé d'inscription</label>

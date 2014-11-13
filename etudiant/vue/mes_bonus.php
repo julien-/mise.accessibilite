@@ -82,7 +82,7 @@ foreach($listeThemes as $theme)
                 <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Ajouter un bonus au theme <?php echo $theme->getTitre();?></h4>
             </div>
-            <form method="post" name="<?php echo "form_add_bonus".$theme->getId();?>" action="../requete/rq_mes_bonus.php?section=mes_bonus&addbonus">
+            <form method="post" name="<?php echo "form_add_bonus".$theme->getId();?>" action="../requete/rq_mes_bonus.php?addbonus">
             	<div class="modal-body">
             		<div class="form-group">
             			<label for="titrebonus" style="width:35%;">Titre du Bonus</label>

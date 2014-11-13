@@ -120,5 +120,62 @@ class DAOBonus extends DAOStandard {
 		}
 		return $listeBonus;
 	}
+	
+	public function getAllByThemeExceptMine($idTheme, $idEtu)
+	{
+		$sql = 'CREATE TEMPORARY TABLE R1
+        SELECT id_bonus
+        FROM avancement_bonus
+        WHERE id_etu != ' . $idEtu .'
+        AND fait != 1';
+		 
+		$this->executeQuery($sql);
+		
+		$result = $this->executeQuery ( 'SELECT *
+										FROM bonus, theme, cours, etudiant, cle, R1
+										WHERE bonus.id_theme = ' . $idTheme . '
+										AND bonus.id_bonus = R1.id_bonus
+										AND bonus.id_theme = theme.id_theme
+										AND theme.id_cours = cours.id_cours
+										AND cours.id_prof = etudiant.id_etu
+										AND cours.id_cle = cle.id_cle
+										GROUP BY bonus.id_bonus' );
+		
+		$listeBonus = array ();
+		while ( $bonus = $this->fetchArray ( $result ) ) {
+			$listeBonus [] = new Bonus ( array (
+					'id' => $bonus ['id_bonus'],
+					'titre' => $bonus ['titre_bonus'],
+					'type' => $bonus ['type_bonus'],
+					'theme' => new Theme ( array (
+							'id' => $bonus ['id_theme'],
+							'titre' => $bonus ['titre_theme'],
+							'cours' => new Cours ( array (
+									'id' => $bonus ['id_cours'],
+									'libelle' => $bonus ['libelle_cours'],
+									'couleurCalendar' => $bonus ['couleur_calendar'],
+									'idProf' => new Professeur ( array (
+											'id' => $bonus ['id_etu'],
+											'nom' => $bonus ['nom_etu'],
+											'prenom' => $bonus ['prenom_etu'],
+											'mail' => $bonus ['mail_etu'],
+											'login' => $bonus ['pseudo_etu'],
+											'pass' => $bonus ['pass_etu'],
+											'admin' => $bonus ['admin']
+									) ),
+									'idCle' => new Cle ( array (
+											'id' => $bonus ['id_cle'],
+											'cle' => $bonus ['valeur_cle']
+									) )
+							) )
+					) )
+			) );
+		}
+		
+		$sql = 'DROP TEMPORARY TABLE R1';
+		$this->executeQuery($sql);
+		
+		return $listeBonus;
+	}
 }
 ?>
