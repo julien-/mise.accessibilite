@@ -8,7 +8,7 @@
 					<i class="glyphicon glyphicon-comment"></i> Remarques sur cette séance
 				</h3>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body" style="height: 300px;">
 				<div id="morris-area-chart">
 					<?php 
 						if($remarque)
@@ -27,12 +27,12 @@
 					<i class="glyphicon glyphicon-stats"></i> Progression globale lors de cette séance
 				</h3>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body" style="height: 300px;">
 				<div id="morris-area-chart">
 					<script type="text/javascript">
 		                var optionsPieChart =   {
 		                                            is3D: 'false',
-		                                            chartArea: {top:"5%", bottom:"5%",width:"100%", height:"90%"},
+		                                            chartArea: {top:"5%", bottom:"5%",width:"90%", height:"90%"},
 		                                            tooltip: {text: 'percentage' },
 		                                            backgroundColor: { fill:'transparent' },
 		                                            slices: {
@@ -42,7 +42,7 @@
 		                                        };
 		                setPieChartOptions('<?php echo $urlJSONPieChart;?>', optionsPieChart, "pieChart");
     		        </script>
-					<div id="pieChart"></div>
+					<div id="pieChart" style="height: 300px;"></div>
 				</div>
 			</div>
 		</div>

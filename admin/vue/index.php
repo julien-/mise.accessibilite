@@ -160,7 +160,7 @@
 				  <div class="col-sm-4 col-sm-offset-2">
 				  	MyStudyCompanion est un outil de gestion de cours pour les étudiants et les enseignants
 				  </div>
-				  <div class="col-sm-2"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoEtudiant->count();?> Inscripts<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
+				  <div class="col-sm-2"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoEtudiant->count();?> Inscrits<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
 				  <div class="col-sm-2"><a href ="#">Contact</a><br><a href ="#">FAQ</a></div>
 				</div>
 				<div class="row" style="margin-top: 10px;">

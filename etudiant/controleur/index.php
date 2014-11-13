@@ -2,8 +2,9 @@
 include_once('../../fonctions.php');
 include_once('../../lib/autoload.inc.php');
 session_start();
-$_SESSION['referrer'] = Outils::currentPageURL();
+
 $db = DBFactory::getMysqlConnexionStandard();
+
 $daoCours = new DAOCours($db);
 $daoInscription = new DAOInscription($db);
 $daoSeance = new DAOSeance($db);
@@ -22,8 +23,14 @@ $daoAssignations_objectif = new DAOAssignations_objectif($db);
 
 if(isset($_SESSION['currentUser']) && !empty($_SESSION['currentUser']))
 {
+	//page sur laquelle se trouve l'etudiant pour le retour apres les requetes (dossier requete)
+	$_SESSION['referrer'] = Outils::currentPageURL();
+	
 	//Liste des cours ou l'etudiant est inscrit
 	$listeCours = $daoInscription->getAllByEtudiant($_SESSION['currentUser']->getId());
+	
+	//Nombre de cours ou l'etudiant est inscrit
+	$nbcours = count($listeCours);
 	
 	//Nombre de messages non lus
 	$nbMessagesNnLu = $daoMessage->countNbNonLu($_SESSION['currentUser']->getId());

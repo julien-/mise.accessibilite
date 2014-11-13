@@ -8,7 +8,7 @@
 					<i class="glyphicon glyphicon-comment"></i> Remarques sur cette séance
 				</h3>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body" style="height: 300px;">
 				<div id="morris-area-chart">
 					<?php 
 						if($remarque)
@@ -81,12 +81,12 @@
 					<i class="glyphicon glyphicon-stats"></i> Progression globale lors de cette séance
 				</h3>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body" style="height: 300px;">
 				<div id="morris-area-chart">
 					<script type="text/javascript">
 		                var optionsPieChart =   {
 		                                            is3D: 'false',
-		                                            chartArea: {top:"5%", bottom:"5%",width:"100%", height:"90%"},
+		                                            chartArea: {top:"5%", bottom:"5%",width:"90%", height:"90%"},
 		                                            tooltip: {text: 'percentage' },
 		                                            backgroundColor: { fill:'transparent' },
 		                                            slices: {
@@ -96,7 +96,7 @@
 		                                        };
 		                setPieChartOptions('<?php echo $urlJSONPieChart;?>', optionsPieChart, "pieChart");
     		        </script>
-					<div id="pieChart"></div>
+					<div id="pieChart" style="height: 300px;"></div>
 				</div>
 			</div>
 		</div>
@@ -104,6 +104,9 @@
 </div>
 
 <form method="post" name="form_maj_avancement" action="../requete/rq_seance_actuelle.php?maj_avancement">
+	<div id="nav">
+	  <input type="submit" class="btn btn-primary" name="soumis" id="soumis_avancement" alt='Mettre à jour avancement' title='Mettre à jour avancement' value="Sauvegarder ma progression"/>
+	</div>
 <?php 
 foreach($listeThemes as $theme)
 {
@@ -174,6 +177,5 @@ foreach($listeThemes as $theme)
 }
 ?>
 <input type="hidden" name="id_seance" value="<?php echo $id_seance;?>"/>
-<input type="submit" class="btn btn-primary" name="soumis" id="soumis_avancement" alt='Mettre à jour avancement' title='Mettre à jour avancement' value="Envoyer"/>
 </form>
 

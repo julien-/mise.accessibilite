@@ -4,8 +4,8 @@
 	    <div class="form-group has-feedback">
 	        <label for="nom" class="control-label col-lg-3">Nom</label>
 	        <div class="col-lg-5">
-	            <input type="text" name="nom" id="nom" class="form-control" value="<?php echo $_SESSION['currentUser']->getNom();?>" />
-	            <span class="glyphicon form-control-feedback" id="nom1"></span>
+	            <input type="text" name="nom_minuscules" id="nom_minuscules" class="form-control" value="<?php echo $_SESSION['currentUser']->getNom();?>" />
+	            <span class="glyphicon form-control-feedback" id="nom_minuscules1"></span>
 	       </div>
 	    </div>
 	    <div class="form-group has-feedback">

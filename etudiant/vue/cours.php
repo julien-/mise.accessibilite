@@ -2,17 +2,6 @@
 <br/>
 <br/>
 <?php
-
-$consignes = "
-                    <br/>
-                    Sur cette page s'affiche la liste des cours dans lesquels vous êtes inscrit, le nom de l'enseignant ainsi qu'une barre de progression qui correspond à votre avancement dans cette matière.
-                    <br/>
-                    <br/>
-                    <b>Cliquez</b> sur le nom d'un cours pour <b>visualiser</b> ou <b>mettre à jour</b> votre avancement dans celui-ci<b>    
-                    <br/>
-             ";
-
-$nbcours = count($listeCours);
 if($nbcours == 0)
 {
     ?>

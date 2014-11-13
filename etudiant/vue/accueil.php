@@ -28,7 +28,7 @@
 						<tr>
 							<td>Cours suivis</td>
 							<td>
-								<a href="index.php?section=cours"><?php echo $nbCours; ?></a>
+								<a href="index.php?section=cours"><?php echo $nbcours; ?></a>
 							</td>
 						</tr>
 						<tr>

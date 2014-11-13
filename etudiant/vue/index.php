@@ -11,6 +11,7 @@
         <link href="../../css/bootstrap/bootstrap-tour.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/dataTables.bootstrap.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
+        <link href="../../css/perso/menu.css" rel="stylesheet">
         <link href="../../css/typeahead.css" rel="stylesheet">
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
@@ -32,6 +33,9 @@
     <!-- HTML code from Bootply.com editor -->
 
     <body>
+  
+  		
+    	
     	<div id="wrap">
             <!-- Header -->
             <nav class="navbar navbar-default" role="navigation" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
@@ -53,33 +57,29 @@
 			          </ul>
 			        </li>
 			      </ul>
-
 			  </div>
 			</nav>
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="container-fluid">
-                   	<div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
-                        	<?php 
-                        		if(isset($_SESSION['cours']))
-                        		{
-                        	?>
-                        			<li><a href="index.php?section=informations">Informations</a></li>
-                        			<li><a href="index.php?section=objectif">Mes Badges</a></li>
-  									<li><a href="index.php?section=evolution">Mon Evolution</a></li>
-  									<li class="dropdown">
-  										<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-  											Seances <b class="caret"></b>
-  										</a>
-  										<ul class="dropdown-menu" role="menu">
+			<nav class="navbar navbar-custom navbar-inverse" role="navigation">
+			    <div class="container">
+			      <div class="navbar-header">
+			        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			          <span class="icon-bar"></span>
+			          <span class="icon-bar"></span>
+			          <span class="icon-bar"></span>
+			        </button>
+			      </div>
+			      <div class="collapse navbar-collapse">
+			        <ul class="nav navbar-nav nav-justified menu-item-hover">
+		        	  <?php 
+                        if(isset($_SESSION['cours']))
+                        {
+                      ?>
+			          <li <?php if ( $_GET['section'] == "informations" ) echo "class='active'";?>><a href="index.php?section=informations">Informations</a></li>
+			          <li <?php if ( $_GET['section'] == "objectif" ) echo "class='active'";?>><a href="index.php?section=objectif">Mes Badges</a></li>
+			          <li <?php if ( $_GET['section'] == "evolution" ) echo "class='active'";?>><a href="index.php?section=evolution">Mon Evolution</a></li>
+			          <li class="dropdown <?php if ( $_GET['section'] == "seance_actuelle" || $_GET['section'] == "seance_precedente") echo "active";?>">
+			            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Séances <b class="caret"></b></a>
+			            <ul class="dropdown-menu" role="menu">
 		                                    <?php
 		                                    $next_seance = next($listeSeances);
 		                                    $trouve_seance = FALSE;
@@ -116,31 +116,30 @@
 	                                        	$next_seance = next($listeSeances);
 		                                    }
 		                                    ?>
-		                                </ul>
-  									</li>
-  									<li><a href="index.php?section=progression">Ma Progression</a></li>
-  									<li class="dropdown">
-  										<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-  											Bonus <b class="caret"></b>
-  										</a>
-  										<ul class="dropdown-menu" role="menu">
-		                                	<li>
-	                                        	<a href="index.php?section=mes_bonus" title="Mes bonus">Mes Bonus</a>
-                                        	</li>
-	                                       	<li>
-	                                        	<a href="index.php?section=autres_bonus" title="Autres bonus">Autres bonus</a>
-                                        	</li>
-		                                </ul>
-  									</li>
-  									<li><a href="index.php?section=index_forum&id_cours=<?php echo $_SESSION['cours']->getId();?>">Forum</a></li>
-                            <?php 
-                        		}
-                            ?>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+                                </ul>
+			          </li>
+			          <li <?php if ( $_GET['section'] == "progression" ) echo "class='active'";?>><a href="index.php?section=progression">Ma Progression</a></li>
+			          <li class="dropdown <?php if ( $_GET['section'] == "mes_bonus" || $_GET['section'] == "autres_bonus") echo "active";?>">
+			            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mes Bonus <b class="caret"></b></a>
+			            <ul class="dropdown-menu">
+			              <li><a href="index.php?section=mes_bonus">Mes Bonus</a></li>
+			              <li><a href="index.php?section=autres_bonus">Autres Bonus</a></li>
+			            </ul>
+			           </li>
+			           <li <?php if ( strpos($_GET['section'], "forum") != false ) echo "class='active'";?>><a href="index.php?section=index_forum&id_cours=<?php echo $_SESSION['cours']->getId();?>">Forum</a></li>
+			        <?php 
+                    }
+                    ?>
+			      	</ul>
+			      </div><!--/.nav-collapse -->
+			    </div><!--/.container -->
+			</nav><!--/.navbar -->
             <!-- /Header -->
+            
+            
+            
+            
+            
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
@@ -151,14 +150,17 @@
 						        <span style="font-size: x-large; margin-left:5%;">Mes cours</span>
 						   	</a>
                         	<?php
-                            foreach ($listeCours as $cours) 
-                            {
-                            ?>
-                        	<a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" class="list-group-item" title="<?php echo $cours->getCours()->getLibelle();?>" <?php if(isset($_SESSION['cours']) && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo 'style="font-weight: bold; background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
-							   <?php echo $cours->getCours()->getLibelle();?>
-							</a>
-							<?php
-                            }
+							if($nbcours != 0)
+							{
+	                            foreach ($listeCours as $cours) 
+	                            {
+	                            ?>
+	                        	<a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" class="list-group-item" title="<?php echo $cours->getCours()->getLibelle();?>" <?php if(isset($_SESSION['cours']) && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo 'style="font-weight: bold; background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
+								   <?php echo $cours->getCours()->getLibelle();?>
+								</a>
+								<?php
+	                            }
+							}
                             ?>
                         </div>
                     </div>
@@ -225,7 +227,7 @@
 				  <div class="col-sm-4 col-sm-offset-2">
 				  	MyStudyCompanion est un outil de gestion de cours pour les étudiants et les enseignants
 				  </div>
-				  <div class="col-sm-2"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoEtudiant->count();?> Inscripts<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
+				  <div class="col-sm-2"><i class="glyphicon glyphicon-user"></i><?php echo "&nbsp;".$daoEtudiant->count();?> Inscrits<br><i class="glyphicon glyphicon-book"></i><?php echo "&nbsp;".$daoCours->count();?> Cours</div>
 				  <div class="col-sm-2"><a href ="#" <?php if(isset($_SESSION['cours'])) echo 'style="font-weight: bold; text-decoration: underline; color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>Contact</a><br><a href ="#"<?php if(isset($_SESSION['cours'])) echo 'style="font-weight: bold; text-decoration: underline; color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>FAQ</a></div>
 				</div>
 				<div class="row" style="margin-top: 10px;">

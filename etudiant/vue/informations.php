@@ -1,28 +1,9 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="../../js/googleChartToolsLineChart.js"></script>
 
-<div class="row show-grid">
-	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<i class="glyphicon glyphicon-wrench"></i> Gestion du thème
-				</h3>
-			</div>
-			<div class="panel-body">
-				<div id="morris-area-chart">
-					<form method="post" name="form_modif_couleur" action="../requete/rq_modification_couleur.php?modifiercouleur">
-						Couleur de fond <input type="color" name="couleur_fond" value="<?php echo $daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId());?>"/>
-						<br>Couleur du texte <input type="color" name="couleur_texte" value="<?php echo $daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId());?>"/><br>
-						<input type="hidden" name="cours" value="<?php echo $_SESSION['cours']->getId();?>" />
-						<input type="submit" class="soumettre_couleur btn btn-primary" alt="Modification couleur cours" title="Modification couleur cours" value="Modification couleur cours"/>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-6">
-		<div class="panel panel-default">
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-default" style="height:200px;">
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					<i class="glyphicon glyphicon-user"></i> Enseignant
@@ -37,8 +18,28 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-md-3">
+		<div class="panel panel-default" style="height:200px;">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="glyphicon glyphicon-wrench"></i> Gestion du thème
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div id="morris-area-chart">
+					<form method="post" name="form_modif_couleur" action="../requete/rq_modification_couleur.php?modifiercouleur">
+						<input type="color" name="couleur_fond" value="<?php echo $daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId());?>"/>&nbsp;&nbsp;Couleur de fond<br><br>
+						<input type="color" name="couleur_texte" value="<?php echo $daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId());?>"/>&nbsp;&nbsp;Couleur du texte<br><br>
+						<input type="hidden" name="cours" value="<?php echo $_SESSION['cours']->getId();?>" />
+						<input type="submit" class="soumettre_couleur btn btn-primary" alt="Modification thème cours" title="Modification thème cours" value="Modification thème cours"/>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<div class="col-md-12">
+<div class="row">
+	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -66,3 +67,4 @@
 			</div>
 		</div>
 	</div>
+</div>

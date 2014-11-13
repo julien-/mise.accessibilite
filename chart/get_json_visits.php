@@ -20,10 +20,11 @@
 	
 	$daoHistorique = new DAOHistorique();
 	
-	if (isset($_GET['etudiant']))
-		$listeHistorique = $daoHistorique->getLastVisitsByEtudiant($_GET['etudiant']);
-	elseif(isset($_GET['etudiant']) && isset($_GET['cours']))
+	
+	if(isset($_GET['etudiant']) && isset($_GET['cours']))
 		$listeHistorique = $daoHistorique->getLastVisitsByEtudiantCours($_GET['etudiant'], $_GET['cours']);
+	elseif (isset($_GET['etudiant']))
+		$listeHistorique = $daoHistorique->getLastVisitsByEtudiant($_GET['etudiant']);
 	else
 		$listeHistorique = $daoHistorique->getLastVisitsByCours($_GET['c']);
 

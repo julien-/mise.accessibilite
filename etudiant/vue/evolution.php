@@ -29,7 +29,7 @@ foreach($listeThemes as $theme)
 ?>
 	var optionsColumnChart = {
 		width:"100%",	
-		title: '<?php echo $theme->getTitre();?>',
+		title: "<?php echo $theme->getTitre();?>",
 		legend: { position: 'none'},
 	    bar: { groupWidth: '75%' },
 	    isStacked: true,
