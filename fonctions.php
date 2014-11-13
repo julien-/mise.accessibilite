@@ -136,23 +136,6 @@ function genererMDP ($longueur = 8){
     return $mdp;
 }
 
-function exists($variable_name, $table, $field)
-{
-    if (isset($_GET[$variable_name]))
-    {
-        if (null == ($id = filter_input(INPUT_GET, $variable_name, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE)))
-            return false;
-    }
-    else
-        return false;
-    
-    $sql = 'SELECT * FROM ' . $table . ' WHERE ' . $field .' = ' . mysql_real_escape_string($id);
-    $resQuery = mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
-    if (mysql_num_rows($resQuery) > 0)
-        return $id;
-    else
-        return false;
-}
 
 function sqlQuery($sql)
 {

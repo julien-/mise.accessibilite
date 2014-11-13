@@ -4,7 +4,7 @@ class DAOCle extends DAOStandard
   
 	public function save(Cle $cle)
 	{
-		$this->executeQuery('INSERT INTO cle SET valeur_cle = "' . $cle->getCle() . '"');
+		$this->executeQuery('INSERT INTO cle SET valeur_cle = "' . md5($cle->getCle()) . '"');
 		
 		return $this->lastInsertedID();
 	}
@@ -31,7 +31,7 @@ class DAOCle extends DAOStandard
   	
   	public function checkCleInscription($valeur)
   	{
-  		$result = $this->executeQuery('SELECT * FROM cle WHERE valeur_cle = "' . $valeur . '" AND id_cle NOT IN (SELECT id_cle FROM cours)');
+  		$result = $this->executeQuery('SELECT * FROM cle WHERE valeur_cle = "' . md5($valeur) . '" AND id_cle NOT IN (SELECT id_cle FROM cours)');
   		 
   		return $this->countRows($result) > 0;
   	}
