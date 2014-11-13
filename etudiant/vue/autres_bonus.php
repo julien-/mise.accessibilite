@@ -1,7 +1,7 @@
 <?php 
 foreach($listeThemes as $theme)
 {
-	$listeBonus = $daoBonus->getAllByTheme($theme->getId());
+	$listeBonus = $daoBonus->getAllByThemeExceptMine($theme->getId(), $_SESSION['currentUser']->getId());
 ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -58,14 +58,14 @@ foreach($listeThemes as $theme)
 				            </td>
 				            <!--Suivi-->
 				            <td class="autre_colonne">
-	            				<form method="post" name="form_add_suivi" action="../requete/rq_autres_bonus.php?section=autres_bonus&addsuivi">
+	            				<form method="post" name="form_add_suivi" action="../requete/rq_autres_bonus.php?addsuivi">
 	            					<input type="hidden" name="id_bonus" value="<?php echo $bonus->getId();?>"/>
 	            					<input type="checkbox" name="<?php echo "bonus_suivi".$bonus->getId();?>" onClick=<?php if($mon_avancement['suivi'] != null) echo "'return false'"; else echo "'this.form.submit()'"?> <?php if($mon_avancement['suivi'] != null) echo "checked='checked'";?>/>
 	            				</form>
 				            </td>
 				            <!--Note du bonus-->
 				            <td class="autre_colonne">
-	            				<form method="post" name="<?php echo "form_add_note".$bonus->getId();?>" action="../requete/rq_autres_bonus.php?section=autres_bonus&addnote">
+	            				<form method="post" name="<?php echo "form_add_note".$bonus->getId();?>" action="../requete/rq_autres_bonus.php?addnote">
 	            					<input type="hidden" name="id_bonus" value="<?php echo $bonus->getId();?>"/>
 	            					<select class="note" name="note" id="<?php echo "note".$bonus->getId();?>" value="<?php echo $bonus->getId();?>">
 	            					<?php 
@@ -119,7 +119,7 @@ foreach($listeThemes as $theme)
 										                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 										                <h4 class="modal-title">Ajouter une Remarque</h4>
 										            </div>
-										            <form method="post" name="<?php echo "form_add_remarque".$bonus->getId();?>" action="../requete/rq_autres_bonus.php?section=autres_bonus&addremarque">
+										            <form method="post" name="<?php echo "form_add_remarque".$bonus->getId();?>" action="../requete/rq_autres_bonus.php?addremarque">
 														<div id="message<?php echo $bonus->getId();?>" class="modal-body">
 									                		<textarea name="remarque" id="remarque<?php echo $bonus->getId();?>" style="width:100%;" rows="4"><?php echo $mon_avancement['remarque'];?></textarea>
 										                </div>
