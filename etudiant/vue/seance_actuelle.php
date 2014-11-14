@@ -1,5 +1,24 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="../../js/googleChartToolsPieChart.js"></script>
+<?php 
+if ($remarqueAdded)
+{
+	$alerte = new AlerteSuccess('Remarque ajoutée !');
+	$alerte->show();
+}
+
+if ($remarqueModified)
+{
+	$alerte = new AlerteSuccess('Remarque modifiée !');
+	$alerte->show();
+}
+
+if ($avancementModified)
+{
+	$alerte = new AlerteSuccess('Progression mise à jours avec succès !');
+	$alerte->show();
+}
+?>
 <div class="row show-grid">
 	<div class="col-md-9">
 		<div class="panel panel-default">

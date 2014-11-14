@@ -1,3 +1,16 @@
+<?php
+if ($compteModified)
+{
+	$alerte = new AlerteSuccess('Compte modifiée !');
+	$alerte->show();
+}
+
+if ($passwordModified)
+{
+	$alerte = new AlerteSuccess('Password modifié !');
+	$alerte->show();
+}
+?>
 <div class="col-md-8">
 	<h2>Informations personnelles</h2>
 	<form id="form_info_perso" class="form-horizontal" method="post" action="../../compte/Requete/rq_compte.php?section=compte&modifycompte">

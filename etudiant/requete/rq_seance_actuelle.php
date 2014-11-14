@@ -7,18 +7,14 @@ $db = DBFactory::getMysqlConnexionStandard();
 $daoRemarque= new DAORemarque($db);
 $daoAvancement= new DAOAvancement($db);
 
-$redirige = false;
-
 if (isset($_GET["addremarque"])) {
 	$daoRemarque->saveByIdSeanceIdEtudiantRemarque($_POST['id_seance'], $_SESSION['currentUser']->getId(), $_POST['remarque']);
-	$message = "Remarque ajoutée avec succes";
-	$redirige = true;
+	$_SESSION['remarqueAdded'] = 'true';
 }
 
 if (isset($_GET["modifyremarque"])) {
 	$daoRemarque->updateRemarqueByIdSeanceIdEtudiant($_POST['id_seance'], $_SESSION['currentUser']->getId(), $_POST['remarque']);
-	$message = "Remarque modifiée avec succes";
-	$redirige = true;
+	$_SESSION['remarqueModified'] = 'true';
 }
 
 if (isset($_GET["maj_avancement"])) {
@@ -45,9 +41,7 @@ if (isset($_GET["maj_avancement"])) {
 			$daoAvancement->insertAssimileByExerciceEtudiantSeance($id_exo, $_SESSION['currentUser']->getId(), $_POST['id_seance']);
 		}
 	}
-	
-	$message = "Mise à jour effectuée";
-	$redirige = true;
+	$_SESSION['avancementModified'] = 'true';
 }
 
 // on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas

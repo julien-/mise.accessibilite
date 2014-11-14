@@ -1,3 +1,10 @@
+<?php 
+if ($inscriptionAdded)
+{
+	$alerte = new AlerteSuccess('Inscription au cours réussie!');
+	$alerte->show();
+}
+?>
 <table id="tableau" class="interactive-table table table-striped table-bordered table-hover">
 	<thead>
 		<tr class="titre">
