@@ -101,6 +101,8 @@ if (isset($_SESSION['cours']))
 		src="js/bootstrap/bootstrap-alert.js"></script>
 	<script type="text/javascript" language="javascript"
 		src="js/dataValidatorPerso.js"></script>
+		
+	<script type="text/javascript" src="js/inscription.js"></script>
 
 
 

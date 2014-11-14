@@ -1,7 +1,14 @@
+<?php 
+if ($inscriptionAdded)
+{
+	$alerte = new AlerteDanger('Clé enseignant invalide');
+	$alerte->show();
+}
+?>
 <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8" style="background-color:#FFFFFF;">
 	<h1>Inscription</h1>
 	<h4>Tous les champs sont requis</h4>
-	<form class="form-horizontal" method="post" action="">
+	<form id="form_inscription" class="form-horizontal" method="post" action="../requete/rq_inscription.php?inscription">
 	    <div class="form-group has-feedback">
 	        <label for="nom" class="control-label col-xs-12 col-sm-5 col-md-5">Nom</label>
 	        <div class="col-xs-12 col-sm-7 col-md-5">
@@ -31,7 +38,7 @@
 	        </div>
 	    </div>
 	    <!-- Upload photo -->
-	    
+	    <!-- 
 	    <div class="form-group">
 	        <label for="photo" class="control-label col-xs-12 col-sm-5 col-md-5">Avatar</label>
 	        <div class="col-xs-12 col-sm-7 col-md-5">
@@ -40,7 +47,7 @@
 				</span>
 	        </div>
 	    </div>
-	    
+	     -->    
 	    <div class="form-group has-feedback">
 	        <label for="nouveau_pwd" class="control-label col-xs-12 col-sm-5 col-md-5">Mot de passe</label>
 	        <div class="col-xs-12 col-sm-7 col-md-5">
@@ -54,7 +61,15 @@
 	            <input type="password" name="confirm_password" id="confirm_password" class="form-control" />
 	            <span class="glyphicon form-control-feedback" id="confirm_password1"></span>
 	        </div>
-	    </div>	      
+	    </div>	    
+	    <div class="form-group">
+	        <label for="enseignant" class="control-label col-xs-12 col-sm-5 col-md-5">Enseignant</label>
+	        <div class="col-xs-12 col-sm-7 col-md-5">
+	            <input type="checkbox" name="enseignant" id="enseignant"/>
+	        </div>
+	    </div>	    
+	    <div class="form-group has-feedback" id="cle">
+	    </div>	    	      
 	    <button type="submit" class="btn btn-primary">S'inscrire</button>
 	    <button	type="reset" class="btn btn-default">Annuler</button>
 	</form>		
