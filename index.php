@@ -58,39 +58,6 @@ if (isset($_SESSION['cours']))
 	href="/bootstrap/img/apple-touch-icon-114x114.png">
 <!-- CSS code from Bootply.com editor -->
 
-<style type="text/css">
-.navbar-static-top {
-	margin-bottom: 20px;
-}
-
-i {
-	font-size: 18px;
-}
-
-footer {
-	margin-top: 20px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	background-color: #efefef;
-}
-
-.nav>li .count {
-	position: absolute;
-	top: 10%;
-	right: 25%;
-	font-size: 10px;
-	font-weight: normal;
-	background: rgba(41, 200, 41, 0.75);
-	color: rgb(255, 255, 255);
-	line-height: 1em;
-	padding: 2px 4px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	-ms-border-radius: 10px;
-	-o-border-radius: 10px;
-	border-radius: 10px;
-}
-</style>
 </head>
 
 <!-- HTML code from Bootply.com editor -->
@@ -134,77 +101,13 @@ footer {
 		src="js/bootstrap/bootstrap-alert.js"></script>
 	<script type="text/javascript" language="javascript"
 		src="js/dataValidatorPerso.js"></script>
+		
+	<script type="text/javascript" src="js/inscription.js"></script>
 
 
 
 	<script type="text/javascript" language="javascript"
 		src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-
-	<script type="text/javascript">
-		$('#tableau').DataTable( {
-		    language: {
-		    	processing:     "Traitement en cours...",
-		        search:         "Rechercher&nbsp;:",
-		        lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
-		        info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-		        infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-		        infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-		        infoPostFix:    "",
-		        loadingRecords: "Chargement en cours...",
-		        zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-		        emptyTable:     "Aucune donnée disponible dans le tableau",
-		        paginate: {
-		            first:      "Premier",
-		            previous:   "Pr&eacute;c&eacute;dent",
-		            next:       "Suivant",
-		            last:       "Dernier"
-		        },
-		        aria: {
-		            sortAscending:  ": activer pour trier la colonne par ordre croissant",
-		            sortDescending: ": activer pour trier la colonne par ordre décroissant"
-		        }
-		        
-			        
-		    }
-		} );
-		</script>
-	<!--Integration des fichiers js de chaque page-->
-	<script type="text/javascript"
-		src="../../js/<?php echo ($page . ".js"); ?>"></script>
-	<script type="text/javascript" src="../../js/commun.js"></script>
-
-	<script>
-            (function(i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function() {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'UA-40413119-1', 'bootply.com');
-            ga('send', 'pageview');
-        </script>
-	<!-- Quantcast Tag -->
-	<script type="text/javascript">
-            var _qevents = _qevents || [];
-
-            (function() {
-                var elem = document.createElement('script');
-                elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
-                elem.async = true;
-                elem.type = "text/javascript";
-                var scpt = document.getElementsByTagName('script')[0];
-                scpt.parentNode.insertBefore(elem, scpt);
-            })();
-
-            _qevents.push({
-                qacct: "p-0cXb7ATGU9nz5"
-            });
-        </script>
 
 </body>
 </html>

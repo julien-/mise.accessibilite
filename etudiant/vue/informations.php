@@ -1,6 +1,12 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="../../js/googleChartToolsLineChart.js"></script>
-
+<?php 
+if ($themeAdded)
+{
+	$alerte = new AlerteSuccess('Thème modifié !');
+	$alerte->show();
+}
+?>
 <div class="row">
 	<div class="col-md-3">
 		<div class="panel panel-default" style="height:200px;">

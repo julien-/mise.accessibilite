@@ -11,7 +11,7 @@ class DAOEtudiant extends DAOStandard
   
   public function add(Etudiant $etudiant)
   {
-  	$result = $this->executeQuery('INSERT INTO etudiant SET admin = ' . $etudiant->getAdmin() . ', nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . md5($etudiant->getPass()) . '"');
+  	$result = $this->executeQuery('INSERT INTO etudiant SET admin = ' . $etudiant->getAdmin() . ', nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '"');
   }
   
   public function update(Etudiant $etudiant)
@@ -34,6 +34,12 @@ class DAOEtudiant extends DAOStandard
   	$result = $this->executeQuery('UPDATE etudiant
   									SET pass_etu = "' . md5($password) . '"
   									WHERE id_etu = ' . $idEtu);
+  }
+  
+  public function getLastInsertEtudiant() {
+  	$result = $this->executeQuery("SELECT LAST_INSERT_ID() AS id_etu FROM etudiant");
+  	$id_etu = $this->fetchArray ( $result );
+  	return $id_etu['id_etu'];
   }
   
   public function delete($id)

@@ -8,8 +8,6 @@ $db = DBFactory::getMysqlConnexionWithMySQLi();
 $daoMessagerie= new DAOMessagerie($db);
 $daoEtudiant= new DAOEtudiant($db);
 
-$redirige = false;
-
 if (isset($_POST["envoyer"])) {
 	
 	if($_POST['destinataire'] != "" && $_POST['titre'] != "" & $_POST['message'] != "" )
@@ -25,10 +23,10 @@ if (isset($_POST["envoyer"])) {
 				'lu' => 0
 		));
 		$daoMessagerie->send($message);
-	
-		$message = "Message envoyé avec succes";
-		$redirige = true;
+		$_SESSION['messageAdded'] = 'true';
+		$referrer = str_replace ("envoyer_messagerie" ,"envoyes_messagerie" , $_SESSION['referrer']);
 	}
 }
-header('Location: ' . $_SESSION['referrer']);
+
+header('Location: ' . $referrer);
 ?>

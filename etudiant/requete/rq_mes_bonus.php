@@ -7,8 +7,6 @@ $db = DBFactory::getMysqlConnexionStandard();
 $daoAvancement_bonus= new DAOAvancement_bonus($db);
 $daoBonus= new DAOBonus($db);
 
-$redirige = false;
-
 if (isset($_GET["addbonus"])) {
 	$daoBonus->insertByTitreTypeTheme($_POST['titrebonus'], $_POST['typebonus'], $_POST['themebonus']);
 	$id_bonus = $daoBonus->getLastInsertBonus();
@@ -20,7 +18,7 @@ if (isset($_GET["addbonus"])) {
 			$daoAvancement_bonus->insertFaitByEtuBonus($id_etu, $id_bonus);
 		}
 	}
-	$redirige = true;
+	$_SESSION['bonusAdded'] = 'true';
 }
 
 

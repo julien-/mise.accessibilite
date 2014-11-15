@@ -6,14 +6,10 @@ $db = DBFactory::getMysqlConnexionStandard();
 
 $daoInscription= new DAOInscription($db);
 
-$redirige = false;
-
 if (isset($_GET["inscriptioncours"])) {
 	$now = date("Y-m-d");
 	$daoInscription->insertByDateAndEtuAndCours($now, $_SESSION['currentUser']->getId(), $_POST['id_cours']);
-	 
-	$message = "Inscription réalisée avec succès";
-	$redirige = true;
+	$_SESSION['inscriptionAdded'] = 'true';
 }
 
 

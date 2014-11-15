@@ -1,5 +1,12 @@
 <a class="btn btn-primary" href="index.php?section=reception_messagerie">Boite de reception</a>
 <a class="btn btn-primary" href="index.php?section=envoyer_messagerie">Envoyer un message</a>
+<?php 
+if ($messageAdded)
+{
+	$alerte = new AlerteSuccess('Message envoyé !');
+	$alerte->show();
+}
+?>
 <h1>Boite d'envoi</h1>
 <?php
 if (sizeof($listeMessages) == 0) 

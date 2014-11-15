@@ -1,4 +1,22 @@
 <?php 
+if ($remarqueAdded)
+{
+	$alerte = new AlerteSuccess('Remarque ajoutée !');
+	$alerte->show();
+}
+
+if ($noteAdded)
+{
+	$alerte = new AlerteSuccess('Note ajoutée !');
+	$alerte->show();
+}
+
+if ($suiviAdded)
+{
+	$alerte = new AlerteSuccess('Suivi ajouté !');
+	$alerte->show();
+}
+
 foreach($listeThemes as $theme)
 {
 	$listeBonus = $daoBonus->getAllByThemeExceptMine($theme->getId(), $_SESSION['currentUser']->getId());

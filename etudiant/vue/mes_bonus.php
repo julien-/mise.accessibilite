@@ -1,4 +1,10 @@
 <?php 
+if ($bonusAdded)
+{
+	$alerte = new AlerteSuccess('Bonus ajouté !');
+	$alerte->show();
+}
+
 foreach($listeThemes as $theme)
 {
 	$listeMesBonus = $daoAvancement_bonus->getByThemeEtudiantFait($theme->getId(),$_SESSION['currentUser']->getId());
