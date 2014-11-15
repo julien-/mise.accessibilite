@@ -113,8 +113,8 @@ foreach ( $listeThemes as $theme ) {
 							id="titre-theme-<?php echo $theme->getId(); ?>"
 							data-modif-theme-id="<?php echo $theme->getId(); ?>"
 							data-toggle="collapse"
-							data-target="#bloc-<?php echo $theme->getId(); ?>">
-						<?php echo $theme->getTitre(); ?>
+							data-target="#bloc-<?php echo $theme->getId(); ?>"><h3>
+						<?php echo $theme->getTitre(); ?></h3>
 					</a>
 					</div>
 					<div class="col-lg-2">

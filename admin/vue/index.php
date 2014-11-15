@@ -10,11 +10,11 @@
         <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="../../css/bootstrap/bootstrap-tour.min.css" rel="stylesheet">
         <link href="../../css/bootstrap/dataTables.bootstrap.css" rel="stylesheet">
+        <link href="../../css/bootstrap/datepicker/datepicker3.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
         <link href="../../css/typeahead.css" rel="stylesheet">
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
-        <link href="../../css/style.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
         <?php if (file_exists("../../css/" . $pageWithoutPath . ".css")){?>
@@ -184,6 +184,7 @@
 		<script type="text/javascript" src="../../js/bootstrap/bootstrap-tour.min.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/typeahead.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/handlebars.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap/datepicker/bootstrap-datepicker.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/jquery.validate.min.js"></script>
 		<script type="text/javascript" src='../../js/googleChartAPI.js'></script>
 		<script type="text/javascript" src="../../js/commun.js"></script>

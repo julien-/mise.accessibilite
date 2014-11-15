@@ -33,6 +33,7 @@ function TAB_selon_COURS() {
 
 $('.interactive-table').DataTable( {
 	"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ 1,2 ] }],
+	"iDisplayLength": 50,
     language: {
     	processing:     "Traitement en cours...",
         search:         "Rechercher&nbsp;:",
@@ -61,7 +62,6 @@ $('.interactive-table').DataTable( {
 
 $(document).ready(function()
 {
-	
     var nb_cours = $("#liste_cours option").length;
 
     if (nb_cours > 0)
@@ -94,3 +94,47 @@ $(document).ready(function()
 
 }
 );
+
+$('.input-date').datepicker();
+
+$(".edit-date").click(function() {
+	clickedIndex = $(this).data('id-seance');	
+	
+	if ($("#input-date-" + clickedIndex).val() != '')
+	{
+		if (isValidDate($("#input-date-" + clickedIndex).val()))
+		{
+			var donnees = {};
+			donnees["id-seance"] = clickedIndex;
+		    donnees["date-seance"] = $("#input-date-" + clickedIndex).val();
+		    donnees["edit"] = "edit";
+		
+		
+		    var ajax = $.ajax({
+		        type: "post",
+		        url: "../requetes/rq_seance.php",
+		        dataType: "html",
+		        data: donnees,
+		        success: function(data) {
+		        	
+		        	$("#label-date-" + clickedIndex).text($("#input-date-" + clickedIndex).val());
+		        	$("#label-sort-date-" + clickedIndex).text(data);
+		        	$("#input-date-" + clickedIndex).val('');
+
+		        	alertSuccess('Date modifiée');
+		        },
+		        error: function() {
+		        	alert('erreur');
+		        }
+		    });
+		}
+		else
+		{
+			alertDanger('Date invalide !');
+		}
+	}
+	else
+	{
+		alertDanger('La date est vide !');
+	}
+});

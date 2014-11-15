@@ -1,3 +1,4 @@
+<div id="alerts"></div>
 <?php 
 if (sizeof($listeSeance) > 0)
 {
@@ -17,16 +18,14 @@ if (sizeof($listeSeance) > 0)
             ?>
                 <tr class="trSEANCE_<?php echo($seance->getCours()->getId()); ?>" >   <!--Pour savoir s'il faut afficher ou pas-->
                     <td class="autre_colonne vert-align">
-                    	<span style="display:none"><?php echo $seance->getDate();?></span>
-                    	<?php echo Outils::dateToFr($seance->getDate()); ?><!--Date de la séance-->
+                    	<span id="label-sort-date-<?php echo $seance->getId(); ?>"style="display:none"><?php echo $seance->getDate();?></span>
+                    	<span id="label-date-<?php echo $seance->getId(); ?>"><?php echo Outils::dateToFr($seance->getDate()); ?></span>
                    	</td>
                     <td class="autre_colonne">
-                        <form method="post" name="form_seance_<?php echo $seance->getId();?>" action="../controleur/rq_seance.php?section=seance&majseance=<?php echo($seance->getId()); ?>">
                             <!-- Saisie de la date -->
-                            <input type="date" class="input-text" name="dateseancemaj" id="dateseancemaj"/>
+                            <input type="text" type="text" class="input-text form-control input-date" name="dateseancemaj"  id="input-date-<?php echo $seance->getId(); ?>"/>
                             <!--submit-->
-                            <a href="#" onClick=form_seance_<?php echo($seance->getId()); ?>.submit()><i class="glyphicon glyphicon-pencil" title="Modifier la date de cette séance"></i></a>
-                        </form>
+                            <a data-id-seance="<?php echo $seance->getId(); ?>" class="pointer edit-date"><i class="glyphicon glyphicon-pencil" title="Modifier la date de cette séance"></i></a>
                     </td>
                     <td class="autre_colonne vert-align">
                    		<a href="../controleur/delete.php?seance=<?php echo($seance->getId()); ?>"><i class="glyphicon glyphicon-minus-sign" alt="Supprimer cette séance" title="Supprimer cette séance"></i></a> 
@@ -81,3 +80,4 @@ else
         </div>
      </div>
 </div>  
+<br/><br/><br/><br/>

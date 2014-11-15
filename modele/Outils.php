@@ -105,6 +105,13 @@ class Outils
 		return strftime('%d/%m/%Y',strtotime($date));
 	}
 	
+	public static function dateToUS($datefr)
+	{
+		$dateus=$datefr{6}.$datefr{7}.$datefr{8}.$datefr{9}."-".$datefr{3}.$datefr{4}."-".$datefr{0}.$datefr{1};
+		return $dateus;
+	}
+	
+	
 	public static function toUpper($string) 
 	{
 	   $string = strtoupper($string);
