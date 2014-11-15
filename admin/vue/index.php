@@ -32,7 +32,7 @@
 
     <!-- HTML code from Bootply.com editor -->
 
-    <body>
+    <body class="main">
         <div id="wrap">
             <!-- Header -->            
             <nav class="navbar navbar-default" role="navigation">
@@ -112,7 +112,7 @@
                         </div>
                         <?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 main-container">
                           <div>
         <ul class="breadcrumb">
         <?php 
@@ -186,11 +186,12 @@
 		<script type="text/javascript" src="../../js/bootstrap/handlebars.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap/jquery.validate.min.js"></script>
 		<script type="text/javascript" src='../../js/googleChartAPI.js'></script>
+		<script type="text/javascript" src="../../js/commun.js"></script>
         <!--Integration des fichiers js de chaque page-->
         <?php if (file_exists("../../js/" . $pageWithoutPath . ".js")){?>
         <script type="text/javascript" src="../../js/<?php echo ($pageWithoutPath . ".js"); ?>"></script>
         <?php }?>
-        <script type="text/javascript" src="../../js/commun.js"></script>
+       
 
         <script type="text/javascript">
 		// Instance the tour

@@ -117,6 +117,8 @@ $(".input-cours").keyup(function (e) {
 	  }
 });
 
+
+
 function changeCoursTitle()
 {
 	var donnees = {};
@@ -134,6 +136,8 @@ function changeCoursTitle()
         	$("#cours-accordion-"+clickedIndex).html(donnees["titre-cours"]);
         	$("#cours-accordion-"+clickedIndex).attr("title", donnees["titre-cours"]);
         	$("#icon-cours").removeClass('hidden');
+        	alertSuccess('Cours modifié');
+
         },
         error: function() {
         	alert('erreur');
@@ -226,6 +230,7 @@ function changeExerciseTitle()
         	$("#titre-exo-" + clickedIndex).text(donnees["titre-exo"]);
         	$("#exo-accordion-" + clickedIndex).html(donnees["titre-exo"]);
         	$("#exo-accordion-"+clickedIndex).attr("title", donnees["titre-exo"]);
+        	alertSuccess('Exercice modifié');
         },
         error: function() {
         	alert('erreur');
@@ -247,6 +252,7 @@ function deleteExercise()
         data: donnees,
         success: function() {
         	$("#E" + clickedIndex).addClass("hidden");
+        	alertSuccess('Exercice supprimé');
         },
         error: function() {
         	alert('erreur');
@@ -328,6 +334,7 @@ function changeThemeTitle()
         	$("#titre-theme-" + clickedIndex).text(donnees["titre-theme"]);
         	$("#theme-accordion-" + clickedIndex).html(donnees["titre-theme"]);
         	$("#theme-accordion-"+clickedIndex).attr("title", donnees["titre-theme"]);
+        	alertSuccess('Thème modifié');
         },
         error: function() {
         	alert('erreur');
@@ -350,6 +357,7 @@ function deleteTheme()
         success: function() {
         	$("#T" + clickedIndex).addClass("hidden");
         	$("#panel-theme-accordion-" + clickedIndex).addClass("hidden");
+        	alertSuccess('Thème supprimé');
         },
         error: function() {
         	alert('erreur');
@@ -370,5 +378,130 @@ $(".header-fichier").hover(function()
 				 }
 		);
 
+$(".edit-fichier").click(function() {
+
+	clickedIndex = $(this).data('id-fichier');
+	$("#input-fichier-" + clickedIndex).removeClass('hidden');
+	$("#input-fichier-" + clickedIndex).focus();
+	$("#edit-valid-fichier-" + clickedIndex).removeClass('hidden');
+	$("#edit-abort-fichier-" + clickedIndex).removeClass('hidden');
+	$("#icon-fichier-" + clickedIndex).addClass('hidden');
+	$("#desc-fichier-" + clickedIndex).addClass('hidden');
+	editMode = true;
+});
+
+$(".validate-icon-fichier").click(function() {
+	changeFichierDesc();
+});
+
+$(".abort-icon-fichier").click(function() {
+	$("#input-fichier-" + clickedIndex).val($("#desc-fichier-" + clickedIndex).text().trim());
+	disableEditMode();
+});
+
+$(".input-fichier").keyup(function (e) {
+	  
+	  if (e.which == 13) 
+	  {
+		  changeFichierDesc();
+	  }
+	  else if (e.which == 27)
+	  {
+		$("#input-fichier-" + clickedIndex).val($("#desc-fichier-" + clickedIndex).text().trim());
+		disableEditMode();
+	  }
+});
+
+function changeFichierDesc()
+{
+	var donnees = {};
+	donnees["id-fichier"] = clickedIndex;
+    donnees["desc-fichier"] = $("#input-fichier-" + clickedIndex).val();
+    donnees["type"] = "edit";
+    
+    var ajax = $.ajax({
+        type: "post",
+        url: "../controleur/index.php?section=gestion_cours",
+        dataType: "html",
+        data: donnees,
+        success: function() {
+        	$("#desc-fichier-" + clickedIndex).text(donnees["desc-fichier"]);
+        	$("#desc-fichier-" + clickedIndex).removeClass('hidden');
+        	alertSuccess('Description du fichier modifiée');
+        },
+        error: function() {
+        	alert('erreur');
+        }
+    });
+    disableEditMode();
+}
+
+$(".online-fichier").click(function() {
+	var donnees = {};
+	donnees["id-fichier"] = $(this).data('fichier-id');
+	$('#online-fichier-' + donnees["id-fichier"]).addClass('hidden');
+	$('#icon-online-fichier-' + donnees["id-fichier"]).removeClass('hidden');
+	if ($(this).is(":checked"))
+	{
+		donnees['online'] = 1;
+	}
+	else
+	{
+		donnees['online'] = 0;
+	}
+	donnees['type'] = 'online';
+	
+	var ajax = $.ajax({
+	    type: "post",
+	    url: "../controleur/index.php?section=gestion_cours",
+	    dataType: "html",
+	    data: donnees,
+	    success: function() {
+	    	$('#online-fichier-' + donnees["id-fichier"]).removeClass('hidden');
+	    	
+	    	if (donnees['online'])
+	    		alertSuccess('Fichier en ligne');
+	    	else
+	    		alertSuccess('Fichier hors ligne');
+	    	$('#icon-online-fichier-' + donnees["id-fichier"]).addClass('hidden');
+	    },
+	    error: function() {
+	    	alert('erreur');
+	    }
+	});
+});
+
+$(".delete-fichier-confirm").click(function() {
+	deleteFichier();	
+});
+
+$(".delete-fichier").click(function() {
+	
+	clickedIndex = $(this).data('id-fichier');
+	
+	disableEditMode();
+});
+
+function deleteFichier()
+{
+	var donnees = {};
+	donnees["id-fichier"] = clickedIndex;
+	donnees["type"] = "delete";
+    
+    var ajax = $.ajax({
+        type: "post",
+        url: "../controleur/index.php?section=gestion_cours",
+        dataType: "html",
+        data: donnees,
+        success: function() {
+        	$("#bloc-fichier-" + clickedIndex).addClass("hidden");
+        	alertSuccess('Fichier supprimé');
+        },
+        error: function() {
+        	alert('erreur');
+        }
+    });
+    disableEditMode();
+}
 
 /**********************************************/

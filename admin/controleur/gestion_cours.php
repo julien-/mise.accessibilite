@@ -32,6 +32,12 @@ if (isset($_POST['type']))
 			$daoCours->update($cours);
 			$_SESSION['cours'] = $cours;
 		}
+		if (isset($_POST['desc-fichier']))
+		{
+			$fichier = $daoFichiers->getByID($_POST['id-fichier']);
+			$fichier->setCommentaire($_POST['desc-fichier']);
+			$daoFichiers->update($fichier);
+		}
 	}
 	else if ($_POST['type'] == 'delete')
 	{
@@ -43,6 +49,20 @@ if (isset($_POST['type']))
 		if (isset($_POST['id-theme']))
 		{
 			$daoTheme->delete($_POST['id-theme']);
+		}
+		
+		if (isset($_POST['id-fichier']))
+		{
+			$daoFichiers->delete($_POST['id-fichier']);
+		}
+	}
+	else if ($_POST['type'] == 'online')
+	{
+		if (isset($_POST['id-fichier']))
+		{
+			$fichier = $daoFichiers->getByID($_POST['id-fichier']);
+			$fichier->setEnLigne($_POST['online']);
+			$daoFichiers->update($fichier);
 		}
 	}
 }

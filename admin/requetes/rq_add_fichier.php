@@ -28,7 +28,7 @@ if (isset($_POST["submit"])) {
     		'enLigne' => $online
     )));
 }
-
+$_SESSION['fichierAdded'] = 'true';
 // on le redirige vers la page d'où il venait avec la notification que y a eu erreur ou pas
 header('Location: ' . $_SESSION['referrer']);
 ?>

@@ -1,4 +1,4 @@
-<div class="row center-block fading-alert">
+<div class="hidden row center-block fading-alert">
 	<div class="col-lg-3">
 	</div>
 	<div class="col-lg-6 center-block">
