@@ -20,6 +20,7 @@ $daoCategorie = new DAOCategorie($db);
 $daoSujet = new DAOSujet($db);
 $daoObjectif = new DAOObjectif($db);
 $daoAssignations_objectif = new DAOAssignations_objectif($db);
+$daoFichiers = new DAOFichier($db);
 
 if(isset($_SESSION['currentUser']) && !empty($_SESSION['currentUser']))
 {

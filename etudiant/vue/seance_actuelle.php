@@ -160,12 +160,47 @@ foreach($listeThemes as $theme)
 						$avancement_pourcentage = 50;
 					elseif($avancement['assimile'] == 50)
 						$avancement_pourcentage = 100;
+					
+					$listeFichiers = $daoFichiers->getAllByExercice ( $avancement['exercice']['id'] );
 				?>
 			    <tbody>
 			        <tr>
 			            <!--Titre de l'exercice-->
 			            <td class="col-xs-4 col-sm-4">
-			                <?php echo $avancement['exercice']['titre']; ?>
+			                <a class="pointer base titre" data-toggle="collapse" data-target="#bloc-<?php echo $avancement['exercice']['id']; ?>">
+								<?php echo $avancement['exercice']['titre']; ?>
+							</a>
+							<div id="bloc-<?php echo $avancement['exercice']['id'] ?>" class="collapse">
+								<?php 
+								if (sizeof($listeFichiers) > 0)
+								{
+								?>
+									<p class="no_results">Fichier(s)</p>
+									<ul>
+								<?php
+									foreach ( $listeFichiers as $fichier ) 
+									{
+										if($fichier->getEnLigne() == 1)
+										{
+								?>
+											<li>
+												<a href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a>
+											</li>
+			        			<?php 
+										}
+									}
+								?>
+									</ul>
+								<?php
+								}
+								else 
+								{
+								?>
+									<p class="no_results">Aucun fichier pour cet exercice</p>
+								<?php 
+								}
+								?>
+			        		</div>							
 			            </td> 
 			            <!--Aide-->
 			            <td class="col-xs-2 col-sm-2 center-text">
@@ -183,7 +218,7 @@ foreach($listeThemes as $theme)
 			            <td class="col-xs-2 col-sm-2 center-text">
 			                <input type="checkbox" class="assimile" id="assimile<?php echo $avancement['exercice']['id'];?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage == 100) echo 'onClick="return false" checked="checked" title="L\'exercice a été assimile à une séance précédente"'; else echo 'name="assimile[]"';?>/>	
 			            </td>
-			        </tr>
+			        </tr>		        
 			    </tbody>
 				<?php 
 				} 
