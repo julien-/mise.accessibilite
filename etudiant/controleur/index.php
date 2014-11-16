@@ -13,6 +13,7 @@ $daoRemarque = new DAORemarque($db);
 $daoTheme = new DAOTheme($db);
 $daoBonus= new DAOBonus($db);
 $daoEtudiant= new DAOEtudiant($db);
+$daoExercice= new DAOExercice($db);
 $daoAvancement_bonus= new DAOAvancement_bonus($db);
 $daoHistorique = new DAOHistorique($db);
 $daoMessage = new DAOMessage($db);

@@ -148,29 +148,21 @@ foreach($listeThemes as $theme)
 						<th class="col-xs-2 col-sm-2 center-text">Assimile</th>
 					</tr>
 				</thead>
-				<?php
-				$listeAvancement = $daoAvancement->getTabBySeanceThemeEtudiant($id_seance, $theme->getId(), $_SESSION["currentUser"]->getId());
-				foreach ($listeAvancement as $avancement)
+				<?php				
+				$listeExercice = $daoExercice->getByAllByTheme($theme->getId());
+				foreach ( $listeExercice as $exercice )
 				{
-					
-					$avancement_pourcentage = 0;
-					if($avancement['fait'] == 25)
-						$avancement_pourcentage = 25;
-					elseif($avancement['compris'] == 25)
-						$avancement_pourcentage = 50;
-					elseif($avancement['assimile'] == 50)
-						$avancement_pourcentage = 100;
-					
-					$listeFichiers = $daoFichiers->getAllByExercice ( $avancement['exercice']['id'] );
+					$avancement = $daoAvancement->getByExerciceEtudiant($exercice->getId(), $_SESSION['currentUser']->getId());			
+					$listeFichiers = $daoFichiers->getAllByExercice ($exercice->getId());
 				?>
 			    <tbody>
 			        <tr>
 			            <!--Titre de l'exercice-->
 			            <td class="col-xs-4 col-sm-4">
-			                <a class="pointer base titre" data-toggle="collapse" data-target="#bloc-<?php echo $avancement['exercice']['id']; ?>">
-								<?php echo $avancement['exercice']['titre']; ?>
+			                <a class="pointer base titre" data-toggle="collapse" data-target="#bloc-<?php echo $exercice->getId(); ?>">
+								<?php echo $exercice->getTitre(); ?>
 							</a>
-							<div id="bloc-<?php echo $avancement['exercice']['id'] ?>" class="collapse">
+							<div id="bloc-<?php echo $exercice->getId(); ?>" class="collapse">
 								<?php 
 								if (sizeof($listeFichiers) > 0)
 								{
@@ -208,15 +200,15 @@ foreach($listeThemes as $theme)
 			            </td>
 			            <!--Fait-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			            	<input type="checkbox" class="fait" id="fait<?php echo $avancement['exercice']['id'];?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage >= 25) echo 'onClick="return false" checked="checked" title="L\'exercice a été fait à une séance précédente"'; else echo 'name="fait[]"';?>/>		            	
+			            	<input type="checkbox" class="fait" id="fait<?php echo $exercice->getId();?>" value="<?php echo $exercice->getId();?>" <?php if($avancement >= 25) echo 'onClick="return false" checked="checked" title="L\'exercice a été fait à une séance précédente"'; else echo 'name="fait[]"';?>/>		            	
 			            </td>
 			            <!--Compris-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			                <input type="checkbox" class="compris" id="compris<?php echo $avancement['exercice']['id'];?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage >= 50) echo 'onClick="return false" checked="checked" title="L\'exercice a été compris à une séance précédente"'; else echo 'name="compris[]"';?>/>	
+			                <input type="checkbox" class="compris" id="compris<?php echo $exercice->getId();?>" value="<?php echo $exercice->getId();?>" <?php if($avancement >= 50) echo 'onClick="return false" checked="checked" title="L\'exercice a été compris à une séance précédente"'; else echo 'name="compris[]"';?>/>	
 		            	</td>
 			            <!--Assimile-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			                <input type="checkbox" class="assimile" id="assimile<?php echo $avancement['exercice']['id'];?>" value="<?php echo $avancement['exercice']['id']?>" <?php if($avancement_pourcentage == 100) echo 'onClick="return false" checked="checked" title="L\'exercice a été assimile à une séance précédente"'; else echo 'name="assimile[]"';?>/>	
+			                <input type="checkbox" class="assimile" id="assimile<?php echo $exercice->getId();?>" value="<?php echo $exercice->getId();?>" <?php if($avancement == 100) echo 'onClick="return false" checked="checked" title="L\'exercice a été assimile à une séance précédente"'; else echo 'name="assimile[]"';?>/>	
 			            </td>
 			        </tr>		        
 			    </tbody>

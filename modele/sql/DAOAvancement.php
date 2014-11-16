@@ -345,12 +345,7 @@ class DAOAvancement extends DAOStandard
   
   	
   function getTabByThemeEtudiant($idTheme, $idEtudiant)
-  {
-  	/*$result = $this->executeQuery('SELECT * FROM avancement, theme, exercice, seance
-  			WHERE avancement.id_etu = ' . $idEtudiant . '
-			AND avancement.id_exo = exercice.id_exo
-  			AND exercice.id_theme = '. $idTheme);*/
-  	
+  {  	
   	$result = $this->executeQuery('SELECT e.id_exo, titre_exo, num_exo, e.id_theme, titre_theme, COALESCE(SUM(fait), 0) AS fait, COALESCE(SUM(compris), 0) AS compris, COALESCE(SUM(assimile), 0) AS assimile
   	FROM theme t, exercice e
   	LEFT JOIN avancement a ON e.id_exo = a.id_exo
@@ -445,5 +440,33 @@ class DAOAvancement extends DAOStandard
   							compris = 0,
   							assimile = 50,
   							id_seance = ' . $id_seance);
+  }
+  
+  public function getBySeanceExerciceEtudiant($idSeance, $idExo, $idEtu)
+  {
+  	$result = $this->executeQuery('SELECT COALESCE(SUM(fait), 0) AS fait, COALESCE(SUM(compris), 0) AS compris, COALESCE(SUM(assimile), 0) AS assimile
+  									FROM avancement
+  									WHERE id_etu = ' . $idEtu . '
+  									AND id_exo = ' . $idExo . '
+  									AND id_seance <= '.$idSeance);
+  	
+  	$avancement = $this->fetchArray($result);
+  	 
+  	$avancement_pourcentage = $avancement['fait'] + $avancement['compris'] + $avancement['assimile'];
+  	 
+  	return $avancement_pourcentage;
+  }
+  
+  public function getByExerciceEtudiant($idExo, $idEtu)
+  {
+  	$result = $this->executeQuery('SELECT COALESCE(SUM(fait), 0) AS fait, COALESCE(SUM(compris), 0) AS compris, COALESCE(SUM(assimile), 0) AS assimile
+  									FROM avancement
+  									WHERE id_etu = ' . $idEtu . '
+  									AND id_exo = ' . $idExo);
+  	$avancement = $this->fetchArray($result);
+  	
+  	$avancement_pourcentage = $avancement['fait'] + $avancement['compris'] + $avancement['assimile'];
+  	
+  	return $avancement_pourcentage;
   }
 }

@@ -3,12 +3,11 @@ class Avancement {
 	protected 
 	$etudiant,
 	$exercice,
-	$theme,
-	$cours,
 	$fait,
 	$compris,
 	$assimile,
 	$seance,
+	$date,
 	$avancement;
 	
 	public function __construct($theme, $avancement) {
@@ -54,10 +53,8 @@ class Avancement {
 	function getAssimile() { return $this->assimile; }
 	function setSeance($seance) { $this->seance = $seance; }
 	function getSeance() { return $this->seance; }
+	function setDate($date) { $this->date = $date; }
+	function getDate() { return $this->date; }
 	function setAvancement($avancement) { $this->avancement = $avancement; }
 	function getAvancement() { return $this->avancement; }
-	function setCours($cours) { $this->cours = $cours; }
-	function getCours() { return $this->cours; }
-	function setTheme($theme) { $this->theme = $theme; }
-	function getTheme() { return $this->theme; }
 }

@@ -72,35 +72,29 @@ foreach($listeThemes as $theme)
 						<th class="col-xs-2 col-sm-2 center-text">Assimile</th>
 					</tr>
 				</thead>
-				<?php
-				$listeAvancement = $daoAvancement->getTabBySeanceThemeEtudiant($_GET["id_seance"], $theme->getId(), $_SESSION["currentUser"]->getId());
-				foreach ($listeAvancement as $avancement)
+				<?php					
+				$listeExercice = $daoExercice->getByAllByTheme($theme->getId());
+				foreach ( $listeExercice as $exercice )
 				{
-					$avancement_pourcentage = 0;
-					if($avancement['fait'] == 25)
-						$avancement_pourcentage = 25;
-					elseif($avancement['compris'] == 25)
-						$avancement_pourcentage = 50;
-					elseif($avancement['assimile'] == 50)
-						$avancement_pourcentage = 100;
+					$avancement = $daoAvancement->getBySeanceExerciceEtudiant($_GET["id_seance"], $exercice->getId(), $_SESSION['currentUser']->getId());
 				?>
 			    <tbody>
 			        <tr>
 			            <!--Titre de l'exercice-->
 			            <td class="col-xs-6 col-sm-6">
-			                <?php echo $avancement['exercice']['titre']; ?>
+			                <?php echo $exercice->getTitre(); ?>
 			            </td> 
 			            <!--Fait-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			            	<i class="<?php if($avancement_pourcentage >= 25) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
+			            	<i class="<?php if($avancement >= 25) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
 			            </td>
 			            <!--Compris-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			                 <i class="<?php if($avancement_pourcentage >= 50) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
+			                 <i class="<?php if($avancement >= 50) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
 			            </td>
 			            <!--Assimile-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			                 <i class="<?php if($avancement_pourcentage == 100) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
+			                 <i class="<?php if($avancement == 100) echo "glyphicon glyphicon-ok"; else echo "glyphicon glyphicon-remove";?>"></i>
 			            </td>
 			        </tr>
 			    </tbody>
