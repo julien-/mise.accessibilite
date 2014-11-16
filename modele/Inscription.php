@@ -2,6 +2,7 @@
 class Inscription {
 	
 	protected 
+	$id,
 	$cours,
 	$etudiant,
 	$date,
@@ -25,6 +26,15 @@ class Inscription {
 				$this->$methode ( $valeur );
 			}
 		}
+	}
+	
+	public function getId() {
+		return $this->id;
+	}
+	
+	public function setId($id) {
+		$this->id = $id;
+		return $this;
 	}
 	
 	public function getCours() {

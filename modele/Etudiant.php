@@ -1,6 +1,6 @@
 <?php
 class Etudiant {
-	protected $id, $nom, $prenom, $login, $pass, $mail, $admin;
+	protected $id, $nom, $prenom, $login, $pass, $mail, $avatar, $admin;
 	
 	
 	public function __construct($valeurs = array()) {
@@ -66,5 +66,11 @@ class Etudiant {
 	}
 	public function getPrenomNom() {
 		return $this->getPrenom() . ' ' . $this->getNom();
+	}
+	public function setAvatar($avatar) {
+		$this->avatar = $avatar;
+	}
+	public function getAvatar() {
+		return $this->avatar;
 	}
 }

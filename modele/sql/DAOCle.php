@@ -1,7 +1,14 @@
 <?php
 class DAOCle extends DAOStandard
 {
-  
+	public function saveOrUpdate(Cle $cle)
+	{
+		if (exists($cours))
+			$this->update($cours);
+		else
+			$this->save($cours);
+	}
+	
 	public function save(Cle $cle)
 	{
 		$this->executeQuery('INSERT INTO cle SET valeur_cle = "' . md5($cle->getCle()) . '"');
@@ -14,12 +21,16 @@ class DAOCle extends DAOStandard
 		$this->executeQuery('UPDATE cle SET valeur_cle = "' . $cle->getCle() . '" WHERE id_cours = ' . $cle->getId());
 	}
 	
-	public function saveOrUpdate(Cle $cle)
+	public function getByID($id)
 	{
-		if (exists($cours))
-			$this->update($cours);
-		else
-			$this->save($cours);
+	  	$result = $this->executeQuery('SELECT * FROM cle WHERE id_cle = ' . $id);
+	  	
+	  	$cle = $this->fetchArray($result);
+	
+	  	if ($cle == null)
+	  		return false;
+	  	
+	  	return new Cle(array('id' => $cle['id_cle'], 'cle' => $cle['valeur_cle']));
 	}
   
   	public function exists(Cle $cle)

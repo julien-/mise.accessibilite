@@ -34,6 +34,8 @@ class DAORemarque extends DAOStandard
 	
 	public function getByEtuSeance($id_etu, $id_seance)
 	{
+		$daoEtudiant = new DAOEtudiant($db);
+		$daoSeance = new DAOSeance($db);
 		
 		$result = $this->executeQuery('SELECT * FROM remarque_seances, etudiant e1, etudiant e2, seance, cours, cle 
 						WHERE remarque_seances.id_seance = '.$id_seance.' 
@@ -49,29 +51,10 @@ class DAORemarque extends DAOStandard
 		if ($remarque == null)
 			return false;
 		else 
-		{
-			return new Remarque(array('seance' => new Seance(array('id' => $remarque['id_seance'],
-																	'date' => $remarque['date_seance'],
-																	'cours' => new Cours(array(	'id' => $remarque['id_cours'], 
-																  								'libelle' => $remarque['libelle_cours'], 
-																  								'couleurCalendar' => $remarque['couleur_calendar'], 
-																  								'prof' => new Professeur(array('id' => $remarque['id_etu'], 
-																						  										'nom' => $remarque['nom_etu'], 
-																						  										'prenom' => $remarque['prenom_etu'], 
-																						  										'mail' => $remarque['mail_etu'], 
-																						  										'login' => $remarque['pseudo_etu'],
-																						  										'pass' => $remarque['pass_etu'],
-																						  										'admin' => $remarque['admin'])),
-																  								'cle' => new Cle(array('id' => $remarque['id_cle'],
-																  														'cle' => $remarque['valeur_cle'])))))),
-									'etudiant' => new Etudiant(array('id' => $remarque['id_etu'],
-															  	 'nom' => $remarque['nom_etu'],
-															  	 'prenom' => $remarque['prenom_etu'],
-															  	 'mail' => $remarque['mail_etu'],
-															  	 'login' => $remarque['pseudo_etu'],
-															  	 'pass' => $remarque['pass_etu'],
-															  	 'admin' => $remarque['admin'])),
-									'remarque' => $remarque['remarque']));
+		{			
+			return new Remarque(array(	'seance' => $daoSeance->getByID($remarque['id_seance']),
+										'etudiant' => $daoEtudiant->getByID($remarque['id_etu']),
+										'remarque' => $remarque['remarque']));
 		}		
 	}
 }

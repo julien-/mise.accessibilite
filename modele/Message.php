@@ -5,8 +5,7 @@ class Message {
 	$auteur,
 	$message,
 	$dateReponse,
-	$sujet
-	;
+	$sujet;
 
 	
 	public function __construct($valeurs = array()) {

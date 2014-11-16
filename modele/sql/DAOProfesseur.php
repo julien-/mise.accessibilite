@@ -27,7 +27,7 @@ class DAOProfesseur extends DAOEtudiant
 	  
 	  public function getByID($id)
 	  {
-	  	$result = $this->executeQuery('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE id_etu = ' . $id);
+	  	$result = $this->executeQuery('SELECT * FROM etudiant WHERE id_etu = ' . $id);
 	  	
 	  	$professeur = $this->fetchArray($result);
 	
@@ -40,6 +40,7 @@ class DAOProfesseur extends DAOEtudiant
   								'mail' => $professeur['mail_etu'], 
   								'login' => $professeur['pseudo_etu'],
   								'pass' => $professeur['pass_etu'],
-  								'admin' => $professeur['admin']));
+  								'admin' => $professeur['admin'],
+	  							'avatar' => $professeur['avatar']));
 	  }
 }

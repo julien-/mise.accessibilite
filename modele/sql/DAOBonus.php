@@ -22,14 +22,8 @@ class DAOBonus extends DAOStandard {
 		$this->executeQuery('DELETE FROM bonus WHERE id_bonus = ' . $id);
 	}
 	
-	public function insertByTitreTypeTheme($titre, $type, $theme) {
-	
-		$this->executeQuery ( 'INSERT INTO bonus
-								SET
-								titre_bonus = "' . $titre . '",
-								type_bonus = "' . $type . '",
-								id_theme = ' . $theme);
-		
+	public function insertByTitreTypeTheme($titre, $type, $theme) {	
+		$this->executeQuery ( 'INSERT INTO bonus SET titre_bonus = "' . $titre . '", type_bonus = "' . $type . '", id_theme = ' . $theme);		
 	}
 	
 	public function getLastInsertBonus() {
@@ -39,6 +33,9 @@ class DAOBonus extends DAOStandard {
 	}
 	
 	public function getByID($id) {
+		
+		$daoTheme = new DAOTheme($db);
+		
 		$result = $this->executeQuery ( 'SELECT *
 										FROM bonus, theme, cours, etudiant, cle
 										WHERE bonus.id_bonus = ' . $id . '
@@ -52,33 +49,14 @@ class DAOBonus extends DAOStandard {
 				'id' => $bonus ['id_bonus'],
 				'titre' => $bonus ['titre_bonus'],
 				'type' => $bonus ['type_bonus'],
-				'theme' => new Theme ( array (
-						'id' => $bonus ['id_theme'],
-						'titre' => $bonus ['titre_theme'],
-						'cours' => new Cours ( array (
-								'id' => $bonus ['id_cours'],
-								'libelle' => $bonus ['libelle_cours'],
-								'couleurCalendar' => $bonus ['couleur_calendar'],
-								'idProf' => new Professeur ( array (
-										'id' => $bonus ['id_etu'],
-										'nom' => $bonus ['nom_etu'],
-										'prenom' => $bonus ['prenom_etu'],
-										'mail' => $bonus ['mail_etu'],
-										'login' => $bonus ['pseudo_etu'],
-										'pass' => $bonus ['pass_etu'],
-										'admin' => $bonus ['admin'] 
-								) ),
-								'idCle' => new Cle ( array (
-										'id' => $bonus ['id_cle'],
-										'cle' => $bonus ['valeur_cle'] 
-								) ) 
-						) )
-				
-				) )
+				'theme' => $daoTheme->getByID($bonus ['id_theme'])
 		) );
 	}
 	
 	public function getAllByTheme($id_theme) {
+		
+		$daoTheme = new DAOTheme($db);
+		
 		$result = $this->executeQuery ( 'SELECT *
 										FROM bonus, theme, cours, etudiant, cle
 										WHERE bonus.id_theme = ' . $id_theme . '
@@ -94,28 +72,7 @@ class DAOBonus extends DAOStandard {
 					'id' => $bonus ['id_bonus'],
 					'titre' => $bonus ['titre_bonus'],
 					'type' => $bonus ['type_bonus'],
-					'theme' => new Theme ( array (
-							'id' => $bonus ['id_theme'],
-							'titre' => $bonus ['titre_theme'],
-							'cours' => new Cours ( array (
-									'id' => $bonus ['id_cours'],
-									'libelle' => $bonus ['libelle_cours'],
-									'couleurCalendar' => $bonus ['couleur_calendar'],
-									'idProf' => new Professeur ( array (
-											'id' => $bonus ['id_etu'],
-											'nom' => $bonus ['nom_etu'],
-											'prenom' => $bonus ['prenom_etu'],
-											'mail' => $bonus ['mail_etu'],
-											'login' => $bonus ['pseudo_etu'],
-											'pass' => $bonus ['pass_etu'],
-											'admin' => $bonus ['admin'] 
-									) ),
-									'idCle' => new Cle ( array (
-											'id' => $bonus ['id_cle'],
-											'cle' => $bonus ['valeur_cle'] 
-									) ) 
-							) ) 
-					) )
+					'theme' => $daoTheme->getByID($bonus ['id_theme'])
 			) );
 		}
 		return $listeBonus;
@@ -123,6 +80,8 @@ class DAOBonus extends DAOStandard {
 	
 	public function getAllByThemeExceptMine($idTheme, $idEtu)
 	{
+		$daoTheme = new DAOTheme($db);
+		
 		$sql = 'CREATE TEMPORARY TABLE R1
         SELECT id_bonus
         FROM avancement_bonus
@@ -147,28 +106,7 @@ class DAOBonus extends DAOStandard {
 					'id' => $bonus ['id_bonus'],
 					'titre' => $bonus ['titre_bonus'],
 					'type' => $bonus ['type_bonus'],
-					'theme' => new Theme ( array (
-							'id' => $bonus ['id_theme'],
-							'titre' => $bonus ['titre_theme'],
-							'cours' => new Cours ( array (
-									'id' => $bonus ['id_cours'],
-									'libelle' => $bonus ['libelle_cours'],
-									'couleurCalendar' => $bonus ['couleur_calendar'],
-									'idProf' => new Professeur ( array (
-											'id' => $bonus ['id_etu'],
-											'nom' => $bonus ['nom_etu'],
-											'prenom' => $bonus ['prenom_etu'],
-											'mail' => $bonus ['mail_etu'],
-											'login' => $bonus ['pseudo_etu'],
-											'pass' => $bonus ['pass_etu'],
-											'admin' => $bonus ['admin']
-									) ),
-									'idCle' => new Cle ( array (
-											'id' => $bonus ['id_cle'],
-											'cle' => $bonus ['valeur_cle']
-									) )
-							) )
-					) )
+					'theme' => $daoTheme->getByID($bonus ['id_theme'])
 			) );
 		}
 		

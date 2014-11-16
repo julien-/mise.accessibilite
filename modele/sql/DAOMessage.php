@@ -34,6 +34,8 @@ class DAOMessage extends DAOStandard
 	public function getByID($id)
 	{
 		$daoSujet = new DAOSujet($db);
+		$daoEtudiant = new DAOEtudiant($db);
+		
 		$ressource = $this->executeQuery("SELECT * 
 				FROM forum_categorie f, cours c, cle, etudiant e, forum_sujets s, forum_reponses r 
 				WHERE f.id_cours = c.id_cours
@@ -46,22 +48,19 @@ class DAOMessage extends DAOStandard
 		
 		
 		$message = $this->fetchArray($ressource);
-			return new Message(array('id' => $message['id_reponse'],
-					'auteur' => new Etudiant(array(	'id' => $message['id_etu'], 
-  								'nom' => $message['nom_etu'], 
-  								'prenom' => $message['prenom_etu'], 
-  								'mail' => $message['mail_etu'], 
-  								'login' => $message['pseudo_etu'],
-  								'pass' => $message['pass_etu'],
-  								'admin' => $message['admin'])),
-					'message' => $message['message'],
-					'dateReponse' => $message['date_reponse'],
-						'sujet'=> 	$daoSujet->getByID($message['correspondance_sujet'])					
+			return new Message(array(	'id' => $message['id_reponse'],
+										'auteur' => $daoEtudiant->getByID($message['id_etu']),
+										'message' => $message['message'],
+										'dateReponse' => $message['date_reponse'],
+										'sujet'=> 	$daoSujet->getByID($message['correspondance_sujet'])					
 			));
 	}
 	
 	public function getAllBySujet($idSujet)
 	{
+		$daoEtudiant = new DAOEtudiant($db);
+		$daoSujet = new DAOSujet($db);
+		
 		$ressource = $this->executeQuery("SELECT *
 				FROM forum_categorie f, cours c, cle, etudiant e, forum_sujets s, forum_reponses r
 				WHERE f.id_cours = c.id_cours
@@ -76,18 +75,11 @@ class DAOMessage extends DAOStandard
 		
 		while($message = $this->fetchArray($ressource))
 		{
-			$listeMessages[] = new Message(array(
-								'id' => $message['id_reponse'],
-								'auteur' => new Etudiant(array(	'id' => $message['id_etu'],
-										'nom' => $message['nom_etu'],
-										'prenom' => $message['prenom_etu'],
-										'mail' => $message['mail_etu'],
-										'login' => $message['pseudo_etu'],
-										'pass' => $message['pass_etu'],
-										'admin' => $message['admin'])),
-								'message' => $message['message'],
-								'dateReponse' => $message['date_reponse'],
-								'sujet'=> $message['correspondance_sujet']
+			$listeMessages[] = new Message(array(	'id' => $message['id_reponse'],
+										'auteur' => $daoEtudiant->getByID($message['id_etu']),
+										'message' => $message['message'],
+										'dateReponse' => $message['date_reponse'],
+										'sujet'=> 	$daoSujet->getByID($message['correspondance_sujet'])					
 			));
 		}
 		
@@ -96,6 +88,9 @@ class DAOMessage extends DAOStandard
 	
 	public function getLastTenBySujet($idSujet)
 	{
+		$daoSujet = new DAOSujet($db);
+		$daoEtudiant = new DAOEtudiant($db);
+		
 		$ressource = $this->executeQuery("SELECT *
 				FROM forum_categorie f, cours c, cle, etudiant e, forum_sujets s, forum_reponses r
 				WHERE f.id_cours = c.id_cours
@@ -112,18 +107,11 @@ class DAOMessage extends DAOStandard
 	
 		while($message = $this->fetchArray($ressource))
 		{
-			$listeMessages[] = new Message(array(
-					'id' => $message['id_reponse'],
-					'auteur' => new Etudiant(array(	'id' => $message['id_etu'],
-							'nom' => $message['nom_etu'],
-							'prenom' => $message['prenom_etu'],
-							'mail' => $message['mail_etu'],
-							'login' => $message['pseudo_etu'],
-							'pass' => $message['pass_etu'],
-							'admin' => $message['admin'])),
-					'message' => $message['message'],
-					'dateReponse' => $message['date_reponse'],
-					'sujet'=> $message['correspondance_sujet']
+			$listeMessages[] = new Message(array(	'id' => $message['id_reponse'],
+										'auteur' => $daoEtudiant->getByID($message['id_etu']),
+										'message' => $message['message'],
+										'dateReponse' => $message['date_reponse'],
+										'sujet'=> 	$daoSujet->getByID($message['correspondance_sujet'])					
 			));
 		}
 	

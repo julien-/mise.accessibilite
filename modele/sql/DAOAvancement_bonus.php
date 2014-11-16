@@ -64,6 +64,9 @@ class DAOAvancement_bonus extends DAOStandard {
 	}
 	
 	public function getByThemeEtudiantFait($id_theme,$id_etu) {
+		
+		$daoTheme = new DAOTheme($db);
+		
 		$result = $this->executeQuery ( 'SELECT *
 										FROM avancement_bonus, bonus, theme, cours, cle, etudiant
 										WHERE avancement_bonus.id_etu = ' . $id_etu . '
@@ -76,42 +79,23 @@ class DAOAvancement_bonus extends DAOStandard {
 										AND cours.id_prof = etudiant.id_etu
 										GROUP BY bonus.id_bonus' );
 	
-		$listeBonus = array();
+		$listeBonus = array();		
 		while($avancement_bonus = $this->fetchArray ( $result ))
 		{			
 			$listeBonus[] = new Bonus ( array (
 				'id' => $avancement_bonus ['id_bonus'],
 				'titre' => $avancement_bonus ['titre_bonus'],
 				'type' => $avancement_bonus ['type_bonus'],
-				'theme' => new Theme ( array (
-						'id' => $avancement_bonus ['id_theme'],
-						'titre' => $avancement_bonus ['titre_theme'],
-						'cours' => new Cours ( array (
-								'id' => $avancement_bonus ['id_cours'],
-								'libelle' => $avancement_bonus ['libelle_cours'],
-								'couleurCalendar' => $avancement_bonus ['couleur_calendar'],
-								'idProf' => new Professeur ( array (
-										'id' => $avancement_bonus ['id_etu'],
-										'nom' => $avancement_bonus ['nom_etu'],
-										'prenom' => $avancement_bonus ['prenom_etu'],
-										'mail' => $avancement_bonus ['mail_etu'],
-										'login' => $avancement_bonus ['pseudo_etu'],
-										'pass' => $avancement_bonus ['pass_etu'],
-										'admin' => $avancement_bonus ['admin'] 
-								) ),
-								'idCle' => new Cle ( array (
-										'id' => $avancement_bonus ['id_cle'],
-										'cle' => $avancement_bonus ['valeur_cle'] 
-								) ) 
-						) )
-				
-				) )
+				'theme' => $daoTheme->getByID($avancement_bonus ['id_theme'])
 			) );
 		}
 		return $listeBonus;
 	}
 	
 	public function getByThemeFait($id_theme) {
+		
+		$daoTheme = new DAOTheme($db);
+		
 		$result = $this->executeQuery ( 'SELECT *
 										FROM avancement_bonus, bonus, theme, cours, cle, etudiant
 										WHERE avancement_bonus.fait = 1
@@ -130,35 +114,16 @@ class DAOAvancement_bonus extends DAOStandard {
 					'id' => $avancement_bonus ['id_bonus'],
 					'titre' => $avancement_bonus ['titre_bonus'],
 					'type' => $avancement_bonus ['type_bonus'],
-					'theme' => new Theme ( array (
-							'id' => $avancement_bonus ['id_theme'],
-							'titre' => $avancement_bonus ['titre_theme'],
-							'cours' => new Cours ( array (
-									'id' => $avancement_bonus ['id_cours'],
-									'libelle' => $avancement_bonus ['libelle_cours'],
-									'couleurCalendar' => $avancement_bonus ['couleur_calendar'],
-									'idProf' => new Professeur ( array (
-											'id' => $avancement_bonus ['id_etu'],
-											'nom' => $avancement_bonus ['nom_etu'],
-											'prenom' => $avancement_bonus ['prenom_etu'],
-											'mail' => $avancement_bonus ['mail_etu'],
-											'login' => $avancement_bonus ['pseudo_etu'],
-											'pass' => $avancement_bonus ['pass_etu'],
-											'admin' => $avancement_bonus ['admin']
-									) ),
-									'idCle' => new Cle ( array (
-											'id' => $avancement_bonus ['id_cle'],
-											'cle' => $avancement_bonus ['valeur_cle']
-									) )
-							) )
-	
-					) )
+					'theme' => $daoTheme->getByID($avancement_bonus ['id_theme'])
 			) );
 		}
 		return $listeBonus;
 	}
 	
 	public function getByEtudiantFait($id_etu) {
+		
+		$daoTheme = new DAOTheme($db);
+		
 		$result = $this->executeQuery ( 'SELECT *
 										FROM avancement_bonus, bonus, theme, cours, cle, etudiant
 										WHERE avancement_bonus.id_etu = ' . $id_etu . '
@@ -177,29 +142,7 @@ class DAOAvancement_bonus extends DAOStandard {
 					'id' => $avancement_bonus ['id_bonus'],
 					'titre' => $avancement_bonus ['titre_bonus'],
 					'type' => $avancement_bonus ['type_bonus'],
-					'theme' => new Theme ( array (
-							'id' => $avancement_bonus ['id_theme'],
-							'titre' => $avancement_bonus ['titre_theme'],
-							'cours' => new Cours ( array (
-									'id' => $avancement_bonus ['id_cours'],
-									'libelle' => $avancement_bonus ['libelle_cours'],
-									'couleurCalendar' => $avancement_bonus ['couleur_calendar'],
-									'idProf' => new Professeur ( array (
-											'id' => $avancement_bonus ['id_etu'],
-											'nom' => $avancement_bonus ['nom_etu'],
-											'prenom' => $avancement_bonus ['prenom_etu'],
-											'mail' => $avancement_bonus ['mail_etu'],
-											'login' => $avancement_bonus ['pseudo_etu'],
-											'pass' => $avancement_bonus ['pass_etu'],
-											'admin' => $avancement_bonus ['admin']
-									) ),
-									'idCle' => new Cle ( array (
-											'id' => $avancement_bonus ['id_cle'],
-											'cle' => $avancement_bonus ['valeur_cle']
-									) )
-							) )
-	
-					) )
+					'theme' => $daoTheme->getByID($avancement_bonus ['id_theme'])
 			) );
 		}
 		return $listeBonus;
@@ -237,6 +180,9 @@ class DAOAvancement_bonus extends DAOStandard {
 	}
 	
 	public function getCreateurs($id_bonus) {
+		
+		$daoEtudiant = new DAOEtudiant($db);
+		
 		$result = $this->executeQuery ( 'SELECT *
 										FROM avancement_bonus, etudiant
 										WHERE avancement_bonus.id_bonus = ' . $id_bonus . '
@@ -246,15 +192,7 @@ class DAOAvancement_bonus extends DAOStandard {
 		$listeEtudiants = array();
 		while($avancement_bonus = $this->fetchArray ( $result ))
 		{
-			$listeEtudiants[] = new Etudiant ( array (
-					'id' => $avancement_bonus ['id_etu'],
-					'nom' => $avancement_bonus ['nom_etu'],
-					'prenom' => $avancement_bonus ['prenom_etu'],
-					'mail' => $avancement_bonus ['mail_etu'],
-					'login' => $avancement_bonus ['pseudo_etu'],
-					'pass' => $avancement_bonus ['pass_etu'],
-					'admin' => $avancement_bonus ['admin']
-			) );				
+			$listeEtudiants[] = $daoEtudiant->getByID($avancement_bonus ['id_etu']);
 		}
 		return $listeEtudiants;
 	}

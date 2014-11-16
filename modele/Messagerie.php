@@ -8,8 +8,7 @@ class Messagerie {
 	$heure,
 	$titre,
 	$texte,
-	$lu
-	;
+	$lu;
 
 	public function __construct($valeurs = array()) {
 		if (! empty ( $valeurs )) // Si on a sp�cifi� des valeurs, alors on hydrate l'objet.

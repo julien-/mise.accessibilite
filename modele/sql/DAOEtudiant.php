@@ -11,12 +11,12 @@ class DAOEtudiant extends DAOStandard
   
   public function add(Etudiant $etudiant)
   {
-  	$result = $this->executeQuery('INSERT INTO etudiant SET admin = ' . $etudiant->getAdmin() . ', nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '"');
+  	$result = $this->executeQuery('INSERT INTO etudiant SET admin = ' . $etudiant->getAdmin() . ', nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '", avatar = "' . $etudiant->getAvatar() . '"');
   }
   
   public function update(Etudiant $etudiant)
   {
-  	$result = $this->executeQuery('UPDATE etudiant SET admin = ' . $etudiant->getAdmin() . ',nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '" WHERE pseudo_etu = "' . $etudiant->getLogin() . '"');
+  	$result = $this->executeQuery('UPDATE etudiant SET admin = ' . $etudiant->getAdmin() . ',nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '" WHERE pseudo_etu = "' . $etudiant->getLogin() . '", avatar = "' . $etudiant->getAvatar() . '"');
   }
   
   public function updateNomPrenomMailLoginByEtudiant($nom, $prenom, $mail, $login, $idEtu)
@@ -62,14 +62,15 @@ class DAOEtudiant extends DAOStandard
   								'mail' => $etudiant['mail_etu'], 
   								'login' => $etudiant['pseudo_etu'],
   								'pass' => $etudiant['pass_etu'],
-  								'admin' => $etudiant['admin']));
+  								'admin' => $etudiant['admin'],
+	  							'avatar' => $etudiant['avatar']));
 	  	}
 	  	return $listeEtudiants;
   }
   
   public function getByID($id)
   {
-  	$result = $this->executeQuery('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE id_etu = ' . $id);
+  	$result = $this->executeQuery('SELECT * FROM etudiant WHERE id_etu = ' . $id);
 
   	$etudiant = $this->fetchArray($result);
   	return new Etudiant(array(	'id' => $etudiant['id_etu'], 
@@ -78,12 +79,13 @@ class DAOEtudiant extends DAOStandard
   								'mail' => $etudiant['mail_etu'], 
   								'login' => $etudiant['pseudo_etu'],
   								'pass' => $etudiant['pass_etu'],
-  								'admin' => $etudiant['admin']));
+  								'admin' => $etudiant['admin'],
+	  							'avatar' => $etudiant['avatar']));
   }
   
   public function getByPseudo($pseudo)
   {
-  	$result = $this->executeQuery('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE pseudo_etu = "' . $pseudo .'"');
+  	$result = $this->executeQuery('SELECT * FROM etudiant WHERE pseudo_etu = "' . $pseudo .'"');
   
   	$etudiant = $this->fetchArray($result);  	
   	
@@ -93,26 +95,27 @@ class DAOEtudiant extends DAOStandard
   			'mail' => $etudiant['mail_etu'],
   			'login' => $etudiant['pseudo_etu'],
   			'pass' => $etudiant['pass_etu'],
-  			'admin' => $etudiant['admin']));
+  			'admin' => $etudiant['admin'],
+  			'avatar' => $etudiant['avatar']));
   }
   
   public function existsByPseudo($pseudo)
   {
-  	$result = $this->executeQuery('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE pseudo_etu = "' . $pseudo .'"');
+  	$result = $this->executeQuery('SELECT * FROM etudiant WHERE pseudo_etu = "' . $pseudo .'"');
 	
   	return $this->countRows($result) > 0;
   }
   
   public function existsByMail($mail)
   {
-  	$result = $this->executeQuery('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE mail_etu = "' . $mail .'"');
+  	$result = $this->executeQuery('SELECT * FROM etudiant WHERE mail_etu = "' . $mail .'"');
   
   	return $this->countRows($result) > 0;
   }
   
   public function existsByPseudoAndPassword($pseudo, $pass)
   {
-  	$result = $this->executeQuery('SELECT id_etu, nom_etu, prenom_etu, mail_etu, pseudo_etu, pass_etu, admin  FROM etudiant WHERE pseudo_etu = "' . $pseudo .'" AND pass_etu = "' . md5($pass) . '"');
+  	$result = $this->executeQuery('SELECT * FROM etudiant WHERE pseudo_etu = "' . $pseudo .'" AND pass_etu = "' . md5($pass) . '"');
   
   	return $this->countRows($result) > 0;
   }

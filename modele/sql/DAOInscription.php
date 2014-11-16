@@ -58,27 +58,21 @@ class DAOInscription extends DAOStandard
 	}
 	
 	  public function getAllByEtudiant($id)
-	  {
-	  	$daoEtudiant = new DAOEtudiant($this->_db);
+	  {  	
+	  	$daoEtudiant = new DAOEtudiant($db);
+	  	$daoCours = new DAOCours($db);
+	  	
 	  	$sql = 'SELECT * FROM inscription i, etudiant e, cours c, cle WHERE c.id_cle = cle.id_cle AND i.id_etu = e.id_etu AND i.id_cours = c.id_cours AND i.id_etu = ' . $id . ' GROUP BY c.id_cours';
 	  	$result = $this->executeQuery($sql);
 
 	  	$listeInscription = null;
 	  	while ($inscription = $this->fetchArray($result)) {
-	  		$listeInscription[] = new Inscription(array( 'cours' => new Cours(array(	'id' => $inscription['id_cours'],
-														  				'libelle' => $inscription['libelle_cours'],
-														  				'couleurCalendar' => $inscription['couleur_calendar'],
-														  				'prof' => $daoEtudiant->getByID($inscription['id_prof']),
-														  				'cle' => new Cle(array('id' => $inscription['id_cle'],
-														  						'cle' => $inscription['valeur_cle'])))),
-	  												'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'], 
-																			  								'nom' => $inscription['nom_etu'], 
-																			  								'prenom' => $inscription['prenom_etu'], 
-																			  								'mail' => $inscription['mail_etu'], 
-																			  								'login' => $inscription['pseudo_etu'],
-																			  								'pass' => $inscription['pass_etu'],
-																			  								'admin' => $inscription['admin'])),
-	  												'date' => $inscription['date_inscription']
+	  		$listeInscription[] = new Inscription(array('id' => $inscription['id_inscription'],
+	  													'cours' => $daoCours->getByID($inscription['id_cours']),
+	  													'etudiant' => $daoEtudiant->getByID($inscription['id_etu']),
+	  													'date' => $inscription['date_inscription'],
+	  													'couleur_fond' => $inscription['couleur_fond'],
+	  													'couleur_texte' => $inscription['couleur_texte']	  													
 	  		));
 	  	}
 	  	return $listeInscription;
@@ -86,86 +80,71 @@ class DAOInscription extends DAOStandard
 	  
 	  public function getAllByEtudiantProf($idEtudiant, $idProf)
 	  {
-	  	$daoEtudiant = new DAOEtudiant($this->_db);
+	  	$daoEtudiant = new DAOEtudiant($db);
+	  	$daoCours = new DAOCours($db);
+	  	
 	  	$sql = 'SELECT * FROM inscription i, etudiant e, cours c, cle WHERE c.id_cle = cle.id_cle AND i.id_etu = e.id_etu AND i.id_cours = c.id_cours AND i.id_etu = ' . $idEtudiant . ' AND c.id_prof = ' . $idProf . ' GROUP BY c.id_cours';
 	  	$result = $this->executeQuery($sql);
 	  
 	  	$listeInscription = null;
 	  	while ($inscription = $this->fetchArray($result)) {
-	  		$listeInscription[] = new Inscription(array( 'cours' => new Cours(array(	'id' => $inscription['id_cours'],
-	  				'libelle' => $inscription['libelle_cours'],
-	  				'couleurCalendar' => $inscription['couleur_calendar'],
-	  				'prof' => $daoEtudiant->getByID($inscription['id_prof']),
-	  				'cle' => new Cle(array('id' => $inscription['id_cle'],
-	  						'cle' => $inscription['valeur_cle'])))),
-	  				'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'],
-	  						'nom' => $inscription['nom_etu'],
-	  						'prenom' => $inscription['prenom_etu'],
-	  						'mail' => $inscription['mail_etu'],
-	  						'login' => $inscription['pseudo_etu'],
-	  						'pass' => $inscription['pass_etu'],
-	  						'admin' => $inscription['admin'])),
-	  				'date' => $inscription['date_inscription']
-	  		));
+	  		$listeInscription[] = new Inscription(array('id' => $inscription['id_inscription'],
+	  				 									'cours' => $daoCours->getByID($inscription['id_cours']),
+	  													'etudiant' => $daoEtudiant->getByID($inscription['id_etu']),
+	  													'date' => $inscription['date_inscription'],
+	  													'couleur_fond' => $inscription['couleur_fond'],
+	  													'couleur_texte' => $inscription['couleur_texte']
+	  			  		));
 	  	}
 	  	return $listeInscription;
 	  }
 	  
 	  public function getAllByProfesseur($id)
 	  {
-	  	$daoEtudiant = new DAOEtudiant($this->_db);
+	  	$daoEtudiant = new DAOEtudiant($db);
+	  	$daoCours = new DAOCours($db);
+	  	
 	  	$sql = 'SELECT * FROM inscription i, etudiant e, cours c, cle WHERE c.id_cle = cle.id_cle AND i.id_etu = e.id_etu AND i.id_cours = c.id_cours AND c.id_prof = ' . $id . ' GROUP BY e.id_etu';
 	  	$result = $this->executeQuery($sql);
 	  
 	  	$listeInscription = null;
 	  	while ($inscription = $this->fetchArray($result)) {
-	  		$listeInscription[] = new Inscription(array( 'cours' => new Cours(array(	'id' => $inscription['id_cours'],
-	  				'libelle' => $inscription['libelle_cours'],
-	  				'couleurCalendar' => $inscription['couleur_calendar'],
-	  				'prof' => $daoEtudiant->getByID($inscription['id_prof']),
-	  				'cle' => new Cle(array('id' => $inscription['id_cle'],
-	  						'cle' => $inscription['valeur_cle'])))),
-	  				'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'],
-	  						'nom' => $inscription['nom_etu'],
-	  						'prenom' => $inscription['prenom_etu'],
-	  						'mail' => $inscription['mail_etu'],
-	  						'login' => $inscription['pseudo_etu'],
-	  						'pass' => $inscription['pass_etu'],
-	  						'admin' => $inscription['admin']))));
+	  		$listeInscription[] = new Inscription(array('id' => $inscription['id_inscription'],
+	  				 									'cours' => $daoCours->getByID($inscription['id_cours']),
+	  													'etudiant' => $daoEtudiant->getByID($inscription['id_etu']),
+	  													'date' => $inscription['date_inscription'],
+	  													'couleur_fond' => $inscription['couleur_fond'],
+	  													'couleur_texte' => $inscription['couleur_texte']
+	  			  		));
 	  	}
 	  	return $listeInscription;
 	  }
 	  
 	  public function getAllByCours($id)
 	  {
-	  	$daoEtudiant = new DAOEtudiant($this->_db);
+	  	$daoEtudiant = new DAOEtudiant($db);
+	  	$daoCours = new DAOCours($db);
+	  	
 	  	$sql = 'SELECT * FROM inscription i, etudiant e, cours c, cle WHERE c.id_cle = cle.id_cle AND i.id_etu = e.id_etu AND i.id_cours = c.id_cours AND i.id_cours = ' . $id . ' GROUP BY i.id_etu ORDER BY nom_etu';
 
 	  	$result = $this->executeQuery($sql);
 	  	$listeInscription = null;
 	  	while ($inscription = $this->fetchArray($result)) {
-
-	  		$listeInscription[] = new Inscription(array( 'cours' => new Cours(array(	'id' => $inscription['id_cours'],
-	  				'libelle' => $inscription['libelle_cours'],
-	  				'couleurCalendar' => $inscription['couleur_calendar'],
-	  				'prof' => $daoEtudiant->getByID($inscription['id_prof']),
-	  				'cle' => new Cle(array('id' => $inscription['id_cle'],
-	  						'cle' => $inscription['valeur_cle'])))),
-	  				'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'],
-	  						'nom' => $inscription['nom_etu'],
-	  						'prenom' => $inscription['prenom_etu'],
-	  						'mail' => $inscription['mail_etu'],
-	  						'login' => $inscription['pseudo_etu'],
-	  						'pass' => $inscription['pass_etu'],
-	  						'admin' => $inscription['admin']))));
+	  		$listeInscription[] = new Inscription(array('id' => $inscription['id_inscription'],
+	  				 									'cours' => $daoCours->getByID($inscription['id_cours']),
+	  													'etudiant' => $daoEtudiant->getByID($inscription['id_etu']),
+	  													'date' => $inscription['date_inscription'],
+	  													'couleur_fond' => $inscription['couleur_fond'],
+	  													'couleur_texte' => $inscription['couleur_texte']
+	  			  		));
 	  	}
-	  	
 	  	return $listeInscription;
 	  }
 	  
 	  public function getClassmates($id)
 	  {
 	  	$daoEtudiant = new DAOEtudiant($db);
+	  	$daoCours = new DAOCours($db);
 	  	
 	  	$sql = 'CREATE TEMPORARY TABLE R1
 				SELECT * 
@@ -174,7 +153,8 @@ class DAOInscription extends DAOStandard
 	  	$result = $this->executeQuery($sql);
 	  	
 	  	$sql = 'CREATE TEMPORARY TABLE R2
-				SELECT inscription.id_etu, nom_etu, prenom_etu, pseudo_etu, mail_etu, pass_etu, admin FROM inscription, etudiant, R1
+				SELECT inscription.id_inscription, inscription.id_cours, inscription.id_etu, inscription.date_inscription, inscription.couleur_fond, inscription.couleur_texte 
+	  			FROM inscription, etudiant, R1
 				WHERE inscription.id_cours = R1.id_cours
 				AND inscription.id_etu = etudiant.id_etu
 				;'; 
@@ -192,15 +172,13 @@ class DAOInscription extends DAOStandard
 	  	
 	  	$listeInscription = null;
 	  	while ($inscription = $this->fetchArray($result)) {
-	  		$listeInscription[] = new Inscription(array( 
-	  				'cours' => 0,
-	  				'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'],
-	  						'nom' => $inscription['nom_etu'],
-	  						'prenom' => $inscription['prenom_etu'],
-	  						'mail' => $inscription['mail_etu'],
-	  						'login' => $inscription['pseudo_etu'],
-	  						'pass' => $inscription['pass_etu'],
-	  						'admin' => $inscription['admin']))));
+	  		$listeInscription[] = new Inscription(array('id' => $inscription['id_inscription'],
+	  				 									'cours' => $daoCours->getByID($inscription['id_cours']),
+	  													'etudiant' => $daoEtudiant->getByID($inscription['id_etu']),
+	  													'date' => $inscription['date_inscription'],
+	  													'couleur_fond' => $inscription['couleur_fond'],
+	  													'couleur_texte' => $inscription['couleur_texte']
+	  			  		));
 	  	}
 	  	return $listeInscription;
 	  }
@@ -208,6 +186,7 @@ class DAOInscription extends DAOStandard
 	  public function searchClassmates($id, $query)
 	  {
 	  	$daoEtudiant = new DAOEtudiant($db);
+	  	$daoCours = new DAOCours($db);
 	  
 	  	$sql = 'CREATE TEMPORARY TABLE R1
 				SELECT *
@@ -216,7 +195,8 @@ class DAOInscription extends DAOStandard
 	  	$result = $this->executeQuery($sql);
 	  
 	  	$sql = 'CREATE TEMPORARY TABLE R2
-				SELECT inscription.id_etu, nom_etu, prenom_etu, pseudo_etu, mail_etu, pass_etu, admin FROM inscription, etudiant, R1
+				SELECT inscription.id_inscription, inscription.id_cours, inscription.id_etu, inscription.date_inscription, inscription.couleur_fond, inscription.couleur_texte 
+	  			FROM inscription, etudiant, R1
 				WHERE inscription.id_cours = R1.id_cours
 				AND inscription.id_etu = etudiant.id_etu
 	  			AND (nom_etu LIKE "%'.$query.'%"
@@ -236,22 +216,22 @@ class DAOInscription extends DAOStandard
 	  
 	  	$listeInscription = null;
 	  	while ($inscription = $this->fetchArray($result)) {
-	  		$listeInscription[] = new Inscription(array(
-	  				'cours' => 0,
-	  				'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'],
-	  						'nom' => $inscription['nom_etu'],
-	  						'prenom' => $inscription['prenom_etu'],
-	  						'mail' => $inscription['mail_etu'],
-	  						'login' => $inscription['pseudo_etu'],
-	  						'pass' => $inscription['pass_etu'],
-	  						'admin' => $inscription['admin']))));
+	  		$listeInscription[] = new Inscription(array('id' => $inscription['id_inscription'],
+	  				 									'cours' => $daoCours->getByID($inscription['id_cours']),
+	  													'etudiant' => $daoEtudiant->getByID($inscription['id_etu']),
+	  													'date' => $inscription['date_inscription'],
+	  													'couleur_fond' => $inscription['couleur_fond'],
+	  													'couleur_texte' => $inscription['couleur_texte']
+	  			  		));
 	  	}
 	  	return $listeInscription;
 	  }
 	  
 	  public function getAllByCoursExceptEtu($id_cours, $id_etu)
 	  {
-	  	$daoEtudiant = new DAOEtudiant($this->_db);
+	  	$daoEtudiant = new DAOEtudiant($db);
+	  	$daoCours = new DAOCours($db);
+	  	
 	  	$sql = 'SELECT * 
 	  			FROM inscription i, etudiant e, cours c, cle 
 	  			WHERE c.id_cle = cle.id_cle 
@@ -265,20 +245,13 @@ class DAOInscription extends DAOStandard
 	  	$result = $this->executeQuery($sql);
 	  	$listeInscription = null;
 	  	while ($inscription = $this->fetchArray($result)) {
-	  
-	  		$listeInscription[] = new Inscription(array( 'cours' => new Cours(array(	'id' => $inscription['id_cours'],
-	  				'libelle' => $inscription['libelle_cours'],
-	  				'couleurCalendar' => $inscription['couleur_calendar'],
-	  				'prof' => $daoEtudiant->getByID($inscription['id_prof']),
-	  				'cle' => new Cle(array('id' => $inscription['id_cle'],
-	  						'cle' => $inscription['valeur_cle'])))),
-	  				'etudiant' => new Etudiant(array(	'id' => $inscription['id_etu'],
-	  						'nom' => $inscription['nom_etu'],
-	  						'prenom' => $inscription['prenom_etu'],
-	  						'mail' => $inscription['mail_etu'],
-	  						'login' => $inscription['pseudo_etu'],
-	  						'pass' => $inscription['pass_etu'],
-	  						'admin' => $inscription['admin']))));
+	  		$listeInscription[] = new Inscription(array('id' => $inscription['id_inscription'],
+	  				 									'cours' => $daoCours->getByID($inscription['id_cours']),
+	  													'etudiant' => $daoEtudiant->getByID($inscription['id_etu']),
+	  													'date' => $inscription['date_inscription'],
+	  													'couleur_fond' => $inscription['couleur_fond'],
+	  													'couleur_texte' => $inscription['couleur_texte']
+	  			  		));
 	  	}
 	  	return $listeInscription;
 	  }

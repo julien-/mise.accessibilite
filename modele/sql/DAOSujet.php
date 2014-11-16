@@ -27,6 +27,8 @@ class DAOSujet extends DAOStandard
 	public function getByID($id)
 	{
 		$daoEtudiant = new DAOEtudiant($db);
+		$daoCategorie = new DAOCategorie($db);
+		
 		$ressource = $this->executeQuery("SELECT * 
 				FROM forum_categorie f, cours c, cle, etudiant e, forum_sujets s 
 				WHERE f.id_cours = c.id_cours
@@ -38,32 +40,19 @@ class DAOSujet extends DAOStandard
 		
 		
 		$sujet = $this->fetchArray($ressource);
-			return new Sujet(array('id' => $sujet['id_sujet'],
-					'auteur' => new Etudiant(array(	'id' => $sujet['id_etu'], 
-  								'nom' => $sujet['nom_etu'], 
-  								'prenom' => $sujet['prenom_etu'], 
-  								'mail' => $sujet['mail_etu'], 
-  								'login' => $sujet['pseudo_etu'],
-  								'pass' => $sujet['pass_etu'],
-  								'admin' => $sujet['admin'])),
+			return new Sujet(array('id' => $sujet['id_sujet'], 
+					'auteur' => $daoEtudiant->getByID($sujet['id_etu']),
 					'titre' => $sujet['titre'],
-					'date_derniere_reponse' => $sujet['date_derniere_reponse'],
-					'categorie' => new Categorie(array('id' => $sujet['id_categorie'],
-										'titre' => $sujet['titre_categorie'],
-										'description' => $sujet['description_categorie'],
-										'cours' => new Cours(array(	'id' => $sujet['id_cours'], 
-					  								'libelle' => $sujet['libelle_cours'], 
-					  								'couleurCalendar' => $sujet['couleur_calendar'], 
-					  								'prof' => $daoEtudiant->getByID($sujet['auteur']),
-					  								'cle' => new Cle(array('id' => $sujet['id_cle'],
-					  														'cle' => $sujet['valeur_cle'])))),
-										'parent' => $sujet['id_categorie_parent']
-			))));
+					'date_derniere_reponse' => $sujet['date_derniere_reponse'], 
+					'categorie' => $daoCategorie->getByID($sujet['id_categorie'])					
+			));
 	}
 	
 	public function getByMessage($id)
 	{
 		$daoEtudiant = new DAOEtudiant($db);
+		$daoCategorie = new DAOCategorie($db);
+		
 		$ressource = $this->executeQuery("SELECT *
 				FROM forum_reponses, forum_categorie f, cours c, cle, etudiant e, forum_sujets s
 				WHERE f.id_cours = c.id_cours
@@ -76,23 +65,18 @@ class DAOSujet extends DAOStandard
 		$sujet = $this->fetchArray($ressource);
 		return new Sujet(array(
 				'id' => $sujet['id_sujet'],
+				'auteur' => $daoEtudiant->getByID($sujet['id_etu']),
 				'titre' => $sujet['titre'],
 				'date_derniere_reponse' => $sujet['date_derniere_reponse'],
-				'categorie' => new Categorie(array('id' => $sujet['id_categorie'],
-						'titre' => $sujet['titre_categorie'],
-						'description' => $sujet['description_categorie'],
-						'cours' => new Cours(array(	'id' => $sujet['id_cours'],
-								'libelle' => $sujet['libelle_cours'],
-								'couleurCalendar' => $sujet['couleur_calendar'],
-								'cle' => new Cle(array('id' => $sujet['id_cle'],
-										'cle' => $sujet['valeur_cle'])))),
-						'parent' => $sujet['id_categorie_parent']
-				))));
+				'categorie' => $daoCategorie->getByID($sujet['id_categorie'])					
+			));
 	}
 	
 	public function getLastFiveByCours($idCours)
 	{
 		$daoEtudiant = new DAOEtudiant($db);
+		$daoCategorie = new DAOCategorie($db);
+		
 		$ressource = $this->executeQuery("SELECT *
 				FROM forum_categorie f, cours c, cle, etudiant e, forum_sujets s
 				WHERE f.id_cours = c.id_cours
@@ -109,27 +93,13 @@ class DAOSujet extends DAOStandard
 		
 		while($sujet = $this->fetchArray($ressource))
 		{
-			$result[] = new Sujet(array('id' => $sujet['id_sujet'],
-					'auteur' => new Etudiant(array(	'id' => $sujet['id_etu'],
-							'nom' => $sujet['nom_etu'],
-							'prenom' => $sujet['prenom_etu'],
-							'mail' => $sujet['mail_etu'],
-							'login' => $sujet['pseudo_etu'],
-							'pass' => $sujet['pass_etu'],
-							'admin' => $sujet['admin'])),
-					'titre' => $sujet['titre'],
-					'dateDerniereReponse' => $sujet['date_derniere_reponse'],
-					'categorie' => new Categorie(array('id' => $sujet['id_categorie'],
-							'titre' => $sujet['titre_categorie'],
-							'description' => $sujet['description_categorie'],
-							'cours' => new Cours(array(	'id' => $sujet['id_cours'],
-									'libelle' => $sujet['libelle_cours'],
-									'couleurCalendar' => $sujet['couleur_calendar'],
-									'prof' => $daoEtudiant->getByID($sujet['auteur']),
-									'cle' => new Cle(array('id' => $sujet['id_cle'],
-											'cle' => $sujet['valeur_cle'])))),
-							'parent' => $sujet['id_categorie_parent']
-					))));
+			$result[] = new Sujet(array(
+				'id' => $sujet['id_sujet'],
+				'auteur' => $daoEtudiant->getByID($sujet['id_etu']),
+				'titre' => $sujet['titre'],
+				'date_derniere_reponse' => $sujet['date_derniere_reponse'],
+				'categorie' => $daoCategorie->getByID($sujet['id_categorie'])					
+			));
 		}
 		
 		return $result;
@@ -138,6 +108,8 @@ class DAOSujet extends DAOStandard
 	public function getLastFiveByCoursEtudiant($idCours, $idEtudiant)
 	{
 		$daoEtudiant = new DAOEtudiant($db);
+		$daoCategorie = new DAOCategorie($db);
+		
 		$ressource = $this->executeQuery("SELECT *
 				FROM forum_categorie f, cours c, cle, etudiant e, forum_sujets s
 				WHERE f.id_cours = c.id_cours
@@ -155,27 +127,13 @@ class DAOSujet extends DAOStandard
 	
 		while($sujet = $this->fetchArray($ressource))
 		{
-			$result[] = new Sujet(array('id' => $sujet['id_sujet'],
-					'auteur' => new Etudiant(array(	'id' => $sujet['id_etu'],
-							'nom' => $sujet['nom_etu'],
-							'prenom' => $sujet['prenom_etu'],
-							'mail' => $sujet['mail_etu'],
-							'login' => $sujet['pseudo_etu'],
-							'pass' => $sujet['pass_etu'],
-							'admin' => $sujet['admin'])),
-					'titre' => $sujet['titre'],
-					'dateDerniereReponse' => $sujet['date_derniere_reponse'],
-					'categorie' => new Categorie(array('id' => $sujet['id_categorie'],
-							'titre' => $sujet['titre_categorie'],
-							'description' => $sujet['description_categorie'],
-							'cours' => new Cours(array(	'id' => $sujet['id_cours'],
-									'libelle' => $sujet['libelle_cours'],
-									'couleurCalendar' => $sujet['couleur_calendar'],
-									'prof' => $daoEtudiant->getByID($sujet['auteur']),
-									'cle' => new Cle(array('id' => $sujet['id_cle'],
-											'cle' => $sujet['valeur_cle'])))),
-							'parent' => $sujet['id_categorie_parent']
-					))));
+			$result[] = new Sujet(array(
+				'id' => $sujet['id_sujet'],
+				'auteur' => $daoEtudiant->getByID($sujet['id_etu']),
+				'titre' => $sujet['titre'],
+				'date_derniere_reponse' => $sujet['date_derniere_reponse'],
+				'categorie' => $daoCategorie->getByID($sujet['id_categorie'])					
+			));
 		}
 	
 		return $result;
@@ -184,6 +142,8 @@ class DAOSujet extends DAOStandard
 	public function getAllByCategorieWithStats($idCategorie)
 	{
 		$daoEtudiant = new DAOEtudiant($db);
+		$daoCategorie = new DAOCategorie($db);
+		
 		$ressource = $this->executeQuery("SELECT *
 				FROM forum_categorie f, cours c, cle, etudiant e, forum_sujets s
 				WHERE f.id_cours = c.id_cours
@@ -198,18 +158,13 @@ class DAOSujet extends DAOStandard
 		
 		while($sujet = $this->fetchArray($ressource))
 		{
-			$listeSujets[] = new Sujet(array('id' => $sujet['id_sujet'],
-					'auteur' => new Etudiant(array(	'id' => $sujet['id_etu'],
-							'nom' => $sujet['nom_etu'],
-							'prenom' => $sujet['prenom_etu'],
-							'mail' => $sujet['mail_etu'],
-							'login' => $sujet['pseudo_etu'],
-							'pass' => $sujet['pass_etu'],
-							'admin' => $sujet['admin'])),
-					'titre' => $sujet['titre'],
-					'nbMessages' => $this->getNbMessages($sujet['id_sujet']),
-					'dateDerniereReponse' => $sujet['date_derniere_reponse'],
-					'categorie' => $sujet['id_categorie']));
+			$listeSujets[] = new Sujet(array(
+				'id' => $sujet['id_sujet'],
+				'auteur' => $daoEtudiant->getByID($sujet['id_etu']),
+				'titre' => $sujet['titre'],
+				'date_derniere_reponse' => $sujet['date_derniere_reponse'],
+				'categorie' => $daoCategorie->getByID($sujet['id_categorie'])					
+			));
 		}
 		
 		return $listeSujets;
