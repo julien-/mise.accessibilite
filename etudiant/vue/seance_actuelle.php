@@ -160,7 +160,7 @@ foreach($listeThemes as $theme)
 			            <!--Titre de l'exercice-->
 			            <td class="col-xs-4 col-sm-4">
 			                <a class="pointer base titre" data-toggle="collapse" data-target="#bloc-<?php echo $exercice->getId(); ?>">
-								<?php echo $exercice->getTitre(); ?>
+								<?php echo $exercice->getTitre(); ?>&nbsp;<b class="caret"></b>
 							</a>
 							<div id="bloc-<?php echo $exercice->getId(); ?>" class="collapse">
 								<?php 
@@ -196,7 +196,65 @@ foreach($listeThemes as $theme)
 			            </td> 
 			            <!--Aide-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			            	
+			            	<a class="glyphicon glyphicon-user" data-toggle="modal" data-target="#ViewAideExercice<?php echo $exercice->getId();?>" title="Obtenir de l'aide"></a>
+			            	<!-- Popup Aide -->
+							<div class="modal fade" id="ViewAideExercice<?php echo $exercice->getId();?>" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
+							     <div class="modal-dialog">  
+								 	<div class="modal-content">
+							            <div class="modal-header">
+							                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+							                <h4 id="myModalLabel" class="modal-title">Obtenir de l'aide pour l'exercice : <?php echo $exercice->getTitre();?></h4>
+							            </div>
+										<div class="modal-body">
+											liste des étudiants qui ont assimilé l'exercice : 
+											<br><br>
+											
+					                		<?php 
+				                			$listeEtudiants = $daoAvancement->getAssimileByExercice($exercice->getId());
+				                			if ($listeEtudiants != null)
+				                			{
+					                		?>
+				                				<table id="tableau" class="interactive-table table table-striped table-bordered table-hover">
+													<thead>
+														<tr class="titre">
+															<th class="center-text">Etudiant</th>
+															<th class="center-text">Le contacter</th>
+														</tr>
+													</thead>
+													<tbody>
+													<?php 
+						                				foreach($listeEtudiants as $etudiant)
+						                				{
+					                					?>
+						                					<tr>
+        														<td class="autre_colonne">
+	        													<?php 
+							                						echo $etudiant->getPrenomNom();
+							                					?>
+						                						</td>
+						                						<td class="autre_colonne">
+						                							<i class="glyphicon glyphicon-envelope"></i>
+						                						</td>
+						                					</tr>
+					                					<?php
+						                				}
+						                				?>
+					                				</tbody>
+				                				</table>
+						                	<?php
+				                			}
+				                			else 
+				                			{
+				                				echo "Aucun étudiant n'a assimilé cet exercice";
+				                			}
+					                		?>	
+						                </div>
+						                <div class="modal-footer">
+					                		<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+					    				</div>
+							        </div>
+								</div>
+							</div>  
 			            </td>
 			            <!--Fait-->
 			            <td class="col-xs-2 col-sm-2 center-text">

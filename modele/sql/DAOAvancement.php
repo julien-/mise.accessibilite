@@ -469,4 +469,23 @@ class DAOAvancement extends DAOStandard
   	
   	return $avancement_pourcentage;
   }
+  
+  public function getAssimileByExercice($idExo)
+  {
+  	$daoEtudiant = new DAOEtudiant($db);
+  	$result = $this->executeQuery('SELECT id_etu
+  									FROM avancement
+  									WHERE id_exo = ' . $idExo . '
+  									AND assimile = 50');
+  	if ($result == null)
+  		return false;
+  	else 
+  	{
+	  	$listeEtudiants = array();
+	  	while ($avancement = $this->fetchArray($result)) {
+	  		$listeEtudiants[] = $daoEtudiant->getByID($avancement['id_etu']);
+	  	}
+	  	return $listeEtudiants;
+  	}
+  }
 }
