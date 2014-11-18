@@ -6,8 +6,8 @@ foreach($listeThemes as $theme)
 	else	
 		$listeMesBonus = $daoAvancementBonus->getByThemeEtudiantFait($theme->getId(),$_GET['e']);
 ?>
-<div class="panel panel-default">
-	<div class="panel-heading">
+	<div class="panel panel-default" style="border-color: #5b5281;">
+		<div class="panel-heading" style="background-color: #5b5281; color: white; font-weight: bold;">
 		<h3 class="panel-title">
 			<i class="glyphicon glyphicon-th-list"></i> 
 			<?php echo $theme->getTitre();?>

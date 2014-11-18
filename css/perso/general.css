@@ -75,7 +75,11 @@ body .modal-large {
 }
 
 /* Colors */
-
+.panel-purple
+{
+	background-color: red;
+	border-color: red;
+}
 .green
 {
 	color: #A8CD1B;

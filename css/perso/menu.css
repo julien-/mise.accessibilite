@@ -42,3 +42,18 @@
 .navbar-toggle {
 	outline:0;
 }
+
+.border_bottom_5px_selected
+{
+	border-bottom: 5px solid #00aaea;
+}
+
+.border_bottom_5px_nocolor
+{
+	border-bottom: 5px solid;
+}
+
+.border_bottom_5px_nocolor:hover
+{
+	border-bottom-color: #00aaea;
+}

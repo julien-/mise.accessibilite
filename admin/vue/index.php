@@ -12,6 +12,7 @@
         <link href="../../css/bootstrap/dataTables.bootstrap.css" rel="stylesheet">
         <link href="../../css/bootstrap/datepicker/datepicker3.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
+         <link href="../../css/perso/menu.css" rel="stylesheet">
         <link href="../../css/typeahead.css" rel="stylesheet">
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
@@ -57,33 +58,33 @@
 
 			  </div>
 			</nav>           
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
+            
+            <nav class="navbar navbar-custom navbar-inverse" role="navigation">
+			    <div class="container">
+			      <div class="navbar-header">
+			        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			          <span class="icon-bar"></span>
+			          <span class="icon-bar"></span>
+			          <span class="icon-bar"></span>
+			        </button>
+			      </div>
+			      <div class="collapse navbar-collapse">
+			        <ul class="nav navbar-nav nav-justified menu-item-hover">
                     <?php
                     if (isset($_SESSION['cours']))
                     {
                     ?>
-                    <div class="collapse navbar-collapse" >
-                        <ul class="nav navbar-nav">
-                            <li class="<?php if (!isset($_GET['section'])) echo "active";?>"><a href="index.php?section=gestion_cours">Gestion du cours</a></li>
-                            <li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'seance') echo "active";?>"><a href="index.php?section=seance">Séances</a></li>
-                        	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'mes_etudiants') echo "active";?>"><a href="index.php?section=mes_etudiants">Etudiants</a></li>
-                        	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'details_cours') echo "active";?>"><a href="index.php?section=details_cours">Statistiques</a></li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
+                            <li class="<?php if (!isset($_GET['section'])) echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=gestion_cours">Gestion du cours</a></li>
+                            <li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'seance') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=seance">Séances</a></li>
+                        	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'mes_etudiants') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=mes_etudiants">Etudiants</a></li>
+                        	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'details_cours') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=details_cours">Statistiques</a></li>
                     <?php
                     }
                     ?>
-                </div>
-            </nav>
+			      	</ul>
+			      </div><!--/.nav-collapse -->
+			    </div><!--/.container -->
+			</nav><!--/.navbar -->
             <!-- /Header -->
 
             
@@ -145,6 +146,20 @@
         <!-- footer -->
         <div id="footer">
         	<div class="container">
+        		<div class="row">
+        			<div class="col-lg-3" style="border-bottom: 5px solid #ff7a00;">
+        			
+        			</div>
+        			<div class="col-lg-3" style="border-bottom: 5px solid #00aaea;">
+        			
+        			</div>
+        			<div class="col-lg-3" style="border-bottom: 5px solid #c5168a;">
+        			
+        			</div>
+        			<div class="col-lg-3" style="border-bottom: 5px solid #06b709;">
+        			
+        			</div>
+        		</div>
 	            <div class="row">
 				  <div class="col-sm-4 col-sm-offset-2">
 				  	<h4>A Propos</h4>

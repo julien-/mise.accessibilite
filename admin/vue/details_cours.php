@@ -22,8 +22,8 @@
 		<div class="row">
 			<div class="col-lg-6 center-content">
 			<br/>
-				<div class="panel panel-default">
-					<div class="panel-heading">
+				<div class="panel panel-default" style="border-color: #8276b9;">
+					<div class="panel-heading" style="background-color: #8276b9; color: white; font-weight: bold;">
 						<h3 class="panel-title">
 							<i class="fa fa-line-chart"></i> Visites sur les 7 derniers jours
 						</h3>
@@ -53,9 +53,9 @@
 			</div>
 			<div class="col-lg-6 center-content">
 			</br>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">
+				<div class="panel panel-default" style="border-color: #02a5c1;">
+					<div class="panel-heading" style="background-color: #02a5c1; color: white; font-weight: bold;">
+						<h3 class="panel-title" >
 							<i class="fa fa-pie-chart"></i> Progression de la promo
 						</h3>
 					</div>
@@ -87,8 +87,8 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 	?>
 <div class="row">
 		<div class="col-lg-12 center-content">
-			<div class="panel panel-default">
-				<div class="panel-heading">
+				<div class="panel panel-default" style="border-color: #60b35c;">
+					<div class="panel-heading" style="background-color: #60b35c; color: white; font-weight: bold;">
 					<h3 class="panel-title">
 						<i class="fa fa-comments"></i> 5 derniers sujets postés sur le
 						forum
@@ -128,8 +128,8 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 ?>
 <div class="row">
 		<div class="col-lg-8 center-content">
-			<div class="panel panel-default">
-				<div class="panel-heading">
+			<div class="panel panel-default" style="border-color: #f39c12;">
+					<div class="panel-heading" style="background-color: #f39c12; color: white; font-weight: bold;">
 					<h3 class="panel-title">
 						<i class="fa fa-bell fa-fw"></i> Derni&egrave;res
 						actualit&eacute;s
@@ -218,8 +218,10 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 		</div>
 		<div class="tab-pane" id="bonus">
 			<div class="row">
+			<div class="col-lg-12">
 				<br/>
 				<?php include_once('bonus.php');?>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -29,7 +29,7 @@ if (isset($_SESSION['fichierAdded']))
 	<div class="col-lg-9"></div>
 	<div class="col-lg-3">
 		<div class="dropdown">
-			<button id="icon-cours"
+			<button id="icon-cours" style="background-color: #5b5281; color: white; font-weight: bold;"
 				data-cours-id="<?php echo $cours->getId(); ?>"
 				class="settings-icon btn btn-default dropdown-toggle"
 				type="button" id="dropdownMenu1" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> Outils
@@ -87,9 +87,9 @@ foreach ( $listeThemes as $theme ) {
 
 <div class="row">
 	<div class="col-lg-12 center-content">
-		<div class="panel panel-default" id="T<?php echo $theme->getId(); ?>">
+		<div class="panel panel-default" id="T<?php echo $theme->getId(); ?>" style="border-color: #60b35c;">
 			<div class="panel-heading header-theme"
-				data-modif-theme-id="<?php echo $theme->getId(); ?>">
+				data-modif-theme-id="<?php echo $theme->getId(); ?>" style="background-color: #60b35c; color: white; font-weight: bold;">
 				<div class="row">
 					<div class="col-lg-10">
 						<input type="text" id="theme-<?php echo $theme->getId(); ?>"
@@ -109,17 +109,17 @@ foreach ( $listeThemes as $theme ) {
 							</a>
 						</p>
 
-						<a class="pointer base titre"
+						<span class="base titre"
 							id="titre-theme-<?php echo $theme->getId(); ?>"
 							data-modif-theme-id="<?php echo $theme->getId(); ?>"
 							data-toggle="collapse"
 							data-target="#bloc-<?php echo $theme->getId(); ?>"><h3>
 						<?php echo $theme->getTitre(); ?></h3>
-					</a>
+					</span>
 					</div>
 					<div class="col-lg-2">
 						<div class="dropdown">
-							<button style="height: 30px;"
+							<button style="background-color: #5b5281; color: white; font-weight: bold;height: 30px;"
 								id="edit-icon-theme-<?php echo $theme->getId(); ?>"
 								data-modif-theme-id="<?php echo $theme->getId(); ?>"
 								class="settings-icon hidden-base hidden btn btn-default dropdown-toggle glyphicon glyphicon-cog"
