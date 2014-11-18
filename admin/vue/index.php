@@ -145,7 +145,7 @@
         </div><!-- /wrap -->
         <!-- footer -->
         <div id="footer">
-        	<div class="container">
+        	<div class="container" >
         		<div class="row">
         			<div class="col-lg-3" style="border-bottom: 5px solid #ff7a00;">
         			

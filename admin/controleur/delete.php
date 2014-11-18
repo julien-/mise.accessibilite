@@ -40,5 +40,5 @@ if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getAdmin() == 1
 		$daoBonus->delete($_GET['bonus']);
 	}
 }
-header('Location: ' . $_SESSION['referrer']);
+header('Location: ' . $_SESSION['referrer'] . '&deleted=true');
 ?>

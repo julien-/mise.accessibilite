@@ -1,4 +1,9 @@
 <?php 
+if (isset($_GET['deleted']))
+{
+	$alertDeleted = new AlerteSuccess('Bonus supprimé');
+	$alertDeleted->show();
+}
 foreach($listeThemes as $theme)
 {
 	if (!isset($_GET['e']))
