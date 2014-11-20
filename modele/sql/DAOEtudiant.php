@@ -11,12 +11,15 @@ class DAOEtudiant extends DAOStandard
   
   public function add(Etudiant $etudiant)
   {
-  	$result = $this->executeQuery('INSERT INTO etudiant SET admin = ' . $etudiant->getAdmin() . ', nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '", avatar = "' . $etudiant->getAvatar() . '"');
+  	if($etudiant->getCode_lien() != false)
+  		$result = $this->executeQuery('INSERT INTO etudiant SET admin = ' . $etudiant->getAdmin() . ', nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '", chemin_avatar = "' . $etudiant->getCode_lien() . '", code_lien = MD5("' . $etudiant->getCode_lien() . '")');
+  	else 
+  		$result = $this->executeQuery('INSERT INTO etudiant SET admin = ' . $etudiant->getAdmin() . ', nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '"');
   }
   
   public function update(Etudiant $etudiant)
   {
-  	$result = $this->executeQuery('UPDATE etudiant SET admin = ' . $etudiant->getAdmin() . ',nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '" WHERE pseudo_etu = "' . $etudiant->getLogin() . '", avatar = "' . $etudiant->getAvatar() . '"');
+  	$result = $this->executeQuery('UPDATE etudiant SET admin = ' . $etudiant->getAdmin() . ',nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '", chemin_avatar = "' . $etudiant->getCode_lien() . '", code_lien = MD5("' . $etudiant->getCode_lien() . '") WHERE pseudo_etu = "' . $etudiant->getLogin() . '"');
   }
   
   public function updateNomPrenomMailLoginByEtudiant($nom, $prenom, $mail, $login, $idEtu)
@@ -63,7 +66,7 @@ class DAOEtudiant extends DAOStandard
   								'login' => $etudiant['pseudo_etu'],
   								'pass' => $etudiant['pass_etu'],
   								'admin' => $etudiant['admin'],
-	  							'avatar' => $etudiant['avatar']));
+	  							'code_lien' => $etudiant['code_lien']));
 	  	}
 	  	return $listeEtudiants;
   }
@@ -80,7 +83,7 @@ class DAOEtudiant extends DAOStandard
   								'login' => $etudiant['pseudo_etu'],
   								'pass' => $etudiant['pass_etu'],
   								'admin' => $etudiant['admin'],
-	  							'avatar' => $etudiant['avatar']));
+	  							'code_lien' => $etudiant['code_lien']));
   }
   
   public function getByPseudo($pseudo)
@@ -96,7 +99,7 @@ class DAOEtudiant extends DAOStandard
   			'login' => $etudiant['pseudo_etu'],
   			'pass' => $etudiant['pass_etu'],
   			'admin' => $etudiant['admin'],
-  			'avatar' => $etudiant['avatar']));
+  			'code_lien' => $etudiant['code_lien']));
   }
   
   public function existsByPseudo($pseudo)
@@ -124,6 +127,21 @@ class DAOEtudiant extends DAOStandard
   {
   	$result = $this->executeQuery('SELECT *	FROM etudiant');
   	return $this->countRows($result);
+  }
+  
+  public function getCheminByCodeLienAndEtu($code,$idEtu)
+  {
+  	$daoExercice = new DAOExercice($db);
+  	$result = $this->executeQuery('SELECT chemin_avatar FROM etudiant WHERE id_etu = '.$idEtu .' AND code_lien = "' . $code . '"');
+  		
+  	if ($result == null)
+  		return false;
+  	else 
+  	{
+  		$chemin = $this->fetchArray($result);
+  		return $chemin["chemin_avatar"];
+  		
+  	}  
   }
   
 }

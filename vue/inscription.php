@@ -1,14 +1,24 @@
 <?php 
-if ($inscriptionAdded)
+if ($inscriptionCleProfInValide)
 {
 	$alerte = new AlerteDanger('Clé enseignant invalide');
-	$alerte->show();
+	$alerte->show_racine();
+}
+if ($typeFichierInvalide)
+{
+	$alerte = new AlerteDanger('Type de fichier invalide (valides : .JPG, .JPEG, .BMP, .GIF, .PNG)');
+	$alerte->show_racine();
+}
+if ($nomFichierInvalide)
+{
+	$alerte = new AlerteDanger('Nom de fichier invalide');
+	$alerte->show_racine();
 }
 ?>
 <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8" style="background-color:#FFFFFF;">
 	<h1>Inscription</h1>
 	<h4>Tous les champs sont requis</h4>
-	<form id="form_inscription" class="form-horizontal" method="post" action="../requete/rq_inscription.php?inscription">
+	<form id="form_inscription" class="form-horizontal" method="post" enctype="multipart/form-data" action="../ProjetSynthese/requete/rq_inscription.php?inscription">
 	    <div class="form-group has-feedback">
 	        <label for="nom" class="control-label col-xs-12 col-sm-5 col-md-5">Nom</label>
 	        <div class="col-xs-12 col-sm-7 col-md-5">
@@ -38,16 +48,14 @@ if ($inscriptionAdded)
 	        </div>
 	    </div>
 	    <!-- Upload photo -->
-	    <!-- 
 	    <div class="form-group">
 	        <label for="photo" class="control-label col-xs-12 col-sm-5 col-md-5">Avatar</label>
 	        <div class="col-xs-12 col-sm-7 col-md-5">
 	            <span class="btn btn-default btn-file">
-				    Télécharger <input type="file">
+				    Télécharger <input type="file" name="fichier">
 				</span>
 	        </div>
-	    </div>
-	     -->    
+	    </div> 
 	    <div class="form-group has-feedback">
 	        <label for="nouveau_pwd" class="control-label col-xs-12 col-sm-5 col-md-5">Mot de passe</label>
 	        <div class="col-xs-12 col-sm-7 col-md-5">

@@ -25,7 +25,7 @@
 						class="btn btn-custom btn-lg btn-block blue-bg" value="Connexion">
 				</form>
 				<div class="form-group">
-				<a href="../index.php?section=inscription" class="forget">Pas encore inscrit ?</a>
+				<a href="../ProjetSynthese/index.php?section=inscription" class="forget">Pas encore inscrit ?</a>
 				</div>
 				<a href="javascript:;" class="forget" data-toggle="modal"
 					data-target=".forget-modal">Mot de passe oublié ?</a>

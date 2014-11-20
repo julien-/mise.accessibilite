@@ -41,6 +41,6 @@ class DAOProfesseur extends DAOEtudiant
   								'login' => $professeur['pseudo_etu'],
   								'pass' => $professeur['pass_etu'],
   								'admin' => $professeur['admin'],
-	  							'avatar' => $professeur['avatar']));
+	  							'code_lien' => $professeur['code_lien']));
 	  }
 }

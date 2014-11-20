@@ -54,15 +54,6 @@ else
                     	<?php echo $progression; ?> %
                     </div>
 				</div>
-                               
-                <?php /*
-                <div style="float: left; border: 1px solid black; width: 79%; height: 20px;">
-                    <div style="height: 100%; background-color: <?php echo $color; ?>; width: <?php echo $progression; ?>%;">&nbsp;</div>
-                </div>
-                <div style="float: left; width: 20%;">
-                	<?php echo $progression; ?> %
-                </div>
-                */?>
             </td>
         </tr>
         <?php } ?>

@@ -5,4 +5,9 @@ class AlerteWarning extends Alerte{
 	{
 		include_once ('../../alertes/vue/alerte_warning.php');
 	}
+	
+	public function show_racine()
+	{
+		include_once ('alertes/vue/alerte_warning.php');
+	}
 }
