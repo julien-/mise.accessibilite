@@ -6220,4 +6220,101 @@ button.close {
     cursor: inherit;
     display: block;
 }
+/* Comportement par défaut */,
+.text-left-sm,
+.text-left-md,
+.text-left-lg,
+.text-center-sm,
+.text-center-md,
+.text-center-lg,
+.text-right-sm,
+.text-right-md,
+.text-right-lg,
+.text-justify-sm,
+.text-justify-md,
+.text-justify-lg { 
+    text-align: inherit; 
+}
+/* Style par défaut */
+.text-left-xs { 
+    text-align: left; 
+}
+.text-center-xs { 
+    text-align: center; 
+}
+.text-right-xs { 
+    text-align: right;
+}
+.text-justify-xs { 
+    text-align: justify; 
+}
+/* Style pour tablette */
+@media (min-width: 768px) {
+    .text-left-sm, 
+    .text-left-xs { 
+        text-align: left; 
+    }
+    .text-center-sm, 
+    .text-center-xs { 
+        text-align: center; 
+    }
+    .text-right-sm, 
+    .text-right-xs { 
+        text-align: right; 
+    }
+    .text-justify-sm, 
+    .text-justify-xs { 
+        text-align: justify; 
+    }
+}
+/* Style pour desktop */
+@media (min-width: 992px) {
+      .text-left-md, 
+      .text-left-sm, 
+      .text-left-xs { 
+          text-align: left; 
+      }
+      .text-center-md, 
+      .text-center-sm, 
+      .text-center-xs { 
+          text-align: center; 
+      }
+    .text-right-md, 
+    .text-right-sm, 
+    .text-right-xs { 
+        text-align: right;
+    }
+    .text-justify-md, 
+    .text-justify-sm, 
+    .text-justify-xs { 
+        text-align: justify;
+    }
+}
+/* Style pour grand desktop */
+@media (min-width: 1200px) {
+    .text-left-lg, 
+    .text-left-md, 
+    .text-left-sm, 
+    .text-left-xs {
+        text-align: left;
+    }
+    .text-center-lg, 
+    .text-center-md, 
+    .text-center-sm, 
+    .text-center-xs {
+        text-align: center;
+    }
+    .text-right-lg, 
+    .text-right-md, 
+    .text-right-sm, 
+    .text-right-xs {
+        text-align: right;
+    }
+    .text-justify-lg, 
+    .text-justify-md, 
+    .text-justify-sm, 
+    .text-justify-xs {
+        text-align: justify;
+    }
+}
 /*# sourceMappingURL=bootstrap.css.map */

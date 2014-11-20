@@ -8,7 +8,7 @@ if ($themeAdded)
 }
 ?>
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-xs-12 col-sm-12 col-md-6">
 		<div class="panel panel-default" style="height:200px;">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -24,7 +24,7 @@ if ($themeAdded)
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-xs-12 col-sm-12 col-md-6">
 		<div class="panel panel-default" style="height:200px;">
 			<div class="panel-heading">
 				<h3 class="panel-title">

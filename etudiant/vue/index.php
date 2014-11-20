@@ -12,6 +12,7 @@
         <link href="../../css/bootstrap/dataTables.bootstrap.css" rel="stylesheet">
         <link href="../../css/perso/index.css" rel="stylesheet">
         <link href="../../css/perso/menu.css" rel="stylesheet">
+        <link href="../../css/perso/menu_haut.css" rel="stylesheet">
         <link href="../../css/typeahead.css" rel="stylesheet">
         <link href="../../css/perso/general.css" rel="stylesheet">
         <link href="../../css/tableau.css" rel="stylesheet">
@@ -35,18 +36,15 @@
     <body>
     	<div id="wrap">
             <!-- Header -->
-            <nav class="navbar navbar-default" role="navigation" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
-			  <div class="container-fluid">
-			    <!--<div class="navbar-header">
-			      <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a> 
-			    </div>-->
-			      <ul class="nav navbar-nav navbar-left">
-			    	<li><a role="button" href="index.php" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>MY STUDY COMPANION</a></li>
-			      </ul>
-			      <ul class="nav navbar-nav navbar-right">
-			        <li><a role="button" href="index.php?section=reception_messagerie" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a></li>
-			        <li class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
+			<nav class="navbar navbar-default" role="navigation" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
+			  <div id="menu_haut" class="container-fluid">
+			  	<div class="row">
+                    <div class="menu_gauche col-xs-12 col-sm-6 col-md-offset-2 col-md-4">
+						<a class="menu_haut_a" role="button" href="index.php" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>MY STUDY COMPANION</a>
+			      	</div>
+			      	<div class="menu_droite col-xs-12 col-sm-6 col-md-4 text-left-xs text-right-sm">
+			      	  <a class="menu_haut_a" role="button" href="index.php?section=reception_messagerie" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a>
+			          <a href="#" class="menu_haut_a dropdown-toggle" data-toggle="dropdown" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
 			          	<?php 
 							if($_SESSION["currentUser"]->getCode_lien() != NULL)
 							{
@@ -65,13 +63,13 @@
 			          	?>
 			          	<span class="caret"></span>
 			          </a>
-			          <ul class="dropdown-menu" role="menu">
+			          <ul class="dropdown-menu dropdown-menu-right" role="menu">
 			            <li><a href="index.php?section=compte">Mon compte</a></li>
 			            <li class="divider"></li>
 	                    <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>&nbsp;Se déconnecter</a></li>
 			          </ul>
-			        </li>
-			      </ul>
+			      	</div>
+		      	</div>
 			  </div>
 			</nav>
 			<nav class="navbar navbar-custom navbar-inverse" role="navigation">
@@ -149,16 +147,11 @@
 			      </div><!--/.nav-collapse -->
 			    </div><!--/.container -->
 			</nav><!--/.navbar -->
-            <!-- /Header -->
-            
-            
-            
-            
-            
+            <!-- /Header -->            
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-lg-2">
+                    <div class="col-xs-12 col-sm-12 col-md-2">
                         <div class="list-group">
                         	<a href="index.php?section=cours" class="<?php if($page == "cours") echo "list-group-item active"; else echo "list-group-item";?>">
                         		<i class="glyphicon glyphicon-th-list"></i>
@@ -179,7 +172,7 @@
                             ?>
                         </div>
                     </div>
-                    <div id="bloc_page" class="col-xs-12 col-sm-12 col-lg-10">
+                    <div id="bloc_page" class="col-xs-12 col-sm-12 col-md-8">
                     	<!-- Small modal popup -->						
 						<div  id="modal_popup" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 						  <div class="modal-dialog modal-sm">
@@ -220,6 +213,42 @@
 				      	</div>				      	
                         <?php include_once('../controleur/' . $page . '.php'); ?>
                     </div>
+                    <?php 
+                    	if(isset($_SESSION['cours']) && !empty($_SESSION['cours']))
+                    	{
+                    ?>
+	                    <div class="col-xs-12 col-sm-12 col-md-2">
+	                        		<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										<i class="glyphicon glyphicon-leaf"></i>&nbsp;&nbsp;Mes Badges
+									</h3>
+								</div>
+								<div class="panel-body">
+									<?php 
+									foreach ($listeAssignationsObjectifs as $assignation)
+									{
+										if ($assignation->getPourcentage() >= 100)
+										{
+											$objectif = str_replace(' ', '_', $assignation->getObjectif()->getObjectif()); 
+											$objectif = stripAccents($objectif);
+									?>
+										
+											<div class="col-xs-4 col-sm-2 col-md-12 col-lg-6 text-center">
+												<img width="50px" height="50px" src="<?php echo '../../images/Badges/' . $objectif . '.png'; ?>" alt="<?php echo $assignation->getObjectif()->getObjectif(); ?>" title="<?php echo $assignation->getObjectif()->getDescription(); ?>" />
+												<br>
+												<span class="bold"><?php echo $assignation->getObjectif()->getObjectif(); ?></span>
+											</div>
+									<?php 
+										}
+									}
+									?>
+								</div>
+							</div>
+	                    </div>
+	                <?php 
+	                }
+			        ?>
                 </div>
             </div>
             <!--/container-->

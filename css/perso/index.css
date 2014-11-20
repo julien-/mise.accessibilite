@@ -41,6 +41,15 @@ body {
     color: white;
 }
 
+#footer a{
+	color: white;
+}
+
+#footer a:hover{
+	text-decoration: none;
+	background-color: #000;
+}
+
 /* Lastly, apply responsive CSS fixes as necessary */
 @media (max-width: 767px) {
     #footer {
