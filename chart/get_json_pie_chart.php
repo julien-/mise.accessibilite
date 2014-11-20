@@ -1,6 +1,7 @@
 <?php
 include_once ('../modele/sql/DAOAvancement.php');
 include_once ('../modele/sql/DBFactory.php');
+include_once('../lib/autoload.inc.php');
 require 'jsonwrapper.php';
 
 DBFactory::getMysqlConnexionStandard();

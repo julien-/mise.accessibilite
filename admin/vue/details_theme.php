@@ -1,5 +1,5 @@
 <script type="text/javascript"
-	src="../../../js/googleChartToolsPieChart.js"></script>
+	src="../../js/googleChartToolsPieChart.js"></script>
 <script type="text/javascript"
 	src="../../js/googleChartToolsColumnChart.js"></script>
 <h1><?php echo $theme->getTitre(); ?></h1>
