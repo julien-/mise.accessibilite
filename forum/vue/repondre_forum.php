@@ -16,7 +16,7 @@ include_once ('voir_sujet_forum.php');
 				<div class="form-wrap">
 					<form role="form" method="post" action="../../forum/controleur/ajout_reponse.php" id="form_reponse">
 						<div class="form-group">
-							<textarea name="message" rows="10" cols="68"></textarea>
+							<textarea name="message" rows="10" style="width: 100%;"></textarea>
 						</div>
 						<input type="hidden" name="sujet" value="<?php echo $_GET['s']; ?>"/>
 						<input type="submit" name="submit" id="btn-login"

@@ -11,5 +11,5 @@ $daoMessage->save(new Message(array(
 		'sujet' => $_POST['sujet']
 )));
 
-header('Location: ' . $_SESSION['referrer']);
+header('Location: ' . $_SESSION['alternative-referrer']);
 ?>

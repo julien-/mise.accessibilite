@@ -24,14 +24,14 @@
             			if(isset($listeClassmates) && sizeof($listeClassmates) != 0)
             			{	
 	            		?>
-            				<input type="text" style="border: 1px solid darkgray;" class="typeahead" id="nom_destinataire">
+            				<input type="text" style="border: 1px solid darkgray;" class="form-control typeahead" id="nom_destinataire">
             				<input type="hidden" class="typeahead" name="destinataire" id="destinataire">
             			<?php 
             			}
             			else
             			{
             			?>
-            				<input type="text" value="Vous êtes le seul membre inscrit pour l'instant">
+            				<input class="form-control" type="text" value="Vous êtes le seul membre inscrit pour l'instant">
             			<?php 
             			}
             			?>
@@ -42,12 +42,12 @@
 	</div>
     <div class="row">
         <div class="col-lg-1">Sujet: </div>
-        <div class="col-lg-11"><input type="text" style="border: 1px solid darkgray;" class="typeahead" name="titre" value="<?php if (isset($message_reponse)) echo "RE: ".$message_reponse->getTitre(); else if(isset($_GET['titre'])) echo $_GET['titre'];?>"></div>
+        <div class="col-lg-11"><input type="text" style="border: 1px solid darkgray;" class="form-control typeahead" name="titre" value="<?php if (isset($message_reponse)) echo "RE: ".$message_reponse->getTitre(); else if(isset($_GET['titre'])) echo $_GET['titre'];?>"></div>
     </div>
     <div class="row">
         <br/>
         <div class="col-lg-1">Message: </div>
-        <div class="col-lg-11"><textarea class="textarea" style="width: 100%; height: 200px;" name="message"><?php if (isset($message_reponse)) echo "Date : ".$message_reponse->getDate()."\nSujet : ".$message_reponse->getTitre()."\nDe : ".$message_reponse->getExpediteur()->getNom()."\nMessage : ".$message_reponse->getTexte(); else if(isset($_GET['message'])) echo $_GET['message'];?></textarea></div>
+        <div class="col-lg-11"><textarea class="form-control textarea" style="width: 100%; height: 200px;" name="message"><?php if (isset($message_reponse)) echo "Date : ".$message_reponse->getDate()."\nSujet : ".$message_reponse->getTitre()."\nDe : ".$message_reponse->getExpediteur()->getNom()."\nMessage : ".$message_reponse->getTexte(); else if(isset($_GET['message'])) echo $_GET['message'];?></textarea></div>
     </div>
     <?php 
     if((isset($listeClassmates) && sizeof($listeClassmates) != 0) || isset($message_reponse))

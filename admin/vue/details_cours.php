@@ -7,18 +7,18 @@
 <div class="row">
 	<div class="col-lg-12 center-content">
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#general" data-toggle="tab">Informations
+			<li class="<?php if (!isset($_GET['deleted'])) echo "active";?>"><a href="#general" data-toggle="tab">Informations
 					générales <i class="fa"></i>
 			</a></li>
 			<li><a href="#theme" data-toggle="tab">Informations par thèmes <i
 					class="fa"></i></a></li>
-			<li><a href="#bonus" data-toggle="tab">Bonus <i
+			<li class="<?php if (isset($_GET['deleted'])) echo "active";?>"><a href="#bonus" data-toggle="tab">Bonus <i
 					class="fa"></i></a></li>
 		</ul>
 	</div>
 </div>
 <div class="tab-content">
-	<div class="tab-pane active" id="general">
+	<div class="tab-pane <?php if (!isset($_GET['deleted'])) echo "active";?>" id="general">
 		<div class="row">
 			<div class="col-lg-6 center-content">
 			<br/>
@@ -127,7 +127,7 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 }
 ?>
 <div class="row">
-		<div class="col-lg-8 center-content">
+		<div class="col-lg-12 center-content">
 			<div class="panel panel-default" style="border-color: #f39c12;">
 					<div class="panel-heading" style="background-color: #f39c12; color: white; font-weight: bold;">
 					<h3 class="panel-title">
@@ -138,38 +138,46 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 				<div class="panel-body">
 					<div class="list-group">
                             <?php
-																												foreach ( $listeNews as $news ) {
-																													?>
-                                <a href="#" class="list-group-item">
-                                    <?php
-																													if ($news->getActivite () == 'inscription') {
-																														?><i
-							class="glyphicon glyphicon-star blue"></i>  <?php
-																														echo $news->getEtudiant ()->getPrenom () . ' ' . $news->getEtudiant ()->getNom () . ' s\'est inscrit à ce cours ';
-																														?>                                   
-                           				 <span
-							class="pull-right text-muted small"> <span
-								class="badge badge-success pull-right blue-bg"><?php echo Outils::determineDate($news->getDate());?></span>
-						</span>
-                                   		 <?php
-																													} 
-
-																													else if ($news->getActivite () == 'avancement') {
-																														?><i
-							class="glyphicon glyphicon-circle-arrow-up green"></i>  <?php
-																														echo $news->getEtudiant ()->getPrenom () . ' ' . $news->getEtudiant ()->getNom () . ' a mis à jour son avancement ';
-																														?>                                   
-                           				 <span
-							class="pull-right text-muted small"> <span
-								class="badge badge-success pull-right green-bg"><?php echo Outils::determineDate($news->getDate());?></span>
-						</span>
-                                   		 <?php
-																													}
-																													?>
-                                </a>
-                         	<?php
-																												}
-																												?>
+								foreach ( $listeNews as $news ) 
+								{
+									?>
+	                                <?php
+									if ($news->getActivite () == 'inscription') 
+									{
+										$chaine = $news->getEtudiant ()->getPrenom () . ' ' . $news->getEtudiant ()->getNom () . ' s\'est inscrit à ce cours ';
+										?>
+										<a href="#" class="list-group-item" title="<?php echo $chaine;?>">
+										<i class="glyphicon glyphicon-star blue"></i>  
+										<?php
+																																
+										echo Outils::raccourcirChaine($chaine, 200);																					
+										?>                                   
+		                           				 
+		                           		<span class="pull-right text-muted small"> 
+		                           			<span class="badge badge-success pull-right blue-bg"><?php echo Outils::determineDate($news->getDate());?></span>
+										</span>
+		                                <?php
+									} 
+									else if ($news->getActivite () == 'avancement') 
+									{
+										$chaine = $news->getEtudiant ()->getPrenom () . ' ' . $news->getEtudiant ()->getNom () . ' a mis à jour son avancement ';
+										?>
+										<a href="#" class="list-group-item" title="<?php echo $chaine;?>">
+										<i class="glyphicon glyphicon-circle-arrow-up green"></i>  
+											<?php
+											echo Outils::raccourcirChaine($chaine, 200);
+											?>                            
+		                           		<span class="pull-right text-muted small">
+		                           			<span class="badge badge-success pull-right green-bg"><?php echo Outils::determineDate($news->getDate());?></span>
+										</span>
+		  								<?php
+									}
+																														
+									?>
+	                                </a>
+	                         		<?php																			
+								}																			
+								?>
                             </div>
 				</div>
 			</div>
@@ -216,7 +224,7 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 				</table>
 			</div>
 		</div>
-		<div class="tab-pane" id="bonus">
+		<div class="tab-pane <?php if (isset($_GET['deleted'])) echo "active";?>" id="bonus">
 			<div class="row">
 			<div class="col-lg-12">
 				<br/>
