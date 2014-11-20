@@ -186,42 +186,44 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 			</div>
 		<div class="tab-pane" id="theme">
 			<div class="row">
-				<br />
-				<table class='table table-striped table-bordered'>
-					<thead>
-						<tr>
-							<th class="center-text">Thème</th>
-							<th class="center-text">Progression</th>
-						</tr>
-					</thead>
-					<tbody>
-    <?php
-				
-				foreach ( $listeThemes as $theme ) {
-					$progression = $daoAvancement->getByTheme ( $theme->getId () );
+				<div class="col-lg-12">
+					<br />
+					<table class='table table-striped table-bordered'>
+						<thead>
+							<tr>
+								<th class="center-text">Thème</th>
+								<th class="center-text">Progression</th>
+							</tr>
+						</thead>
+						<tbody>
+	    <?php
+					
+					foreach ( $listeThemes as $theme ) {
+						$progression = $daoAvancement->getByTheme ( $theme->getId () );
+						?>
+	                <tr>
+								<td class='autre_colonne vert-align'><a
+									href='index.php?section=details_theme&t=<?php echo $theme->getId(); ?>'><?php echo $theme->getTitre(); ?></a>
+								</td>
+								<td class="prem_colonne vert-align">
+	
+	
+									<div class="progress progress-striped progress-borders"
+										style="margin-top: 12px;">
+										<div class="progress-bar progress-bar-primary vert-align" 
+	                                    style="color: black; background-color: <?php echo Outils::colorChart($progression); ?>; width: <?php echo $progression; ?>%;">
+	                                    	<?php echo $progression; ?> %
+	                                    </div>
+									</div>
+	
+								</td>
+							</tr>
+	            <?php
+					}
 					?>
-                <tr>
-							<td class='autre_colonne vert-align'><a
-								href='index.php?section=details_theme&t=<?php echo $theme->getId(); ?>'><?php echo $theme->getTitre(); ?></a>
-							</td>
-							<td class="prem_colonne vert-align">
-
-
-								<div class="progress progress-striped progress-borders"
-									style="margin-top: 12px;">
-									<div class="progress-bar progress-bar-primary vert-align" 
-                                    style="color: black; background-color: <?php echo Outils::colorChart($progression); ?>; width: <?php echo $progression; ?>%;">
-                                    	<?php echo $progression; ?> %
-                                    </div>
-								</div>
-
-							</td>
-						</tr>
-            <?php
-				}
-				?>
-            </tbody>
-				</table>
+	            </tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 		<div class="tab-pane <?php if (isset($_GET['deleted'])) echo "active";?>" id="bonus">
