@@ -16,7 +16,7 @@
 					{
 						$chemin = $daoEtudiant->getCheminByCodeLienAndEtu($_SESSION["currentUser"]->getCode_lien(),$_SESSION["currentUser"]->getId());
 				?>
-						<img class="center-block" width="150" height="150" src="../../upload/<?php echo $chemin; ?>" alt="avatar"/>
+						<img class="center-block profile-image img-circle" width="150" height="150" src="../../upload/<?php echo $chemin; ?>" alt="avatar"/>
 				<?php 
 					}
 				?>	
