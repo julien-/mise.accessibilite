@@ -56,7 +56,7 @@ if ($themeAdded)
 				<div id="morris-area-chart">
 					<div id="morris-area-chart">
 						<script type="text/javascript">
-					        var optionsBarChart = {
+					        var optionsLineChart = {
 					        		chartArea: {left:0,top:50,height:"75%", width: "100%"},
 					        		backgroundColor: { fill:'transparent' },
 					        		vAxis: {minValue: 0},
@@ -65,9 +65,9 @@ if ($themeAdded)
 					        		    },
 					        		legend: {position: 'none'},
 					        };
-					        setBarChartOptions('../../chart/get_json_visits.php?etudiant=<?php echo $_SESSION['currentUser']->getId();?>&cours=<?php echo $_SESSION['cours']->getId();?>', optionsBarChart, 'lineChart');
+					        setLineChartOptions('../../chart/get_json_visits.php?etudiant=<?php echo $_SESSION['currentUser']->getId();?>&cours=<?php echo $_SESSION['cours']->getId();?>', optionsLineChart, 'lineChart');
 					    </script>
-						<div id=lineChart style="width: 100%; height: 300px;"></div>
+						<div id="lineChart" style="width: 100%; height: 300px;"></div>
 					</div>
 				</div>
 			</div>

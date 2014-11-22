@@ -115,28 +115,28 @@
                     </div>
                     <div class="col-sm-9 main-container">
                           <div>
-        <ul class="breadcrumb">
-        <?php 
-        foreach($filArianne as $titre => $lien)
-        {
-        	if ($lien != 'final')
-        	{
-        	?>
-        	 <li>
-            	<a href="<?php echo $lien; ?>"><?php echo $titre ?></a> <span class="divider"></span>
-          	</li>
-        	<?php 
-        	}
-        	else 
-        	{
-        		?>
-        		<li class="active"><?php echo $titre ?></li>
-        		<?php
-        	}
-        }
-        ?>
-        </ul>
-      </div>
+					        <ul class="breadcrumb">
+					        <?php 
+					        foreach($filArianne as $titre => $lien)
+					        {
+					        	if ($lien != 'final')
+					        	{
+					        	?>
+					        	 <li>
+					            	<a href="<?php echo $lien; ?>"><?php echo $titre ?></a> <span class="divider"></span>
+					          	</li>
+					        	<?php 
+					        	}
+					        	else 
+					        	{
+					        		?>
+					        		<li class="active"><?php echo $titre ?></li>
+					        		<?php
+					        	}
+					        }
+					        ?>
+					        </ul>
+					      </div>
                         <?php include_once('../controleur/' . $page . '.php'); ?>
                     </div>						
                     </div>

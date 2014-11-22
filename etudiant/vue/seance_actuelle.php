@@ -20,11 +20,11 @@ if ($avancementModified)
 }
 ?>
 <div class="row show-grid">
-	<div class="col-md-9">
+	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="glyphicon glyphicon-comment"></i> Remarques sur cette séance
+					<i class="glyphicon glyphicon-comment"></i>&nbsp;&nbsp;Remarques sur cette séance
 				</h3>
 			</div>
 			<div class="panel-body" style="height: 300px;">
@@ -34,7 +34,7 @@ if ($avancementModified)
 						{
 							echo $remarque->getRemarque();
 						?>
-							<a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ViewModifyRemarqueBonus" title="Modifier la remarque"></a> 
+							&nbsp;<a class="pointer" data-toggle="modal" data-target="#ViewModifyRemarqueBonus" title="Modifier la remarque"><i class="glyphicon glyphicon-pencil"></i></a> 
 							
 							<!-- Popup Ajout remarque -->
 							<div class="modal fade" id="ViewModifyRemarqueBonus" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
@@ -42,11 +42,11 @@ if ($avancementModified)
 								 	<div class="modal-content">
 							            <div class="modal-header">
 							                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-							                <h4 id="myModalLabel" class="modal-title">Modifier la Remarque</h4>
+							                <h4 id="myModalLabel" class="modal-title">Modification de la Remarque</h4>
 							            </div>
 							            <form method="post" name="form_modify_remarque" action="../requete/rq_seance_actuelle.php?modifyremarque">
 											<div class="modal-body">
-						                		<input type="text" name="remarque" size="60" value="<?php echo $remarque->getRemarque();?>" class="inputValDefaut"/>
+												<textarea name="remarque" style="width:100%; height:100px; resize:vertical;"><?php echo $remarque->getRemarque();?></textarea>
 							                </div>
 							                <div class="modal-footer">
 												<input type="hidden" name="id_seance" value="<?php echo $id_seance;?>"/>
@@ -93,11 +93,11 @@ if ($avancementModified)
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-4">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="glyphicon glyphicon-stats"></i> Progression globale lors de cette séance
+					<i class="fa fa-pie-chart"></i>&nbsp;Progression globale lors de cette séance
 				</h3>
 			</div>
 			<div class="panel-body" style="height: 300px;">
@@ -133,7 +133,7 @@ foreach($listeThemes as $theme)
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-th-list"></i> <?php echo $theme->getTitre();?>
+			<i class="glyphicon glyphicon-th-list"></i>&nbsp;&nbsp;Exercices du thème <?php echo $theme->getTitre();?>
 		</h3>
 	</div>
 	<div class="panel-body">
@@ -196,7 +196,7 @@ foreach($listeThemes as $theme)
 			            </td> 
 			            <!--Aide-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			            	<a class="glyphicon glyphicon-user" data-toggle="modal" data-target="#ViewAideExercice<?php echo $exercice->getId();?>" title="Obtenir de l'aide"></a>
+			            	<a class="pointer" data-toggle="modal" data-target="#ViewAideExercice<?php echo $exercice->getId();?>" title="Obtenir de l'aide pour cet exercice"><i class="glyphicon glyphicon-user"></i> </a>
 			            	<!-- Popup Aide -->
 							<div class="modal fade" id="ViewAideExercice<?php echo $exercice->getId();?>" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
 							     <div class="modal-dialog">  

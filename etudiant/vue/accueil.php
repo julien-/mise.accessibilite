@@ -57,7 +57,7 @@
 				<div id="morris-area-chart">
 					<div id="morris-area-chart">
 						<script type="text/javascript">
-					        var optionsBarChart = {
+					        var optionsLineChart = {
 					        		chartArea: {left:0, top:20, height:"80%", width: "100%"},
 					        		backgroundColor: { fill:'transparent' },
 					        		vAxis: {minValue: 0},
@@ -66,7 +66,7 @@
 					        		    },
 					        		legend: {position: 'none'},
 					        };
-					        setBarChartOptions('../../chart/get_json_visits.php?etudiant=<?php echo $_SESSION['currentUser']->getId();?>', optionsBarChart, 'lineChart');
+					        setLineChartOptions('../../chart/get_json_visits.php?etudiant=<?php echo $_SESSION['currentUser']->getId();?>', optionsLineChart, 'lineChart');
 					    </script>
 						<div id=lineChart style="width: 100%; height: 250px;"></div>
 					</div>

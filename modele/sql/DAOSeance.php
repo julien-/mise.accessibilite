@@ -69,4 +69,20 @@ public function save(Seance $seance)
 		}
 		return $listeSeance;
 	}
+	
+	public function getAllIdByCours($idCours)
+	{
+	
+		$result = $this->executeQuery('	SELECT * 
+										FROM seance 
+										WHERE id_cours =' . $idCours);
+			
+		$listeId = array();
+		while ($seance = $this->fetchArray($result)) {
+			$listeId[] = array( 'id' => $seance['id_seance'], 'date' => $seance['date_seance']);
+		}
+		return $listeId;
+	}
+	
+	
 }

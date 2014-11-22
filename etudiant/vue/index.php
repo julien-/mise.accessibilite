@@ -88,8 +88,6 @@
                         {
                       ?>
 			          <li <?php if ( $_GET['section'] == "informations" ) echo "class='active'";?>><a href="index.php?section=informations">Informations</a></li>
-			          <li <?php if ( $_GET['section'] == "objectif" ) echo "class='active'";?>><a href="index.php?section=objectif">Mes Badges</a></li>
-			          <li <?php if ( $_GET['section'] == "evolution" ) echo "class='active'";?>><a href="index.php?section=evolution">Mon Evolution</a></li>
 			          <li class="dropdown <?php if ( $_GET['section'] == "seance_actuelle" || $_GET['section'] == "seance_precedente") echo "active";?>">
 			            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Séances <b class="caret"></b></a>
 			            <ul class="dropdown-menu" role="menu">
@@ -138,8 +136,9 @@
 			              <li><a href="index.php?section=mes_bonus">Mes Bonus</a></li>
 			              <li><a href="index.php?section=autres_bonus">Autres Bonus</a></li>
 			            </ul>
-			           </li>
-			           <li <?php if ( strpos($_GET['section'], "forum") != false ) echo "class='active'";?>><a href="index.php?section=index_forum&id_cours=<?php echo $_SESSION['cours']->getId();?>">Forum</a></li>
+			          </li>
+			          <li <?php if ( $_GET['section'] == "objectif" ) echo "class='active'";?>><a href="index.php?section=objectif">Mes Badges</a></li>
+			          <li <?php if ( strpos($_GET['section'], "forum") != false ) echo "class='active'";?>><a href="index.php?section=index_forum&id_cours=<?php echo $_SESSION['cours']->getId();?>">Forum</a></li>
 			        <?php 
                     }
                     ?>
@@ -218,10 +217,10 @@
                     	{
                     ?>
 	                    <div class="col-xs-12 col-sm-12 col-md-2">
-	                        		<div class="panel panel-default">
+                        	<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title">
-										<i class="glyphicon glyphicon-leaf"></i>&nbsp;&nbsp;Mes Badges
+										<a style="display: block;" href="index.php?section=objectif"><i class="glyphicon glyphicon-leaf"></i>&nbsp;&nbsp;Mes Badges</a>
 									</h3>
 								</div>
 								<div class="panel-body">

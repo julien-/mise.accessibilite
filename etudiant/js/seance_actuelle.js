@@ -32,7 +32,7 @@ $(document).ready(function() {
 	});
 	
 	$("#soumis_remarque").click(function() {
-		var remarque = "input[name=remarque]";
+		var remarque = "textarea[name=remarque]";
 		if (!$(remarque).val()) 
 		{
 			$('#modal_popup').modal();  

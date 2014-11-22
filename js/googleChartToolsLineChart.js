@@ -1,4 +1,4 @@
-function drawBarChart(urlJSON, options, divID)  {
+function drawLineChart(urlJSON, options, divID)  {
     var json = $.ajax({
             url: urlJSON,
             dataType: 'json',
@@ -9,8 +9,8 @@ function drawBarChart(urlJSON, options, divID)  {
     new google.visualization.LineChart(document.getElementById(divID)).draw(data, options);
 }
 
-function setBarChartOptions(urlJSON, options, divID)
+function setLineChartOptions(urlJSON, options, divID)
 {
     google.load('visualization', '1', {'packages':['corechart']});
-    google.setOnLoadCallback(function() { drawBarChart(urlJSON, options, divID); });
+    google.setOnLoadCallback(function() { drawLineChart(urlJSON, options, divID); });
 }

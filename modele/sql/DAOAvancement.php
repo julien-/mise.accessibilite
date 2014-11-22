@@ -488,4 +488,38 @@ class DAOAvancement extends DAOStandard
 	  	return $listeEtudiants;
   	}
   }
+  
+  public function getTabProgressionSeanceByEtuCours($idEtu, $idCours)
+  {  	
+  	$sql = 'SELECT e.id_exo 
+  			FROM exercice e, theme t
+  			WHERE e.id_theme = t.id_theme
+  			AND t.id_cours = ' . $idCours;
+  	
+  	$req_total = $this->executeQuery($sql) or die (mysql_error());
+  	$total = $this->countRows($req_total);
+  	
+  	$total = $total * 100;
+  	
+  	$sql = 'CREATE TEMPORARY TABLE R1
+  	 SELECT id_seance
+  	 FROM seance
+  	 WHERE id_cours = '. $idCours;
+  	  
+  	 $result = $this->executeQuery($sql);
+  	
+  	$sql = 'SELECT SUM( assimile + compris + fait ) AS progression, a.id_seance AS seance
+            FROM avancement a, R1
+            WHERE a.id_etu = ' . $idEtu . '
+            AND a.id_seance = R1.id_seance
+  			GROUP BY R1.id_seance';
+  	
+  	$result = $this->executeQuery($sql);
+  	
+  	$progression_seance = array();
+  	while ($progression = $this->fetchArray($result)) {
+  		$progression_seance[] = array( 'seance' => $progression['seance'], 'progression' => number_format(($progression['progression'] / $total) * 100, 2));
+  	}
+  	return $progression_seance;  	
+  }
 }

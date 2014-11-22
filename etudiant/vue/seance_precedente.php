@@ -1,11 +1,11 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="../../js/googleChartToolsPieChart.js"></script>
 <div class="row show-grid">
-	<div class="col-md-9">
+	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="glyphicon glyphicon-comment"></i> Remarques sur cette séance
+					<i class="glyphicon glyphicon-comment"></i>&nbsp;&nbsp;Remarques sur cette séance
 				</h3>
 			</div>
 			<div class="panel-body" style="height: 300px;">
@@ -14,17 +14,17 @@
 						if($remarque)
 							echo $remarque->getRemarque();
 						else 
-							echo "Aucune remarque";
+							echo "Aucune remarque n'avait été ajoutée lors de cette séance.";
 					?>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-4">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="glyphicon glyphicon-stats"></i> Progression globale lors de cette séance
+					<i class="fa fa-pie-chart"></i>&nbsp;&nbsp;Progression globale lors de cette séance
 				</h3>
 			</div>
 			<div class="panel-body" style="height: 300px;">
@@ -58,7 +58,7 @@ foreach($listeThemes as $theme)
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="glyphicon glyphicon-th-list"></i> <?php echo $theme->getTitre();?>
+			<i class="glyphicon glyphicon-th-list"></i>&nbsp;&nbsp;Exercices du thème <?php echo $theme->getTitre();?>
 		</h3>
 	</div>
 	<div class="panel-body">

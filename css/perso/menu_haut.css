@@ -1,0 +1,29 @@
+#menu_haut .menu_haut_a
+{
+	font-weight:600;
+	color: white;
+	padding: 18px 20px;
+}
+
+#menu_haut .menu_haut_a:hover
+{
+	background-color: #000;
+}
+
+#menu_haut a
+{
+	text-decoration: none;
+}
+
+#menu_haut .menu_droite .open > .dropdown-toggle {
+  background-color: #000;
+}
+
+#menu_haut .menu_gauche, .menu_droite
+{
+	height:50px; 
+	line-height:50px;
+}
+
+
+
