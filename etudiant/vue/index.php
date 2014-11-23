@@ -162,7 +162,7 @@
 	                            foreach ($listeCours as $cours) 
 	                            {
 	                            ?>
-	                        	<a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId(); ?>" class="list-group-item" title="<?php echo $cours->getCours()->getLibelle();?>" <?php if(isset($_SESSION['cours']) && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo 'style="font-weight: bold; background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
+	                        	<a href="index.php?section=progression&id_cours=<?php echo $cours->getCours()->getId(); ?>" class="list-group-item" title="<?php echo $cours->getCours()->getLibelle();?>" <?php if(isset($_SESSION['cours']) && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getCours()->getId()) echo 'style="font-weight: bold; background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).'; color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
 								   <?php echo $cours->getCours()->getLibelle();?>
 								</a>
 								<?php
