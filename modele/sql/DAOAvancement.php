@@ -206,20 +206,16 @@ class DAOAvancement extends DAOStandard
    	
    	
   	function getByCours($idCours)
-  	{
+  	{  		
 	  	$sql = '    SELECT e.id_exo '
-	  			. ' FROM exercice e, theme t '
-	  			. ' WHERE t.id_theme = e.id_theme '
-	  					. ' AND id_cours = ' . $idCours;
-	  	
-	  	$reqTotal = $this->executeQuery($sql);
-	  	$total = $this->countRows($reqTotal);
-	  	
-	  	$sql = 'SELECT e.id_etu FROM etudiant e';
-	  	$reqTotalEtudiant = $this->executeQuery($sql);
-	  	$totalEtudiant = $this->countRows($reqTotalEtudiant);
-	  	
-	  	$total = $total * $totalEtudiant * 100;
+  			. ' FROM exercice e, theme t '
+  					. ' WHERE t.id_theme = e.id_theme '
+  							. ' AND id_cours = ' . $idCours;
+  
+	  	$req_total = $this->executeQuery($sql) or die (mysql_error());
+	  	$total = $this->countRows($req_total);
+	  
+	  	$total = $total * 100;
 	
 	  	$sql = 'SELECT SUM( assimile + compris + fait ) AS progression
 	            FROM avancement a, theme t, exercice e
@@ -234,7 +230,15 @@ class DAOAvancement extends DAOStandard
 	  	if ($total == 0)
 	  		return 0;
 	  	
-	  	return number_format(($avancement['progression'] / $total) * 100, 2);
+	  	$sql = 'SELECT * FROM inscription WHERE id_cours = ' . $idCours;
+  	
+	  	$result = $this->executeQuery($sql) or die (mysql_error());
+	  	
+	  	$nbEtuInscrits = $this->countRows($result);
+	  	
+	  	$progression = $avancement['progression'] / $nbEtuInscrits;
+	  
+	  	return number_format(($progression / $total) * 100, 2);
   	}
   
   
@@ -292,6 +296,39 @@ class DAOAvancement extends DAOStandard
   	$avancement = $this->fetchArray($req_progression);
   	 
   	return number_format(($avancement['progression'] / $total) * 100, 2);
+  }
+  
+  function getByCoursSeance($idCours, $idSeance)
+  {    	
+  	$sql = '    SELECT e.id_exo '
+  			. ' FROM exercice e, theme t '
+  					. ' WHERE t.id_theme = e.id_theme '
+  							. ' AND id_cours = ' . $idCours;
+  
+  	$req_total = $this->executeQuery($sql) or die (mysql_error());
+  	$total = $this->countRows($req_total);
+  
+  	$total = $total * 100;
+  
+  	$sql = 'SELECT SUM( assimile + compris + fait ) AS progression
+            FROM avancement a, theme t, exercice e
+            WHERE a.id_exo = e.id_exo
+  			AND a.id_seance <= ' .$idSeance. '
+            AND t.id_theme = e.id_theme
+            AND id_cours = ' . $idCours;
+  
+  	$req_progression = $this->executeQuery($sql);
+  	$avancement = $this->fetchArray($req_progression);
+  	
+  	$sql = 'SELECT * FROM inscription WHERE id_cours = ' . $idCours;
+  	
+  	$result = $this->executeQuery($sql) or die (mysql_error());
+  	
+  	$nbEtuInscrits = $this->countRows($result);
+  	
+  	$progression = $avancement['progression'] / $nbEtuInscrits;
+  
+  	return number_format(($progression / $total) * 100, 2);
   }
   
   	function getTabByCoursEtudiant($idCours, $idEtudiant)

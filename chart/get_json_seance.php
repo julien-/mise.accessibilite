@@ -20,7 +20,8 @@
 	$table = array();
 	$table['cols'] = array(
 			array('label' => 'Date', 'type' => 'string'),
-			array('label' => 'Pourcentage', 'type' => 'number'),
+			array('label' => 'Ma progression', 'type' => 'number'),
+			array('label' => 'Progression de la promo', 'type' => 'number'),
 	);
 
 	$rows = array();
@@ -28,10 +29,13 @@
 	for ($i = 0; $i < sizeof($listeSeances); $i++)
 	{
 		$avancement = $daoAvancement->getByCoursSeanceEtudiant($_SESSION['cours']->getId(), $listeSeances[$i]['id'], $_SESSION['currentUser']->getId());
+		$avancement_promo = $daoAvancement->getByCoursSeance($_SESSION['cours']->getId(), $listeSeances[$i]['id']);
+		
 		$temp = array();
 		$temp[] = array('v' => "Seance du ".Outils::dateToFr($listeSeances[$i]['date']));
 		$temp[] = array('v' => $avancement);
-		$rows[] = array('c' => $temp); 
+		$temp[] = array('v' => $avancement_promo);
+		$rows[] = array('c' => $temp);
 	}
 	
 	$table['rows'] = $rows;

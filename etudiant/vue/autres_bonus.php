@@ -19,7 +19,7 @@ if ($suiviAdded)
 
 foreach($listeThemes as $theme)
 {
-	$listeBonus = $daoBonus->getAllByThemeExceptMine($theme->getId(), $_SESSION['currentUser']->getId());
+	$listeBonus = $daoBonus->getAllByThemeExceptMine($theme->getId(), $_SESSION['currentUser']->getId());	
 ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -30,7 +30,7 @@ foreach($listeThemes as $theme)
 	<div class="panel-body">
 		<div id="morris-area-chart">
 			<?php 
-			if($listeBonus)
+			if(sizeof($listeBonus) > 0)
 			{
 			?>
 			<table class="table table-striped table-bordered">
@@ -47,9 +47,6 @@ foreach($listeThemes as $theme)
 				<?php
 				foreach ($listeBonus as $bonus)
 				{
-					if(!$daoAvancement_bonus->VerifCreateur($bonus->getId(), $_SESSION['currentUser']->getId()))
-					{
-						//$moyenne = $daoAvancement_bonus->getMoyenneBonus($bonus->getId());
 						$mon_avancement = $daoAvancement_bonus->getByEtudiantBonus($_SESSION['currentUser']->getId(), $bonus->getId());
 						$liste_createurs = $daoAvancement_bonus->getCreateurs($bonus->getId());
 				?>
@@ -157,7 +154,6 @@ foreach($listeThemes as $theme)
 				        </tr>
 				    </tbody>
 				<?php 
-					}
 				} 
 				?>
 			</table>

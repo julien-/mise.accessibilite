@@ -41,7 +41,26 @@ $table ['cols'] = array (
 );
 
 $rows = array ();
+/* Ajout de la barre concernant l'étudiant */
+$temp = array ();
 
+$temp [] = array (
+		'v' => 'Moi'
+);
+$temp [] = array (
+		'v' => ( int ) $progressionEtudiant
+);
+$temp [] = array (
+		'v' => 'Ma progression: ' . $progressionEtudiant . '%'
+);
+$temp [] = array (
+		'v' => Outils::colorChart ( $progressionEtudiant )
+);
+
+$rows [] = array (
+		'c' => $temp
+);
+/* Fin de la barre concernant l'étudiant */
 /* Ajout de la barre concernant la promo */
 $temp = array ();
 
@@ -52,7 +71,7 @@ $temp [] = array (
 		'v' => ( int ) $progression 
 );
 $temp [] = array (
-		'v' => 'Avancement de la promo: ' . $progression . '%' 
+		'v' => 'Progression de la promo: ' . $progression . '%' 
 );
 $temp [] = array (
 		'v' => Outils::colorChart ( $progression ) 
@@ -62,26 +81,6 @@ $rows [] = array (
 		'c' => $temp 
 );
 /* Fin de la barre concernant la promo */
-/* Ajout de la barre concernant l'étudiant */
-$temp = array ();
-
-$temp [] = array (
-		'v' => 'Moi' 
-);
-$temp [] = array (
-		'v' => ( int ) $progressionEtudiant 
-);
-$temp [] = array (
-		'v' => 'Mon avancement: ' . $progressionEtudiant . '%' 
-);
-$temp [] = array (
-		'v' => Outils::colorChart ( $progressionEtudiant ) 
-);
-
-$rows [] = array (
-		'c' => $temp 
-);
-/* Fin de la barre concernant l'étudiant */
 /* Ajout des deux barres dans le graphique */
 $table ['rows'] = $rows;
 $temp = array (

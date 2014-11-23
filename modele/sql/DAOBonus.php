@@ -82,23 +82,13 @@ class DAOBonus extends DAOStandard {
 	{
 		$daoTheme = new DAOTheme($db);
 		
-		$sql = 'CREATE TEMPORARY TABLE R1
-        SELECT id_bonus
-        FROM avancement_bonus
-        WHERE id_etu != ' . $idEtu .'
-        AND fait != 1';
-		 
-		$this->executeQuery($sql);
-		
 		$result = $this->executeQuery ( 'SELECT *
-										FROM bonus, theme, cours, etudiant, cle, R1
-										WHERE bonus.id_theme = ' . $idTheme . '
-										AND bonus.id_bonus = R1.id_bonus
-										AND bonus.id_theme = theme.id_theme
-										AND theme.id_cours = cours.id_cours
-										AND cours.id_prof = etudiant.id_etu
-										AND cours.id_cle = cle.id_cle
-										GROUP BY bonus.id_bonus' );
+										FROM bonus
+										WHERE id_theme = ' . $idTheme . '
+										AND id_bonus NOT IN (	SELECT id_bonus
+																FROM avancement_bonus
+																WHERE id_etu = ' . $idEtu . '
+																AND fait = 1)');
 		
 		$listeBonus = array ();
 		while ( $bonus = $this->fetchArray ( $result ) ) {
@@ -108,11 +98,7 @@ class DAOBonus extends DAOStandard {
 					'type' => $bonus ['type_bonus'],
 					'theme' => $daoTheme->getByID($bonus ['id_theme'])
 			) );
-		}
-		
-		$sql = 'DROP TEMPORARY TABLE R1';
-		$this->executeQuery($sql);
-		
+		}		
 		return $listeBonus;
 	}
 }
