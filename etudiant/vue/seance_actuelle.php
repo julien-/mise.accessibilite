@@ -138,6 +138,11 @@ foreach($listeThemes as $theme)
 	</div>
 	<div class="panel-body">
 		<div id="morris-area-chart">
+			<?php				
+			$listeExercice = $daoExercice->getByAllByTheme($theme->getId());
+			if(sizeof($listeExercice) > 0)
+			{
+			?>
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
@@ -145,11 +150,10 @@ foreach($listeThemes as $theme)
 						<th class="col-xs-2 col-sm-2 center-text">Aide</th>
 						<th class="col-xs-2 col-sm-2 center-text">Fait</th>
 						<th class="col-xs-2 col-sm-2 center-text">Compris</th>
-						<th class="col-xs-2 col-sm-2 center-text">Assimile</th>
+						<th class="col-xs-2 col-sm-2 center-text">Assimilé</th>
 					</tr>
 				</thead>
-				<?php				
-				$listeExercice = $daoExercice->getByAllByTheme($theme->getId());
+				<?php 
 				foreach ( $listeExercice as $exercice )
 				{
 					$avancement = $daoAvancement->getByExerciceEtudiant($exercice->getId(), $_SESSION['currentUser']->getId());			
@@ -206,7 +210,7 @@ foreach($listeThemes as $theme)
 							                <h4 id="myModalLabel" class="modal-title">Obtenir de l'aide pour l'exercice : <?php echo $exercice->getTitre();?></h4>
 							            </div>
 										<div class="modal-body">
-											liste des étudiants qui ont assimilé l'exercice : 
+											Liste des étudiants qui ont assimilé l'exercice : 
 											<br><br>
 											
 					                		<?php 
@@ -214,7 +218,7 @@ foreach($listeThemes as $theme)
 				                			if ($listeEtudiants != null)
 				                			{
 					                		?>
-				                				<table id="tableau" class="interactive-table table table-striped table-bordered table-hover">
+				                				<table id="tableau<?php echo $exercice->getId();?>" class="interactive-table table table-striped table-bordered table-hover">
 													<thead>
 														<tr class="titre">
 															<th class="center-text">Etudiant</th>
@@ -258,15 +262,15 @@ foreach($listeThemes as $theme)
 			            </td>
 			            <!--Fait-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			            	<input type="checkbox" class="fait" id="fait<?php echo $exercice->getId();?>" value="<?php echo $exercice->getId();?>" <?php if($avancement >= 25) echo 'onClick="return false" checked="checked" title="L\'exercice a été fait à une séance précédente"'; else echo 'name="fait[]"';?>/>		            	
+			            	<input type="checkbox" class="fait" id="fait<?php echo $exercice->getId();?>" value="<?php echo $exercice->getId();?>" <?php if($avancement >= 25) echo 'onClick="return false" checked="checked" title="L\'exercice a été fait"'; else echo 'name="fait[]"';?>/>		            	
 			            </td>
 			            <!--Compris-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			                <input type="checkbox" class="compris" id="compris<?php echo $exercice->getId();?>" value="<?php echo $exercice->getId();?>" <?php if($avancement >= 50) echo 'onClick="return false" checked="checked" title="L\'exercice a été compris à une séance précédente"'; else echo 'name="compris[]"';?>/>	
+			                <input type="checkbox" class="compris" id="compris<?php echo $exercice->getId();?>" value="<?php echo $exercice->getId();?>" <?php if($avancement >= 50) echo 'onClick="return false" checked="checked" title="L\'exercice a été compris"'; else echo 'name="compris[]"';?>/>	
 		            	</td>
 			            <!--Assimile-->
 			            <td class="col-xs-2 col-sm-2 center-text">
-			                <input type="checkbox" class="assimile" id="assimile<?php echo $exercice->getId();?>" value="<?php echo $exercice->getId();?>" <?php if($avancement == 100) echo 'onClick="return false" checked="checked" title="L\'exercice a été assimile à une séance précédente"'; else echo 'name="assimile[]"';?>/>	
+			                <input type="checkbox" class="assimile" id="assimile<?php echo $exercice->getId();?>" value="<?php echo $exercice->getId();?>" <?php if($avancement == 100) echo 'onClick="return false" checked="checked" title="L\'exercice a été assimilé"'; else echo 'name="assimile[]"';?>/>	
 			            </td>
 			        </tr>		        
 			    </tbody>
@@ -274,6 +278,13 @@ foreach($listeThemes as $theme)
 				} 
 				?>
 			</table>
+			<?php 
+			}
+			else 
+			{
+				echo "Aucun exercice dans ce thème";
+			}
+			?>
 		</div>
 	</div>
 </div>

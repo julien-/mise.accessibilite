@@ -16,7 +16,26 @@
 			<td style="display: none;">
 			</td>
 			<td>
-				<a href="#" class="bold"><?php echo $message->getAuteur()->getPrenomNom(); ?></a>
+				<?php 
+				if($message->getAuteur()->getCode_lien() != NULL)
+				{
+					$chemin = $daoEtudiant->getCheminByCodeLienAndEtu($message->getAuteur()->getCode_lien(),$message->getAuteur()->getId());
+				?>
+					<img class="profile-image img-circle" width="25" height="25" src="../../upload/<?php echo $chemin; ?>" alt="avatar"/>&nbsp; 
+				<?php 
+				}
+				else 
+				{
+				?>
+          			<i class="glyphicon glyphicon-user"></i>&nbsp; 
+	          	<?php 
+				}
+				?>
+				<a href="#" class="bold">
+				<?php 
+					echo $message->getAuteur()->getPrenomNom(); 
+				?>
+				</a>
 				<span style="position: relative; top: 0; color: #9996b3;"> Le <?php echo Outils::sqlDateTimeToFr($message->getDateReponse()); ?></span>
 				<?php if ($_SESSION['currentUser']->getAdmin()) {?>
 		        	<a href="../../forum/controleur/delete_message.php?m=<?php echo $message->getId(); ?>">

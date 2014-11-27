@@ -1,6 +1,27 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="../../js/googleChartToolsLineChart.js"></script>
-
+<?php 
+if ($avatarAdd)
+{
+	$alerte = new AlerteSuccess('Avatar ajouté avec succès!');
+	$alerte->show();
+}
+if ($fichierVide)
+{
+	$alerte = new AlerteDanger('Vous n\'avez pas inséré de fichier');
+	$alerte->show();
+}
+if ($typeFichierInvalide)
+{
+	$alerte = new AlerteDanger('Type de fichier invalide (valides : .JPG, .JPEG, .BMP, .GIF, .PNG)');
+	$alerte->show();
+}
+if ($nomFichierInvalide)
+{
+	$alerte = new AlerteDanger('Nom de fichier invalide');
+	$alerte->show();
+}
+?>
 <h1>Bienvenue <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?></h1>
 <div class="row show-grid">
 	<div class="col-md-4">
@@ -18,6 +39,38 @@
 				?>
 						<img class="center-block profile-image img-circle" width="150" height="150" src="../../upload/<?php echo $chemin; ?>" alt="avatar"/>
 				<?php 
+					}
+					else
+					{
+				?>
+						<a data-toggle="modal" href="modal/remotePage.php" data-target="#ViewAjoutPhoto" class="btn btn-sm btn-primary" title="Ajouter un avatar"><i class="glyphicon glyphicon-user"></i>&nbsp;+</a>
+						<!-- Modal ajout Bonus-->  
+						<div class="modal fade" id="ViewAjoutPhoto" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
+						     <div class="modal-dialog">  
+						        <div class="modal-content">
+						            <div class="modal-header">
+						                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						                <h4 class="modal-title">Ajouter un Avatar à mon profile</h4>
+						            </div>
+						            <form method="post" enctype="multipart/form-data" action="../requete/rq_accueil.php?addavatar">
+						               <div class="modal-body">
+						            		<div class="form-group">
+						            			<label for="choix" class="col-xs-12 col-sm-12 col-md-6">Choisir un fichier : </label>
+									            <span class="btn btn-default btn-file">
+												    Télécharger <input type="file" name="fichier">
+												</span>
+									    	</div> 	              	
+							           </div>
+							           <div class="modal-footer">
+						                	<input type="submit" class="soumettre_avatar btn btn-primary" alt='Ajouter un avatar' title='Ajouter un avatar' value="Ajouter"/>
+						                	<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+						    			</div>
+							    	</form>
+						        </div>
+						     </div>
+						</div>  
+						<br>
+				<?php
 					}
 				?>	
 				<br/>
