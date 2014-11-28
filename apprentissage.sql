@@ -1,11 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 4.1.4
+﻿-- phpMyAdmin SQL Dump
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 06 Novembre 2014 à 23:51
--- Version du serveur :  5.6.15-log
--- Version de PHP :  5.4.24
+-- Généré le :  Ven 28 Novembre 2014 à 09:10
+-- Version du serveur :  5.6.20
+-- Version de PHP :  5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -44,7 +44,8 @@ INSERT INTO `assignations_objectif` (`id_etu`, `id_objectif`, `date`, `id_cours`
 (65, 7, '2014-11-05', 1),
 (65, 8, '2014-11-06', 1),
 (65, 11, '2014-11-06', 1),
-(65, 15, '2014-11-06', 27);
+(65, 15, '2014-11-06', 27),
+(65, 15, '2014-11-20', 23);
 
 -- --------------------------------------------------------
 
@@ -56,11 +57,7 @@ CREATE TABLE IF NOT EXISTS `assignations_pokemon` (
   `id_etu` int(11) NOT NULL,
   `id_pokemon` int(11) NOT NULL,
   `id_exo` int(11) NOT NULL,
-  `poke_courant` int(11) NOT NULL,
-  PRIMARY KEY (`id_etu`,`id_pokemon`),
-  KEY `id_pokemon` (`id_pokemon`),
-  KEY `assign_exo` (`id_exo`),
-  KEY `id_etu` (`id_etu`,`id_pokemon`)
+  `poke_courant` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -1404,9 +1401,7 @@ CREATE TABLE IF NOT EXISTS `avancement` (
   `compris` int(1) NOT NULL,
   `assimile` int(1) NOT NULL,
   `id_seance` int(11) NOT NULL,
-  `date` date NOT NULL,
-  KEY `id_exo` (`id_exo`),
-  KEY `id_seance` (`id_seance`)
+  `date` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -2384,10 +2379,7 @@ CREATE TABLE IF NOT EXISTS `avancement_bonus` (
   `suivi` tinyint(1) NOT NULL,
   `note` tinyint(5) DEFAULT NULL,
   `remarque` varchar(400) DEFAULT NULL,
-  `id_seance` int(11) NOT NULL,
-  PRIMARY KEY (`id_etu`,`id_bonus`,`id_seance`),
-  KEY `id_bonus` (`id_bonus`),
-  KEY `id_seance` (`id_seance`)
+  `id_seance` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -2444,7 +2436,6 @@ INSERT INTO `avancement_bonus` (`id_etu`, `id_bonus`, `fait`, `suivi`, `note`, `
 (64, 6, 0, 0, NULL, NULL, 8),
 (125, 6, 0, 0, NULL, NULL, 14),
 (65, 6, 0, 1, 2, NULL, 0),
-(65, 18, 1, 0, NULL, NULL, 0),
 (125, 5, 0, 0, NULL, NULL, 14),
 (66, 5, 0, 0, NULL, NULL, 14),
 (66, 6, 0, 0, NULL, NULL, 14),
@@ -2463,17 +2454,7 @@ INSERT INTO `avancement_bonus` (`id_etu`, `id_bonus`, `fait`, `suivi`, `note`, `
 (122, 6, 0, 0, NULL, NULL, 14),
 (71, 5, 0, 0, NULL, NULL, 14),
 (71, 6, 0, 0, NULL, NULL, 14),
-(122, 5, 0, 0, NULL, NULL, 14),
-(31, 17, 0, 1, 4, NULL, 0),
-(61, 15, 1, 0, NULL, NULL, 0),
-(59, 15, 1, 0, NULL, NULL, 0),
-(55, 15, 1, 0, NULL, NULL, 0),
-(65, 17, 1, 0, NULL, NULL, 0),
-(23, 16, 1, 0, NULL, NULL, 0),
-(55, 16, 1, 0, NULL, NULL, 0),
-(46, 16, 1, 0, NULL, NULL, 0),
-(30, 17, 0, 1, 5, NULL, 0),
-(30, 18, 1, 0, NULL, NULL, 0);
+(122, 5, 0, 0, NULL, NULL, 14);
 
 -- --------------------------------------------------------
 
@@ -2482,12 +2463,10 @@ INSERT INTO `avancement_bonus` (`id_etu`, `id_bonus`, `fait`, `suivi`, `note`, `
 --
 
 CREATE TABLE IF NOT EXISTS `bonus` (
-  `id_bonus` int(11) NOT NULL AUTO_INCREMENT,
+`id_bonus` int(11) NOT NULL,
   `titre_bonus` varchar(200) NOT NULL,
   `type_bonus` varchar(200) NOT NULL,
-  `id_theme` int(11) NOT NULL,
-  PRIMARY KEY (`id_bonus`),
-  KEY `id_theme` (`id_theme`)
+  `id_theme` int(11) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
@@ -2496,11 +2475,7 @@ CREATE TABLE IF NOT EXISTS `bonus` (
 
 INSERT INTO `bonus` (`id_bonus`, `titre_bonus`, `type_bonus`, `id_theme`) VALUES
 (5, 'Intérêt et limite des BdD ', 'Exposé', 7),
-(6, 'ISFATES', 'Exercice', 8),
-(15, 'test', 'Expose', 7),
-(16, 'test', 'Exercice', 7),
-(17, 'test', 'Expose', 7),
-(18, 'sefsd', 'Expose', 8);
+(6, 'ISFATES', 'Exercice', 8);
 
 -- --------------------------------------------------------
 
@@ -2509,10 +2484,9 @@ INSERT INTO `bonus` (`id_bonus`, `titre_bonus`, `type_bonus`, `id_theme`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cle` (
-  `id_cle` int(11) NOT NULL AUTO_INCREMENT,
-  `valeur_cle` varchar(120) NOT NULL,
-  PRIMARY KEY (`id_cle`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+`id_cle` int(11) NOT NULL,
+  `valeur_cle` varchar(120) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Contenu de la table `cle`
@@ -2533,7 +2507,9 @@ INSERT INTO `cle` (`id_cle`, `valeur_cle`) VALUES
 (27, 'eab71244afb687f16d8c4f5ee9d6ef0e'),
 (28, 'eab71244afb687f16d8c4f5ee9d6ef0e'),
 (29, 'eab71244afb687f16d8c4f5ee9d6ef0e'),
-(30, '098f6bcd4621d373cade4e832627b4f6');
+(30, '098f6bcd4621d373cade4e832627b4f6'),
+(31, '098f6bcd4621d373cade4e832627b4f6'),
+(32, '3680e659eee9880c217e9a7408410f16');
 
 -- --------------------------------------------------------
 
@@ -2542,13 +2518,12 @@ INSERT INTO `cle` (`id_cle`, `valeur_cle`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cours` (
-  `id_cours` int(11) NOT NULL AUTO_INCREMENT,
+`id_cours` int(11) NOT NULL,
   `libelle_cours` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `couleur_calendar` varchar(7) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   `id_prof` int(11) NOT NULL,
-  `id_cle` int(11) NOT NULL,
-  PRIMARY KEY (`id_cours`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
+  `id_cle` int(11) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- Contenu de la table `cours`
@@ -2559,7 +2534,9 @@ INSERT INTO `cours` (`id_cours`, `libelle_cours`, `couleur_calendar`, `id_prof`,
 (24, 'nnn', NULL, 17, 27),
 (23, 'Biologie', NULL, 124, 19),
 (25, 'nnn', NULL, 17, 28),
-(27, 'Test', NULL, 17, 30);
+(27, 'Test', NULL, 17, 30),
+(28, 'test', NULL, 17, 31),
+(29, 'Cours1', NULL, 124, 32);
 
 -- --------------------------------------------------------
 
@@ -2568,123 +2545,156 @@ INSERT INTO `cours` (`id_cours`, `libelle_cours`, `couleur_calendar`, `id_prof`,
 --
 
 CREATE TABLE IF NOT EXISTS `etudiant` (
-  `id_etu` int(3) NOT NULL AUTO_INCREMENT,
+`id_etu` int(3) NOT NULL,
   `nom_etu` varchar(200) NOT NULL,
   `prenom_etu` varchar(200) NOT NULL,
   `pseudo_etu` varchar(200) NOT NULL,
   `mail_etu` varchar(200) NOT NULL,
   `pass_etu` varchar(200) NOT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_etu`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=130 ;
+  `chemin_avatar` text,
+  `code_lien` text,
+  `admin` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=162 ;
 
 --
 -- Contenu de la table `etudiant`
 --
 
-INSERT INTO `etudiant` (`id_etu`, `nom_etu`, `prenom_etu`, `pseudo_etu`, `mail_etu`, `pass_etu`, `admin`) VALUES
-(17, 'My Study Companion', ' (admin)', 'admin', 'zerock54@hotmail.com', 'f6fdffe48c908deb0f4c3bd36c032e72', 1),
-(50, 'Mayot', 'Paul', 'paulm', 'paul.mayot@hotmail.fr', '6ec0de365a73d4e99aa75383fe49e083', 0),
-(23, 'Bardon', 'Hélène', 'bardonhelene', 'bardonhelene@outlook.fr', 'bb148a34e1890fadcc0e8e943943adc4', 0),
-(24, 'Lux', 'Mathieu', 'mathieu67', 'mathieu-lux@hotmail.fr', '6253e1406b64bbe6ba7b00ac0bf81257', 0),
-(25, 'GREFF', 'Simon', 'bigross', 'greff.simon@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 0),
-(26, 'Hindermeyer', 'Andrew', 'Roni', 'andrew.hindermeyer@hotmail.fr', '4b94dcce4763d191e9a100cc8715037f', 0),
-(27, 'Nothof', 'Carolin', 'Caro', 'CNothof@gmx.net', 'ed7f528e5cceb3b0c344241811af1cf0', 0),
-(28, 'GRALL', 'Magalie', 'mgrall', 'magaliegrall@gmail.com', 'fa442f3f39d35c67c0f37c2aba79395d', 0),
-(29, 'Godard', 'Eloïse', 'EloïseGodard', 'eloise.godard@gmail.com', 'b6edd10559b20cb0a3ddaeb15e5267cc', 0),
-(30, 'preyssat', 'marina', 'mpreyssat', 'marinapreyssat@gmail.com', 'c9b9741c5f444218e071d942fa004d83', 0),
-(31, 'BIER', 'Louis-Nicolas', 'neko', 'dewendelsidelor@gmail.com', 'b0bd5aa3fcc9f2f2c580d172ba9e6fb3', 0),
-(32, 'Souto Tuna', 'Diogo', 'soutotun1u', 'diogo.tuna@hotmail.com', 'b5d27aeab112ba516af800d3bec2f647', 0),
-(33, 'Le Rest', 'Adrien', 'Kohril', 'lerest.adrien@gmail.com', '59f4fe41ceeec27f74cbf1baf883e373', 0),
-(34, 'Welker', 'Natalie', 'Natalie', 'natalie.welker@web.de', 'dd6f2a0e7515d0ed910921aad4258825', 0),
-(35, 'Hudson', 'Frederick', 'Freddy', 'Frederick@Hudson.de', '69fd97f355e1997b5a08ae1d93876bd8', 0),
-(36, 'Chupin', 'Alexander ', 'Alex', 'alexander.chupin@hotmail.de', '0957d2c1ae86e5eb0b9d397fa9cf2730', 0),
-(37, 'giangreco', 'giannina', 'giannina', 'giannina.gianreco@gmail.com', 'b48fee99c626f0634db4bf8f5d2d54b2', 0),
-(38, 'Demoulin', 'Miriam', 'mdemoulin', 'miriam.demoulin@orange.fr', '628adbb43b8e2efccbda9266ebbe0593', 0),
-(39, 'Hoffmann', 'Daniel', 'Dan', 'daniel.hoffmann6@etu.univ-lorraine.fr', '66475847da18d826852a4eb646a070ec', 0),
-(40, 'Rapp', 'Christian', 'nth', 'christian.r.rapp@t-online.de', '50b401b8605ee77ada5e87135f57156a', 0),
-(49, 'Handrick', 'Florine', 'Flof', 'florine.handrick@gmail.com', '8836afd14c547660380406d7e7a13c26', 0),
-(48, 'GURTLER', 'SOPHIE', 'Sophie', 'sophie.gurtler@orange.fr', '3b088b7cc2b2e5beec1cb14a7023655a', 0),
-(45, 'Demmerlé', 'Thibaut', 'tibo', 'thibaut555@gmail.com', '7682fe272099ea26efe39c890b33675b', 0),
-(46, 'Hoffmann', 'Nicolas', 'Nicolas.hoffmann', 'nicolashdu57@hotmail.com', 'cda1efa189ba1e3a79695bf43663c9f1', 0),
-(47, 'HUMBERT', 'Lorraine', 'Lorraine', 'lorraineh.h@live.fr', 'c6ed9aa478ae56001957faced0271cb7', 0),
-(51, 'Delanaux', 'Pierre', 'Pierre57420', 'pierredelanaux@yahoo.fr', 'edeedf39ecab63ded84bbcdc04e200bc', 0),
-(52, 'Golkowski', 'Marc', 'm.golkowski@hamcom.biz', 'm.golkowski@hamcom.biz', '6f72d10b24ce6db292d40cf31b5377da', 0),
-(53, 'schwarz', 'emmanuel', 'menechen', 'emmanuel.schwarz@hotmail.fr', '621507d7eec1a50b1a7d56957c67d297', 0),
-(54, 'Theis', 'Annika', 'Annii', 'annika.theis@yahoo.com', '3d61774aaa23843f1d80a0b6903e8ba1', 0),
-(55, 'Allal', 'Kenza', 'kenzanaj', 'kenzaallal@gmail.com', 'ab69d4f3abee17108f2fc2e571b5665d', 0),
-(56, 'Heim', 'Guillaume', 'Weshladesh', 'guillaume.heim@gmail.com', '43ff0d53f5d019778ddcb4ea8259a322', 0),
-(57, 'GREFF', 'Simon 2', 'TheBoss', 'simon.g5713@orange.fr', 'e7d56f3d9f5bd20065bc5b556e5f3197', 0),
-(58, 'Pascal', 'Hoffman', 'divapasc', 'diva@hoff.fr', 'd3e309779350bf432bfd819492b825f1', 0),
-(59, 'Ibrahimovic', 'Zlatan', 'zlatan', 'zlatan@ibra.com', '0b5ffc09eb62ef2241f07327276ee064', 0),
-(60, 'Benzema', 'Karim', 'karim', 'kaka@rim.fr', '51467d5f95285c46f9dba677e991885b', 0),
-(61, 'giangreco', 'Giannina', 'giagia', 'giannina.giangreco@gmail.com', 'b48fee99c626f0634db4bf8f5d2d54b2', 0),
-(62, 'ADEBAYOR', 'Emmanuel', 'Adeba', 'ade@manu.fr', 'f4c2c8a86d7c9879f1d69c95838abd5a', 0),
-(63, 'Buehler', 'Cindy', 'cinderella', 'elenanosaltarin@gmx.de', '9feb4c00dad9409f01a8e8b006691e0c', 0),
-(64, 'gabi', 'gabi', 'gabi', 'gabi@gabi.com', 'a0d499c751053663c611a32779a57104', 1),
-(65, 'Test', 'Test', 'TEST', 'collet.damien@hotmail.fr', '033bd94b1168d7e4f0d644c3c95e35bf', 0),
-(66, 'GALMICHE', 'Nicolas', 'nico', 'gabi@gabfffi.com', '410ec15153a6dff0bed851467309bcbd', 1),
-(67, 'NICK', 'Df', 'dfdf', 'dffd@ggl.fr', 'b52c96bea30646abf8170f333bbd42b9', 1),
-(68, 'TESTPROF', 'Testprof', 'testprof', 'testprof@testprof.fr', '694ae24230bc0baa4eabdc0d3d2995c8', 1),
-(69, 'TESTPROF2', 'Testprof2', 'testprof2', 'gabintm@gg.fr', 'ec91ede073a72ad4b81625f3d394b7db', 1),
-(70, 'LOL', 'Lol', 'ggg', 'lol@lol.fr', '73c18c59a39b18382081ec00bb456d43', 1),
-(71, 'SWF', 'Fdf', 'dfsf', 'sfdsf@dwf.fr', '3238b0f5af9931fc73a43eb02a2ee528', 0),
-(72, ':nom', ':prenom', ':pseudo', ':mail', ':pass', 0),
-(73, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(74, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(75, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(76, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(77, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(78, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(79, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(80, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(81, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(82, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(83, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(84, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(85, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(86, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(87, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(88, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(89, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(90, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(91, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(92, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', 0),
-(93, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(94, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(95, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(96, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(97, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(98, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(99, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(100, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(101, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(102, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(103, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(104, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(105, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(106, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(107, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(108, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(109, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(110, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(111, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(112, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(113, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(114, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(115, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(116, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(117, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(118, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(119, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 0),
-(123, 'MICHEL', 'Gabriel', 'gabriel.michel', 'gabriel.michel@gmail.com', 'a0d499c751053663c611a32779a57104', 1),
-(122, 'GALMICHE', 'Nicolas', 'zerock', 'zerock54@hotmail.fr', 'd450c5dbcc10db0749277efc32f15f9f', 1),
-(124, 'PROF', 'Prof', 'prof', 'prof@etu.fr', 'd450c5dbcc10db0749277efc32f15f9f', 1),
-(125, 'FFF', 'Fff', 'fr', 'fff@ff.fr', '82a9e4d26595c87ab6e442391d8c5bba', 1),
-(126, 'n', 'n', 'zerockj', 'zerock54@hotmail.comj', 'aa', 0),
-(127, 'n', 'n', 'zerockjk', 'zerock54@hotmail.comjk', 'aa', 0),
-(128, 'n', 'n', 'zerockjkmm', 'zerock54@hotmail.comjkmm', 'aa', 0),
-(129, 'na', 'na', 'zerockjka', 'zerock54@hotmail.comjka', 'aa', 0);
+INSERT INTO `etudiant` (`id_etu`, `nom_etu`, `prenom_etu`, `pseudo_etu`, `mail_etu`, `pass_etu`, `chemin_avatar`, `code_lien`, `admin`) VALUES
+(17, 'My Study Companion', ' (admin)', 'admin', 'zerock54@hotmail.com', 'f6fdffe48c908deb0f4c3bd36c032e72', NULL, NULL, 1),
+(50, 'Mayot', 'Paul', 'paulm', 'paul.mayot@hotmail.fr', '6ec0de365a73d4e99aa75383fe49e083', NULL, NULL, 0),
+(23, 'Bardon', 'Hélène', 'bardonhelene', 'bardonhelene@outlook.fr', 'bb148a34e1890fadcc0e8e943943adc4', NULL, NULL, 0),
+(24, 'Lux', 'Mathieu', 'mathieu67', 'mathieu-lux@hotmail.fr', '6253e1406b64bbe6ba7b00ac0bf81257', NULL, NULL, 0),
+(25, 'GREFF', 'Simon', 'bigross', 'greff.simon@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, NULL, 0),
+(26, 'Hindermeyer', 'Andrew', 'Roni', 'andrew.hindermeyer@hotmail.fr', '4b94dcce4763d191e9a100cc8715037f', NULL, NULL, 0),
+(27, 'Nothof', 'Carolin', 'Caro', 'CNothof@gmx.net', 'ed7f528e5cceb3b0c344241811af1cf0', NULL, NULL, 0),
+(28, 'GRALL', 'Magalie', 'mgrall', 'magaliegrall@gmail.com', 'fa442f3f39d35c67c0f37c2aba79395d', NULL, NULL, 0),
+(29, 'Godard', 'Eloïse', 'EloïseGodard', 'eloise.godard@gmail.com', 'b6edd10559b20cb0a3ddaeb15e5267cc', NULL, NULL, 0),
+(30, 'preyssat', 'marina', 'mpreyssat', 'marinapreyssat@gmail.com', 'c9b9741c5f444218e071d942fa004d83', NULL, NULL, 0),
+(31, 'BIER', 'Louis-Nicolas', 'neko', 'dewendelsidelor@gmail.com', 'b0bd5aa3fcc9f2f2c580d172ba9e6fb3', NULL, NULL, 0),
+(32, 'Souto Tuna', 'Diogo', 'soutotun1u', 'diogo.tuna@hotmail.com', 'b5d27aeab112ba516af800d3bec2f647', NULL, NULL, 0),
+(33, 'Le Rest', 'Adrien', 'Kohril', 'lerest.adrien@gmail.com', '59f4fe41ceeec27f74cbf1baf883e373', NULL, NULL, 0),
+(34, 'Welker', 'Natalie', 'Natalie', 'natalie.welker@web.de', 'dd6f2a0e7515d0ed910921aad4258825', NULL, NULL, 0),
+(35, 'Hudson', 'Frederick', 'Freddy', 'Frederick@Hudson.de', '69fd97f355e1997b5a08ae1d93876bd8', NULL, NULL, 0),
+(36, 'Chupin', 'Alexander ', 'Alex', 'alexander.chupin@hotmail.de', '0957d2c1ae86e5eb0b9d397fa9cf2730', NULL, NULL, 0),
+(37, 'giangreco', 'giannina', 'giannina', 'giannina.gianreco@gmail.com', 'b48fee99c626f0634db4bf8f5d2d54b2', NULL, NULL, 0),
+(38, 'Demoulin', 'Miriam', 'mdemoulin', 'miriam.demoulin@orange.fr', '628adbb43b8e2efccbda9266ebbe0593', NULL, NULL, 0),
+(39, 'Hoffmann', 'Daniel', 'Dan', 'daniel.hoffmann6@etu.univ-lorraine.fr', '66475847da18d826852a4eb646a070ec', NULL, NULL, 0),
+(40, 'Rapp', 'Christian', 'nth', 'christian.r.rapp@t-online.de', '50b401b8605ee77ada5e87135f57156a', NULL, NULL, 0),
+(49, 'Handrick', 'Florine', 'Flof', 'florine.handrick@gmail.com', '8836afd14c547660380406d7e7a13c26', NULL, NULL, 0),
+(48, 'GURTLER', 'SOPHIE', 'Sophie', 'sophie.gurtler@orange.fr', '3b088b7cc2b2e5beec1cb14a7023655a', NULL, NULL, 0),
+(45, 'Demmerlé', 'Thibaut', 'tibo', 'thibaut555@gmail.com', '7682fe272099ea26efe39c890b33675b', NULL, NULL, 0),
+(46, 'Hoffmann', 'Nicolas', 'Nicolas.hoffmann', 'nicolashdu57@hotmail.com', 'cda1efa189ba1e3a79695bf43663c9f1', NULL, NULL, 0),
+(47, 'HUMBERT', 'Lorraine', 'Lorraine', 'lorraineh.h@live.fr', 'c6ed9aa478ae56001957faced0271cb7', NULL, NULL, 0),
+(51, 'Delanaux', 'Pierre', 'Pierre57420', 'pierredelanaux@yahoo.fr', 'edeedf39ecab63ded84bbcdc04e200bc', NULL, NULL, 0),
+(52, 'Golkowski', 'Marc', 'm.golkowski@hamcom.biz', 'm.golkowski@hamcom.biz', '6f72d10b24ce6db292d40cf31b5377da', NULL, NULL, 0),
+(53, 'schwarz', 'emmanuel', 'menechen', 'emmanuel.schwarz@hotmail.fr', '621507d7eec1a50b1a7d56957c67d297', NULL, NULL, 0),
+(54, 'Theis', 'Annika', 'Annii', 'annika.theis@yahoo.com', '3d61774aaa23843f1d80a0b6903e8ba1', NULL, NULL, 0),
+(55, 'Allal', 'Kenza', 'kenzanaj', 'kenzaallal@gmail.com', 'ab69d4f3abee17108f2fc2e571b5665d', NULL, NULL, 0),
+(56, 'Heim', 'Guillaume', 'Weshladesh', 'guillaume.heim@gmail.com', '43ff0d53f5d019778ddcb4ea8259a322', NULL, NULL, 0),
+(57, 'GREFF', 'Simon 2', 'TheBoss', 'simon.g5713@orange.fr', 'e7d56f3d9f5bd20065bc5b556e5f3197', NULL, NULL, 0),
+(58, 'Pascal', 'Hoffman', 'divapasc', 'diva@hoff.fr', 'd3e309779350bf432bfd819492b825f1', NULL, NULL, 0),
+(59, 'Ibrahimovic', 'Zlatan', 'zlatan', 'zlatan@ibra.com', '0b5ffc09eb62ef2241f07327276ee064', NULL, NULL, 0),
+(60, 'Benzema', 'Karim', 'karim', 'kaka@rim.fr', '51467d5f95285c46f9dba677e991885b', NULL, NULL, 0),
+(61, 'giangreco', 'Giannina', 'giagia', 'giannina.giangreco@gmail.com', 'b48fee99c626f0634db4bf8f5d2d54b2', NULL, NULL, 0),
+(62, 'ADEBAYOR', 'Emmanuel', 'Adeba', 'ade@manu.fr', 'f4c2c8a86d7c9879f1d69c95838abd5a', NULL, NULL, 0),
+(63, 'Buehler', 'Cindy', 'cinderella', 'elenanosaltarin@gmx.de', '9feb4c00dad9409f01a8e8b006691e0c', NULL, NULL, 0),
+(64, 'gabi', 'gabi', 'gabi', 'gabi@gabi.com', 'a0d499c751053663c611a32779a57104', NULL, NULL, 1),
+(65, 'azeazea', 'azaz', 'TEST', 'collet.damien@hotmail.fr', '033bd94b1168d7e4f0d644c3c95e35bf', NULL, NULL, 0),
+(66, 'GALMICHE', 'Nicolas', 'nico', 'gabi@gabfffi.com', '410ec15153a6dff0bed851467309bcbd', NULL, NULL, 1),
+(67, 'NICK', 'Df', 'dfdf', 'dffd@ggl.fr', 'b52c96bea30646abf8170f333bbd42b9', NULL, NULL, 1),
+(68, 'TESTPROF', 'Testprof', 'testprof', 'testprof@testprof.fr', '694ae24230bc0baa4eabdc0d3d2995c8', NULL, NULL, 1),
+(69, 'TESTPROF2', 'Testprof2', 'testprof2', 'gabintm@gg.fr', 'ec91ede073a72ad4b81625f3d394b7db', NULL, NULL, 1),
+(70, 'LOL', 'Lol', 'ggg', 'lol@lol.fr', '73c18c59a39b18382081ec00bb456d43', NULL, NULL, 1),
+(71, 'SWF', 'Fdf', 'dfsf', 'sfdsf@dwf.fr', '3238b0f5af9931fc73a43eb02a2ee528', NULL, NULL, 0),
+(72, ':nom', ':prenom', ':pseudo', ':mail', ':pass', NULL, NULL, 0),
+(73, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(74, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(75, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(76, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(77, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(78, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(79, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(80, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(81, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(82, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(83, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(84, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(85, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(86, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(87, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(88, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(89, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(90, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(91, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(92, 'Luc', 'Luc', 'Luc', 'Luc', 'Luc', NULL, NULL, 0),
+(93, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(94, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(95, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(96, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(97, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(98, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(99, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(100, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(101, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(102, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(103, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(104, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(105, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(106, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(107, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(108, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(109, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(110, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(111, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(112, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(113, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(114, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(115, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(116, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(117, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(118, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(119, 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', 'My Study Companion', NULL, NULL, 0),
+(123, 'MICHEL', 'Gabriel', 'gabriel.michel', 'gabriel.michel@gmail.com', 'a0d499c751053663c611a32779a57104', NULL, NULL, 1),
+(122, 'GALMICHE', 'Nicolas', 'zerock', 'zerock54@hotmail.fr', 'd450c5dbcc10db0749277efc32f15f9f', NULL, NULL, 1),
+(124, 'PROF', 'Prof', 'prof', 'prof@etu.fr', 'd450c5dbcc10db0749277efc32f15f9f', NULL, NULL, 1),
+(125, 'FFF', 'Fff', 'fr', 'fff@ff.fr', '82a9e4d26595c87ab6e442391d8c5bba', NULL, NULL, 1),
+(126, 'n', 'n', 'zerockj', 'zerock54@hotmail.comj', 'aa', NULL, NULL, 0),
+(127, 'n', 'n', 'zerockjk', 'zerock54@hotmail.comjk', 'aa', NULL, NULL, 0),
+(128, 'n', 'n', 'zerockjkmm', 'zerock54@hotmail.comjkmm', 'aa', NULL, NULL, 0),
+(129, 'na', 'na', 'zerockjka', 'zerock54@hotmail.comjka', 'aa', NULL, NULL, 0),
+(130, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e', NULL, NULL, 0),
+(131, 'Aaaaaaaa', 'Aaaaaaaaaaa', 'AAAAAAAAAAAAAA', 'aa@aa.aa', 'd8a73157ce10cd94a91c2079fc9a92c8', '', '', 0),
+(132, 'Aaaaaaaa', 'Aaaaaaaaaaa', 'AAAAAAAAAAAAAA', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', '', '', 0),
+(133, 'Aaaaaaaa', 'Aaaaaaaaaaa', 'AAAAAAAAAAAAAA', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', '', 'd41d8cd98f00b204e9800998ecf8427e', 0),
+(134, 'Aa', 'Aa', 'aaa', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', '', 'd41d8cd98f00b204e9800998ecf8427e', 0),
+(135, 'Aa', 'Aa', 'aaa', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', '', '', 0),
+(136, 'Aa', 'Aa', 'aaa', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', '', '', 0),
+(137, 'Aa', 'Aa', 'aaa', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', '', '', 0),
+(138, 'Aa', 'Aa', 'aaa', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', '', '', 0),
+(139, 'Aaaa', 'Aa', 'qqqq', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', '', '', 0),
+(140, 'Salut', 'Salut', 'salut', 'sdfsd@sdfsdf.sdf', '4bbde07660e5eff90873642cfae9a8dd', 'salut', 'salut', 0),
+(141, 'Salut', 'Salut', 'salut', 'sdfsd@sdfsdf.sdf', '4bbde07660e5eff90873642cfae9a8dd', 'salut', 'salut', 0),
+(142, 'Salut', 'Salut', 'salut', 'sdfsd@sdfsdf.sdf', '4bbde07660e5eff90873642cfae9a8dd', 'coucou', 'coucou', 0),
+(143, 'Aa', 'Aa', 'aaaa', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', 'NULL', 'NULL', 0),
+(144, 'Aa', 'Aa', 'aaa', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', '', 'd41d8cd98f00b204e9800998ecf8427e', 0),
+(145, 'Aa', 'Aa', 'admin', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', 'WP_20140423_001.jpg', '912d7d1d5206cde2f9a5114511187d90', 0),
+(146, 'Aa', 'Aa', 'admin', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', NULL, NULL, 0),
+(147, 'Aa', 'Aa', 'admin', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', 'WP_20140423_0011.jpg', '9c38c69c0ac8523b0d849fb6fc2d6e4f', 0),
+(148, 'Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'Aa', 'aaa', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', NULL, NULL, 0),
+(149, 'Bbbbbbbbbb', 'Bbbbbbb', 'bbbbbbbbbbbb', 'b@b.c', '810247419084c82d03809fc886fedaad', 'WP_20140419_001.jpg', 'd6d09bc53d90f431e4862f87f534f500', 0),
+(150, 'Aa', 'Aaaaa', 'aaaaaaaaaaaaa', 'aa@aa.aa', '3dbe00a167653a1aaee01d93e77e730e', NULL, NULL, 0),
+(151, 'Collet', 'Damien', 'Damien57070', 'collet.damien@hotmail.fr', 'e86ccb972fb44b55ed2b4d9b4f9bce7a', NULL, NULL, 0),
+(152, 'Collet', 'Damien', 'Damien57070', 'collet.damien@hotmail.fr', 'e86ccb972fb44b55ed2b4d9b4f9bce7a', 'IMG_10112014_234548.png', 'a78ed6913acc7024fb1f90ff0538d05a', 0),
+(153, 'Salut', 'Sss', 'sssssssssss', 'sdfsd@sdfsdf.sdf', '4bbde07660e5eff90873642cfae9a8dd', NULL, NULL, 0),
+(154, 'A', 'Z', 'robot', 'aa@aa.aa', '12fc62439d5d79daf7ba8333e549b70b', 'IMG_10112014_2345481.png', 'b60a1d2d731185678568cc0001f17c80', 0),
+(155, 'Hhhh', 'Hhh', 'hhhh', 'heyy@hey.hey', 'b7e6923f6de66497d51789db0ef3571d', NULL, NULL, 0),
+(156, 'Ppp', 'Ppp', 'restaurant', 'aa@aa.aa', '6d4b62960a6aa2b1fff43a9c1d95f7b2', '2d19adeda1beb7f73ebce66af3cabe71', '2d19adeda1beb7f73ebce66af3cabe71', 0),
+(157, 'Jjjjjjjjj', 'Jjjjj', 'jjjjjj', 'jptest@gmail.com', '4bb2c9d9a57a0d2a53e7c4d56c952331', 'IMG_10112014_2345483.png', '9a4a51b07b1fec9724c8f89bbc69d8bd', 0),
+(158, 'Fdg', 'Dfgdfg', 'GGGGG', 'aa@aa.aa', '9ce68bf7aee21ff56acf75f4fd4f8bec', 'IMG_10112014_2345484.png', '2e81e74fb7921535e218ed9a189295c3', 0),
+(159, 'Jp', 'Jp', 'alert', 'collet.damien@hotmail.fr', 'ca692b009da9da37cca5b0435e0c786d', 'logo.png', '1bb87d41d15fe27b500a4bfcde01bb0e', 0),
+(160, 'Aaaazd', 'Azd', 'azdazdzad', 'aa@aa.aa', 'c162de19c4c3731ca3428769d0cd593d', NULL, NULL, 0),
+(161, 'Galmiche', 'Nicolas', 'loserpoolfc', 'ng54@hotmail.fr', '89f5858214dfef761b40508b5c2c9b40', 'WP_20140423_0012.jpg', '59ce6833e57d6c143d9f0c0a25d7f857', 0);
 
 -- --------------------------------------------------------
 
@@ -2694,9 +2704,7 @@ INSERT INTO `etudiant` (`id_etu`, `nom_etu`, `prenom_etu`, `pseudo_etu`, `mail_e
 
 CREATE TABLE IF NOT EXISTS `evolutions` (
   `id_pokemon` int(11) NOT NULL,
-  `id_evolution` int(11) NOT NULL,
-  PRIMARY KEY (`id_pokemon`,`id_evolution`),
-  KEY `id_evolution` (`id_evolution`)
+  `id_evolution` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -2752,13 +2760,11 @@ INSERT INTO `evolutions` (`id_pokemon`, `id_evolution`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `exercice` (
-  `id_exo` int(11) NOT NULL AUTO_INCREMENT,
+`id_exo` int(11) NOT NULL,
   `titre_exo` varchar(200) NOT NULL,
   `num_exo` int(11) NOT NULL,
-  `id_theme` int(11) NOT NULL,
-  PRIMARY KEY (`id_exo`),
-  KEY `id_chap` (`id_theme`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
+  `id_theme` int(11) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
 
 --
 -- Contenu de la table `exercice`
@@ -2787,7 +2793,9 @@ INSERT INTO `exercice` (`id_exo`, `titre_exo`, `num_exo`, `id_theme`) VALUES
 (48, 'Bonjour', 2, 10),
 (53, 'Hello world !', 1, 18),
 (51, 'dd', 1, 13),
-(54, 'dsds', 12, 7);
+(54, 'dsds', 12, 7),
+(56, 'Exercice1', 1, 20),
+(57, 'Exercice2', 2, 20);
 
 -- --------------------------------------------------------
 
@@ -2796,24 +2804,24 @@ INSERT INTO `exercice` (`id_exo`, `titre_exo`, `num_exo`, `id_theme`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `fichiers` (
-  `id_fichier` int(11) NOT NULL AUTO_INCREMENT,
+`id_fichier` int(11) NOT NULL,
   `id_exo` int(11) NOT NULL,
   `chemin_fichier` varchar(200) NOT NULL,
   `nom` varchar(200) NOT NULL,
   `commentaires` varchar(500) NOT NULL,
   `code_lien` varchar(100) NOT NULL,
   `enligne` tinyint(1) NOT NULL,
-  `telechargements` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_fichier`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `telechargements` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `fichiers`
 --
 
 INSERT INTO `fichiers` (`id_fichier`, `id_exo`, `chemin_fichier`, `nom`, `commentaires`, `code_lien`, `enligne`, `telechargements`) VALUES
-(1, 16, 'Docts-Tests-VF-Pour-IUP.doc', 'Docts-Tests-VF-Pour-IUP.doc', 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit ', '76c229e6e68a5b7e432613c4ba69ce5e', 1, 0),
-(2, 16, 'fond.jpg', 'fond.jpg', 'feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque s', '96571c9d6f4f5c2f5c3d9542aa8e715c', 1, 1);
+(1, 16, 'Docts-Tests-VF-Pour-IUP.doc', 'Docts-Tests-VF-Pour-IUP.doc', 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit ', '76c229e6e68a5b7e432613c4ba69ce5e', 1, 1),
+(2, 16, 'fond.jpg', 'fond.jpg', 'feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque s', '96571c9d6f4f5c2f5c3d9542aa8e715c', 1, 1),
+(3, 56, '', 'fond.jpg', 'lolo', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2822,12 +2830,11 @@ INSERT INTO `fichiers` (`id_fichier`, `id_exo`, `chemin_fichier`, `nom`, `commen
 --
 
 CREATE TABLE IF NOT EXISTS `forum_categorie` (
-  `id_categorie` int(11) NOT NULL AUTO_INCREMENT,
+`id_categorie` int(11) NOT NULL,
   `titre_categorie` varchar(200) NOT NULL,
   `description_categorie` varchar(90) NOT NULL,
   `id_cours` int(11) NOT NULL,
-  `id_categorie_parent` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_categorie`)
+  `id_categorie_parent` int(11) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
@@ -2845,20 +2852,23 @@ INSERT INTO `forum_categorie` (`id_categorie`, `titre_categorie`, `description_c
 --
 
 CREATE TABLE IF NOT EXISTS `forum_reponses` (
-  `id_reponse` int(6) NOT NULL AUTO_INCREMENT,
+`id_reponse` int(6) NOT NULL,
   `auteur_reponse` varchar(30) NOT NULL,
   `message` text NOT NULL,
   `date_reponse` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `correspondance_sujet` int(6) NOT NULL,
-  PRIMARY KEY (`id_reponse`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
+  `correspondance_sujet` int(6) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
 
 --
 -- Contenu de la table `forum_reponses`
 --
 
 INSERT INTO `forum_reponses` (`id_reponse`, `auteur_reponse`, `message`, `date_reponse`, `correspondance_sujet`) VALUES
-(61, '17', 'Moi c''est le lion c''est trop cool !!!', '2014-11-03 21:12:10', 45);
+(61, '17', 'Moi c''est le lion c''est trop cool !!!', '2014-11-03 21:12:10', 45),
+(62, '65', 'WESH BABES\r\n\r\nHOW YOU DOIN YO', '2014-11-20 15:43:47', 45),
+(63, '65', 'KKKKK', '2014-11-20 15:46:27', 45),
+(64, '65', 'DGTGDSE', '2014-11-20 15:46:54', 45),
+(65, '65', 'sedfcv', '2014-11-20 15:49:49', 45);
 
 -- --------------------------------------------------------
 
@@ -2867,12 +2877,11 @@ INSERT INTO `forum_reponses` (`id_reponse`, `auteur_reponse`, `message`, `date_r
 --
 
 CREATE TABLE IF NOT EXISTS `forum_sujets` (
-  `id_sujet` int(6) NOT NULL AUTO_INCREMENT,
+`id_sujet` int(6) NOT NULL,
   `auteur` varchar(30) NOT NULL,
   `titre` text NOT NULL,
   `date_derniere_reponse` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `id_categorie` int(11) NOT NULL,
-  PRIMARY KEY (`id_sujet`)
+  `id_categorie` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
@@ -2889,15 +2898,13 @@ INSERT INTO `forum_sujets` (`id_sujet`, `auteur`, `titre`, `date_derniere_repons
 --
 
 CREATE TABLE IF NOT EXISTS `historique` (
-  `id_historique` int(11) NOT NULL AUTO_INCREMENT,
+`id_historique` int(11) NOT NULL,
   `page` varchar(200) NOT NULL,
   `date_visite` date NOT NULL,
   `heure_visite` time NOT NULL,
   `id_etu` int(11) NOT NULL,
-  `id_cours` int(11) NOT NULL,
-  PRIMARY KEY (`id_historique`),
-  KEY `id_etu` (`id_etu`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5284 ;
+  `id_cours` int(11) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5340 ;
 
 --
 -- Contenu de la table `historique`
@@ -8166,7 +8173,63 @@ INSERT INTO `historique` (`id_historique`, `page`, `date_visite`, `heure_visite`
 (5280, 'seance_actuelle', '2014-11-06', '23:49:10', 65, 1),
 (5281, 'compte', '2014-11-06', '23:49:18', 65, 0),
 (5282, 'compte', '2014-11-06', '23:49:29', 65, 0),
-(5283, 'compte', '2014-11-06', '23:50:27', 65, 0);
+(5283, 'compte', '2014-11-06', '23:50:27', 65, 0),
+(5284, 'evolution', '2014-11-13', '10:55:01', 65, 1),
+(5285, 'evolution', '2014-11-13', '10:55:14', 65, 1),
+(5286, 'evolution', '2014-11-13', '10:56:06', 65, 1),
+(5287, 'informations', '2014-11-13', '10:56:09', 65, 1),
+(5288, 'objectif', '2014-11-13', '10:56:10', 65, 1),
+(5289, 'evolution', '2014-11-20', '15:33:22', 65, 1),
+(5290, 'progression', '2014-11-20', '15:33:37', 65, 1),
+(5291, 'objectif', '2014-11-20', '15:33:46', 65, 1),
+(5292, 'evolution', '2014-11-20', '15:34:02', 65, 1),
+(5293, 'seance_actuelle', '2014-11-20', '15:34:05', 65, 1),
+(5294, 'evolution', '2014-11-20', '15:37:29', 65, 23),
+(5295, 'evolution', '2014-11-20', '15:37:33', 65, 27),
+(5296, 'evolution', '2014-11-20', '15:37:35', 65, 23),
+(5297, 'evolution', '2014-11-20', '15:37:43', 65, 27),
+(5298, 'evolution', '2014-11-20', '15:37:46', 65, 1),
+(5299, '../../forum/controleur/index_forum', '2014-11-20', '15:37:55', 65, 1),
+(5300, '../../forum/controleur/index_forum', '2014-11-20', '15:39:09', 65, 1),
+(5301, '../../forum/controleur/liste_sujets_forum', '2014-11-20', '15:39:13', 65, 1),
+(5302, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:39:16', 65, 1),
+(5303, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:42:42', 65, 1),
+(5304, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:43:13', 65, 1),
+(5305, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:43:23', 65, 1),
+(5306, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:43:48', 65, 1),
+(5307, '../../forum/controleur/liste_sujets_forum', '2014-11-20', '15:46:20', 65, 1),
+(5308, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:46:22', 65, 1),
+(5309, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:46:24', 65, 1),
+(5310, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:46:27', 65, 1),
+(5311, '../../forum/controleur/index_forum', '2014-11-20', '15:46:44', 65, 1),
+(5312, '../../forum/controleur/liste_sujets_forum', '2014-11-20', '15:46:46', 65, 1),
+(5313, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:46:50', 65, 1),
+(5314, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:46:52', 65, 1),
+(5315, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:46:55', 65, 1),
+(5316, '../../forum/controleur/index_forum', '2014-11-20', '15:47:14', 65, 1),
+(5317, '../../forum/controleur/liste_sujets_forum', '2014-11-20', '15:47:16', 65, 1),
+(5318, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:47:18', 65, 1),
+(5319, '../../forum/controleur/liste_sujets_forum', '2014-11-20', '15:47:20', 65, 1),
+(5320, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:47:25', 65, 1),
+(5321, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:48:09', 65, 1),
+(5322, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:48:16', 65, 1),
+(5323, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:49:36', 65, 1),
+(5324, '../../forum/controleur/index_forum', '2014-11-20', '15:49:40', 65, 1),
+(5325, '../../forum/controleur/liste_sujets_forum', '2014-11-20', '15:49:42', 65, 1),
+(5326, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:49:44', 65, 1),
+(5327, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:49:46', 65, 1),
+(5328, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:49:50', 65, 1),
+(5329, '../../forum/controleur/voir_sujet_forum', '2014-11-20', '15:50:07', 65, 1),
+(5330, 'progression', '2014-11-24', '10:25:17', 65, 1),
+(5331, 'seance_actuelle', '2014-11-24', '10:26:48', 65, 1),
+(5332, 'objectif', '2014-11-24', '10:30:44', 65, 1),
+(5333, 'progression', '2014-11-24', '10:35:50', 65, 1),
+(5334, 'progression', '2014-11-24', '11:27:14', 65, 1),
+(5335, 'objectif', '2014-11-24', '11:27:42', 65, 1),
+(5336, 'objectif', '2014-11-24', '11:27:44', 65, 1),
+(5337, 'seance_actuelle', '2014-11-24', '11:33:51', 65, 1),
+(5338, 'mes_bonus', '2014-11-24', '11:36:15', 65, 1),
+(5339, 'progression', '2014-11-24', '11:39:28', 65, 1);
 
 -- --------------------------------------------------------
 
@@ -8175,57 +8238,59 @@ INSERT INTO `historique` (`id_historique`, `page`, `date_visite`, `heure_visite`
 --
 
 CREATE TABLE IF NOT EXISTS `inscription` (
-  `id_inscription` int(11) NOT NULL AUTO_INCREMENT,
+`id_inscription` int(11) NOT NULL,
   `id_cours` int(11) NOT NULL,
   `id_etu` int(11) NOT NULL,
   `date_inscription` date NOT NULL,
-  PRIMARY KEY (`id_inscription`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+  `couleur_fond` varchar(50) DEFAULT NULL,
+  `couleur_texte` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Contenu de la table `inscription`
 --
 
-INSERT INTO `inscription` (`id_inscription`, `id_cours`, `id_etu`, `date_inscription`) VALUES
-(1, 1, 23, '2014-10-14'),
-(2, 1, 24, '2014-10-21'),
-(3, 1, 25, '2014-10-14'),
-(4, 1, 26, '2014-10-14'),
-(5, 1, 27, '2014-10-14'),
-(6, 1, 28, '2014-10-14'),
-(7, 1, 29, '2014-10-14'),
-(8, 1, 30, '2014-10-14'),
-(9, 1, 31, '2014-10-14'),
-(10, 1, 32, '2014-10-14'),
-(11, 1, 33, '2014-10-14'),
-(12, 1, 34, '2014-10-14'),
-(13, 1, 35, '2014-10-14'),
-(14, 1, 36, '2014-10-14'),
-(15, 1, 37, '2014-10-14'),
-(16, 1, 38, '2014-10-14'),
-(17, 1, 39, '2014-10-14'),
-(18, 1, 40, '2014-10-14'),
-(19, 1, 49, '2014-10-14'),
-(20, 1, 48, '2014-10-14'),
-(21, 1, 45, '2014-10-14'),
-(22, 1, 46, '2014-10-14'),
-(23, 1, 47, '2014-10-14'),
-(24, 1, 51, '2014-10-14'),
-(25, 1, 52, '2014-10-14'),
-(26, 1, 53, '2014-10-14'),
-(27, 1, 54, '2014-10-14'),
-(28, 1, 55, '2014-10-14'),
-(29, 1, 56, '2014-10-14'),
-(30, 1, 57, '2014-10-14'),
-(31, 1, 58, '2014-10-14'),
-(32, 1, 59, '2014-10-14'),
-(33, 1, 60, '2014-10-14'),
-(34, 1, 61, '2014-10-14'),
-(35, 1, 62, '2014-10-14'),
-(36, 1, 63, '2014-10-14'),
-(37, 1, 65, '2014-10-14'),
-(38, 3, 65, '2014-10-14'),
-(39, 27, 65, '2014-11-06');
+INSERT INTO `inscription` (`id_inscription`, `id_cours`, `id_etu`, `date_inscription`, `couleur_fond`, `couleur_texte`) VALUES
+(1, 1, 23, '2014-10-14', '', NULL),
+(2, 1, 24, '2014-10-21', '', NULL),
+(3, 1, 25, '2014-10-14', '', NULL),
+(4, 1, 26, '2014-10-14', '', NULL),
+(5, 1, 27, '2014-10-14', '', NULL),
+(6, 1, 28, '2014-10-14', '', NULL),
+(7, 1, 29, '2014-10-14', '', NULL),
+(8, 1, 30, '2014-10-14', '', NULL),
+(9, 1, 31, '2014-10-14', '', NULL),
+(10, 1, 32, '2014-10-14', '', NULL),
+(11, 1, 33, '2014-10-14', '', NULL),
+(12, 1, 34, '2014-10-14', '', NULL),
+(13, 1, 35, '2014-10-14', '', NULL),
+(14, 1, 36, '2014-10-14', '', NULL),
+(15, 1, 37, '2014-10-14', '', NULL),
+(16, 1, 38, '2014-10-14', '', NULL),
+(17, 1, 39, '2014-10-14', '', NULL),
+(18, 1, 40, '2014-10-14', '', NULL),
+(19, 1, 49, '2014-10-14', '', NULL),
+(20, 1, 48, '2014-10-14', '', NULL),
+(21, 1, 45, '2014-10-14', '', NULL),
+(22, 1, 46, '2014-10-14', '', NULL),
+(23, 1, 47, '2014-10-14', '', NULL),
+(24, 1, 51, '2014-10-14', '', NULL),
+(25, 1, 52, '2014-10-14', '', NULL),
+(26, 1, 53, '2014-10-14', '', NULL),
+(27, 1, 54, '2014-10-14', '', NULL),
+(28, 1, 55, '2014-10-14', '', NULL),
+(29, 1, 56, '2014-10-14', '', NULL),
+(30, 1, 57, '2014-10-14', '', NULL),
+(31, 1, 58, '2014-10-14', '', NULL),
+(32, 1, 59, '2014-10-14', '', NULL),
+(33, 1, 60, '2014-10-14', '', NULL),
+(34, 1, 61, '2014-10-14', '', NULL),
+(35, 1, 62, '2014-10-14', '', NULL),
+(36, 1, 63, '2014-10-14', '', NULL),
+(41, 1, 65, '2014-11-03', '#9187b8', '#004040'),
+(38, 3, 65, '2014-10-14', '', NULL),
+(42, 27, 65, '2014-11-10', NULL, NULL),
+(40, 23, 65, '2014-11-07', '#0000ff', '#80ff00');
 
 -- --------------------------------------------------------
 
@@ -8234,19 +8299,15 @@ INSERT INTO `inscription` (`id_inscription`, `id_cours`, `id_etu`, `date_inscrip
 --
 
 CREATE TABLE IF NOT EXISTS `messages` (
-  `id_mess` int(11) NOT NULL AUTO_INCREMENT,
+`id_mess` int(11) NOT NULL,
   `expediteur` int(11) NOT NULL,
   `destinataire` int(11) NOT NULL,
   `date_mess` datetime NOT NULL,
   `heure_mess` time NOT NULL,
   `titre_mess` varchar(1000) NOT NULL,
   `texte_mess` varchar(1000) NOT NULL,
-  `lu` int(11) NOT NULL,
-  PRIMARY KEY (`id_mess`),
-  KEY `expediteur` (`expediteur`,`destinataire`),
-  KEY `destinataire` (`destinataire`),
-  KEY `expediteur_2` (`expediteur`,`destinataire`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
+  `lu` int(11) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
 
 --
 -- Contenu de la table `messages`
@@ -8296,9 +8357,10 @@ INSERT INTO `messages` (`id_mess`, `expediteur`, `destinataire`, `date_mess`, `h
 (70, 17, 60, '2014-10-24 15:37:18', '15:37:18', 'Wesh rimk', 'bien ou bien', 0),
 (71, 17, 27, '2014-10-25 19:23:56', '19:23:56', 'lol', 'lol', 0),
 (72, 17, 65, '2014-10-25 19:41:47', '19:41:47', 'bv', 'ghgh', 1),
-(73, 65, 17, '2014-11-04 15:04:16', '15:04:16', 'RE: bv', 'dfsdfsdf\r\nDate : 2014-10-25 19:41:47\r\nSujet : bv\r\nDe : My Study Companion\r\nMessage : ghgh', 0),
+(73, 65, 17, '2014-11-04 15:04:16', '15:04:16', 'RE: bv', 'dfsdfsdf\r\nDate : 2014-10-25 19:41:47\r\nSujet : bv\r\nDe : My Study Companion\r\nMessage : ghgh', 1),
 (74, 65, 65, '2014-11-04 15:05:15', '15:05:15', 'ksqdho', 'qsdqsd', 1),
-(75, 65, 65, '2014-11-04 15:05:47', '15:05:47', 'RE: ksqdho', 'zdeqsd\r\n\r\nDate : 2014-11-04 15:05:15\r\nSujet : ksqdho\r\nDe : Test\r\nMessage : qsdqsd', 1);
+(75, 65, 65, '2014-11-04 15:05:47', '15:05:47', 'RE: ksqdho', 'zdeqsd\r\n\r\nDate : 2014-11-04 15:05:15\r\nSujet : ksqdho\r\nDe : Test\r\nMessage : qsdqsd', 1),
+(76, 17, 65, '2014-11-24 11:07:02', '11:07:02', 'RE: RE: bv', 'Salut bien reçu bye\r\n\r\nDate : 2014-11-04 15:04:16\r\nSujet : RE: bv\r\nDe : Azeazea\r\nMessage : dfsdfsdf\r\nDate : 2014-10-25 19:41:47\r\nSujet : bv\r\nDe : My Study Companion\r\nMessage : ghgh', 0);
 
 -- --------------------------------------------------------
 
@@ -8307,11 +8369,10 @@ INSERT INTO `messages` (`id_mess`, `expediteur`, `destinataire`, `date_mess`, `h
 --
 
 CREATE TABLE IF NOT EXISTS `objectif` (
-  `id_objectif` int(11) NOT NULL AUTO_INCREMENT,
+`id_objectif` int(11) NOT NULL,
   `objectif` varchar(1000) NOT NULL,
   `description` varchar(1000) NOT NULL,
-  `points` int(11) NOT NULL,
-  PRIMARY KEY (`id_objectif`)
+  `points` int(11) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
@@ -8342,10 +8403,9 @@ INSERT INTO `objectif` (`id_objectif`, `objectif`, `description`, `points`) VALU
 --
 
 CREATE TABLE IF NOT EXISTS `pokemon` (
-  `id_pokemon` int(11) NOT NULL AUTO_INCREMENT,
+`id_pokemon` int(11) NOT NULL,
   `nom_pokemon` varchar(200) NOT NULL,
-  `pokemon_base` int(11) NOT NULL,
-  PRIMARY KEY (`id_pokemon`)
+  `pokemon_base` int(11) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
 
 --
@@ -8447,10 +8507,7 @@ INSERT INTO `professeur` (`id_prof`) VALUES
 CREATE TABLE IF NOT EXISTS `remarque_seances` (
   `id_seance` int(11) NOT NULL,
   `id_etu` int(11) NOT NULL,
-  `remarque` varchar(400) NOT NULL,
-  PRIMARY KEY (`id_seance`,`id_etu`),
-  KEY `id_seance` (`id_seance`),
-  KEY `id_etudiant` (`id_etu`)
+  `remarque` varchar(400) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -8499,18 +8556,17 @@ INSERT INTO `remarque_seances` (`id_seance`, `id_etu`, `remarque`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `seance` (
-  `id_seance` int(11) NOT NULL AUTO_INCREMENT,
+`id_seance` int(11) NOT NULL,
   `date_seance` date NOT NULL,
-  `id_cours` int(11) NOT NULL,
-  PRIMARY KEY (`id_seance`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+  `id_cours` int(11) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Contenu de la table `seance`
 --
 
 INSERT INTO `seance` (`id_seance`, `date_seance`, `id_cours`) VALUES
-(1, '0000-00-00', 1),
+(1, '2014-11-11', 1),
 (2, '2014-03-19', 1),
 (3, '2014-04-02', 1),
 (4, '2014-04-23', 1),
@@ -8522,7 +8578,8 @@ INSERT INTO `seance` (`id_seance`, `date_seance`, `id_cours`) VALUES
 (13, '2014-02-24', 1),
 (14, '2014-09-20', 3),
 (16, '2014-10-13', 22),
-(17, '2014-10-10', 1);
+(17, '2014-10-10', 1),
+(18, '2015-01-20', 29);
 
 -- --------------------------------------------------------
 
@@ -8531,11 +8588,10 @@ INSERT INTO `seance` (`id_seance`, `date_seance`, `id_cours`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `theme` (
-  `id_theme` int(11) NOT NULL AUTO_INCREMENT,
+`id_theme` int(11) NOT NULL,
   `titre_theme` varchar(200) NOT NULL,
-  `id_cours` int(11) NOT NULL,
-  PRIMARY KEY (`id_theme`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+  `id_cours` int(11) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Contenu de la table `theme`
@@ -8547,8 +8603,223 @@ INSERT INTO `theme` (`id_theme`, `titre_theme`, `id_cours`) VALUES
 (9, 'Access', 1),
 (19, 'gg', 1),
 (18, 'Les bases', 22),
-(13, 'ff', 3);
+(13, 'ff', 3),
+(20, 'Theme1', 29);
 
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `assignations_pokemon`
+--
+ALTER TABLE `assignations_pokemon`
+ ADD PRIMARY KEY (`id_etu`,`id_pokemon`), ADD KEY `id_pokemon` (`id_pokemon`), ADD KEY `assign_exo` (`id_exo`), ADD KEY `id_etu` (`id_etu`,`id_pokemon`);
+
+--
+-- Index pour la table `avancement`
+--
+ALTER TABLE `avancement`
+ ADD KEY `id_exo` (`id_exo`), ADD KEY `id_seance` (`id_seance`);
+
+--
+-- Index pour la table `avancement_bonus`
+--
+ALTER TABLE `avancement_bonus`
+ ADD PRIMARY KEY (`id_etu`,`id_bonus`,`id_seance`), ADD KEY `id_bonus` (`id_bonus`), ADD KEY `id_seance` (`id_seance`);
+
+--
+-- Index pour la table `bonus`
+--
+ALTER TABLE `bonus`
+ ADD PRIMARY KEY (`id_bonus`), ADD KEY `id_theme` (`id_theme`);
+
+--
+-- Index pour la table `cle`
+--
+ALTER TABLE `cle`
+ ADD PRIMARY KEY (`id_cle`);
+
+--
+-- Index pour la table `cours`
+--
+ALTER TABLE `cours`
+ ADD PRIMARY KEY (`id_cours`);
+
+--
+-- Index pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+ ADD PRIMARY KEY (`id_etu`);
+
+--
+-- Index pour la table `evolutions`
+--
+ALTER TABLE `evolutions`
+ ADD PRIMARY KEY (`id_pokemon`,`id_evolution`), ADD KEY `id_evolution` (`id_evolution`);
+
+--
+-- Index pour la table `exercice`
+--
+ALTER TABLE `exercice`
+ ADD PRIMARY KEY (`id_exo`), ADD KEY `id_chap` (`id_theme`);
+
+--
+-- Index pour la table `fichiers`
+--
+ALTER TABLE `fichiers`
+ ADD PRIMARY KEY (`id_fichier`);
+
+--
+-- Index pour la table `forum_categorie`
+--
+ALTER TABLE `forum_categorie`
+ ADD PRIMARY KEY (`id_categorie`);
+
+--
+-- Index pour la table `forum_reponses`
+--
+ALTER TABLE `forum_reponses`
+ ADD PRIMARY KEY (`id_reponse`);
+
+--
+-- Index pour la table `forum_sujets`
+--
+ALTER TABLE `forum_sujets`
+ ADD PRIMARY KEY (`id_sujet`);
+
+--
+-- Index pour la table `historique`
+--
+ALTER TABLE `historique`
+ ADD PRIMARY KEY (`id_historique`), ADD KEY `id_etu` (`id_etu`);
+
+--
+-- Index pour la table `inscription`
+--
+ALTER TABLE `inscription`
+ ADD PRIMARY KEY (`id_inscription`);
+
+--
+-- Index pour la table `messages`
+--
+ALTER TABLE `messages`
+ ADD PRIMARY KEY (`id_mess`), ADD KEY `expediteur` (`expediteur`,`destinataire`), ADD KEY `destinataire` (`destinataire`), ADD KEY `expediteur_2` (`expediteur`,`destinataire`);
+
+--
+-- Index pour la table `objectif`
+--
+ALTER TABLE `objectif`
+ ADD PRIMARY KEY (`id_objectif`);
+
+--
+-- Index pour la table `pokemon`
+--
+ALTER TABLE `pokemon`
+ ADD PRIMARY KEY (`id_pokemon`);
+
+--
+-- Index pour la table `remarque_seances`
+--
+ALTER TABLE `remarque_seances`
+ ADD PRIMARY KEY (`id_seance`,`id_etu`), ADD KEY `id_seance` (`id_seance`), ADD KEY `id_etudiant` (`id_etu`);
+
+--
+-- Index pour la table `seance`
+--
+ALTER TABLE `seance`
+ ADD PRIMARY KEY (`id_seance`);
+
+--
+-- Index pour la table `theme`
+--
+ALTER TABLE `theme`
+ ADD PRIMARY KEY (`id_theme`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `bonus`
+--
+ALTER TABLE `bonus`
+MODIFY `id_bonus` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT pour la table `cle`
+--
+ALTER TABLE `cle`
+MODIFY `id_cle` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT pour la table `cours`
+--
+ALTER TABLE `cours`
+MODIFY `id_cours` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+--
+-- AUTO_INCREMENT pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+MODIFY `id_etu` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=162;
+--
+-- AUTO_INCREMENT pour la table `exercice`
+--
+ALTER TABLE `exercice`
+MODIFY `id_exo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=58;
+--
+-- AUTO_INCREMENT pour la table `fichiers`
+--
+ALTER TABLE `fichiers`
+MODIFY `id_fichier` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `forum_categorie`
+--
+ALTER TABLE `forum_categorie`
+MODIFY `id_categorie` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT pour la table `forum_reponses`
+--
+ALTER TABLE `forum_reponses`
+MODIFY `id_reponse` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=66;
+--
+-- AUTO_INCREMENT pour la table `forum_sujets`
+--
+ALTER TABLE `forum_sujets`
+MODIFY `id_sujet` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
+--
+-- AUTO_INCREMENT pour la table `historique`
+--
+ALTER TABLE `historique`
+MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5340;
+--
+-- AUTO_INCREMENT pour la table `inscription`
+--
+ALTER TABLE `inscription`
+MODIFY `id_inscription` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
+--
+-- AUTO_INCREMENT pour la table `messages`
+--
+ALTER TABLE `messages`
+MODIFY `id_mess` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
+--
+-- AUTO_INCREMENT pour la table `objectif`
+--
+ALTER TABLE `objectif`
+MODIFY `id_objectif` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT pour la table `pokemon`
+--
+ALTER TABLE `pokemon`
+MODIFY `id_pokemon` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
+--
+-- AUTO_INCREMENT pour la table `seance`
+--
+ALTER TABLE `seance`
+MODIFY `id_seance` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT pour la table `theme`
+--
+ALTER TABLE `theme`
+MODIFY `id_theme` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

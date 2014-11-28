@@ -34,7 +34,7 @@
 								<script type="text/javascript"
 									src="https://www.google.com/jsapi"></script>
 								<script type="text/javascript">
-        var optionsBarChart = {
+        var optionsLineChart= {
         		chartArea: {left:0,top:50,height:"75%", width: "100%"},
         		backgroundColor: { fill:'transparent' },
         		vAxis: {minValue: 0},
@@ -43,7 +43,7 @@
         		    },
         		legend: {position: 'none'},
         };
-        setBarChartOptions('../../chart/get_json_visits.php?c=<?php echo $cours->getId();?>', optionsBarChart, 'lineChart');
+        setLineChartOptions('../../chart/get_json_visits.php?c=<?php echo $cours->getId();?>', optionsLineChart, 'lineChart');
     </script>
 								<div id=lineChart style="width: 100%; height: 300px;"></div>
 							</div>
