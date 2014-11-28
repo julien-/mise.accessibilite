@@ -38,6 +38,11 @@ class Outils
 		return $basename;
 	}
 	
+	public static function dateToTimestamp($date)
+	{
+		return strtotime($date);
+	}
+	
 	public static function getServerURL()
 	{
 		return 'http://' . $_SERVER['SERVER_NAME'];

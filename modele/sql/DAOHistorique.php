@@ -3,7 +3,7 @@ class DAOHistorique extends DAOStandard
 {
 	public function save(Historique $historique)
 	{
-		$this->executeQuery("INSERT INTO historique SET page='" . $historique->getPage() . "', date_visite='" . $historique->getDateVisite() . "', heure_visite='".$historique->getHeureVisite()."', id_etu=".$historique->getEtudiant()->getId().", id_cours=".$historique->getCours());
+		$this->executeQuery("INSERT INTO historique SET page='" . $historique->getPage() . "', date_visite='" . $historique->getDateVisite() . "', heure_visite='".$historique->getHeureVisite()."', id_etu=".$historique->getEtudiant()->getId().", id_cours=".$historique->getCours(). ', timestamp = ' . Outils::dateToTimestamp(date('Y-m-d H:i:s')));
 	}
 	
 	public function getLastVisitsByCours($idCours)
@@ -67,6 +67,33 @@ class DAOHistorique extends DAOStandard
 	public function verifConnexion4JoursAffile($idEtu, $idCours)
 	{
 		
+	}
+	
+	public function getUserConnected()
+	{
+		$timestamp_5 = time()-(60*5);
+		
+		$ressource = $this->executeQuery("
+							SELECT nom_etu, prenom_etu, etudiant.id_etu
+							FROM historique, etudiant
+							WHERE historique.id_etu != ". $_SESSION['currentUser']->getId() ."
+							AND etudiant.id_etu = historique.id_etu 
+							AND id_cours = ". $_SESSION['cours']->getId() ."
+							AND timestamp >= " . $timestamp_5);
+		
+		$result = array();
+		while($historique = $this->fetchArray($ressource))
+		{
+			echo $historique['nom_etu'];
+			$result[] = array('etudiant' => new Etudiant(array(
+					'nom' => $historique['nom_etu'],
+					'prenom' => $historique['prenom_etu'],
+					'id' => $historique['id_etu']
+					
+			)));
+		}
+		
+		return $result;
 	}
 } 
 ?>

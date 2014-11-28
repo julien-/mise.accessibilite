@@ -91,7 +91,7 @@
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-2" style="background-color: #f5f5f5; height: 100%; ">
+                    <div class="col-lg-2" style="background-color: #f5f5f5; height: 100%; ">
                         <div class="list-group" style="padding: 2%">
                         	<a href="index.php?section=cours" class="<?php if($page == "cours") echo "list-group-item active"; else echo "list-group-item";?>">
                         		<i class="glyphicon glyphicon-th-list"></i>
@@ -113,7 +113,7 @@
                         </div>
                         <?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
                     </div>
-                    <div class="col-sm-9 main-container">
+                    <div class="col-lg-9 main-container">
                           <div>
 					        <ul class="breadcrumb">
 					        <?php 
@@ -138,8 +138,36 @@
 					        </ul>
 					      </div>
                         <?php include_once('../controleur/' . $page . '.php'); ?>
-                    </div>						
+                    </div>	
+                    <div id="sidebar" class="span3 scrollDiv" style="display: none; width: 200px;">
+	                    <div class="col-sidebar col-lg-12 height-100" style="background-color: #f5f5f5;">
+	                        <div class="list-group" style="padding: 2%">
+	                        	<?php
+	                        	if (!isset($_SESSION['cours']) && sizeof($listeConnectes) > 0)
+	                        	{
+		                            foreach ($listeConnectes as $connecte) 
+		                            {
+		                            ?>
+		                        	<a>
+									   <?php echo $connecte->getId();?>
+									</a>
+									<?php
+		                            }
+	                        	}
+	                        	else if (sizeof($listeConnectes) <= 0)
+	                        	{
+									?>
+									<span style="font-size:8pt; font-weight: bold;">
+										0 utilisateur connecté
+									</span>
+									<?php
+	                        	}
+	                            ?>
+	                        </div>
+	                        <?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
+	                    </div>
                     </div>
+                    <a id="toggleSidebar" href="#" class="toggles <?php if (!isset($_SESSION['cours'])) echo 'hidden';?>"><i class="fa fa-angle-double-left"></i></a>				
                 </div><!--/row-->
             </div><!--/container-->
         </div><!-- /wrap -->

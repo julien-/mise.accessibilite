@@ -18,6 +18,7 @@ $daoAvancement = new DAOAvancement($db);
 $daoCategorie = new DAOCategorie($db);
 $daoSujet = new DAOSujet($db);
 $daoMessage = new DAOMessage($db);
+$daoHistorique = new DAOHistorique($db);
 
 if (isset($_SESSION['currentUser']))
 {
@@ -25,10 +26,15 @@ if (isset($_SESSION['currentUser']))
 	
 	if (isset($_GET['c']))
 		$_SESSION['cours'] = $daoCours->getByID($_GET['c']);
+	
+	
+	
 	$daoCours = new DAOCours($db);
 	$listeCours = $daoCours->getAllByProf($_SESSION['currentUser']->getId());
 	if (isset($_GET['section'])) 
 	{
+		if (isset($_SESSION['cours']))
+			$listeConnectes = $daoHistorique->getUserConnected();
 		$page = $_GET['section'];
 		$pageWithoutPath = $page;
 		if (strpos($page, 'forum') != false)
