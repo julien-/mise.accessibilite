@@ -63,17 +63,21 @@ foreach($listeThemes as $theme)
 	</div>
 	<div class="panel-body">
 		<div id="morris-area-chart">
+			<?php				
+			$listeExercice = $daoExercice->getByAllByTheme($theme->getId());
+			if(sizeof($listeExercice) > 0)
+			{
+			?>
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th class="col-xs-6 col-sm-6 center-text">Exercice</th>
 						<th class="col-xs-2 col-sm-2 center-text">Fait</th>
 						<th class="col-xs-2 col-sm-2 center-text">Compris</th>
-						<th class="col-xs-2 col-sm-2 center-text">Assimile</th>
+						<th class="col-xs-2 col-sm-2 center-text">Assimilé</th>
 					</tr>
 				</thead>
 				<?php					
-				$listeExercice = $daoExercice->getByAllByTheme($theme->getId());
 				foreach ( $listeExercice as $exercice )
 				{
 					$avancement = $daoAvancement->getBySeanceExerciceEtudiant($_GET["id_seance"], $exercice->getId(), $_SESSION['currentUser']->getId());
@@ -102,6 +106,13 @@ foreach($listeThemes as $theme)
 				} 
 				?>
 			</table>
+			<?php 
+			}
+			else 
+			{
+				echo "Aucun exercice dans ce thème";
+			}
+			?>
 		</div>
 	</div>
 </div>

@@ -17,7 +17,17 @@ if ($themeAdded)
 			</div>
 			<div class="panel-body">
 				<div id="morris-area-chart">
-					<?php echo $_SESSION['cours']->getProf()->getNom()."&nbsp;".$_SESSION['cours']->getProf()->getPrenom();?>
+					<?php 
+					if($_SESSION['cours']->getProf()->getCode_lien() != NULL)
+					{
+						$chemin = $daoEtudiant->getCheminByCodeLienAndEtu($_SESSION['cours']->getProf()->getCode_lien(),$_SESSION['cours']->getProf()->getId());
+					?>
+						<img class="center-block profile-image img-circle" width="75" height="75" src="../../upload/<?php echo $chemin; ?>" alt="avatar"/>&nbsp; 
+						<br>
+					<?php 
+					}
+					echo $_SESSION['cours']->getProf()->getNom()."&nbsp;".$_SESSION['cours']->getProf()->getPrenom();
+					?>
 					<br>
 					<?php echo $_SESSION['cours']->getProf()->getMail();?>
 				</div>

@@ -48,7 +48,8 @@ class DAOCours extends DAOStandard
   	public function getAll()
   	{
   			$daoCle = new DAOCle($db);
-  			$daoProfesseur = new DAOProfesseur($db);
+  			//$daoProfesseur = new DAOProfesseur($db);
+  			$daoEtudiant = new DAOEtudiant($db);
   			
 		  	$result = $this->executeQuery('SELECT * FROM cours c, etudiant e, cle WHERE c.id_cle = cle.id_cle AND c.id_prof = e.id_etu');
 	 		
@@ -57,7 +58,8 @@ class DAOCours extends DAOStandard
 	  		$listeCours[] = new Cours(array(	'id' => $cours['id_cours'], 
   								'libelle' => $cours['libelle_cours'], 
   								'couleurCalendar' => $cours['couleur_calendar'], 
-  								'prof' => $daoProfesseur->getByID($cours['id_etu']),
+  								//'prof' => $daoProfesseur->getByID($cours['id_etu']),
+	  							'prof' => $daoEtudiant->getByID($cours['id_etu']),
   								'cle' => $daoCle->getByID($cours['id_cle']))
   				);
 	  	}

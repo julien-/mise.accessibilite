@@ -22,6 +22,11 @@ class DAOEtudiant extends DAOStandard
   	$result = $this->executeQuery('UPDATE etudiant SET admin = ' . $etudiant->getAdmin() . ',nom_etu = "' . $etudiant->getNom() . '", prenom_etu = "' . $etudiant->getPrenom() . '", mail_etu = "' . $etudiant->getMail() . '", pseudo_etu = "' . $etudiant->getLogin() . '", pass_etu = "' . $etudiant->getPass() . '", chemin_avatar = "' . $etudiant->getCode_lien() . '", code_lien = MD5("' . $etudiant->getCode_lien() . '") WHERE pseudo_etu = "' . $etudiant->getLogin() . '"');
   }
   
+  public function AddAvatar($idEtu, $chemin, $chemin_md5)
+  {
+  	$result = $this->executeQuery('UPDATE etudiant SET chemin_avatar = "' . $chemin . '", code_lien = "' . $chemin_md5 . '" WHERE id_etu = ' . $idEtu . '');
+  }
+  
   public function updateNomPrenomMailLoginByEtudiant($nom, $prenom, $mail, $login, $idEtu)
   {
   	$result = $this->executeQuery('UPDATE etudiant
