@@ -1,3 +1,4 @@
+<script type="text/javascript" src="../js/compte.js"></script>
 <?php
 if (isset($_SESSION['compteModified']))
 {

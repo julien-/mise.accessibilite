@@ -52,9 +52,19 @@ foreach($listeThemes as $theme)
 			            	<?php 
 		            		foreach($liste_createurs as $createur)
 		            		{
-			            	?>
-			            		<i class="glyphicon glyphicon-user" title="<?php echo $createur->getPrenom(). " " .$createur->getNom();?>"></i>
+								if($createur->getCode_lien() != NULL)
+								{
+									$chemin = $daoEtudiant->getCheminByCodeLienAndEtu($createur->getCode_lien(),$createur->getId());
+							?>
+									<img class="profile-image img-circle" width="20" height="20" src="../../upload/<?php echo $chemin; ?>" alt="avatar" title="<?php echo $createur->getPrenomNom();?>"/>
+							<?php 
+								}
+								else 
+								{
+							?>
+			            			<i class="glyphicon glyphicon-user" title="<?php echo $createur->getPrenomNom();?>"></i>
 			            	<?php 
+								}	
 			            	}
 			            	?>
 			            </td>

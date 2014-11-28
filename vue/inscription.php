@@ -18,7 +18,7 @@ if ($nomFichierInvalide)
 <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8" style="background-color:#FFFFFF;">
 	<h1>Inscription</h1>
 	<h4>Tous les champs sont requis</h4>
-	<form id="form_inscription" class="form-horizontal" method="post" enctype="multipart/form-data" action="../ProjetSynthese/requete/rq_inscription.php?inscription">
+	<form id="form_inscription" class="form-horizontal" method="post" enctype="multipart/form-data" action="requete/rq_inscription.php?inscription">
 	    <div class="form-group has-feedback">
 	        <label for="nom" class="control-label col-xs-12 col-sm-5 col-md-5">Nom</label>
 	        <div class="col-xs-12 col-sm-7 col-md-5">

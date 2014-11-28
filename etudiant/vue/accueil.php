@@ -43,7 +43,7 @@ if ($nomFichierInvalide)
 					else
 					{
 				?>
-						<a data-toggle="modal" href="modal/remotePage.php" data-target="#ViewAjoutPhoto" class="btn btn-sm btn-primary" title="Ajouter un avatar"><i class="glyphicon glyphicon-user"></i>&nbsp;+</a>
+						<a data-toggle="modal" href="modal/remotePage.php" data-target="#ViewAjoutPhoto" class="btn btn-sm btn-primary" title="Ajouter un avatar"><i class="glyphicon glyphicon-picture"></i>&nbsp;&nbsp;<b>+</b></a>
 						<!-- Modal ajout Bonus-->  
 						<div class="modal fade" id="ViewAjoutPhoto" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
 						     <div class="modal-dialog">  
