@@ -181,4 +181,11 @@ class Outils
 		}
 		return $chaine;
 	}
+	
+	public static function securite_bdd_string($string)
+	{
+		$string = mysql_real_escape_string($string);
+		$string = addcslashes($string, '%_');
+		return $string;
+	}
 }

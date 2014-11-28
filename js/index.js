@@ -11,6 +11,82 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#form_oubli_mdp').validate({
+	    rules: {
+	    	pseudo_oubli: {
+	            required: true
+	        },
+	        email_oubli: {
+	            required: true
+	        }
+	    },
+	    messages: {
+	    	pseudo_oubli: {
+				required: "Champ requis"
+			},
+			email_oubli: {
+				required: "Champ requis"
+			},
+	    },
+	    highlight: function(element) {
+	        var id_attr = "#" + $( element ).attr("id") + "1";
+	        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	        $(id_attr).removeClass('glyphicon-ok').addClass('glyphicon-remove');         
+	    },
+	    unhighlight: function(element) {
+	        var id_attr = "#" + $( element ).attr("id") + "1";
+	        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+	        $(id_attr).removeClass('glyphicon-remove').addClass('glyphicon-ok');         
+	    },
+	    errorElement: 'span',
+	    errorClass: 'help-block',
+	    errorPlacement: function(error, element) {
+	        if(element.length) {
+	            error.insertAfter(element);
+	        } else {
+	        error.insertAfter(element);
+	        }
+	    } 
+	});
+	
+	$('#form_connexion').validate({
+	    rules: {
+	        pseudo_conn: {
+	            required: true
+	        },
+	        password_conn: {
+	            required: true
+	        }
+	    },
+	    messages: {
+		    pseudo_conn: {
+				required: "Champ requis"
+			},
+			password_conn: {
+				required: "Champ requis"
+			},
+	    },
+	    highlight: function(element) {
+	        var id_attr = "#" + $( element ).attr("id") + "1";
+	        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	        $(id_attr).removeClass('glyphicon-ok').addClass('glyphicon-remove');         
+	    },
+	    unhighlight: function(element) {
+	        var id_attr = "#" + $( element ).attr("id") + "1";
+	        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+	        $(id_attr).removeClass('glyphicon-remove').addClass('glyphicon-ok');         
+	    },
+	    errorElement: 'span',
+	    errorClass: 'help-block',
+	    errorPlacement: function(error, element) {
+	        if(element.length) {
+	            error.insertAfter(element);
+	        } else {
+	        error.insertAfter(element);
+	        }
+	    } 
+	});
+	
 	$('#form_inscription').validate({
 	    rules: {
 	    	nom_minuscules: {

@@ -2,32 +2,33 @@
 include_once('../lib/autoload.inc.php');
 session_start();
 
-DBFactory::getMysqlConnexionStandard();
+$db = DBFactory::getMysqlConnexionStandard();
+
+$erreur = false;
 
 if (isset($_GET["connexion"]))
-{
-	if (isset($_POST['pseudo']))
-		$pseudo = $_POST['pseudo'];
+{	
+	if (isset($_POST['pseudo_conn']) && !empty($_POST['pseudo_conn']))
+		$pseudo = Outils::securite_bdd_string($_POST['pseudo_conn']);
 	else
-		$pseudo = "";
+	{
+		$_SESSION['pseudoVide'] = 'true';
+		$erreur = true;
+	}
 	
-	if (isset($_POST['mdp']))
-		$mdp = $_POST['mdp'];
+	if (isset($_POST['password_conn'])  && !empty($_POST['password_conn']))
+		$mdp = Outils::securite_bdd_string($_POST['password_conn']);
 	else
-		$mdp = "";
+	{
+		$_SESSION['mdpVide'] = 'true';
+		$erreur = true;
+	}
 	
-	$errorList = array();
-	
+	if($erreur == false)//Si le login et le mdp ne sont pas invalides ou vides
+	{
 		$daoEtudiant = new DAOEtudiant($db);
 		
-		if (!$daoEtudiant->existsByPseudoAndPassword($pseudo, $mdp))
-		{
-			$errorList[] = "Utilisateur inconnu";
-		}
-		
-		if (sizeof($errorList) > 0)
-			include_once('vue/connexion.php');
-		else 
+		if ($daoEtudiant->existsByPseudoAndPassword($pseudo, $mdp))
 		{
 			$etudiant = $daoEtudiant->getByPseudo($pseudo);
 			$_SESSION['currentUser'] = $daoEtudiant->getByID($etudiant->getId());
@@ -35,12 +36,24 @@ if (isset($_GET["connexion"]))
 				$typeUser = 'admin';
 			else
 				$typeUser = 'etudiant';
-			?>
-			
-			<script language="Javascript">
-				document.location.replace("../<?php echo $typeUser?>/controleur/index.php");
-			</script>
-			<?php
+		}	
+		else
+		{
+			$_SESSION['utilisateurInconnu'] = 'true';
+			$erreur = true;
 		}
+	}
+}
+
+if($erreur == true)
+	header('Location: ' . $_SESSION['referrer']);
+else 
+{
+?>
+			
+	<script language="Javascript">
+		document.location.replace("../<?php echo $typeUser?>/controleur/index.php");
+	</script>
+<?php	
 }
 ?>

@@ -28,4 +28,5 @@ abstract class Alerte {
 	}
 	
 	public abstract function show();	
+	public abstract function show_racine();
 }
