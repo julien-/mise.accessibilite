@@ -3,10 +3,10 @@ class DAOCle extends DAOStandard
 {
 	public function saveOrUpdate(Cle $cle)
 	{
-		if (exists($cours))
-			$this->update($cours);
+		if (exists($cle))
+			$this->update($cle);
 		else
-			$this->save($cours);
+			$this->save($cle);
 	}
 	
 	public function save(Cle $cle)

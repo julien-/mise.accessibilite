@@ -11,18 +11,12 @@ if (isset($_GET["connexion"]))
 	if (isset($_POST['pseudo_conn']) && !empty($_POST['pseudo_conn']))
 		$pseudo = Outils::securite_bdd_string($_POST['pseudo_conn']);
 	else
-	{
-		$_SESSION['pseudoVide'] = 'true';
 		$erreur = true;
-	}
 	
 	if (isset($_POST['password_conn'])  && !empty($_POST['password_conn']))
 		$mdp = Outils::securite_bdd_string($_POST['password_conn']);
 	else
-	{
-		$_SESSION['mdpVide'] = 'true';
 		$erreur = true;
-	}
 	
 	if($erreur == false)//Si le login et le mdp ne sont pas invalides ou vides
 	{

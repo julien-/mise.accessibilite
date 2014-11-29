@@ -128,6 +128,13 @@ class DAOEtudiant extends DAOStandard
   	return $this->countRows($result) > 0;
   }
   
+  public function existsByPseudoAndMail($pseudo, $mail)
+  {
+  	$result = $this->executeQuery('SELECT * FROM etudiant WHERE pseudo_etu = "' . $pseudo .'" AND mail_etu = "' . $mail . '"');
+  
+  	return $this->countRows($result) > 0;
+  }
+  
   public function count()
   {
   	$result = $this->executeQuery('SELECT *	FROM etudiant');
