@@ -149,7 +149,7 @@ class DAOInscription extends DAOStandard
 	  	$sql = 'CREATE TEMPORARY TABLE R1
 				SELECT * 
 				FROM inscription
-				WHERE id_etu = 23;';  
+				WHERE id_etu = ' . $id;  
 	  	$result = $this->executeQuery($sql);
 	  	
 	  	$sql = 'CREATE TEMPORARY TABLE R2
@@ -191,7 +191,7 @@ class DAOInscription extends DAOStandard
 	  	$sql = 'CREATE TEMPORARY TABLE R1
 				SELECT *
 				FROM inscription
-				WHERE id_etu = 23;';
+				WHERE id_etu = ' . $id;
 	  	$result = $this->executeQuery($sql);
 	  
 	  	$sql = 'CREATE TEMPORARY TABLE R2

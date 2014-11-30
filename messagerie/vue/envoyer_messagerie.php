@@ -31,7 +31,8 @@
             			else
             			{
             			?>
-            				<input class="form-control" type="text" value="Vous êtes le seul membre inscrit pour l'instant">
+            				<input class="form-control" readonly="readonly" type="text" value="Vous êtes le seul membre inscrit pour l'instant">
+            				<br/>
             			<?php 
             			}
             			?>
@@ -58,3 +59,4 @@
     }
     ?>        
 </form>
+<br/><br/><br/><br/>
