@@ -143,13 +143,15 @@
 	                    <div class="col-sidebar col-lg-12 height-100" style="background-color: #f5f5f5;">
 	                        <div class="list-group" style="padding: 2%">
 	                        	<?php
-	                        	if (!isset($_SESSION['cours']) && sizeof($listeConnectes) > 0)
+	                        	if (isset($_SESSION['cours']) && sizeof($listeConnectes) > 0)
 	                        	{
+	                        		
 		                            foreach ($listeConnectes as $connecte) 
 		                            {
+		                            	
 		                            ?>
 		                        	<a>
-									   <?php echo $connecte->getId();?>
+									   <?php echo $connecte->getEtudiant()->getPrenomNom();?>
 									</a>
 									<?php
 		                            }

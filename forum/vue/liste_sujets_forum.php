@@ -37,7 +37,7 @@ if (sizeof ( $listeSujets ) == 0) {
 					<?php echo htmlentities(trim($sujet->getAuteur()->getPrenom() . ' ' . $sujet->getAuteur()->getNom())); ?>
 		</span></td>
 			<td class="vert-align center-text">
-		<?php echo $sujet->getNbMessages(); ?>
+		<?php echo $daoSujet->getNbMessages($sujet->getId()); ?>
 		</td>
 			<td class="vert-align center-text">
 			<span style="display: none"><?php echo $annee.$mois.$jour.$heure.$minute.$seconde; ?></span>
@@ -107,3 +107,4 @@ if (sizeof ( $listeSujets ) == 0) {
 		</div>
 	</div>
 </div>
+<br/><br/><br/>

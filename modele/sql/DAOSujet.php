@@ -144,15 +144,9 @@ class DAOSujet extends DAOStandard
 		$daoEtudiant = new DAOEtudiant($db);
 		$daoCategorie = new DAOCategorie($db);
 		
-		$ressource = $this->executeQuery("SELECT *
-				FROM forum_categorie f, cours c, cle, etudiant e, forum_sujets s
-				WHERE f.id_cours = c.id_cours
-				AND e.id_etu = c.id_prof
-				AND c.id_cle = cle.id_cle
-				AND s.auteur = e.id_etu
-				AND s.id_categorie = " . $idCategorie . "
-				ORDER BY date_derniere_reponse DESC
-				");
+		$ressource = $this->executeQuery("SELECT * FROM forum_sujets s 
+WHERE s.id_categorie = " . $idCategorie . " 
+ORDER BY date_derniere_reponse DESC");
 			
 		$listeSujets = array();
 		
@@ -160,9 +154,9 @@ class DAOSujet extends DAOStandard
 		{
 			$listeSujets[] = new Sujet(array(
 				'id' => $sujet['id_sujet'],
-				'auteur' => $daoEtudiant->getByID($sujet['id_etu']),
+				'auteur' => $daoEtudiant->getByID($sujet['auteur']),
 				'titre' => $sujet['titre'],
-				'date_derniere_reponse' => $sujet['date_derniere_reponse'],
+				'dateDerniereReponse' => $sujet['date_derniere_reponse'],
 				'categorie' => $daoCategorie->getByID($sujet['id_categorie'])					
 			));
 		}
@@ -172,8 +166,9 @@ class DAOSujet extends DAOStandard
 	
 	public function getNbMessages($idSujet)
 	{
+		
 		$result = $this->executeQuery("SELECT * FROM forum_reponses WHERE correspondance_sujet = " . $idSujet);
-	
+
 		return $this->countRows($result);
 	}
 	

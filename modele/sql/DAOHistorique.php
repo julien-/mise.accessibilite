@@ -84,13 +84,12 @@ class DAOHistorique extends DAOStandard
 		$result = array();
 		while($historique = $this->fetchArray($ressource))
 		{
-			echo $historique['nom_etu'];
-			$result[] = array('etudiant' => new Etudiant(array(
+			$result[] = new Historique(array('etudiant' => new Etudiant(array(
 					'nom' => $historique['nom_etu'],
 					'prenom' => $historique['prenom_etu'],
 					'id' => $historique['id_etu']
-					
-			)));
+			)		)));
+			
 		}
 		
 		return $result;
