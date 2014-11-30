@@ -5,6 +5,11 @@ $daoEtudiant = new DAOEtudiant($db);
 
 if(isset($_GET['id_message_reponse']) && !empty($_GET['id_message_reponse']))
 	$message_reponse = $daoMessagerie->getById($_GET['id_message_reponse']);
+elseif(isset($_GET['aide']) && !empty($_GET['aide']) && isset($_GET['exercice']) && !empty($_GET['exercice']))
+{
+	$aideur = $daoEtudiant->getByID($_GET['aide']);
+	$exercice = $daoExercice->getByID($_GET['exercice']);
+}
 else 
 	$listeClassmates = $daoInscription->getClassmates($_SESSION['currentUser']->getId());
 

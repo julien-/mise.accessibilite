@@ -237,7 +237,7 @@ foreach($listeThemes as $theme)
 							                					?>
 						                						</td>
 						                						<td class="autre_colonne">
-						                							<i class="glyphicon glyphicon-envelope"></i>
+						                							<a href="index.php?section=envoyer_messagerie&aide=<?php echo $etudiant->getId();?>&exercice=<?php echo $exercice->getId();?>"><i class="glyphicon glyphicon-envelope"></i></a>
 						                						</td>
 						                					</tr>
 					                					<?php

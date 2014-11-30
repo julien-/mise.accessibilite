@@ -66,7 +66,7 @@ class DAOExercice extends DAOStandard
 	  	$exercice = $this->fetchArray($result);
 
 	  	return new Exercice (array('id' => $exercice['id_exo'],
-	  								'titre_exo' => $exercice['titre_exo'],
+	  								'titre' => $exercice['titre_exo'],
 	  								'numero' => $exercice['num_exo'],
 	  								'theme' => $daoTheme->getByID($exercice['id_theme'])
 	  	));
