@@ -1,0 +1,13 @@
+Albert Einstein:
+	Pseudo: AtomicAlbert
+	MDP: einstein
+
+Jean-Michel Professeur:
+	Pseudo: professeur
+	MDP: professeur
+
+Jean-Michel Etudiant
+	Pseudo: etudiant
+	MDP: etudiant
+
+clé enseignant: enseignant
