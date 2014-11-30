@@ -11,6 +11,54 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#form_nouveau_mdp').validate({
+	    rules: {
+	    	new_password: {
+	            minlength: 7,
+	            maxlength: 20,
+	            required: true
+	        },
+	        confirm_new_password: {
+	            minlength: 7,
+	            maxlength: 20,
+	            required: true,
+	            equalTo: "#new_password"
+	        }
+	    },
+	    messages: {
+	    	new_password: {
+				required: "Champ requis",
+				minlength: jQuery.format("Minimum {0} caractères"),
+				maxlength: jQuery.format("Maximum {0} caractères")
+			},
+		    confirm_new_password: {
+				required: "Champ requis",
+				minlength: jQuery.format("Minimum {0} caractères"),
+				maxlength: jQuery.format("Maximum {0} caractères"),
+				equalTo: "Mot de passe et confirmation du mot de passe différents"
+			}
+	    },
+	    highlight: function(element) {
+	        var id_attr = "#" + $( element ).attr("id") + "1";
+	        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	        $(id_attr).removeClass('glyphicon-ok').addClass('glyphicon-remove');         
+	    },
+	    unhighlight: function(element) {
+	        var id_attr = "#" + $( element ).attr("id") + "1";
+	        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+	        $(id_attr).removeClass('glyphicon-remove').addClass('glyphicon-ok');         
+	    },
+	    errorElement: 'span',
+	    errorClass: 'help-block',
+	    errorPlacement: function(error, element) {
+	        if(element.length) {
+	            error.insertAfter(element);
+	        } else {
+	        error.insertAfter(element);
+	        }
+	    } 
+	});
+	
 	$('#form_oubli_mdp').validate({
 	    rules: {
 	    	pseudo_oubli: {
@@ -26,7 +74,7 @@ $(document).ready(function() {
 			},
 			email_oubli: {
 				required: "Champ requis"
-			},
+			}
 	    },
 	    highlight: function(element) {
 	        var id_attr = "#" + $( element ).attr("id") + "1";
@@ -64,7 +112,7 @@ $(document).ready(function() {
 			},
 			password_conn: {
 				required: "Champ requis"
-			},
+			}
 	    },
 	    highlight: function(element) {
 	        var id_attr = "#" + $( element ).attr("id") + "1";

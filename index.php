@@ -4,17 +4,38 @@ $db = DBFactory::getMysqlConnexionStandard ();
 session_start();
 $_SESSION['referrer'] = Outils::currentPageURL();
 
-/*if (isset($_SESSION['pseudoVide']))
+if (isset($_SESSION['mailEnvoye']))
 {
-	unset($_SESSION['pseudoVide']);
-	$alerte = new AlerteWarning('Pseudo et/ou Mot de passe vide !');
+	unset($_SESSION['mailEnvoye']);
+	$alerte = new AlerteSuccess('Mail de réinitialisation du Mot de passe envoyé !');
 	$alerte->show_racine();
-}*/
+}
 
-if (isset($_SESSION['mdpVide']))
+if (isset($_SESSION['typeFichierInvalide']))
 {
-	unset($_SESSION['mdpVide']);
-	$alerte = new AlerteWarning('Pseudo ou et/ou Mot de passe vide !');
+	unset($_SESSION['typeFichierInvalide']);
+	$alerte = new AlerteWarning('Extension de fichier invalide ! (valides : .jpeg, .jpg, .gif, .bmp, .png)');
+	$alerte->show_racine();
+}
+
+if (isset($_SESSION['nomFichierInvalide']))
+{
+	unset($_SESSION['nomFichierInvalide']);
+	$alerte = new AlerteWarning('Nom de fichier invalide !');
+	$alerte->show_racine();
+}
+
+if (isset($_SESSION['pseudoUtilise']))
+{
+	unset($_SESSION['pseudoUtilise']);
+	$alerte = new AlerteWarning('Pseudo déjà attribué !');
+	$alerte->show_racine();
+}
+
+if (isset($_SESSION['cleInvalide']))
+{
+	unset($_SESSION['cleInvalide']);
+	$alerte = new AlerteWarning('Clé Enseignant invalide !');
 	$alerte->show_racine();
 }
 
@@ -73,6 +94,15 @@ if (isset($_SESSION['cours']))
 <body>
 	<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8" style="height: 100%;">
 		<div id="form-login" class="col-xs-12 col-sm-12 col-md-7">
+			<?php 
+			$daoOubliPassword = new DAOOubliPassword($db);
+			if(isset($_GET["cle"]) && !empty($_GET["cle"]) && $daoOubliPassword->existsByCle($_GET["cle"]))
+			{
+				include_once('oubli_password.php');
+			}
+			else 
+			{
+			?>
         	<ul id="loginTab" class="nav tabs" style="font-weight: bold;">
         		<li class="active"><a href="#companion" data-toggle="tab">MyStudyCompanion</a></li>
         		<li><a href="#login" data-toggle="tab">Connexion</a></li>
@@ -182,7 +212,7 @@ if (isset($_SESSION['cours']))
 	        	</div>
 	        	<div class="tab-pane fade" id="reset">
 	          		<h1>Mot de passe oublié</h1> 
-		          	<p>Veuillez renseigner votre Identifiant et votre E-mail pour modifier votre Mot de passe.</p>
+		          	<p>Veuillez renseigner votre Identifiant et votre E-mail. Vous recevrez un e-mail pour réinitialiser votre Mot de passe.</p>
 			  		<form id="form_oubli_mdp" class="form-horizontal" method="post" action="requete/rq_oubli_mdp.php?oubli_mdp">
 				    	<div class="form-group has-feedback">
 				        	<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8">
@@ -192,7 +222,7 @@ if (isset($_SESSION['cours']))
 					    </div>
 					    <div class="form-group has-feedback">
 					        <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8">
-					        	<input type="password" name="email_oubli" id="email_oubli" class="form-control" placeholder="E-mail" />
+					        	<input type="text" name="email_oubli" id="email_oubli" class="form-control" placeholder="E-mail" />
 					            <span class="glyphicon form-control-feedback" id="email_oubli1"></span>
 					       	</div>
 					    </div>
@@ -201,9 +231,12 @@ if (isset($_SESSION['cours']))
 					</form>
 		        </div>
 	      	</div>
+	      	<?php 
+			}
+			?>
 	  	</div>
   	</div>
-  	<!-- /Container -->
+  	<!-- /Container -->  	
 
 	<script type='text/javascript'
 		src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
