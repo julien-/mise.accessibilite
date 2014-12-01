@@ -40,7 +40,7 @@
 			  <div id="menu_haut" class="container-fluid">
 			  	<div class="row">
                     <div class="menu_gauche col-xs-12 col-sm-6 col-md-offset-2 col-md-4">
-						<a class="menu_haut_a" role="button" href="index.php" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>MY STUDY COMPANION</a>
+						<a class="menu_haut_a" role="button" href="index.php?section=accueil" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>MY STUDY COMPANION</a>
 			      	</div>
 			      	<div class="menu_droite col-xs-12 col-sm-6 col-md-4 text-left-xs text-right-sm">
 			      	  <a class="menu_haut_a" role="button" href="index.php?section=reception_messagerie" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a>
