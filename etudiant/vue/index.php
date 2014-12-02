@@ -39,9 +39,10 @@
 			<nav class="navbar navbar-default" role="navigation" <?php if(isset($_SESSION['cours'])) echo 'style="background-color: '.$daoInscription->getCouleurFond($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
 			  <div id="menu_haut" class="container-fluid">
 			  	<div class="row">
-                    <div class="menu_gauche col-xs-12 col-sm-6 col-md-offset-2 col-md-4">
-						<a class="menu_haut_a" role="button" href="index.php?section=accueil" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>MY STUDY COMPANION</a>
-			      	</div>
+			  		<div class="col-xs-12 col-sm-6 col-md-offset-2 col-md-4 col-lg-6 col-lg-offset-1">
+						<img src="../../images/logo.png" alt="Logo" width="20%" style="z-index:999999;"/>
+			  		</div>
+
 			      	<div class="menu_droite col-xs-12 col-sm-6 col-md-4 text-left-xs text-right-sm">
 			      	  <a class="menu_haut_a" role="button" href="index.php?section=reception_messagerie" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a>
 			          <a href="#" class="menu_haut_a dropdown-toggle" data-toggle="dropdown" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
@@ -233,7 +234,9 @@
 											$objectif = stripAccents($objectif);
 									?>
 										
-											<div class="col-xs-4 col-sm-2 col-md-12 col-lg-6 text-center">
+											<div class="col-xs-4 col-sm-2 col-md-12 col-lg-6 text-center" style="overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;">
 												<img width="50px" height="50px" src="<?php echo '../../images/Badges/' . $objectif . '.png'; ?>" alt="<?php echo $assignation->getObjectif()->getObjectif(); ?>" title="<?php echo $assignation->getObjectif()->getDescription(); ?>" />
 												<br>
 												<span class="bold"><?php echo $assignation->getObjectif()->getObjectif(); ?></span>

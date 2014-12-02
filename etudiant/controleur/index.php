@@ -99,6 +99,7 @@ if(isset($_SESSION['currentUser']) && !empty($_SESSION['currentUser']))
 	}
 	else
 	{
+		unset($_SESSION['cours']);
 		$page = "accueil";
 		$pageWithoutPath = $page;
 	}
