@@ -234,9 +234,7 @@
 											$objectif = stripAccents($objectif);
 									?>
 										
-											<div class="col-xs-4 col-sm-2 col-md-12 col-lg-6 text-center" style="overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;">
+											<div class="col-xs-4 col-sm-2 col-md-12 col-lg-6 text-center cut-text">
 												<img width="50px" height="50px" src="<?php echo '../../images/Badges/' . $objectif . '.png'; ?>" alt="<?php echo $assignation->getObjectif()->getObjectif(); ?>" title="<?php echo $assignation->getObjectif()->getDescription(); ?>" />
 												<br>
 												<span class="bold"><?php echo $assignation->getObjectif()->getObjectif(); ?></span>

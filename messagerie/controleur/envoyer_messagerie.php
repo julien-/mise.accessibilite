@@ -10,6 +10,10 @@ elseif(isset($_GET['aide']) && !empty($_GET['aide']) && isset($_GET['exercice'])
 	$aideur = $daoEtudiant->getByID($_GET['aide']);
 	$exercice = $daoExercice->getByID($_GET['exercice']);
 }
+elseif (isset($_GET['dest']))
+{
+	$destinataire = $daoEtudiant->getByID($_GET['dest']);
+}
 else 
 	$listeClassmates = $daoInscription->getClassmates($_SESSION['currentUser']->getId());
 

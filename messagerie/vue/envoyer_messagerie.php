@@ -21,6 +21,13 @@
             		<input type="hidden" class="typeahead" name="destinataire" value="<?php echo $aideur->getId();?>">
             	<?php 
             	}
+            	elseif(isset($destinataire))
+            	{
+            	?>
+            	    <input type="text" readonly="readonly" style="border: 1px solid darkgray;" class="form-control typeahead" value="<?php echo $destinataire->getPrenomNom();?>">
+            	    <input type="hidden" class="typeahead" name="destinataire" value="<?php echo $destinataire->getId();?>">
+            	<?php 
+            	}
             	elseif(isset($listeClassmates) && sizeof($listeClassmates) != 0) 
             	{
             	?>

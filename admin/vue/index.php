@@ -113,7 +113,7 @@
                         </div>
                         <?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
                     </div>
-                    <div class="col-lg-9 main-container">
+                    <div class="col-lg-9 main-container" id="main">
                           <div>
 					        <ul class="breadcrumb">
 					        <?php 
@@ -142,18 +142,42 @@
                     <div id="sidebar" class="span3 scrollDiv" style="display: none; width: 200px;">
 	                    <div class="col-sidebar col-lg-12 height-100" style="background-color: #f5f5f5;">
 	                        <div class="list-group" style="padding: 2%">
+	                        
 	                        	<?php
 	                        	if (isset($_SESSION['cours']) && sizeof($listeConnectes) > 0)
 	                        	{
-	                        		
+	                        		?>
+	                        		<span style="font-size:8pt; font-weight: bold;">
+	                        		<?php echo sizeof($listeConnectes);?> utilisateur(s) connecté(s)
+	                        		</span>
+	                        		<br/><br/>
+	                        		<ul class="paddingmargin0">
+	                        		<?php
 		                            foreach ($listeConnectes as $connecte) 
 		                            {
-		                            	
-		                            ?>
-		                        	<a>
-									   <?php echo $connecte->getEtudiant()->getPrenomNom();?>
-									</a>
-									<?php
+		                            	if($connecte->getEtudiant()->getCode_lien() != NULL)
+		                            	{
+		                            		$chemin = $daoEtudiant->getCheminByCodeLienAndEtu($connecte->getEtudiant()->getCode_lien(),$connecte->getEtudiant()->getId());
+		                            		?>
+		                            		<li class="paddingmargin0 cut-text">
+	                            				<a href="index.php?section=envoyer_messagerie&dest=<?php echo $connecte->getEtudiant()->getId();?>">
+		                            				<img class="profile-image img-circle" width="20" height="20" src="../../upload/<?php echo $chemin; ?>" alt="avatar" title="<?php echo $connecte->getEtudiant()->getPrenomNom();?>"/>
+		                            				<?php echo $connecte->getEtudiant()->getPrenomNom();?>
+	                            				</a>
+                            				</li>
+                            				<?php 
+                            			}
+                            			else 
+                            			{
+                            				?>			
+                            				<li>
+	                            				<a>
+		                            				<i class="glyphicon glyphicon-user" title="<?php echo $connecte->getEtudiant()->getPrenomNom();?>"></i></a>
+		                            				<?php echo $connecte->getEtudiant()->getPrenomNom();?>
+	                            				</a>
+                            				</li>
+                            				<?php 
+                            				}
 		                            }
 	                        	}
 	                        	else if (sizeof($listeConnectes) <= 0)
@@ -165,6 +189,7 @@
 									<?php
 	                        	}
 	                            ?>
+	                        </ul>
 	                        </div>
 	                        <?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
 	                    </div>

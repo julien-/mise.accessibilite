@@ -19,15 +19,17 @@
                             <table class="table">
                             <?php 
                             $listeExos = $daoExercice->getByAllByTheme($theme->getId());
+                            $num_exos = 0;
                             foreach($listeExos as $exos)
                             {
                             ?>
                                 <tr>
-                                    <td class="cut-text" style="max-width: 50px; background-color: white;">
+                                    <td class="cut-text" style="max-width: 50px; <?php if ($num_exos == 0) echo " border-top: none;"?>background-color: white;">
                                         <span><?php echo $exos->getNumero(); ?>  </span><a id="exo-accordion-<?php echo $exos->getId();?>" data-toggle="collapse" data-target="#bloc-<?php echo $exos->getId(); ?>" href="#E<?php echo $exos->getId(); ?>" title="<?php echo $exos->getTitre(); ?>"><?php echo $exos->getTitre(); ?></a>
                                     </td>
                                 </tr>
                             <?php   
+                            	$num_exos++;
                             }
                             ?>
                             </table>

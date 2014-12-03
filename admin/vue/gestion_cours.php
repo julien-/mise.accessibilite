@@ -151,7 +151,7 @@ foreach ( $listeThemes as $theme ) {
 				</div>
 			</div>
 			<div class="panel-body">
-				<table class="table table-bordered">
+				<table class="table table-bordered table-exos-<?php echo $theme->getId(); ?>">
 
 						<?php
 	$listeExos = $daoExercice->getByAllByTheme ( $theme->getId () );
@@ -159,8 +159,7 @@ foreach ( $listeThemes as $theme ) {
 		$listeFichiers = $daoFichiers->getAllByExercice ( $exos->getId () );
 		?>
 						
-					<tr class="header-exo" id="E<?php echo $exos->getId();?>"
-								data-modif-exo-id="<?php echo $exos->getId(); ?>">
+					<tr class="header-exo" id="E<?php echo $exos->getId();?>" data-modif-exo-id="<?php echo $exos->getId(); ?>">
 						<td>
 							<div>
 								<div class="row">
@@ -236,8 +235,6 @@ foreach ( $listeThemes as $theme ) {
 									?>
 										<ul id="bloc-fichier-<?php echo $fichier->getId(); ?>" class="header-fichier" data-fichier-id="<?php echo $fichier->getId(); ?>">
 										<div class="row" style="height: 30px;">
-											
-											
 											<div class="col-lg-8">
 											<li>
 													<a href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a>
@@ -313,12 +310,26 @@ foreach ( $listeThemes as $theme ) {
 								?>
 								
 							</div>
-					
-					</tr>
 					</td>
-						<?php
+					</tr>
+					<?php
 	}
 	?>
+						<tr class="new_row hidden"><td></td></tr>
+						<tr class="hidden-base row_new_exo">
+						<td>
+							<input type="text" data-id-theme="<?php echo $theme->getId(); ?>" id="field-new-exo-<?php echo $theme->getId();?>" class="form-control field-new-exo" placeholder="Entrez le titre du nouvel exercice..."/>
+							<p class="center-text base-hidden hidden" id="group-icon-new-<?php echo $theme->getId();?>">
+								<br />
+								<a class="pointer base-hidden validate-icon-new"> 
+									<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle" title="Valider"></i>
+								</a> 
+								<a class="pointer base-hidden abort-icon-new"> 
+									<i style="font-size: 50px;" class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
+								</a>
+							</p>	
+						</td>
+					</tr>
 				</table>
 			</div>
 		</div>

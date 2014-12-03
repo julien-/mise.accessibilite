@@ -12,6 +12,7 @@ class DAOExercice extends DAOStandard
 	public function save(Exercice $exercice)
 	{
 		$this->executeQuery('INSERT INTO exercice SET titre_exo = "' . $exercice->getTitre() . '", num_exo = ' . $this->getNextAvailableNumber($exercice->getTheme()) . ', id_theme =' . $exercice->getTheme());
+		return $this->lastInsertedID();
 	}
 	
 	public function update(Exercice $exercice)

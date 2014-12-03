@@ -1,5 +1,12 @@
 <div id="alerts"></div>
+<a class="btn btn-success" data-toggle="modal" data-target="#ajoutExo">Ajouter une s&eacute;ance</a> 
+<br/><br/>
 <?php 
+if (isset($_GET['added']))
+{
+	$alertAdded = new AlerteSuccess('Séance ajoutée');
+	$alertAdded->show();
+}
 if (sizeof($listeSeance) > 0)
 {
 ?>
@@ -45,7 +52,7 @@ else
 <?php
 }
 ?>
-<a  class="btn btn-primary" data-toggle="modal" data-target="#ajoutExo">Ajouter une s&eacute;ance</a>  
+ 
 <div class="modal fade" id="ajoutExo" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
      <div class="modal-dialog">  
         <div class="modal-content">
@@ -54,7 +61,7 @@ else
                 <h4 id="myModalLabel" class="modal-title">Ajouter une séance</h4>
             </div>
             <br/>
-            <form method="post" class="form-horizontal" action="rq_seance.php?section=seance&addseance">
+            <form method="post" class="form-horizontal" action="../requetes/rq_add_seance.php">
             	<div class="container-fluid">
                 	<div class="row">
                 		<div class="col-sm-1">
@@ -63,7 +70,7 @@ else
 	            		<div class="form-group">
 	            			<label for="date" class="control-label col-lg-5">Date de la séance</label>
                             <div class="col-lg-6">
-                            	<input class="form-control" type="date" name="date"/>	
+                            	<input class="form-control input-date" type="text" name="date"/>	
                             </div>	                
                         </div>
                 		<!--submit-->

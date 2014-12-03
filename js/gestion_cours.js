@@ -505,3 +505,45 @@ function deleteFichier()
 }
 
 /**********************************************/
+
+
+/** Nouvelle gestion de l'ajout d'exos */
+
+$(".field-new-exo").click(function() {
+	clickedIndex = $(this).data('id-theme');
+	$('#group-icon-new-' + clickedIndex).removeClass('hidden');
+});
+
+$(".validate-icon-new").click(function() {
+	addExo()
+});
+
+function addExo()
+{
+	alert(clickedIndex);
+	var donnees = {};
+	donnees["titre_exo"] = $("#field-new-exo-" + clickedIndex).val();
+	donnees["id_theme"] = clickedIndex;
+    var ajax = $.ajax({
+        type: "post",
+        url: "../requetes/rq_add_exercice.php?ajax=ajax",
+        dataType: "html",
+        data: donnees,
+        success: function(data) {
+        	alertSuccess('Exercice ajouté');
+        	$(data).insertBefore('.new_row');
+        	alert(data);
+        	$('#group-icon-new-' + clickedIndex).addClass('hidden');
+        },
+        error: function() {
+        	alert('erreur');
+        }
+    });
+    disableEditMode();
+}
+
+
+$(document).on('click','tr', function(){
+	alert('lll');
+});
+

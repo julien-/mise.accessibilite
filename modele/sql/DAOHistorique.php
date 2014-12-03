@@ -71,15 +71,16 @@ class DAOHistorique extends DAOStandard
 	
 	public function getUserConnected()
 	{
-		$timestamp_5 = time()-(60*5);
+		$timestamp_5 = time()-(60*150);
 		
 		$ressource = $this->executeQuery("
-							SELECT nom_etu, prenom_etu, etudiant.id_etu
+							SELECT nom_etu, prenom_etu, etudiant.id_etu, code_lien
 							FROM historique, etudiant
 							WHERE historique.id_etu != ". $_SESSION['currentUser']->getId() ."
 							AND etudiant.id_etu = historique.id_etu 
 							AND id_cours = ". $_SESSION['cours']->getId() ."
-							AND timestamp >= " . $timestamp_5);
+							AND timestamp >= " . $timestamp_5 . "
+							GROUP BY historique.id_etu");
 		
 		$result = array();
 		while($historique = $this->fetchArray($ressource))
@@ -87,9 +88,10 @@ class DAOHistorique extends DAOStandard
 			$result[] = new Historique(array('etudiant' => new Etudiant(array(
 					'nom' => $historique['nom_etu'],
 					'prenom' => $historique['prenom_etu'],
-					'id' => $historique['id_etu']
+					'id' => $historique['id_etu'],
+					'code_lien' => $historique['code_lien']
 			)		)));
-			
+
 		}
 		
 		return $result;
