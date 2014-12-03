@@ -151,93 +151,12 @@ $(".delete-cours").click(function() {
 });
 /** Exercices **/
 
-$(".header-exo").hover(function() 
-		{
-			if (!editMode)
-				$("#edit-icon-exo-" + $(this).data('modif-exo-id')).removeClass('hidden');	
-				  	}, function() 
-				  	{
-				  		$("#edit-icon-exo-" + $(this).data('modif-exo-id')).addClass('hidden');
-				 }
-		);
 
-$(".edit-exo").click(function() {
-	clickedIndex = $(this).data('modif-exo-id');
-	
-	disableEditMode();
-	
-	$("#exo-" + clickedIndex).removeClass('hidden');
-	$("#exo-" + clickedIndex).focus();
-	$("#edit-valid-exo-" + clickedIndex).removeClass('hidden');
-	$("#edit-abort-exo-" + clickedIndex).removeClass('hidden');
-	$("#edit-icon-exo-" + clickedIndex).addClass('hidden');
-	$("#titre-exo-" + clickedIndex).addClass('hidden');
-	editMode = true;
-});
 
-$(".add-fichier-exo").click(function() {
-	$("#exercice-fichier").val($(this).data('id-exo'));	
-});
 
-$(".delete-exo-confirm").click(function() {
-	deleteExercise();	
-});
 
-$(".delete-exo").click(function() {
-	clickedIndex = $(this).data('modif-exo-id');
-	disableEditMode();
-});
 
-$(".validate-icon-exo").click(function() {
-	changeExerciseTitle();
-});
 
-$(".add-exercice").click(function() {
-	$("#id_theme").val($(this).data('id-theme'));
-});
-
-$(".abort-icon-exo").click(function() {
-	$("#exo-" + clickedIndex).val($("#titre-exo-" + clickedIndex).text().trim());
-	disableEditMode();
-});
-
-$(".input-exo").keyup(function (e) {
-	  
-	  if (e.which == 13) 
-	  {
-		  changeExerciseTitle();
-	  }
-	  else if (e.which == 27)
-	  {
-		  $("#exo-" + clickedIndex).val($("#titre-exo-" + clickedIndex).text().trim());
-		  disableEditMode();
-	  }
-});
-
-function changeExerciseTitle()
-{
-	var donnees = {};
-	donnees["id-exo"] = clickedIndex;
-    donnees["titre-exo"] = $("#exo-" + clickedIndex).val();
-    donnees["type"] = "edit";
-    
-    var ajax = $.ajax({
-        type: "post",
-        url: "../controleur/index.php?section=gestion_cours",
-        dataType: "html",
-        data: donnees,
-        success: function() {
-        	$("#titre-exo-" + clickedIndex).text(donnees["titre-exo"]);
-        	$("#exo-accordion-" + clickedIndex).html(donnees["titre-exo"]);
-        	$("#exo-accordion-"+clickedIndex).attr("title", donnees["titre-exo"]);
-        	alertSuccess('Exercice modifié');
-        },
-        error: function() {
-        	alert('erreur');
-        }
-    });
-    disableEditMode();
-}
 
 function deleteExercise()
 {
@@ -520,7 +439,6 @@ $(".validate-icon-new").click(function() {
 
 function addExo()
 {
-	alert(clickedIndex);
 	var donnees = {};
 	donnees["titre_exo"] = $("#field-new-exo-" + clickedIndex).val();
 	donnees["id_theme"] = clickedIndex;
@@ -532,8 +450,8 @@ function addExo()
         success: function(data) {
         	alertSuccess('Exercice ajouté');
         	$(data).insertBefore('.new_row');
-        	alert(data);
         	$('#group-icon-new-' + clickedIndex).addClass('hidden');
+        	$("#field-new-exo-" + clickedIndex).val('');
         },
         error: function() {
         	alert('erreur');
@@ -543,7 +461,89 @@ function addExo()
 }
 
 
-$(document).on('click','tr', function(){
-	alert('lll');
+
+$(document).on('mouseenter', '.header-exo', function() {
+	if (!editMode)
+		$("#edit-icon-exo-" + $(this).data('modif-exo-id')).removeClass('hidden');	
+});
+$(document).on('mouseleave', '.header-exo', function() {
+	$("#edit-icon-exo-" + $(this).data('modif-exo-id')).addClass('hidden');
 });
 
+$(document).on('click', '.edit-exo', function() {
+	clickedIndex = $(this).data('modif-exo-id');
+	
+	disableEditMode();
+	
+	$("#exo-" + clickedIndex).removeClass('hidden');
+	$("#exo-" + clickedIndex).focus();
+	$("#edit-valid-exo-" + clickedIndex).removeClass('hidden');
+	$("#edit-abort-exo-" + clickedIndex).removeClass('hidden');
+	$("#edit-icon-exo-" + clickedIndex).addClass('hidden');
+	$("#titre-exo-" + clickedIndex).addClass('hidden');
+	editMode = true;
+});
+
+$(document).on('click', '.add-fichier-exo', function() {
+	$("#exercice-fichier").val($(this).data('id-exo'));	
+});
+
+$(document).on('click', '.delete-exo-confirm', function() {
+	deleteExercise();	
+});
+
+$(document).on('click', '.delete-exo', function() {
+	clickedIndex = $(this).data('modif-exo-id');
+	disableEditMode();
+});
+
+$(document).on('click', '.validate-icon-exo', function() {
+	changeExerciseTitle();
+});
+
+$(document).on('click', '.add-exercice', function() {
+	$("#id_theme").val($(this).data('id-theme'));
+});
+
+$(document).on('click', '.abort-icon-exo', function() {
+	$("#exo-" + clickedIndex).val($("#titre-exo-" + clickedIndex).text().trim());
+	disableEditMode();
+});
+
+
+$(document).on('keyup', 'input', function(e){
+	  if (e.which == 13) 
+	  {
+		  changeExerciseTitle();
+	  }
+	  else if (e.which == 27)
+	  {
+		  $("#exo-" + clickedIndex).val($("#titre-exo-" + clickedIndex).text().trim());
+		  disableEditMode();
+	  }
+});
+
+function changeExerciseTitle()
+{
+	var donnees = {};
+	donnees["id-exo"] = clickedIndex;
+    donnees["titre-exo"] = $("#exo-" + clickedIndex).val();
+    donnees["type"] = "edit";
+    alert(clickedIndex);
+    var ajax = $.ajax({
+        type: "post",
+        url: "../controleur/index.php?section=gestion_cours",
+        dataType: "html",
+        data: donnees,
+        success: function() {
+        	$("#titre-exo-" + clickedIndex).text(donnees["titre-exo"]);
+        	$("#exo-accordion-" + clickedIndex).html(donnees["titre-exo"]);
+        	$("#exo-accordion-"+clickedIndex).attr("title", donnees["titre-exo"]);
+        	alertSuccess('Exercice modifié');
+        },
+        error: function() {
+        	alert('erreur');
+        }
+    });
+    disableEditMode();
+}
