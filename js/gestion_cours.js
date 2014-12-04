@@ -439,6 +439,7 @@ $(".validate-icon-new").click(function() {
 
 function addExo()
 {
+	$('#icon-spin-new-exo-' + clickedIndex).removeClass('hidden');
 	var donnees = {};
 	donnees["titre_exo"] = $("#field-new-exo-" + clickedIndex).val();
 	donnees["id_theme"] = clickedIndex;
@@ -448,10 +449,12 @@ function addExo()
         dataType: "html",
         data: donnees,
         success: function(data) {
-        	alertSuccess('Exercice ajouté');
-        	$(data).insertBefore('.new_row');
+        	
+        	$(data).insertBefore('#new-row-' + clickedIndex);
         	$('#group-icon-new-' + clickedIndex).addClass('hidden');
         	$("#field-new-exo-" + clickedIndex).val('');
+        	$('#icon-spin-new-exo-' + clickedIndex).addClass('hidden');
+        	alertSuccess('Exercice ajouté');
         },
         error: function() {
         	alert('erreur');
@@ -511,25 +514,42 @@ $(document).on('click', '.abort-icon-exo', function() {
 });
 
 
-$(document).on('keyup', 'input', function(e){
+$(document).on('keyup', '.field-new-exo', function(e){
 	  if (e.which == 13) 
 	  {
-		  changeExerciseTitle();
+		  addExo();
 	  }
 	  else if (e.which == 27)
 	  {
 		  $("#exo-" + clickedIndex).val($("#titre-exo-" + clickedIndex).text().trim());
 		  disableEditMode();
 	  }
+	  else
+	  {
+			clickedIndex = $(this).data('id-theme');
+			$('#group-icon-new-' + clickedIndex).removeClass('hidden');
+	  }
+});
+
+$(document).on('keyup', '.input-exo', function(e){
+	  if (e.which == 13) 
+	  {
+		  changeExerciseTitle()
+	  }
+	  else if (e.which == 27)
+	  {
+		  $("#exo-" + clickedIndex).val($("#field-new-exo-" + clickedIndex).text().trim());
+		  disableEditMode();
+	  }
 });
 
 function changeExerciseTitle()
 {
+	$('#icon-spin-edit-exo-' + clickedIndex).removeClass('hidden');
 	var donnees = {};
 	donnees["id-exo"] = clickedIndex;
     donnees["titre-exo"] = $("#exo-" + clickedIndex).val();
     donnees["type"] = "edit";
-    alert(clickedIndex);
     var ajax = $.ajax({
         type: "post",
         url: "../controleur/index.php?section=gestion_cours",
@@ -537,9 +557,12 @@ function changeExerciseTitle()
         data: donnees,
         success: function() {
         	$("#titre-exo-" + clickedIndex).text(donnees["titre-exo"]);
+        	$("#test-titre-exo-" + clickedIndex).text(donnees["titre-exo"]);
         	$("#exo-accordion-" + clickedIndex).html(donnees["titre-exo"]);
         	$("#exo-accordion-"+clickedIndex).attr("title", donnees["titre-exo"]);
         	alertSuccess('Exercice modifié');
+        	$('#icon-spin-edit-exo-' + clickedIndex).addClass('hidden');
+ 
         },
         error: function() {
         	alert('erreur');

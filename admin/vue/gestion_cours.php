@@ -168,13 +168,15 @@ foreach ( $listeThemes as $theme ) {
 											class="base-hidden form-control hidden input-exo"
 											value="<?php echo $exos->getTitre(); ?>"
 											data-input-exo-id="<?php echo $exos->getId(); ?>" />
+											<i id="icon-spin-edit-exo-<?php echo $exos->getId(); ?>" class="hidden fa fa-spinner fa-spin"></i>
 										<p class="center-text">
 											<a id="edit-valid-exo-<?php echo $exos->getId(); ?>"
 												class="pointer hidden base-hidden validate-icon-exo"
 												data-modif-exo-id="<?php echo $exos->getId(); ?>"> <br />
-											<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
+												<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle"
 												title="Valider"></i>
-											</a> <a id="edit-abort-exo-<?php echo $exos->getId(); ?>"
+											</a> 
+											<a id="edit-abort-exo-<?php echo $exos->getId(); ?>"
 												class="pointer hidden base-hidden abort-icon-exo"> <i
 												style="font-size: 50px;"
 												class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
@@ -187,7 +189,7 @@ foreach ( $listeThemes as $theme ) {
 											data-toggle="collapse"
 											data-target="#bloc-<?php echo $exos->getId(); ?>">
 										<?php echo $exos->getTitre(); ?>
-									</a>
+										</a>
 									</div>
 									<div class="col-lg-2">
 										<div class="dropdown">
@@ -315,16 +317,17 @@ foreach ( $listeThemes as $theme ) {
 					<?php
 	}
 	?>
-						<tr class="new_row hidden"><td></td></tr>
+						<tr id="new-row-<?php echo $theme->getId(); ?>" class="new_row hidden"><td></td></tr>
 						<tr class="hidden-base row_new_exo">
 						<td>
 							<input type="text" data-id-theme="<?php echo $theme->getId(); ?>" id="field-new-exo-<?php echo $theme->getId();?>" class="form-control field-new-exo" placeholder="Entrez le titre du nouvel exercice..."/>
+							<i id="icon-spin-new-exo-<?php echo $theme->getId(); ?>" class="hidden fa fa-spinner fa-spin"></i>
 							<p class="center-text base-hidden hidden" id="group-icon-new-<?php echo $theme->getId();?>">
 								<br />
-								<a class="pointer base-hidden validate-icon-new"> 
+								<a class="pointer validate-icon-new"> 
 									<i style="font-size: 50px;" class="glyphicon glyphicon-ok-circle" title="Valider"></i>
 								</a> 
-								<a class="pointer base-hidden abort-icon-new"> 
+								<a class="pointer abort-icon-new"> 
 									<i style="font-size: 50px;" class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
 								</a>
 							</p>	
