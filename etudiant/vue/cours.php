@@ -27,7 +27,7 @@ else
         <tr>
             <!--Titre du cours-->
             <td class="col-xs-3 col-sm-3">
-                <a href="index.php?section=evolution&id_cours=<?php echo $cours->getCours()->getId();?>">
+                <a href="index.php?section=progression&id_cours=<?php echo $cours->getCours()->getId();?>">
                 	<?php echo $cours->getCours()->getLibelle(); ?>
                 </a>
             </td>
