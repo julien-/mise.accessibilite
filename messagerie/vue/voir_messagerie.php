@@ -21,7 +21,7 @@
         <br/>
         <div class="col-lg-1">Message: </div>
         <div class="col-lg-11">
-        	<textarea readonly="readonly" style="width: 100%; height: 200px;" class="form-control textarea"><?php echo $message->getTexte();?></textarea>
+        	<textarea readonly="readonly" style="width: 100%; height: 200px; resize:vertical;" class="form-control textarea"><?php echo $message->getTexte();?></textarea>
         </div>
 </div>
 <br/>

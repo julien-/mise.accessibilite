@@ -56,9 +56,25 @@ class DAOAssignations_objectif extends DAOStandard
 	return $listeObjectifs;
   }
   
+  public function getDateByEtudiantObjectifCours($idEtu, $idObj, $idCours)
+  {
+  	$daoEtudiant = new DAOEtudiant($db);
+  	$daoObjectif = new DAOObjectif($db);
+  	$daoCours = new DAOCours($db);
+  	$result = $this->executeQuery('SELECT date
+									FROM assignations_objectif
+									WHERE id_etu =' .$idEtu. '
+  									AND id_objectif =' .$idObj. '
+  									AND id_cours =' .$idCours);
+  	
+  	$date = $this->fetchArray($result);
+  	return $date['date'];
+  }
+  
   public function checkAllByEtudiantCours($idEtu, $idCours)
   {
   	$daoObjectifs = new DAOObjectif($db);
+  	$daoAssignations_objectif = new DAOAssignations_objectif($db);
   	$listeObjectifs = $daoObjectifs->getAll();
   	$listeAssignation = array();
   	foreach($listeObjectifs as $objectif)
@@ -80,11 +96,13 @@ class DAOAssignations_objectif extends DAOStandard
 	  				'date' => date("Y/m/d")
 	  		));
 	  		
-	  		if ($pourcentage >= 100 && !$this->existsByEtudiantObjectifCours($idEtu, $objectif->getId(), $idCours))
+	  		if ($pourcentage == 100 && !$this->existsByEtudiantObjectifCours($idEtu, $objectif->getId(), $idCours))
 	  		{
 	  			$this->save($assignation);
 	  		}
-	  		
+	  		else 
+	  			$assignation->setDate($daoAssignations_objectif->getDateByEtudiantObjectifCours($idEtu, $objectif->getId(), $idCours));
+	  		  
 	  		$listeAssignation[] = $assignation;
 	  	}
   	}
@@ -95,22 +113,31 @@ class DAOAssignations_objectif extends DAOStandard
   public function checkDebutant($idEtu, $idCours)
   {
   	$daoAvancement = new DAOAvancement($db);
-  	$pourcentage = $daoAvancement->getByCoursEtudiant($idCours, $idEtu) * 4;
-  	return $pourcentage;
+  	$pourcentage = $daoAvancement->getByCoursEtudiant($idCours, $idEtu);
+  	if ($pourcentage >= 25)
+  		return 100;
+  	else
+  		return $pourcentage * 4;
   }
   
   public function checkIntermediaire($idEtu, $idCours)
   {
   	$daoAvancement = new DAOAvancement($db);
-  	$pourcentage = $daoAvancement->getByCoursEtudiant($idCours, $idEtu) * 2;
-  	return $pourcentage;
+  	$pourcentage = $daoAvancement->getByCoursEtudiant($idCours, $idEtu);
+  	if ($pourcentage >= 50)
+  		return 100;
+  	else
+  		return $pourcentage * 2;
   }
   
   public function checkAvance($idEtu, $idCours)
   {
   	$daoAvancement = new DAOAvancement($db);
-  	$pourcentage = $daoAvancement->getByCoursEtudiant($idCours, $idEtu) * (4/3);
-  	return $pourcentage;
+  	$pourcentage = $daoAvancement->getByCoursEtudiant($idCours, $idEtu);
+  	if ($pourcentage >= 75)
+  		return 100;
+  	else
+  		return $pourcentage * (4/3);
   }
   
   public function checkExpert($idEtu, $idCours)
@@ -122,71 +149,101 @@ class DAOAssignations_objectif extends DAOStandard
   public function checkDiscret($idEtu, $idCours)
   {
   	$daoMessage = new DAOMessage($db);
-  	$pourcentage = $daoMessage->countByEtudiantCours($idEtu, $idCours);
-  	return $pourcentage * 100;
+  	$nbMessagesPostes = $daoMessage->countByEtudiantCours($idEtu, $idCours);
+  	if ($nbMessagesPostes >= 1)
+  		return 100;
+  	else
+  		return 0;
   }
   
   public function checkLoquace($idEtu, $idCours)
   {
   	$daoMessage = new DAOMessage($db);
-  	$pourcentage = $daoMessage->countByEtudiantCours($idEtu, $idCours) / 5;
-  	return $pourcentage * 100; 
+  	$nbMessagesPostes = $daoMessage->countByEtudiantCours($idEtu, $idCours);
+  	if ($nbMessagesPostes >= 5)
+  		return 100;
+  	else
+  		return $nbMessagesPostes * 20;
   }
   
   public function checkBavard($idEtu, $idCours)
   {
   	$daoMessage = new DAOMessage($db);
-  	$pourcentage = $daoMessage->countByEtudiantCours($idEtu, $idCours) / 15;
-  	return $pourcentage * 100;
+  	$nbMessagesPostes = $daoMessage->countByEtudiantCours($idEtu, $idCours);
+  	if ($nbMessagesPostes >= 15)
+  		return 100;
+  	else
+  		return $nbMessagesPostes * 100 / 15;
   }
   
   public function checkProf_en_herbe($idEtu, $idCours)
   {
   	$daoAvancement_bonus = new DAOAvancement_bonus($db);
-  	$pourcentage = $daoAvancement_bonus->countFaitByEtudiantCours($idEtu, $idCours);
-  	return $pourcentage * 100;
+  	$nbBonusCrees = $daoAvancement_bonus->countFaitByEtudiantCours($idEtu, $idCours);
+  	if ($nbBonusCrees >= 1)
+  		return 100;
+  	else
+  		return 0;
   }
   
   public function checkPetit_genie($idEtu, $idCours)
   {
   	$daoAvancement_bonus = new DAOAvancement_bonus($db);
-  	$pourcentage = $daoAvancement_bonus->countFaitByEtudiantCours($idEtu, $idCours) / 5;
-  	return $pourcentage * 100;
+  	$nbBonusCrees = $daoAvancement_bonus->countFaitByEtudiantCours($idEtu, $idCours);
+  	if ($nbBonusCrees >= 5)
+  		return 100;
+  	else
+  		return $nbBonusCrees * 20;
   }
   
   public function checkSavant_fou($idEtu, $idCours)
   {
   	$daoAvancement_bonus = new DAOAvancement_bonus($db);
-  	$pourcentage = $daoAvancement_bonus->countFaitByEtudiantCours($idEtu, $idCours) / 15;
-  	return $pourcentage * 100;
+  	$nbBonusCrees = $daoAvancement_bonus->countFaitByEtudiantCours($idEtu, $idCours);
+  	if ($nbBonusCrees >= 15)
+  		return 100;
+  	else
+  		return $nbBonusCrees * 100 / 15;
   }
   
   public function checkJuge($idEtu, $idCours)
   {
   	$daoAvancement_bonus = new DAOAvancement_bonus($db);
-  	$pourcentage = $daoAvancement_bonus->countNotesByEtudiantCours($idEtu, $idCours);
-  	return $pourcentage * 100;
+  	$nbBonusNotes = $daoAvancement_bonus->countNotesByEtudiantCours($idEtu, $idCours);
+  	if ($nbBonusNotes >= 1)
+  		return 100;
+  	else
+  		return 0;
   }
   
   public function checkJure($idEtu, $idCours)
   {
   	$daoAvancement_bonus = new DAOAvancement_bonus($db);
-  	$pourcentage = $daoAvancement_bonus->countNotesByEtudiantCours($idEtu, $idCours) / 5;
-  	return $pourcentage * 100;
+  	$nbBonusNotes = $daoAvancement_bonus->countNotesByEtudiantCours($idEtu, $idCours);
+  	if ($nbBonusNotes >= 5)
+  		return 100;
+  	else
+  		return $nbBonusNotes * 20;
   }
   
   public function checkBourreau($idEtu, $idCours)
   {
   	$daoAvancement_bonus = new DAOAvancement_bonus($db);
-  	$pourcentage = $daoAvancement_bonus->countNotesByEtudiantCours($idEtu, $idCours) / 15;
-  	return $pourcentage * 100;
+  	$nbBonusNotes = $daoAvancement_bonus->countNotesByEtudiantCours($idEtu, $idCours);
+  	if ($nbBonusNotes >= 15)
+  		return 100;
+  	else
+  		return $nbBonusNotes * 100 / 15;
   }
   
   public function checkIdole($idEtu, $idCours)
   {
   	$daoAvancement_bonus = new DAOAvancement_bonus($db);
-  	$pourcentage = $daoAvancement_bonus->countNotesRecuesEgal5ByEtudiantCours($idEtu, $idCours) / 15;
-  	return $pourcentage * 100;
+  	$NbBonusNoteEgal5= $daoAvancement_bonus->countNotesRecuesEgal5ByEtudiantCours($idEtu, $idCours);
+  	if ($NbBonusNoteEgal5 >= 15)
+  		return 100;
+  	else
+  		return $NbBonusNoteEgal5 * 100 / 15;
   }  
   
   public function checkPionier($idEtu, $idCours)

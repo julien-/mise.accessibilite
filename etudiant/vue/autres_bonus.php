@@ -121,7 +121,7 @@ foreach($listeThemes as $theme)
 									                	<h4 class="modal-title">Ma Remarque</h4>
 										            </div>
 										            <div class="modal-body" >
-										            	<textarea style="width:100%;" rows="4" readonly><?php echo $mon_avancement['remarque'];?></textarea>
+										            	<textarea style="width:100%; resize:vertical;" rows="4" readonly><?php echo $mon_avancement['remarque'];?></textarea>
 										            </div>
 										            <div class="modal-footer">
 										        		<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -146,7 +146,7 @@ foreach($listeThemes as $theme)
 										            </div>
 										            <form method="post" name="<?php echo "form_add_remarque".$bonus->getId();?>" action="../requete/rq_autres_bonus.php?addremarque">
 														<div id="message<?php echo $bonus->getId();?>" class="modal-body">
-									                		<textarea name="remarque" id="remarque<?php echo $bonus->getId();?>" style="width:100%;" rows="4"><?php echo $mon_avancement['remarque'];?></textarea>
+									                		<textarea name="remarque" id="remarque<?php echo $bonus->getId();?>" style="width:100%; resize:vertical;" rows="4"><?php echo $mon_avancement['remarque'];?></textarea>
 										                </div>
 										                <div class="modal-footer">
 															<input type="hidden" name="id_bonus" value="<?php echo $bonus->getId();?>"/>

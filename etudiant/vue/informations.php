@@ -7,6 +7,7 @@ if ($themeAdded)
 	$alerte->show();
 }
 ?>
+<img src="../../images/Badges.jpg" alt="badges" title="Mes Badges"/>
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-6">
 		<div class="panel panel-default" style="height:200px;">

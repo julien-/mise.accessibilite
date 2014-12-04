@@ -75,7 +75,7 @@ if ($avancementModified)
 							            </div>
 							            <form method="post" name="form_add_remarque" action="../requete/rq_seance_actuelle.php?addremarque">
 											<div class="modal-body">
-						                		<input type="text" name="remarque" size="60" class="inputValDefaut"/>
+						                		<textarea name="remarque" style="width:100%; height:100px; resize:vertical;"></textarea>
 							                </div>
 							                <div class="modal-footer">
 												<input type="hidden" name="id_seance" value="<?php echo $id_seance;?>"/>
