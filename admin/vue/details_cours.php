@@ -95,7 +95,7 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 					</h3>
 				</div>
 				<div class="panel-body">
-					<table class="table table-striped table-bordered">
+					<table class="table table-striped table-bordered table-overflow">
 						<thead>
 							<tr>
 								<th class="center-text">Sujet</th>
@@ -109,10 +109,10 @@ if (sizeof ( $liste5DerniersSujets ) > 0) {
 	foreach ( $liste5DerniersSujets as $sujet ) {
 		?>
 							<tr>
-								<td class="prem_colonne"><?php echo Outils::raccourcirChaine($sujet->getTitre(), 20); ?></td>
-								<td class="autre_colonne cut-text" style="max-width: 100px;"><?php echo $sujet->getCategorie()->getTitre(); ?></td>
-								<td class="autre_colonne"><?php echo Outils::raccourcirChaine($sujet->getAuteur()->getNom(), 20);?></td>
-								<td class="autre_colonne center-text"><?php echo Outils::sqlDateTimeToFr($sujet->getDateDerniereReponse())?></td>
+								<td class="prem_colonne cut-text"><a href="index.php?section=voir_sujet_forum&s=<?php echo $sujet->getId(); ?>" title="<?php echo $sujet->getTitre(); ?>"><?php echo $sujet->getTitre(); ?></a></td>
+								<td class="autre_colonne"><a href="index.php?section=liste_sujets_forum&categorie=<?php echo $sujet->getCategorie()->getId(); ?>" title="<?php echo $sujet->getCategorie()->getTitre(); ?>"><?php echo $sujet->getCategorie()->getTitre();  ?></a><<?php echo $sujet->getCategorie()->getTitre(); ?></td>
+								<td class="autre_colonne cut-text"><?php echo $sujet->getAuteur()->getNom();?></td>
+								<td class="autre_colonne"><?php echo Outils::sqlDateTimeToFr($sujet->getDateDerniereReponse())?></td>
 							</tr>
 						<?php
 	}

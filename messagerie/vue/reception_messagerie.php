@@ -11,7 +11,7 @@ else
 ?>
 <br/>
 <br/>
-<table id="tableau" class="interactive-table table table-striped table-bordered">
+<table id="tableau" class="interactive-table table table-striped table-bordered table-overflow">
 	<thead>
 	<tr>
 		<th class="center-text">Expéditeur</th>
@@ -27,10 +27,10 @@ else
     {
     	?>
     	<tr class="<?php if (!$message->getLu()) echo "bold"?>">
-    		<td class="autre_colonne">
+    		<td class="autre_colonne cut-text">
     			<a href="index.php?section=voir_messagerie&id_message=<?php echo $message->getId();?>" title="Lire le message"><?php echo $message->getExpediteur()->getPrenom()."&nbsp;". $message->getExpediteur()->getNom(); ?></a>
     		</td>
-    		<td class="prem_colonne">
+    		<td class="prem_colonne cut-text">
     			<a href="index.php?section=voir_messagerie&id_message=<?php echo $message->getId();?>" title="Lire le message"><?php echo $message->getTitre(); ?></a>
     		</td>
     		<td class="autre_colonne center-text"><?php echo Outils::dateToFr(substr($message->getDate(), 0, 10)) . " à " . $message->getHeure() ; ?></td>

@@ -85,7 +85,7 @@ class DAOSujet extends DAOStandard
 				AND s.auteur = e.id_etu
 				AND f.id_cours = " . $idCours . "
 				AND s.id_categorie = f.id_categorie
-				ORDER BY date_derniere_reponse
+				ORDER BY date_derniere_reponse DESC
 				LIMIT 5");
 		
 	
@@ -97,7 +97,7 @@ class DAOSujet extends DAOStandard
 				'id' => $sujet['id_sujet'],
 				'auteur' => $daoEtudiant->getByID($sujet['id_etu']),
 				'titre' => $sujet['titre'],
-				'date_derniere_reponse' => $sujet['date_derniere_reponse'],
+				'dateDerniereReponse' => $sujet['date_derniere_reponse'],
 				'categorie' => $daoCategorie->getByID($sujet['id_categorie'])					
 			));
 		}

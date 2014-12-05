@@ -23,7 +23,7 @@ if (isset($_SESSION['currentUser']) && $_SESSION['currentUser']->getAdmin() == 1
 		if (isset($_SESSION['cours']) && $_SESSION['cours']->getId() == $_GET['cours-delete'])
 		{
 			unset($_SESSION['cours']);
-			$_SESSION['referrer'] = 'index.php';
+			$_SESSION['referrer'] = 'index.php?section=cours';
 		}
 		$daoCours->delete($_GET['cours-delete']);
 	}

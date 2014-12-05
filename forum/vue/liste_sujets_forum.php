@@ -6,7 +6,7 @@ if (sizeof ( $listeSujets ) == 0) {
 <?php
 } else {
 	?>
-<a class="btn btn-primary" data-toggle="modal" href="#"
+<a class="btn btn-success" data-toggle="modal" href="#"
 	data-target="#ajoutSujet">Créer un sujet</a>
 	<br/><br/>
 <table class="interactive-table table">
@@ -64,7 +64,7 @@ if (sizeof ( $listeSujets ) == 0) {
 <?php
 }
 ?>
-<a class="btn btn-primary" data-toggle="modal" href="#"
+<a class="btn btn-success" data-toggle="modal" href="#"
 	data-target="#ajoutSujet">Créer un sujet</a>
 <!-- Modal ajout cours-->
 <div class="modal fade" id="ajoutSujet" tabindex="-1" role="dialog"
@@ -86,7 +86,7 @@ if (sizeof ( $listeSujets ) == 0) {
 							action="../../forum/controleur/ajout_sujet.php">
 							<div class="form-group">
 								<label for="titre">Titre</label> <input type="text"
-									class="form-control" name="titre">
+									class="form-control" name="titre" maxlength="65">
 							</div>
 							<div class="form-group">
 								<label for="message">Message</label>

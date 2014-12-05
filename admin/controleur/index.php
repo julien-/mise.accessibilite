@@ -27,8 +27,6 @@ if (isset($_SESSION['currentUser']))
 	if (isset($_GET['c']))
 		$_SESSION['cours'] = $daoCours->getByID($_GET['c']);
 	
-	
-	
 	$daoCours = new DAOCours($db);
 	$listeCours = $daoCours->getAllByProf($_SESSION['currentUser']->getId());
 	if (isset($_GET['section'])) 
@@ -36,7 +34,15 @@ if (isset($_SESSION['currentUser']))
 		if (isset($_SESSION['cours']))
 			$listeConnectes = $daoHistorique->getUserConnected();
 		$page = $_GET['section'];
+		
+		if ($page == 'cours')
+			unset($_SESSION['cours']);
 		$pageWithoutPath = $page;
+		if (strpos($page, 'forum') != false)
+		{
+			$page = '../../forum/controleur/' . $page;
+		}
+		
 		if (strpos($page, 'forum') != false)
 		{
 			$page = '../../forum/controleur/' . $page;
@@ -55,6 +61,7 @@ if (isset($_SESSION['currentUser']))
 	{
 		$page = 'cours';
 		$pageWithoutPath = $page;
+		unset($_SESSION['cours']);
 	}
 }
 else if (isset($_GET['section'])) 
@@ -102,7 +109,7 @@ switch($pageWithoutPath)
 		}
 		break;
 	case 'details_theme_etudiant': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Mes étudiants' => 'index.php?section=mes_etudiants', $daoEtudiant->getByID($_GET['e'])->getPrenom() . ' ' . $daoEtudiant->getByID($_GET['e'])->getNom() => 'index.php?section=etudiant&e='.$_GET['e'], $daoTheme->getByID($_GET['t'])->getTitre() => 'final'); break;
-	case 'index_forum': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Mes cours' => 'index.php?section=mes_cours',  $daoCours->getByID($_GET['id_cours'])->getLibelle() => 'index.php?section=details_cours&c='.$_GET['id_cours'], 'Index du forum' => 'final'); break;
+	case 'index_forum': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Mes cours' => 'index.php?section=mes_cours',  $daoCours->getByID($_SESSION['cours']->getId())->getLibelle() => 'index.php?section=details_cours&c='.$_SESSION['cours']->getId(), 'Index du forum' => 'final'); break;
 	case 'liste_sujets_forum': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Mes cours' => 'index.php?section=mes_cours',  $daoCategorie->getByID($_GET['categorie'])->getCours()->getLibelle() => 'index.php?section=details_cours&c='.$daoCategorie->getByID($_GET['categorie'])->getCours()->getId(), 'Index du forum' => 'index.php?section=index_forum&id_cours='.$daoCategorie->getByID($_GET['categorie'])->getCours()->getId(), Outils::raccourcirChaine($daoCategorie->getByID($_GET['categorie'])->getTitre(), 50) => 'final'); break;
 	case 'voir_sujet_forum': $filArianne = array('<i class="glyphicon glyphicon-home"></i>' => 'index.php', 'Mes cours' => 'index.php?section=mes_cours',  $daoSujet->getByID($_GET['s'])->getCategorie()->getCours()->getLibelle() => 'index.php?section=details_cours&c='.$daoSujet->getByID($_GET['s'])->getCategorie()->getCours()->getId(), 'Index du forum' => 'index.php?section=index_forum&id_cours='.$daoSujet->getByID($_GET['s'])->getCategorie()->getCours()->getId(), Outils::raccourcirChaine($daoSujet->getByID($_GET['s'])->getCategorie()->getTitre(), 50) => 'index.php?section=liste_sujets_forum&categorie=' . $daoSujet->getByID($_GET['s'])->getCategorie()->getId(), $daoSujet->getByID($_GET['s'])->getTitre() => 'final'); break;	
 }

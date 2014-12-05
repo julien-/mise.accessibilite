@@ -1,13 +1,4 @@
 <?php 
-if (isset($_SESSION['exerciceAdded']))
-{
-	unset($_SESSION['exerciceAdded']);
-	$alerte = new AlerteSuccess('Exercice ajouté !');
-	$alerte->show();
-}
-?>
-
-<?php 
 if (isset($_SESSION['themeAdded']))
 {
 	unset($_SESSION['themeAdded']);
@@ -127,13 +118,6 @@ foreach ( $listeThemes as $theme ) {
 								<span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="options">
-								<li role="presentation"><a class="pointer add-exercice"
-									data-toggle="modal" data-target="#modalAddExercice"
-									data-id-theme="<?php echo $theme->getId(); ?>"> <i
-										style="font-size: 15px;" class="glyphicon glyphicon-plus-sign"
-										title="Ajouter un exercice à ce thème""></i> Ajouter un
-										exercice
-								</a></li>
 								<li role="presentation"><a class="pointer edit-theme"
 									data-modif-theme-id="<?php echo $theme->getId(); ?>"> <i
 										style="font-size: 15px;" class="glyphicon glyphicon-pencil"
@@ -232,17 +216,19 @@ foreach ( $listeThemes as $theme ) {
 								{
 								?>
 								<table style="background-color: #F0F0F0; width: 100%;">
+								<tr>
+								<td>
 									<?php
 									foreach ( $listeFichiers as $fichier ) {
 									?>
 										<ul id="bloc-fichier-<?php echo $fichier->getId(); ?>" class="header-fichier" data-fichier-id="<?php echo $fichier->getId(); ?>">
-										<div class="row" style="height: 30px;">
-											<div class="col-lg-8">
-											<li>
-													<a href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a>
-													<br/>
-													</div>
-													<div class="col-lg-4">
+										<li>
+											<div class="row" style="height: 30px;">
+												<div class="col-lg-8">
+														<a href="../../controleur/download.php?f=<?php echo $fichier->getCodeLien();?>"><?php echo $fichier->getNom();?></a>
+														<br/>
+												</div>
+												<div class="col-lg-4">
 													<div class="dropdown">
 														<button style="height: 30px;"
 															id="icon-fichier-<?php echo $fichier->getId(); ?>"
@@ -264,17 +250,17 @@ foreach ( $listeThemes as $theme ) {
 																	title="Supprimer ce thème"></i> Supprimer le fichier
 															</a></li>
 														</ul>
-														</div>
 													</div>
 												</div>
-												<div class="row">
+											</div>
+											<div class="row">
 												<div class="col-lg-8">
 													<br/>
 													<label class="control-label" for="online-fichier-<?php echo $fichier->getId(); ?>">Visible en ligne    </label>
 											      	<input name="online-fichier-<?php echo $fichier->getId(); ?>" id="online-fichier-<?php echo $fichier->getId(); ?>" class="online-fichier" type="checkbox" data-fichier-id="<?php echo $fichier->getId(); ?>" value="" <?php if ($fichier->getEnLigne()) echo 'checked="checked"';?>>
 													<i id="icon-online-fichier-<?php echo $fichier->getId(); ?>" class="hidden fa fa-spinner fa-spin"></i>
 													<hr>
-														<textarea type="text" style="width: 95%; height: 200px;" id="input-fichier-<?php echo $fichier->getId(); ?>"
+														<textarea style="width: 95%; height: 200px;" id="input-fichier-<?php echo $fichier->getId(); ?>"
 														class="base-hidden form-control hidden input-fichier"
 														data-input-exo-id="<?php echo $fichier->getId(); ?>" ><?php echo $fichier->getCommentaire(); ?></textarea>
 													<p class="center-text">
@@ -289,17 +275,14 @@ foreach ( $listeThemes as $theme ) {
 															class="glyphicon glyphicon-remove-circle" title="Annuler"></i>
 														</a>
 													</p>	
-													<span class="desc-fichier-texte" id="desc-fichier-<?php echo $fichier->getId(); ?>" data-id-fichier=""<?php echo $exos->getId(); ?>""><?php echo $fichier->getCommentaire();?></span>
-													</div>
-													</li>
-													</div>
-											
+													<span class="desc-fichier-texte" id="desc-fichier-<?php echo $fichier->getId(); ?>" data-id-fichier=""<?php echo $exos->getId(); ?>"><?php echo $fichier->getCommentaire();?></span>
+												</div>
 											</div>
-										</ul>
+										</li>
+									</ul>
 								<?php
 									}
 								?>
-		
 									</table>
 								<?php
 								}
@@ -551,7 +534,7 @@ foreach ( $listeThemes as $theme ) {
 				<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 						<input type="submit" class="btn btn-primary" name="submit"
-							title="Supprimer le cours"
+							title="Ajouter le fichier"
 							value="Ajouter" />
 				</div>
 			</form>

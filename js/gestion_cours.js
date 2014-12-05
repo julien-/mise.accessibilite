@@ -504,6 +504,11 @@ $(document).on('click', '.validate-icon-exo', function() {
 	changeExerciseTitle();
 });
 
+$(document).on('click', '.abort-icon-new', function() {
+	  $("#exo-" + clickedIndex).val($("#titre-exo-" + clickedIndex).text().trim());
+	  disableEditMode();
+});
+
 $(document).on('click', '.add-exercice', function() {
 	$("#id_theme").val($(this).data('id-theme'));
 });

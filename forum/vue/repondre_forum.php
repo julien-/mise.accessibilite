@@ -4,8 +4,7 @@ include_once ('voir_sujet_forum.php');
 ?>
 <hr>
 <div class="row">
-	<div class="col-xs-3"></div>
-	<div class="col-xs-6">
+	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -20,11 +19,10 @@ include_once ('voir_sujet_forum.php');
 						</div>
 						<input type="hidden" name="sujet" value="<?php echo $_GET['s']; ?>"/>
 						<input type="submit" name="submit" id="btn-login"
-							class="btn btn-primary btn-lg btn-block" value="Poster">
+							class="btn btn-success btn-lg btn-block" value="Poster">
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-3"></div>
 </div>

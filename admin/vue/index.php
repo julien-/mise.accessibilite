@@ -37,25 +37,40 @@
         <div id="wrap">
             <!-- Header -->            
             <nav class="navbar navbar-default" role="navigation">
-			  <div class="container-fluid">
-			    <!--<div class="navbar-header">
-			      <a href="index.php"><img src="../../images/logo_titre_centre.png" alt="logo"/></a> 
-			    </div>-->
-			    <ul class="nav navbar-nav navbar-left">
-			    	<li><a role="button" href="index.php">MY STUDY COMPANION</a></li>
-			    </ul>
-			      <ul class="nav navbar-nav navbar-right">
-			        <li><a role="button" href="index.php?section=reception_messagerie"><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a></li>
-			        <li class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom(); ?> <span class="caret"></span></a>
-			          <ul class="dropdown-menu" role="menu">
+			  <div id="menu_haut" class="container-fluid">
+			  	<div class="row">
+			  		<div class="col-xs-12 col-sm-6 col-md-offset-2 col-md-4 col-lg-6 col-lg-offset-1">
+						<img src="../../images/logo.png" alt="Logo" width="20%" style="z-index:999999;"/>
+			  		</div>
+
+			      	<div class="menu_droite col-xs-12 col-sm-6 col-md-4 text-left-xs text-right-sm">
+			      	  <a class="menu_haut_a" role="button" href="index.php?section=reception_messagerie" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>><?php echo $nbMessagesNnLu;?>&nbsp;<i class="glyphicon glyphicon-envelope"></i></a>
+			          <a href="#" class="menu_haut_a dropdown-toggle" data-toggle="dropdown" <?php if(isset($_SESSION['cours'])) echo 'style="color: '.$daoInscription->getCouleurTexte($_SESSION['cours']->getId(), $_SESSION['currentUser']->getId()).';"'; ?>>
+			          	<?php 
+							if($_SESSION["currentUser"]->getCode_lien() != NULL)
+							{
+								$chemin = $daoEtudiant->getCheminByCodeLienAndEtu($_SESSION["currentUser"]->getCode_lien(),$_SESSION["currentUser"]->getId());
+						?>
+								<img class="profile-image img-circle" width="30" height="30" src="../../upload/<?php echo $chemin; ?>" alt="avatar"/>&nbsp; 
+						<?php 
+							}
+							else 
+							{
+						?>
+			          			<i class="glyphicon glyphicon-user"></i>&nbsp; 
+			          	<?php 
+							}
+							echo $_SESSION['currentUser']->getPrenom() . ' ' . $_SESSION['currentUser']->getNom();
+			          	?>
+			          	<span class="caret"></span>
+			          </a>
+			          <ul class="dropdown-menu dropdown-menu-right" role="menu">
 			            <li><a href="index.php?section=compte">Mon compte</a></li>
 			            <li class="divider"></li>
 	                    <li><a href="../../deconnexion.php"><i class="glyphicon glyphicon-lock"></i>&nbsp;Se déconnecter</a></li>
 			          </ul>
-			        </li>
-			      </ul>
-
+			      	</div>
+		      	</div>
 			  </div>
 			</nav>           
             
@@ -74,10 +89,11 @@
                     if (isset($_SESSION['cours']))
                     {
                     ?>
-                            <li class="<?php if (!isset($_GET['section'])) echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=gestion_cours">Gestion du cours</a></li>
-                            <li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'seance') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=seance">Séances</a></li>
-                        	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'mes_etudiants') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=mes_etudiants">Etudiants</a></li>
-                        	<li class="<?php if (isset($_GET['section']) && $_GET['section'] == 'details_cours') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=details_cours">Statistiques</a></li>
+                            <li id="gestion" class="<?php if (isset($_GET['section']) && $_GET['section'] == 'gestion_cours') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=gestion_cours">Gestion du cours</a></li>
+                            <li id="seance" class="<?php if (isset($_GET['section']) && $_GET['section'] == 'seance') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=seance">Séances</a></li>
+                        	<li id="etudiants" class="<?php if (isset($_GET['section']) && $_GET['section'] == 'mes_etudiants') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=mes_etudiants">Etudiants</a></li>
+                        	<li id="statistiques" class="<?php if (isset($_GET['section']) && $_GET['section'] == 'details_cours') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=details_cours">Statistiques</a></li>
+                    		<li id="forum" class="<?php if (isset($_GET['section']) && $_GET['section'] == 'index_forum') echo "active border_bottom_5px_selected"; else echo "border_bottom_5px_nocolor"?>"><a href="index.php?section=index_forum">Forum</a></li>
                     <?php
                     }
                     ?>
@@ -91,31 +107,42 @@
             <!-- container -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-2" style="background-color: #f5f5f5; height: 100%; ">
-                        <div class="list-group" style="padding: 2%">
-                        	<a href="index.php?section=cours" class="<?php if($page == "cours") echo "list-group-item active"; else echo "list-group-item";?>">
-                        		<i class="glyphicon glyphicon-th-list"></i>
-						        <span style="font-size: x-large;">Mes cours</span>
-						   	</a>
-                        	<?php
-                        	if (sizeof($listeCours) > 0)
-                        	{
-	                            foreach ($listeCours as $cours) 
-	                            {
-	                            ?>
-	                        	<a id="cours-accordion-<?php echo $cours->getId(); ?>" href="index.php?section=gestion_cours&c=<?php echo $cours->getId(); ?>" class="cut-text <?php if($page != 'cours' && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getId()) echo "list-group-item active"; else echo "list-group-item";?>" title="<?php echo $cours->getLibelle();?>">
-								   <?php echo $cours->getLibelle();?>
-								</a>
-								<?php
-	                            }
-                        	}
-                            ?>
-                        </div>
+                    <div class="col-lg-2">
+                    	<div class="row">
+                    		<div class="col-lg-12 center-text">
+            		 			<button id="help" data-demo class="pointer btn btn-danger"><span class="glyphicon glyphicon-question-sign"></span> Besoin d'aide ?</button>
+            		 		</div>
+            			</div>
+            			<hr>
+            			
+            			<div class="col-lg-12" style="background-color: #f5f5f5; height: 100%; ">
+            				<div class="row">
+		                        <div class="list-group" style="padding: 2%">
+		                        	<a href="index.php?section=cours" class="<?php if($page == "cours") echo "list-group-item active"; else echo "list-group-item";?>">
+		                        		<i class="glyphicon glyphicon-th-list"></i>
+								        <span style="font-size: x-large;">Mes cours</span>
+								   	</a>
+		                        	<?php
+		                        	if (sizeof($listeCours) > 0)
+		                        	{
+			                            foreach ($listeCours as $cours) 
+			                            {
+			                            ?>
+			                        	<a id="cours-accordion-<?php echo $cours->getId(); ?>" href="index.php?section=gestion_cours&c=<?php echo $cours->getId(); ?>" class="cut-text <?php if($page != 'cours' && isset($_SESSION['cours']) && $_SESSION['cours']->getId() ==  $cours->getId()) echo "list-group-item active"; else echo "list-group-item";?>" title="<?php echo $cours->getLibelle();?>">
+										   <?php echo $cours->getLibelle();?>
+										</a>
+										<?php
+			                            }
+		                        	}
+		                            ?>
+		                        </div>
+	                        </div>
                         <?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
+                    	</div>
                     </div>
                     <div class="col-lg-9 main-container" id="main">
                           <div>
-					        <ul class="breadcrumb">
+					        <ul class="breadcrumb cut-text">
 					        <?php 
 					        foreach($filArianne as $titre => $lien)
 					        {
@@ -130,7 +157,7 @@
 					        	else 
 					        	{
 					        		?>
-					        		<li class="active"><?php echo $titre ?></li>
+					        		<li title="<?php if (!isset($_GET['section']) || $_GET['section'] == 'cours') echo "Mes cours" ?>" class="active"><?php echo $titre ?></li>
 					        		<?php
 					        	}
 					        }
@@ -150,7 +177,7 @@
 	                        		<span style="font-size:8pt; font-weight: bold;">
 	                        		<?php echo sizeof($listeConnectes);?> utilisateur(s) connecté(s)
 	                        		</span>
-	                        		<br/><br/>
+	                        		<hr>
 	                        		<ul class="paddingmargin0">
 	                        		<?php
 		                            foreach ($listeConnectes as $connecte) 
@@ -160,7 +187,7 @@
 		                            		$chemin = $daoEtudiant->getCheminByCodeLienAndEtu($connecte->getEtudiant()->getCode_lien(),$connecte->getEtudiant()->getId());
 		                            		?>
 		                            		<li class="paddingmargin0 cut-text">
-	                            				<a href="index.php?section=envoyer_messagerie&dest=<?php echo $connecte->getEtudiant()->getId();?>">
+	                            				<a title="<?php echo $connecte->getEtudiant()->getPrenomNom(); ?>" href="index.php?section=envoyer_messagerie&dest=<?php echo $connecte->getEtudiant()->getId();?>">
 		                            				<img class="profile-image img-circle" width="20" height="20" src="../../upload/<?php echo $chemin; ?>" alt="avatar" title="<?php echo $connecte->getEtudiant()->getPrenomNom();?>"/>
 		                            				<?php echo $connecte->getEtudiant()->getPrenomNom();?>
 	                            				</a>
@@ -179,17 +206,19 @@
                             				<?php 
                             				}
 		                            }
+		                            ?>
+		                            </ul>
+		                            <?php 
 	                        	}
 	                        	else if (sizeof($listeConnectes) <= 0)
 	                        	{
 									?>
 									<span style="font-size:8pt; font-weight: bold;">
-										0 utilisateur connecté
+										Aucun utilisateur connecté
 									</span>
 									<?php
 	                        	}
 	                            ?>
-	                        </ul>
 	                        </div>
 	                        <?php  if ($page == 'gestion_cours') include_once('../controleur/gauche_gestion_fichier.php');?>
 	                    </div>
@@ -258,42 +287,26 @@
 		<script type="text/javascript" src="../../js/bootstrap/jquery.validate.min.js"></script>
 		<script type="text/javascript" src='../../js/googleChartAPI.js'></script>
 		<script type="text/javascript" src="../../js/commun.js"></script>
+		<script type="text/javascript" src="../../js/aides/menu.js"></script>
+		
         <!--Integration des fichiers js de chaque page-->
         <?php if (file_exists("../../js/" . $pageWithoutPath . ".js")){?>
         <script type="text/javascript" src="../../js/<?php echo ($pageWithoutPath . ".js"); ?>"></script>
-        <?php }?>
-       
-
-        <script type="text/javascript">
-		// Instance the tour
-		
-var tour = new Tour({
-  steps: [
-  {
-    element: "#addcours",
-    title: "Welcome",
-    content: "Welcome to our app, take this tour to be familirized with it.",
-    	backdrop:true
-  },
-  {
-    element: "#addcours",
-    title: "This Image",
-    content: "In this application we generate random placeholder images for any case.",
-    backdrop: true
-  }  
-]
-});
-		// Initialize the tour
-		tour.init();
-		 // Added this
-
-		$("#demo").click(function(){
-			tour.restart();
-			});
-
-		
-		</script>
-		
-
+        <?php }
+        
+          if (isset($_SESSION['cours'])){?>
+          <script type="text/javascript" src="../../js/aides/menu.js"></script>
+          <?php }
+          else {?>
+          <script type="text/javascript" src="../../js/aides/index.js"></script>
+          <?php }?>
+         
+      
+      
+        <!--Integration des fichiers aides js de chaque page-->
+        <?php /* if (file_exists("../../js/aides/" . $pageWithoutPath . ".js")){?>
+        <script type="text/javascript" src="../../js/aides/<?php echo ($pageWithoutPath . ".js"); ?>"></script>
+        <?php }*/?>
+        
     </body>
 </html>

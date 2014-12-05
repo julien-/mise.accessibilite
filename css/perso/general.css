@@ -1,5 +1,11 @@
 @import url("../fonts/font.css");
 
+.table-overflow
+{
+	table-layout:fixed; 
+	overflow:hidden; 
+	white-space: nowrap;
+}
 
 .datepicker
 {

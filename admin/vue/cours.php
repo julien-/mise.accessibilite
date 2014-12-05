@@ -4,9 +4,14 @@ if ($coursAdded)
 	$alerte = new AlerteSuccess('Cours ajouté !');
 	$alerte->show();
 }
+if (isset($_GET['deleted']))
+{
+	$alerte = new AlerteSuccess('Cours supprimé');
+	$alerte->show();
+}
 ?>
 
-<table class="interactive-table table table-bordered table-striped">
+<table id="tableau-cours" class="interactive-table table table-bordered table-striped">
 	<thead>
 		<tr>
 			<th>Cours</th>
@@ -36,7 +41,7 @@ if ($coursAdded)
 	</tbody>
 </table>
 
-<a class="btn btn-primary" id="addCours" data-toggle="modal"
+<a class="btn btn-success" id="addCours" data-toggle="modal"
 	 data-target="#modalAddCours">Ajouter un
 	cours</a>
 				

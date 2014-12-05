@@ -7,6 +7,11 @@ if (isset($_GET['added']))
 	$alertAdded = new AlerteSuccess('Séance ajoutée');
 	$alertAdded->show();
 }
+if (isset($_GET['deleted']))
+{
+	$alertDeleted = new AlerteSuccess('Séance supprimée');
+	$alertDeleted->show();
+}
 if (sizeof($listeSeance) > 0)
 {
 ?>
@@ -55,36 +60,38 @@ else
  
 <div class="modal fade" id="ajoutExo" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">   
      <div class="modal-dialog">  
-        <div class="modal-content">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 id="myModalLabel" class="modal-title">Ajouter une séance</h4>
-            </div>
-            <br/>
-            <form method="post" class="form-horizontal" action="../requetes/rq_add_seance.php">
-            	<div class="container-fluid">
-                	<div class="row">
-                		<div class="col-sm-1">
-                		</div>
-                		<div class="col-sm-9">
-	            		<div class="form-group">
-	            			<label for="date" class="control-label col-lg-5">Date de la séance</label>
-                            <div class="col-lg-6">
-                            	<input class="form-control input-date" type="text" name="date"/>	
-                            </div>	                
-                        </div>
-                		<!--submit-->
-		                <div class="form-group center-content">
-		                	<input type="submit" class="btn btn-primary" name="submit" id="submit" alt='Ajouter une séance' title='Ajouter une séance' value="Ajouter"/>
-		    			</div>
-		    			<br/>
-		    			</div>
-		    			<div class="col-sm-1">
+     	<form method="post" class="form-horizontal" action="../requetes/rq_add_seance.php">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+	                <h4 id="myModalLabel" class="modal-title">Ajouter une séance</h4>
+	            </div>
+	            <br/>
+	            	<div class="container-fluid">
+	                	<div class="row">
+	                		<div class="col-sm-1">
+	                		</div>
+	                		<div class="col-sm-9">
+			            		<div class="form-group">
+			            			<label for="date" class="control-label col-lg-5">Date de la séance</label>
+		                            <div class="col-lg-6">
+		                            	<input class="form-control input-date" type="text" name="date"/>	
+		                            </div>	                
+		                        </div>
+			    			</div>
+			    			<div class="col-sm-1">
+			    			</div>
 		    			</div>
 	    			</div>
-    			</div>
-	    	</form>
-        </div>
+			   <div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+					<input type="submit" class="btn btn-primary" name="submit"
+						title="Ajouter la séance"
+						value="Ajouter" />
+				</div>
+	        </div>
+
+		</form>
      </div>
 </div>  
 <br/><br/><br/><br/>
